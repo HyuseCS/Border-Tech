@@ -9,20 +9,20 @@
 9        android:targetSdkVersion="34" />
 10
 11    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-11-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:4:5-71
-11-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:4:22-68
+11-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:4:5-71
+11-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:4:22-68
 12    <uses-permission android:name="android.permission.INTERNET" />
-12-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:5:5-67
-12-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:5:22-64
+12-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:5:5-67
+12-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:5:22-64
 13    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-13-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:6:5-77
-13-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:6:22-74
+13-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:6:5-77
+13-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:6:22-74
 14    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
-14-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:7:5-88
-14-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:7:22-85
+14-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:7:5-88
+14-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:7:22-85
 15    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-15-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:8:5-77
-15-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:8:22-74
+15-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:8:5-77
+15-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:8:22-74
 16
 17    <permission
 17-->[androidx.core:core:1.13.1] /home/hyuse/.gradle/caches/transforms-4/30a8ab7bc08d8a30507c883d8dd92505/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
@@ -36,51 +36,51 @@
 21-->[androidx.core:core:1.13.1] /home/hyuse/.gradle/caches/transforms-4/30a8ab7bc08d8a30507c883d8dd92505/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
 22
 23    <application
-23-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:10:5-33:19
+23-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:10:5-33:19
 24        android:allowBackup="true"
-24-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:11:9-35
+24-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:11:9-35
 25        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 25-->[androidx.core:core:1.13.1] /home/hyuse/.gradle/caches/transforms-4/30a8ab7bc08d8a30507c883d8dd92505/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
 26        android:debuggable="true"
 27        android:extractNativeLibs="false"
-28        android:icon="@android:drawable/ic_btn_speak_now"
-28-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:12:9-58
+28        android:icon="@drawable/ic_launcher_mic"
+28-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:12:9-49
 29        android:label="Project-M Mic"
-29-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:13:9-38
-30        android:roundIcon="@android:drawable/ic_btn_speak_now"
-30-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:14:9-63
+29-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:13:9-38
+30        android:roundIcon="@drawable/ic_launcher_mic"
+30-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:14:9-54
 31        android:supportsRtl="true"
-31-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:15:9-35
+31-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:15:9-35
 32        android:theme="@android:style/Theme.Material.NoActionBar" >
-32-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:16:9-66
+32-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:16:9-66
 33        <service
-33-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:18:9-22:58
+33-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:18:9-22:58
 34            android:name="com.projectm.mic.AudioCaptureService"
-34-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:19:13-48
+34-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:19:13-48
 35            android:enabled="true"
-35-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:20:13-35
+35-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:20:13-35
 36            android:exported="false"
-36-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:21:13-37
+36-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:21:13-37
 37            android:foregroundServiceType="microphone" />
-37-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:22:13-55
+37-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:22:13-55
 38
 39        <activity
-39-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:24:9-32:20
+39-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:24:9-32:20
 40            android:name="com.projectm.mic.MainActivity"
-40-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:25:13-41
+40-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:25:13-41
 41            android:exported="true"
-41-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:26:13-36
+41-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:26:13-36
 42            android:theme="@android:style/Theme.Material.NoActionBar" >
-42-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:27:13-70
+42-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:27:13-70
 43            <intent-filter>
-43-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:28:13-31:29
+43-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:28:13-31:29
 44                <action android:name="android.intent.action.MAIN" />
-44-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:29:17-69
-44-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:29:25-66
+44-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:29:17-69
+44-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:29:25-66
 45
 46                <category android:name="android.intent.category.LAUNCHER" />
-46-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:30:17-77
-46-->/home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:30:27-74
+46-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:30:17-77
+46-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:30:27-74
 47            </intent-filter>
 48        </activity>
 49        <activity

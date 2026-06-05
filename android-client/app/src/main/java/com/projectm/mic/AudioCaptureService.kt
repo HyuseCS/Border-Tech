@@ -113,7 +113,7 @@ class AudioCaptureService : Service() {
         return builder
             .setContentTitle("Project-M Microphone")
             .setContentText(contentText)
-            .setSmallIcon(android.R.drawable.ic_btn_speak_now)
+            .setSmallIcon(R.drawable.ic_launcher_mic)
             .setOngoing(true)
             .build()
     }

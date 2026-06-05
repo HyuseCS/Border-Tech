@@ -1,8 +1,8 @@
-#Fri Jun 05 19:00:01 PST 2026
-base.0=/home/hyuse/Desktop/WO Mic Replica/android-client/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
-base.1=/home/hyuse/Desktop/WO Mic Replica/android-client/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
-base.2=/home/hyuse/Desktop/WO Mic Replica/android-client/app/build/intermediates/dex/debug/mergeProjectDexDebug/2/classes.dex
-base.3=/home/hyuse/Desktop/WO Mic Replica/android-client/app/build/intermediates/dex/debug/mergeExtDexDebug/classes2.dex
+#Fri Jun 05 22:32:33 PST 2026
+base.0=/home/hyuse/Desktop/project-m/android-client/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
+base.1=/home/hyuse/Desktop/project-m/android-client/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
+base.2=/home/hyuse/Desktop/project-m/android-client/app/build/intermediates/dex/debug/mergeProjectDexDebug/2/classes.dex
+base.3=/home/hyuse/Desktop/project-m/android-client/app/build/intermediates/dex/debug/mergeExtDexDebug/classes2.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.2=2/classes.dex

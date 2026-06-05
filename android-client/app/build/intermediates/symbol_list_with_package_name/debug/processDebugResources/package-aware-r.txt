@@ -52,6 +52,7 @@ drawable ic_call_answer_video
 drawable ic_call_answer_video_low
 drawable ic_call_decline
 drawable ic_call_decline_low
+drawable ic_launcher_mic
 drawable notification_action_background
 drawable notification_bg
 drawable notification_bg_low

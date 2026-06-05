@@ -25,9 +25,9 @@
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
         android:extractNativeLibs="false"
-        android:icon="@android:drawable/ic_btn_speak_now"
+        android:icon="@drawable/ic_launcher_mic"
         android:label="Project-M Mic"
-        android:roundIcon="@android:drawable/ic_btn_speak_now"
+        android:roundIcon="@drawable/ic_launcher_mic"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Material.NoActionBar" >
         <service
