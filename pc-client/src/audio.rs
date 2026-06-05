@@ -55,8 +55,8 @@ impl PipewireSink {
 
         let props = pw::properties::properties! {
             *pw::keys::NODE_NAME => node_name.as_str(),
-            *pw::keys::NODE_DESCRIPTION => "Project-M Virtual Microphone",
-            *pw::keys::NODE_NICK => "Project-M",
+            *pw::keys::NODE_DESCRIPTION => "Lampyris Virtual Microphone",
+            *pw::keys::NODE_NICK => "Lampyris",
             *pw::keys::MEDIA_TYPE => "Audio",
             *pw::keys::MEDIA_CATEGORY => "Source",
             *pw::keys::MEDIA_CLASS => "Audio/Source",

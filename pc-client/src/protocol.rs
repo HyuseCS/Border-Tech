@@ -1,7 +1,7 @@
 use tokio::io::{AsyncRead, AsyncReadExt, AsyncWrite};
 use tracing::{debug, error};
 
-/// Handles the Project-M raw PCM framing protocol.
+/// Handles the Lampyris raw PCM framing protocol.
 /// Packets are structured as: `['M', 'C', length_high, length_low]` + `[raw PCM payload]`.
 pub struct ProtocolHandler<S> {
     stream: S,
@@ -49,7 +49,7 @@ where
                             return Err(anyhow::anyhow!("Timeout waiting for audio packet payload"));
                         }
                     }
-                    debug!("Read Project-M audio packet: len={}", len);
+                    debug!("Read Lampyris audio packet: len={}", len);
                     return Ok(len);
                 }
             }

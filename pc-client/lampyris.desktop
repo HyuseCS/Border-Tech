@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Lampyris
+Comment=Lampyris app
+Exec=lampyris
+Icon=audio-input-microphone
+Type=Application
+Categories=AudioVideo;Audio;
+Terminal=false

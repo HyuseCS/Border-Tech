@@ -1,0 +1,19 @@
+[Unit]
+Description=Lampyris
+After=network.target pipewire.service
+Requires=pipewire.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/lampyris
+Restart=always
+RestartSec=5
+# Allow real-time scheduling
+CPUSchedulingPolicy=fifo
+CPUSchedulingPriority=15
+# Optional: Capability for RT without root
+# CapabilityBoundingSet=CAP_SYS_NICE
+# AmbientCapabilities=CAP_SYS_NICE
+
+[Install]
+WantedBy=default.target

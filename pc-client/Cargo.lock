@@ -2753,6 +2753,32 @@ dependencies = [
 ]
 
 [[package]]
+name = "lampyris"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "clap",
+ "dirs",
+ "libc",
+ "libspa-sys",
+ "pipewire",
+ "pipewire-sys",
+ "rcgen",
+ "ringbuf",
+ "rustls",
+ "rustls-pemfile",
+ "scopeguard",
+ "slint",
+ "slint-build",
+ "tokio",
+ "tokio-rustls",
+ "tokio-test",
+ "tracing",
+ "tracing-subscriber",
+]
+
+[[package]]
 name = "lazy_static"
 version = "1.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3982,32 +4008,6 @@ checksum = "4488a4a36b9a4ba6b9334a32a39971f77c1436ec82c38707bce707699cc3bbcb"
 dependencies = [
  "quote",
  "syn",
-]
-
-[[package]]
-name = "project-m"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "async-trait",
- "clap",
- "dirs",
- "libc",
- "libspa-sys",
- "pipewire",
- "pipewire-sys",
- "rcgen",
- "ringbuf",
- "rustls",
- "rustls-pemfile",
- "scopeguard",
- "slint",
- "slint-build",
- "tokio",
- "tokio-rustls",
- "tokio-test",
- "tracing",
- "tracing-subscriber",
 ]
 
 [[package]]

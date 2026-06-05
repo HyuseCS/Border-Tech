@@ -207,7 +207,7 @@ impl AppState {
 
         let mut stop_fut = stop_rx;
 
-        let (mut stream, peer_addr): (Box<dyn AsyncStream>, std::net::SocketAddr) = if is_usb {
+        let (stream, peer_addr): (Box<dyn AsyncStream>, std::net::SocketAddr) = if is_usb {
             // Bind TCP Listener
             let listener = TcpListener::bind(format!("127.0.0.1:{}", port)).await?;
             info!("Listening for phone connection on loopback port {}", port);
@@ -222,7 +222,7 @@ impl AppState {
             };
             
             if use_tls {
-                let cert = rcgen::generate_simple_self_signed(vec!["project-m.local".to_string()])?;
+                let cert = rcgen::generate_simple_self_signed(vec!["lampyris.local".to_string()])?;
                 let key_der = cert.signing_key.serialize_der();
                 let cert_der = cert.cert.der().to_vec();
                 let key = rustls::pki_types::PrivateKeyDer::try_from(key_der)
@@ -262,12 +262,12 @@ impl AppState {
             let peer_addr = tcp_stream.peer_addr()?;
             
             if use_tls {
-                let mut config = rustls::ClientConfig::builder()
+                let config = rustls::ClientConfig::builder()
                     .dangerous()
                     .with_custom_certificate_verifier(std::sync::Arc::new(DummyVerifier))
                     .with_no_client_auth();
                 let connector = tokio_rustls::TlsConnector::from(std::sync::Arc::new(config));
-                let domain = rustls::pki_types::ServerName::try_from("project-m.local").unwrap();
+                let domain = rustls::pki_types::ServerName::try_from("lampyris.local").unwrap();
                 
                 info!("Initiating TLS handshake...");
                 let tls_stream = tokio::select! {
@@ -297,7 +297,7 @@ impl AppState {
         });
 
         // Initialize PipeWire virtual source sink at 48kHz
-        let sink = PipewireSink::new("Project-M-Virtual-Mic".to_string(), 48000)?;
+        let sink = PipewireSink::new("Lampyris-Virtual-Mic".to_string(), 48000)?;
         let mut protocol = ProtocolHandler::new(stream);
         
         // 960 bytes = 480 samples of 16-bit Mono @ 48kHz

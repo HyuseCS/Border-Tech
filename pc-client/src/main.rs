@@ -45,11 +45,11 @@ async fn main() -> anyhow::Result<()> {
     };
 
     let mut log_dir = dirs::data_local_dir().unwrap_or_else(|| std::path::PathBuf::from("/tmp"));
-    log_dir.push("project-m");
+    log_dir.push("lampyris");
     std::fs::create_dir_all(&log_dir).ok();
-    log_dir.push("projectm.log");
+    log_dir.push("lampyris.log");
     let log_file = std::fs::File::create(&log_dir).unwrap_or_else(|_| {
-        std::fs::File::create("/tmp/projectm.log").expect("failed to create log file")
+        std::fs::File::create("/tmp/lampyris.log").expect("failed to create log file")
     });
 
     let subscriber = tracing_subscriber::fmt()
@@ -61,7 +61,7 @@ async fn main() -> anyhow::Result<()> {
     tracing::subscriber::set_global_default(subscriber)
         .expect("setting default subscriber failed");
 
-    info!("Starting Project-M Client");
+    info!("Starting Lampyris Client");
 
     let ui = MainWindow::new()?;
     let ui_weak = ui.as_weak();
@@ -107,7 +107,7 @@ async fn main() -> anyhow::Result<()> {
     
     // Final cleanup after UI exits
     app_state.disconnect();
-    info!("Project-M Client exited");
+    info!("Lampyris Client exited");
 
     Ok(())
 }
