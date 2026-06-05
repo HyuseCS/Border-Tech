@@ -60,8 +60,8 @@ impl PipewireSink {
 
         let props = pw::properties::properties! {
             *pw::keys::NODE_NAME => node_name.as_str(),
-            *pw::keys::NODE_DESCRIPTION => "WO Mic Virtual Microphone",
-            *pw::keys::NODE_NICK => "WO Mic",
+            *pw::keys::NODE_DESCRIPTION => "Project-M Virtual Microphone",
+            *pw::keys::NODE_NICK => "Project-M",
             *pw::keys::MEDIA_TYPE => "Audio",
             *pw::keys::MEDIA_CATEGORY => "Source",
             *pw::keys::MEDIA_CLASS => "Audio/Source",
@@ -69,6 +69,10 @@ impl PipewireSink {
         };
 
         let stream = StreamBox::new(&core, &node_name, props)?;
+
+        let mut is_buffering = true;
+        // 40ms pre-buffering threshold: sample_rate * 40 / 1000 = sample_rate / 25
+        let prebuffer_threshold = (sample_rate / 25) as usize;
 
         let _listener = stream
             .add_local_listener::<()>()
@@ -79,7 +83,26 @@ impl PipewireSink {
                     
                     if let Some(slice) = data.data() {
                         let total_len = slice.len();
-                        let n_samples = (total_len / 4).min(consumer.occupied_len());
+                        let requested_samples = total_len / 4;
+                        
+                        let occupied = consumer.occupied_len();
+
+                        // Jitter Buffer logic
+                        if is_buffering {
+                            if occupied >= prebuffer_threshold {
+                                is_buffering = false;
+                                debug!("Jitter buffer filled ({} samples). Starting audio playback.", occupied);
+                            }
+                        } else if occupied == 0 {
+                            is_buffering = true;
+                            info!("Jitter buffer underrun. Re-buffering...");
+                        }
+
+                        let n_samples = if is_buffering {
+                            0
+                        } else {
+                            requested_samples.min(occupied)
+                        };
                         
                         if n_samples > 0 {
                             // SEC-02: Defensive bounds check

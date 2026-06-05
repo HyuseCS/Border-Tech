@@ -1,120 +1,291 @@
-import { Button, VerticalBox, LineEdit, HorizontalBox, GroupBox, ProgressIndicator, ComboBox } from "std-widgets.slint";
+import { LineEdit, VerticalBox, HorizontalBox } from "std-widgets.slint";
+
+// Custom Container Panel
+component Panel inherits Rectangle {
+    in property <string> title;
+    background: #14141B;
+    border-radius: 14px;
+    border-width: 1px;
+    border-color: #23232E;
+    
+    VerticalBox {
+        padding: 16px;
+        spacing: 12px;
+        Text {
+            text: title;
+            font-size: 12px;
+            font-weight: 800;
+            color: #8E8E9F;
+            letter-spacing: 0.8px;
+        }
+        @children
+    }
+}
+
+// Custom Mode Selector Button
+component ModeButton inherits Rectangle {
+    in property <string> text;
+    in property <bool> active;
+    in property <bool> enabled: true;
+    callback clicked;
+    
+    background: active ? #00FFCC14 : (touch.has-hover ? #22222E : #1B1B24);
+    border-radius: 8px;
+    border-width: 1px;
+    border-color: active ? #00FFCC : (touch.has-hover ? #3D3D4F : #2A2A35);
+    height: 38px;
+    
+    animate background, border-color { duration: 150ms; easing: ease-out; }
+    
+    Text {
+        text: text;
+        color: active ? #00FFCC : (enabled ? #B3B3C2 : #555566);
+        font-weight: active ? 800 : 600;
+        font-size: 13px;
+        horizontal-alignment: center;
+        vertical-alignment: center;
+    }
+    
+    touch := TouchArea {
+        enabled: enabled;
+        clicked => { clicked(); }
+    }
+}
+
+// Custom Volume EQ Meter
+component VolumeMeter inherits Rectangle {
+    in property <float> value; // 0.0 to 1.0
+    background: #1F1F28;
+    border-radius: 6px;
+    height: 12px;
+    
+    // Gradient fill bar
+    Rectangle {
+        x: 0;
+        y: 0;
+        width: parent.width * Math.clamp(value, 0.0, 1.0);
+        height: parent.height;
+        background: @linear-gradient(90deg, #00FFCC 0%, #00FF88 50%, #FFCC00 80%, #FF3366 100%);
+        border-radius: 6px;
+        
+        animate width { duration: 60ms; easing: ease-out; }
+    }
+}
+
+// Custom Connection Status Display Card
+component StatusCard inherits Rectangle {
+    in property <bool> is_connected;
+    in property <string> text;
+    in property <float> volume;
+    
+    background: #14141B;
+    border-radius: 14px;
+    border-width: 1px;
+    border-color: is_connected ? #00FFCC4C : #FF33664C;
+    
+    animate border-color { duration: 250ms; }
+    
+    VerticalBox {
+        padding: 16px;
+        spacing: 12px;
+        
+        Text {
+            text: text;
+            color: is_connected ? #00FFCC : #FF3366;
+            font-size: 14px;
+            font-weight: 900;
+            horizontal-alignment: center;
+        }
+        
+        VolumeMeter {
+            value: volume;
+        }
+    }
+}
+
+// Custom Main Action Button
+component ActionButton inherits Rectangle {
+    in property <string> text;
+    in property <bool> active; // true if running/listening
+    callback clicked;
+    
+    background: active ? #FF33661E : #00FFCC1E;
+    border-radius: 12px;
+    border-width: 2px;
+    border-color: active ? #FF3366 : #00FFCC;
+    height: 50px;
+    
+    animate background, border-color { duration: 200ms; easing: ease-out; }
+    
+    Text {
+        text: text;
+        color: active ? #FF4D7D : #00FFCC;
+        font-size: 15px;
+        font-weight: 900;
+        letter-spacing: 1px;
+        horizontal-alignment: center;
+        vertical-alignment: center;
+    }
+    
+    touch := TouchArea {
+        clicked => { clicked(); }
+    }
+}
 
 export component MainWindow inherits Window {
-    title: "WO Mic Client (Native)";
-    min-width: 400px;
-    min-height: 550px;
-    background: #1a1b26;
+    title: "Project-M Client";
+    min-width: 440px;
+    min-height: 500px;
+    background: #0A0A0E;
 
-    in-out property <string> ip_address: "127.0.0.1";
-    in-out property <string> port: "8125";
+    in-out property <string> local_ip: "Determining IP...";
+    in-out property <string> port: "47999";
     in-out property <bool> is_connected: false;
     in-out property <float> volume_level: 0.0;
     in-out property <string> status_text: "Disconnected";
     in-out property <bool> is_usb: true;
-    in-out property <string> selected_codec: "PCM";
 
-    callback connect_clicked();
-    callback disconnect_clicked();
+    callback connect_clicked(); 
+    callback disconnect_clicked(); 
 
     VerticalBox {
-        padding: 20px;
-        spacing: 15px;
+        padding: 24px;
+        spacing: 18px;
 
-        Text {
-            text: "WOMIC Linux Replica";
-            font-size: 24px;
-            color: #a9b1d6;
-            horizontal-alignment: center;
-        }
-
-        GroupBox {
-            title: "Connection Settings";
-            VerticalBox {
-                spacing: 10px;
-                
-                HorizontalBox {
-                    Text { text: "Transport: "; vertical-alignment: center; color: #c0caf5; }
-                    Button {
-                        text: "USB (ADB)";
-                        primary: is_usb;
-                        enabled: !is_connected;
-                        clicked => { is_usb = true; ip_address = "127.0.0.1"; }
-                    }
-                    Button {
-                        text: "WiFi";
-                        primary: !is_usb;
-                        enabled: !is_connected;
-                        clicked => { is_usb = false; }
-                    }
-                }
-
-                HorizontalBox {
-                    Text { text: "Codec: "; vertical-alignment: center; color: #c0caf5; width: 80px; }
-                    ComboBox {
-                        model: ["PCM", "Opus"];
-                        current-value: selected_codec;
-                        enabled: !is_connected;
-                        selected(val) => { selected_codec = val; }
-                    }
-                }
-
-                HorizontalBox {
-                    Text { text: "IP Address: "; vertical-alignment: center; color: #c0caf5; width: 80px; }
-                    LineEdit {
-                        text: ip_address;
-                        enabled: !is_usb && !is_connected;
-                        edited(t) => { ip_address = t; }
-                        placeholder-text: "192.168.1.x";
-                    }
-                }
-
-                HorizontalBox {
-                    Text { text: "Port: "; vertical-alignment: center; color: #c0caf5; width: 80px; }
-                    LineEdit {
-                        text: port;
-                        enabled: !is_connected;
-                        edited(t) => { port = t; }
-                    }
-                }
+        // Header Title Area
+        VerticalBox {
+            padding: 0;
+            spacing: 4px;
+            Text {
+                text: "PROJECT-M";
+                font-size: 28px;
+                font-weight: 900;
+                color: #FFFFFF;
+                horizontal-alignment: center;
+                letter-spacing: 2px;
+            }
+            Text {
+                text: "HI-FI WIRELESS AUDIO LINK";
+                font-size: 11px;
+                font-weight: 700;
+                color: #6C6C7E;
+                horizontal-alignment: center;
+                letter-spacing: 1.5px;
             }
         }
 
-        GroupBox {
-            title: "Audio Status";
-            VerticalBox {
-                spacing: 10px;
-                Text {
-                    text: status_text;
-                    color: is_connected ? #9ece6a : #f7768e;
-                    horizontal-alignment: center;
+        // Mode Configuration Panel
+        Panel {
+            title: "CONNECTION SETTINGS";
+            
+            // Selector buttons
+            HorizontalBox {
+                padding: 0;
+                spacing: 8px;
+                
+                ModeButton {
+                    text: "USB (ADB)";
+                    active: is_usb;
+                    enabled: !is_connected;
+                    clicked => { is_usb = true; }
+                    horizontal-stretch: 1;
+                }
+                ModeButton {
+                    text: "Wi-Fi";
+                    active: !is_usb;
+                    enabled: !is_connected;
+                    clicked => { is_usb = false; }
+                    horizontal-stretch: 1;
+                }
+            }
+
+            // Explanatory Instructions
+            Rectangle {
+                background: #1B1B24;
+                border-radius: 8px;
+                
+                VerticalBox {
+                    spacing: 4px;
+                    padding: 10px;
+                    
+                    if is_usb : Text {
+                        text: "USB Mode Instructions:\n1. Enable USB Debugging on your Android phone.\n2. Connect phone to PC and click 'Start Listening' below.\n3. USB port forwarding configures automatically.";
+                        font-size: 11px;
+                        color: #A3A3B5;
+                        wrap: word-wrap;
+                    }
+                    if !is_usb : VerticalBox {
+                        padding: 0;
+                        spacing: 6px;
+                        Text {
+                            text: "Wi-Fi Mode Instructions:";
+                            font-size: 11px;
+                            font-weight: 700;
+                            color: #A3A3B5;
+                        }
+                        Text {
+                            text: "1. Make sure phone and PC are on the same Wi-Fi network.\n2. Enter this PC's local IP address in the phone app:";
+                            font-size: 10px;
+                            color: #6C6C7E;
+                            wrap: word-wrap;
+                        }
+                        Text {
+                            text: local_ip;
+                            font-size: 18px;
+                            font-weight: 900;
+                            color: #00FFCC;
+                            horizontal-alignment: center;
+                        }
+                    }
+                }
+            }
+
+            // Port configuration line edit
+            HorizontalBox {
+                padding: 0;
+                spacing: 12px;
+                Text { 
+                    text: "Listen Port:"; 
+                    vertical-alignment: center; 
+                    color: #A3A3B5; 
+                    font-size: 12px;
                     font-weight: 700;
+                    width: 80px; 
                 }
-                
-                ProgressIndicator {
-                    progress: volume_level;
-                    height: 10px;
+                LineEdit {
+                    text: port;
+                    enabled: !is_connected;
+                    edited(t) => { port = t; }
+                    horizontal-stretch: 1;
                 }
             }
         }
 
-        if !is_connected : Button {
-            text: "Connect";
-            primary: true;
-            height: 50px;
+        // Live Audio Status Dashboard
+        StatusCard {
+            is_connected: is_connected;
+            text: status_text;
+            volume: volume_level;
+        }
+
+        // Giant Action Controls
+        if !is_connected : ActionButton {
+            text: "START LISTENING";
+            active: false;
             clicked => { connect_clicked(); }
         }
 
-        if is_connected : Button {
-            text: "Disconnect";
-            height: 50px;
+        if is_connected : ActionButton {
+            text: "STOP LISTENING";
+            active: true;
             clicked => { disconnect_clicked(); }
         }
 
+        // Technical Footer
         Text {
-            text: "Optimized for CachyOS / PipeWire";
-            font-size: 12px;
-            color: #565f89;
+            text: "Raw 48kHz Mono PCM • Low-Latency Jitter Buffer • PipeWire Native";
+            font-size: 10px;
+            color: #4C4C5E;
             horizontal-alignment: center;
         }
     }

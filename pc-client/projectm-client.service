@@ -1,11 +1,11 @@
 [Unit]
-Description=WO Mic Linux Client
+Description=Project-M Linux Client
 After=network.target pipewire.service
 Requires=pipewire.service
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/womic-linux --transport usb --codec pcm --rt
+ExecStart=/usr/local/bin/project-m
 Restart=always
 RestartSec=5
 # Allow real-time scheduling
