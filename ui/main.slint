@@ -1,0 +1,121 @@
+import { Button, VerticalBox, LineEdit, HorizontalBox, GroupBox, ProgressIndicator, ComboBox } from "std-widgets.slint";
+
+export component MainWindow inherits Window {
+    title: "WO Mic Client (Native)";
+    min-width: 400px;
+    min-height: 550px;
+    background: #1a1b26;
+
+    in-out property <string> ip_address: "127.0.0.1";
+    in-out property <string> port: "8125";
+    in-out property <bool> is_connected: false;
+    in-out property <float> volume_level: 0.0;
+    in-out property <string> status_text: "Disconnected";
+    in-out property <bool> is_usb: true;
+    in-out property <string> selected_codec: "PCM";
+
+    callback connect_clicked();
+    callback disconnect_clicked();
+
+    VerticalBox {
+        padding: 20px;
+        spacing: 15px;
+
+        Text {
+            text: "WOMIC Linux Replica";
+            font-size: 24px;
+            color: #a9b1d6;
+            horizontal-alignment: center;
+        }
+
+        GroupBox {
+            title: "Connection Settings";
+            VerticalBox {
+                spacing: 10px;
+                
+                HorizontalBox {
+                    Text { text: "Transport: "; vertical-alignment: center; color: #c0caf5; }
+                    Button {
+                        text: "USB (ADB)";
+                        primary: is_usb;
+                        enabled: !is_connected;
+                        clicked => { is_usb = true; ip_address = "127.0.0.1"; }
+                    }
+                    Button {
+                        text: "WiFi";
+                        primary: !is_usb;
+                        enabled: !is_connected;
+                        clicked => { is_usb = false; }
+                    }
+                }
+
+                HorizontalBox {
+                    Text { text: "Codec: "; vertical-alignment: center; color: #c0caf5; width: 80px; }
+                    ComboBox {
+                        model: ["PCM", "Opus"];
+                        current-value: selected_codec;
+                        enabled: !is_connected;
+                        selected(val) => { selected_codec = val; }
+                    }
+                }
+
+                HorizontalBox {
+                    Text { text: "IP Address: "; vertical-alignment: center; color: #c0caf5; width: 80px; }
+                    LineEdit {
+                        text: ip_address;
+                        enabled: !is_usb && !is_connected;
+                        edited(t) => { ip_address = t; }
+                        placeholder-text: "192.168.1.x";
+                    }
+                }
+
+                HorizontalBox {
+                    Text { text: "Port: "; vertical-alignment: center; color: #c0caf5; width: 80px; }
+                    LineEdit {
+                        text: port;
+                        enabled: !is_connected;
+                        edited(t) => { port = t; }
+                    }
+                }
+            }
+        }
+
+        GroupBox {
+            title: "Audio Status";
+            VerticalBox {
+                spacing: 10px;
+                Text {
+                    text: status_text;
+                    color: is_connected ? #9ece6a : #f7768e;
+                    horizontal-alignment: center;
+                    font-weight: 700;
+                }
+                
+                ProgressIndicator {
+                    progress: volume_level;
+                    height: 10px;
+                }
+            }
+        }
+
+        if !is_connected : Button {
+            text: "Connect";
+            primary: true;
+            height: 50px;
+            clicked => { connect_clicked(); }
+        }
+
+        if is_connected : Button {
+            text: "Disconnect";
+            height: 50px;
+            clicked => { disconnect_clicked(); }
+        }
+
+        Text {
+            text: "Optimized for CachyOS / PipeWire";
+            font-size: 12px;
+            color: #565f89;
+            horizontal-alignment: center;
+        }
+    }
+}

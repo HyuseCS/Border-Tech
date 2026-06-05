@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=WO Mic Client
+Comment=Use your phone as a microphone on Linux
+Exec=womic-linux
+Icon=audio-input-microphone
+Type=Application
+Categories=AudioVideo;Audio;
+Terminal=false
