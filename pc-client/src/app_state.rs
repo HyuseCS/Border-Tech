@@ -4,7 +4,7 @@ use tokio::sync::Mutex;
 use crate::audio::PipewireSink;
 use crate::protocol::ProtocolHandler;
 use crate::MainWindow;
-use tokio::net::TcpListener;
+
 use tracing::{info, error};
 use std::time::Duration;
 
@@ -46,9 +46,14 @@ impl rustls::client::danger::ServerCertVerifier for DummyVerifier {
     fn supported_verify_schemes(&self) -> Vec<rustls::SignatureScheme> {
         vec![
             rustls::SignatureScheme::RSA_PKCS1_SHA256,
+            rustls::SignatureScheme::RSA_PKCS1_SHA384,
+            rustls::SignatureScheme::RSA_PKCS1_SHA512,
             rustls::SignatureScheme::ECDSA_NISTP256_SHA256,
             rustls::SignatureScheme::ECDSA_NISTP384_SHA384,
             rustls::SignatureScheme::ED25519,
+            rustls::SignatureScheme::RSA_PSS_SHA256,
+            rustls::SignatureScheme::RSA_PSS_SHA384,
+            rustls::SignatureScheme::RSA_PSS_SHA512,
         ]
     }
 }
@@ -69,7 +74,7 @@ impl AppState {
     }
 
     /// Starts connection logic.
-    pub fn connect(&self, port: u16, is_usb: bool, server_ip: String, use_tls: bool) {
+    pub fn connect(&self, port: u16, is_usb: bool, server_ip: String) {
         let connection_task = self.connection_task.clone();
 
         let ui_weak_task = self.ui.clone();
@@ -91,7 +96,7 @@ impl AppState {
                     const MAX_RETRIES: u32 = 5;
 
                     loop {
-                        let res = Self::run_connection(port, is_usb, server_ip_clone.clone(), use_tls, ui_weak_run.clone(), &mut rx).await;
+                        let res = Self::run_connection(port, is_usb, server_ip_clone.clone(), ui_weak_run.clone(), &mut rx).await;
                         
                         match res {
                             Ok(_) => {
@@ -157,7 +162,6 @@ impl AppState {
         port: u16, 
         is_usb: bool, 
         server_ip: String,
-        use_tls: bool,
         ui_weak: Weak<MainWindow>,
         stop_rx: &mut tokio::sync::oneshot::Receiver<()>
     ) -> anyhow::Result<()> {
@@ -186,19 +190,25 @@ impl AppState {
                 .map(|s| s.trim().to_string())
                 .unwrap_or_else(|| "/usr/bin/adb".to_string());
 
-            info!("Configuring ADB port reverse forwarding for port {} using {}...", port, adb_path);
+            info!("Configuring ADB port forwarding (PC -> Phone) for port {} using {}...", port, adb_path);
+            
+            // Proactively remove any existing dangling bindings to avoid "Address already in use" errors
+            let _ = tokio::process::Command::new(&adb_path)
+                .args(["forward", "--remove", &format!("tcp:{}", port)])
+                .output().await;
+
             let out = tokio::process::Command::new(&adb_path)
-                .args(["reverse", &format!("tcp:{}", port), &format!("tcp:{}", port)])
+                .args(["forward", &format!("tcp:{}", port), &format!("tcp:{}", port)])
                 .output().await?;
             
             if !out.status.success() {
-                return Err(anyhow::anyhow!("ADB reverse command failed: {}", String::from_utf8_lossy(&out.stderr)));
+                return Err(anyhow::anyhow!("ADB forward command failed: {}", String::from_utf8_lossy(&out.stderr)));
             }
 
             Some(scopeguard::guard((port, adb_path), |(p, adb_cmd)| {
-                info!("Removing ADB port reverse forwarding...");
+                info!("Removing ADB port forwarding...");
                 let _ = std::process::Command::new(&adb_cmd)
-                    .args(["reverse", "--remove", &format!("tcp:{}", p)])
+                    .args(["forward", "--remove", &format!("tcp:{}", p)])
                     .output();
             }))
         } else {
@@ -207,81 +217,42 @@ impl AppState {
 
         let mut stop_fut = stop_rx;
 
-        let (stream, peer_addr): (Box<dyn AsyncStream>, std::net::SocketAddr) = if is_usb {
-            // Bind TCP Listener
-            let listener = TcpListener::bind(format!("127.0.0.1:{}", port)).await?;
-            info!("Listening for phone connection on loopback port {}", port);
-
-            // Accept connection or handle cancellation
-            let (tcp_stream, peer_addr) = tokio::select! {
-                res = listener.accept() => res?,
-                _ = &mut stop_fut => {
-                    info!("Listening stopped before connection was accepted.");
-                    return Ok(());
-                }
-            };
-            
-            if use_tls {
-                let cert = rcgen::generate_simple_self_signed(vec!["lampyris.local".to_string()])?;
-                let key_der = cert.signing_key.serialize_der();
-                let cert_der = cert.cert.der().to_vec();
-                let key = rustls::pki_types::PrivateKeyDer::try_from(key_der)
-                    .map_err(|e| anyhow::anyhow!("Invalid private key: {}", e))?;
-                let certs = vec![rustls::pki_types::CertificateDer::from(cert_der)];
-
-                let config = rustls::ServerConfig::builder()
-                    .with_no_client_auth()
-                    .with_single_cert(certs, key)?;
-
-                let acceptor = tokio_rustls::TlsAcceptor::from(std::sync::Arc::new(config));
-                
-                info!("Accepting TLS connection...");
-                let tls_stream = tokio::select! {
-                    res = acceptor.accept(tcp_stream) => res?,
-                    _ = &mut stop_fut => {
-                        info!("Listening stopped during TLS handshake.");
-                        return Ok(());
-                    }
-                };
-                (Box::new(tls_stream), peer_addr)
-            } else {
-                (Box::new(tcp_stream), peer_addr)
-            }
+        let target_addr = if is_usb {
+            format!("127.0.0.1:{}", port)
         } else {
-            // Wi-Fi Mode: Connect to Android device as a client
-            let target_addr = format!("{}:{}", server_ip, port);
-            info!("Connecting to Android device at {}...", target_addr);
+            format!("{}:{}", server_ip, port)
+        };
 
-            let tcp_stream = tokio::select! {
-                res = tokio::net::TcpStream::connect(&target_addr) => res?,
-                _ = &mut stop_fut => {
-                    info!("Connection attempt cancelled.");
-                    return Ok(());
-                }
-            };
-            let peer_addr = tcp_stream.peer_addr()?;
-            
-            if use_tls {
-                let config = rustls::ClientConfig::builder()
-                    .dangerous()
-                    .with_custom_certificate_verifier(std::sync::Arc::new(DummyVerifier))
-                    .with_no_client_auth();
-                let connector = tokio_rustls::TlsConnector::from(std::sync::Arc::new(config));
-                let domain = rustls::pki_types::ServerName::try_from("lampyris.local").unwrap();
-                
-                info!("Initiating TLS handshake...");
-                let tls_stream = tokio::select! {
-                    res = connector.connect(domain, tcp_stream) => res?,
-                    _ = &mut stop_fut => {
-                        info!("Connection cancelled during TLS handshake.");
-                        return Ok(());
-                    }
-                };
-                (Box::new(tls_stream), peer_addr)
-            } else {
-                (Box::new(tcp_stream), peer_addr)
+        info!("Connecting to Android device at {}...", target_addr);
+
+        let tcp_stream = tokio::select! {
+            res = tokio::net::TcpStream::connect(&target_addr) => res?,
+            _ = &mut stop_fut => {
+                info!("Connection attempt cancelled.");
+                return Ok(());
             }
         };
+        let peer_addr = tcp_stream.peer_addr()?;
+        
+        let config = rustls::ClientConfig::builder()
+            .dangerous()
+            .with_custom_certificate_verifier(std::sync::Arc::new(DummyVerifier))
+            .with_no_client_auth();
+        let connector = tokio_rustls::TlsConnector::from(std::sync::Arc::new(config));
+        let ip_str = if is_usb { "127.0.0.1" } else { server_ip.as_str() };
+        let domain = rustls::pki_types::ServerName::try_from(ip_str).unwrap_or_else(|_| {
+            rustls::pki_types::ServerName::try_from("localhost").unwrap()
+        }).to_owned();
+        
+        info!("Initiating TLS handshake...");
+        let tls_stream = tokio::select! {
+            res = connector.connect(domain, tcp_stream) => res?,
+            _ = &mut stop_fut => {
+                info!("Connection cancelled during TLS handshake.");
+                return Ok(());
+            }
+        };
+        let stream: Box<dyn AsyncStream> = Box::new(tls_stream);
 
         info!("Connection established with {}", peer_addr);
         

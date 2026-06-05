@@ -146,7 +146,7 @@ export component MainWindow inherits Window {
     in-out property <float> volume_level: 0.0;
     in-out property <string> status_text: "Disconnected";
     in-out property <bool> is_usb: true;
-    in-out property <bool> use_tls: true;
+
 
     callback connect_clicked(); 
     callback disconnect_clicked(); 
@@ -252,17 +252,7 @@ export component MainWindow inherits Window {
                 }
             }
 
-            // TLS Toggle
-            HorizontalBox {
-                padding: 0;
-                spacing: 12px;
-                CheckBox {
-                    text: "Enable Secure Connection (TLS)";
-                    checked: use_tls;
-                    toggled => { use_tls = self.checked; }
-                    enabled: !is_connected;
-                }
-            }
+
 
             // Port configuration line edit
             HorizontalBox {

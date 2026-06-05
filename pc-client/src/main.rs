@@ -80,9 +80,7 @@ async fn main() -> anyhow::Result<()> {
             let is_usb = ui.get_is_usb();
             let server_ip = ui.get_android_ip().to_string();
             let port = port_str.parse::<u16>().unwrap_or(47999);
-            let use_tls = ui.get_use_tls();
-
-            app_state_clone.connect(port, is_usb, server_ip, use_tls);
+            app_state_clone.connect(port, is_usb, server_ip);
         }
     });
 
