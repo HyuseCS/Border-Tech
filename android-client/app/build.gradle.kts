@@ -22,7 +22,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -59,7 +59,11 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.2.1")
 
     // Coroutines for networking/async work
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
+
+    // BouncyCastle for TLS certificate generation
+    implementation("org.bouncycastle:bcprov-jdk15to18:1.78")
+    implementation("org.bouncycastle:bcpkix-jdk15to18:1.78")
 
     debugImplementation("androidx.compose.ui:ui-tooling:$compose_version")
 }

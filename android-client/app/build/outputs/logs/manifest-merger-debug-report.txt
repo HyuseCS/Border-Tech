@@ -38,9 +38,9 @@ MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.1] /home/hyuse/.grad
 MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.1] /home/hyuse/.gradle/caches/transforms-4/fe9d098d9e7e0da0f7db8a2d1b7438f5/transformed/jetified-lifecycle-runtime-ktx-release/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.1] /home/hyuse/.gradle/caches/transforms-4/55af4167ca5408d0ade5543a4e5c5068/transformed/jetified-lifecycle-viewmodel-savedstate-2.8.1/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.core:core-ktx:1.13.1] /home/hyuse/.gradle/caches/transforms-4/46c75a6df819f9db30a84bbdaa32e220/transformed/jetified-core-ktx-1.13.1/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.annotation:annotation-experimental:1.4.0] /home/hyuse/.gradle/caches/transforms-4/17b308651c7cbc54c2c7fc8929697a24/transformed/jetified-annotation-experimental-1.4.0/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.compose.runtime:runtime-saveable-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/217543465a17627aef16d1f4143483b8/transformed/jetified-runtime-saveable-release/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.compose.runtime:runtime-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/c2f8fc803725c41af3f60ae851d19315/transformed/jetified-runtime-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.annotation:annotation-experimental:1.4.0] /home/hyuse/.gradle/caches/transforms-4/17b308651c7cbc54c2c7fc8929697a24/transformed/jetified-annotation-experimental-1.4.0/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.interpolator:interpolator:1.0.0] /home/hyuse/.gradle/caches/transforms-4/b84c77d5d99b899be5bf2f048481ba57/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/hyuse/.gradle/caches/transforms-4/54b274e5ba05613e4fae827356efe753/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
 MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:17:1-55:12
@@ -105,7 +105,7 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] /home/hyuse/.gradle/caches/
 	android:icon
 		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:12:9-49
 	android:allowBackup
-		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:11:9-35
+		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:11:9-36
 	android:theme
 		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:16:9-66
 service#com.projectm.mic.AudioCaptureService
@@ -208,12 +208,12 @@ MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.1] /home/hyus
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.1] /home/hyuse/.gradle/caches/transforms-4/55af4167ca5408d0ade5543a4e5c5068/transformed/jetified-lifecycle-viewmodel-savedstate-2.8.1/AndroidManifest.xml:20:5-44
 MERGED from [androidx.core:core-ktx:1.13.1] /home/hyuse/.gradle/caches/transforms-4/46c75a6df819f9db30a84bbdaa32e220/transformed/jetified-core-ktx-1.13.1/AndroidManifest.xml:5:5-44
 MERGED from [androidx.core:core-ktx:1.13.1] /home/hyuse/.gradle/caches/transforms-4/46c75a6df819f9db30a84bbdaa32e220/transformed/jetified-core-ktx-1.13.1/AndroidManifest.xml:5:5-44
-MERGED from [androidx.annotation:annotation-experimental:1.4.0] /home/hyuse/.gradle/caches/transforms-4/17b308651c7cbc54c2c7fc8929697a24/transformed/jetified-annotation-experimental-1.4.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.annotation:annotation-experimental:1.4.0] /home/hyuse/.gradle/caches/transforms-4/17b308651c7cbc54c2c7fc8929697a24/transformed/jetified-annotation-experimental-1.4.0/AndroidManifest.xml:5:5-44
 MERGED from [androidx.compose.runtime:runtime-saveable-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/217543465a17627aef16d1f4143483b8/transformed/jetified-runtime-saveable-release/AndroidManifest.xml:5:5-44
 MERGED from [androidx.compose.runtime:runtime-saveable-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/217543465a17627aef16d1f4143483b8/transformed/jetified-runtime-saveable-release/AndroidManifest.xml:5:5-44
 MERGED from [androidx.compose.runtime:runtime-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/c2f8fc803725c41af3f60ae851d19315/transformed/jetified-runtime-release/AndroidManifest.xml:5:5-44
 MERGED from [androidx.compose.runtime:runtime-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/c2f8fc803725c41af3f60ae851d19315/transformed/jetified-runtime-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.0] /home/hyuse/.gradle/caches/transforms-4/17b308651c7cbc54c2c7fc8929697a24/transformed/jetified-annotation-experimental-1.4.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.0] /home/hyuse/.gradle/caches/transforms-4/17b308651c7cbc54c2c7fc8929697a24/transformed/jetified-annotation-experimental-1.4.0/AndroidManifest.xml:5:5-44
 MERGED from [androidx.interpolator:interpolator:1.0.0] /home/hyuse/.gradle/caches/transforms-4/b84c77d5d99b899be5bf2f048481ba57/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.interpolator:interpolator:1.0.0] /home/hyuse/.gradle/caches/transforms-4/b84c77d5d99b899be5bf2f048481ba57/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/hyuse/.gradle/caches/transforms-4/54b274e5ba05613e4fae827356efe753/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41

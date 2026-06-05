@@ -11,7 +11,12 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -32,8 +37,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -49,7 +52,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.res.painterResource
@@ -87,10 +89,10 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen(activity: ComponentActivity) {
     val sharedPref = activity.getSharedPreferences("sonus_pref", Context.MODE_PRIVATE)
-    
-    var ipAddress by remember { mutableStateOf(sharedPref.getString("ip_address", "192.168.1.100") ?: "192.168.1.100") }
+
     var portString by remember { mutableStateOf(sharedPref.getString("port", "47999") ?: "47999") }
-    
+    var localIp by remember { mutableStateOf("Fetching IP...") }
+
     val connectionState by AudioCaptureService.state
     val isRunning by AudioCaptureService.isServiceRunning
     val errorMessage by AudioCaptureService.errorMessage
@@ -118,10 +120,14 @@ fun MainScreen(activity: ComponentActivity) {
         launcher.launch(permissions.toTypedArray())
     }
 
-    // Save preferences when IP/Port updates
-    LaunchedEffect(ipAddress, portString) {
+    // Refresh IP address
+    LaunchedEffect(isRunning) {
+        localIp = getLocalIpAddress(activity)
+    }
+
+    // Save preferences when Port updates
+    LaunchedEffect(portString) {
         sharedPref.edit().apply {
-            putString("ip_address", ipAddress)
             putString("port", portString)
             apply()
         }
@@ -134,10 +140,14 @@ fun MainScreen(activity: ComponentActivity) {
         AudioCaptureService.ConnectionState.DISCONNECTED -> Color(0xFF888899)
     }
 
-    val glowAlpha by animateFloatAsState(
-        targetValue = if (connectionState == AudioCaptureService.ConnectionState.CONNECTED) 1.0f else 0.4f,
-        animationSpec = tween(1000),
-        label = "glow"
+    val btnColor by animateColorAsState(
+        targetValue = if (isRunning) {
+            if (connectionState == AudioCaptureService.ConnectionState.ERROR) Color(0xFFFF3366) 
+            else if (connectionState == AudioCaptureService.ConnectionState.CONNECTED) Color(0xFF00FFCC)
+            else Color(0xFFFFCC00)
+        } else Color(0xFF333344),
+        animationSpec = tween(500),
+        label = "btnColor"
     )
 
     Column(
@@ -171,85 +181,91 @@ fun MainScreen(activity: ComponentActivity) {
                 )
             )
             Text(
-                text = "Hi-Fi Wireless Audio Link",
-                fontSize = 14.sp,
+                text = "SECURE AUDIO SERVER",
+                fontSize = 12.sp,
                 color = Color(0xFF8E8E9F),
-                fontFamily = FontFamily.SansSerif
+                fontFamily = FontFamily.SansSerif,
+                letterSpacing = 2.sp
             )
         }
 
         // Connection Status Box
-        Card(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .border(1.dp, neonColor.copy(alpha = glowAlpha), RoundedCornerShape(16.dp)),
-            colors = CardDefaults.cardColors(containerColor = Color(0xFF16161D)),
-            shape = RoundedCornerShape(16.dp)
+                .clip(RoundedCornerShape(16.dp))
+                .background(Color(0xFF1E1E24))
+                .padding(20.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(20.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .size(12.dp)
-                            .clip(CircleShape)
-                            .background(neonColor)
-                    )
-                    Spacer(modifier = Modifier.width(10.dp))
-                    Text(
-                        text = connectionState.name,
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White
-                    )
-                }
+            Text(
+                text = when (connectionState) {
+                    AudioCaptureService.ConnectionState.CONNECTED -> "SECURELY STREAMING"
+                    AudioCaptureService.ConnectionState.CONNECTING -> "LISTENING FOR PC..."
+                    AudioCaptureService.ConnectionState.ERROR -> "SYSTEM ERROR"
+                    AudioCaptureService.ConnectionState.DISCONNECTED -> "SYSTEM READY"
+                },
+                color = neonColor,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Bold,
+                letterSpacing = 2.sp
+            )
+            
+            Spacer(modifier = Modifier.height(8.dp))
+            
+            Text(
+                text = if (isRunning) localIp else "OFFLINE",
+                color = Color.White,
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Light
+            )
 
-                if (connectionState == AudioCaptureService.ConnectionState.ERROR && errorMessage.isNotEmpty()) {
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = errorMessage,
-                        fontSize = 12.sp,
-                        color = Color(0xFFFF3366),
-                        textAlign = TextAlign.Center
-                    )
-                }
+            if (connectionState == AudioCaptureService.ConnectionState.ERROR && errorMessage.isNotEmpty()) {
+                Text(
+                    text = errorMessage,
+                    color = Color(0xFFFF3366),
+                    fontSize = 12.sp,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(top = 8.dp)
+                )
             }
         }
 
-        // Main Controller Area
+        // Main Power Button
         Box(
             contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .size(200.dp)
-                .scale(if (isRunning) 1.05f else 1.0f)
+            modifier = Modifier.size(200.dp)
         ) {
-            // Pulsing background rings
-            Box(
-                modifier = Modifier
-                    .size(190.dp)
-                    .clip(CircleShape)
-                    .border(2.dp, neonColor.copy(alpha = 0.2f), CircleShape)
-            )
-            Box(
-                modifier = Modifier
-                    .size(170.dp)
-                    .clip(CircleShape)
-                    .border(1.dp, neonColor.copy(alpha = 0.4f), CircleShape)
-            )
-
-            // Actual interactive button
-            val btnColor by animateColorAsState(
-                targetValue = if (isRunning) Color(0xFFFF3366) else Color(0xFF00FFCC),
-                animationSpec = tween(500),
-                label = "btnColor"
-            )
+            // Pulse Effect
+            if (isRunning && connectionState != AudioCaptureService.ConnectionState.ERROR) {
+                val infiniteTransition = rememberInfiniteTransition(label = "pulse")
+                val scale by infiniteTransition.animateFloat(
+                    initialValue = 1f,
+                    targetValue = 1.4f,
+                    animationSpec = infiniteRepeatable(
+                        animation = tween(1500, easing = LinearOutSlowInEasing),
+                        repeatMode = RepeatMode.Restart
+                    ),
+                    label = "scale"
+                )
+                val alpha by infiniteTransition.animateFloat(
+                    initialValue = 0.4f,
+                    targetValue = 0f,
+                    animationSpec = infiniteRepeatable(
+                        animation = tween(1500, easing = LinearOutSlowInEasing),
+                        repeatMode = RepeatMode.Restart
+                    ),
+                    label = "alpha"
+                )
+                
+                Box(
+                    modifier = Modifier
+                        .size(140.dp)
+                        .scale(scale)
+                        .clip(CircleShape)
+                        .background(neonColor.copy(alpha = alpha))
+                )
+            }
 
             Button(
                 onClick = {
@@ -261,7 +277,7 @@ fun MainScreen(activity: ComponentActivity) {
                         AudioCaptureService.stopService(activity)
                     } else {
                         val port = portString.toIntOrNull() ?: 47999
-                        AudioCaptureService.startService(activity, ipAddress, port)
+                        AudioCaptureService.startService(activity, port)
                     }
                 },
                 modifier = Modifier
@@ -283,32 +299,21 @@ fun MainScreen(activity: ComponentActivity) {
             }
         }
 
-        // Input Fields (IP & Port)
+        // Port Settings
         Column(modifier = Modifier.fillMaxWidth()) {
-            OutlinedTextField(
-                value = ipAddress,
-                onValueChange = { ipAddress = it },
-                label = { Text("Receiver PC IP") },
-                singleLine = true,
-                enabled = !isRunning,
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = Color(0xFF00FFCC),
-                    unfocusedBorderColor = Color(0xFF333344),
-                    focusedLabelColor = Color(0xFF00FFCC),
-                    unfocusedLabelColor = Color(0xFF8E8E9F),
-                    focusedTextColor = Color.White,
-                    unfocusedTextColor = Color.White
-                ),
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp)
+            Text(
+                text = "SERVER SETTINGS",
+                color = Color(0xFF8E8E9F),
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Bold,
+                letterSpacing = 1.sp,
+                modifier = Modifier.padding(bottom = 8.dp)
             )
-
-            Spacer(modifier = Modifier.height(12.dp))
-
+            
             OutlinedTextField(
                 value = portString,
                 onValueChange = { portString = it },
-                label = { Text("Port") },
+                label = { Text("Server Port") },
                 singleLine = true,
                 enabled = !isRunning,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
@@ -332,5 +337,22 @@ fun MainScreen(activity: ComponentActivity) {
             color = Color(0xFF555566),
             modifier = Modifier.padding(bottom = 8.dp)
         )
+    }
+}
+
+fun getLocalIpAddress(context: Context): String {
+    try {
+        val wm = context.applicationContext.getSystemService(Context.WIFI_SERVICE) as android.net.wifi.WifiManager
+        val ipInt = wm.connectionInfo.ipAddress
+        if (ipInt == 0) return "No Wi-Fi"
+        return String.format(
+            "%d.%d.%d.%d",
+            ipInt and 0xff,
+            ipInt shr 8 and 0xff,
+            ipInt shr 16 and 0xff,
+            ipInt shr 24 and 0xff
+        )
+    } catch (e: Exception) {
+        return "Unknown IP"
     }
 }
