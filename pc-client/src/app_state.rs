@@ -23,29 +23,30 @@ impl AppState {
         }
     }
 
-    /// Starts listening for incoming audio connections.
-    pub fn connect(&self, port: u16, is_usb: bool) {
+    /// Starts connection logic.
+    pub fn connect(&self, port: u16, is_usb: bool, server_ip: String) {
         let connection_task = self.connection_task.clone();
 
         let ui_weak_task = self.ui.clone();
         tokio::spawn(async move {
-            // Cancel existing listener if any
+            // Cancel existing listener/connection if any
             {
                 let mut task_opt = connection_task.lock().await;
                 if let Some((handle, tx)) = task_opt.take() {
-                    info!("Cancelling existing connection listener...");
+                    info!("Cancelling existing connection...");
                     let _ = tx.send(());
                     let _ = handle.await;
                 }
 
                 let (tx, mut rx) = tokio::sync::oneshot::channel::<()>();
                 let ui_weak_run = ui_weak_task.clone();
+                let server_ip_clone = server_ip.clone();
                 let handle = tokio::spawn(async move {
                     let mut retry_count = 0;
                     const MAX_RETRIES: u32 = 5;
 
                     loop {
-                        let res = Self::run_connection(port, is_usb, ui_weak_run.clone(), &mut rx).await;
+                        let res = Self::run_connection(port, is_usb, server_ip_clone.clone(), ui_weak_run.clone(), &mut rx).await;
                         
                         match res {
                             Ok(_) => {
@@ -110,14 +111,21 @@ impl AppState {
     async fn run_connection(
         port: u16, 
         is_usb: bool, 
+        server_ip: String,
         ui_weak: Weak<MainWindow>,
         stop_rx: &mut tokio::sync::oneshot::Receiver<()>
     ) -> anyhow::Result<()> {
+        let status_msg = if is_usb {
+            "Waiting for connection...".to_string()
+        } else {
+            format!("Connecting to {}...", server_ip)
+        };
+
         let _ = slint::invoke_from_event_loop({
             let ui_weak = ui_weak.clone();
             move || {
                 if let Some(ui) = ui_weak.upgrade() {
-                    ui.set_status_text("Waiting for connection...".into());
+                    ui.set_status_text(status_msg.into());
                 }
             }
         });
@@ -143,22 +151,40 @@ impl AppState {
             None
         };
 
-        // Bind TCP Listener
-        let listener = TcpListener::bind(format!("0.0.0.0:{}", port)).await?;
-        info!("Listening for phone connection on port {}", port);
-
         let mut stop_fut = stop_rx;
 
-        // Accept connection or handle cancellation
-        let (stream, peer_addr) = tokio::select! {
-            res = listener.accept() => res?,
-            _ = &mut stop_fut => {
-                info!("Listening stopped before connection was accepted.");
-                return Ok(());
-            }
+        // Establish connection based on connection mode
+        let (stream, peer_addr) = if is_usb {
+            // Bind TCP Listener
+            let listener = TcpListener::bind(format!("0.0.0.0:{}", port)).await?;
+            info!("Listening for phone connection on port {}", port);
+
+            // Accept connection or handle cancellation
+            let (stream, peer_addr) = tokio::select! {
+                res = listener.accept() => res?,
+                _ = &mut stop_fut => {
+                    info!("Listening stopped before connection was accepted.");
+                    return Ok(());
+                }
+            };
+            (stream, peer_addr)
+        } else {
+            // Wi-Fi Mode: Connect to Android device as a client
+            let target_addr = format!("{}:{}", server_ip, port);
+            info!("Connecting to Android device at {}...", target_addr);
+
+            let stream = tokio::select! {
+                res = tokio::net::TcpStream::connect(&target_addr) => res?,
+                _ = &mut stop_fut => {
+                    info!("Connection attempt cancelled.");
+                    return Ok(());
+                }
+            };
+            let peer_addr = stream.peer_addr()?;
+            (stream, peer_addr)
         };
 
-        info!("Accepted connection from {}", peer_addr);
+        info!("Connection established with {}", peer_addr);
         
         let _ = slint::invoke_from_event_loop({
             let ui_weak = ui_weak.clone();

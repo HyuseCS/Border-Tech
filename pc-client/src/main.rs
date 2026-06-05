@@ -68,9 +68,10 @@ async fn main() -> anyhow::Result<()> {
         if let Some(ui) = ui_weak.upgrade() {
             let port_str = ui.get_port().to_string();
             let is_usb = ui.get_is_usb();
+            let server_ip = ui.get_android_ip().to_string();
             let port = port_str.parse::<u16>().unwrap_or(47999);
 
-            app_state_clone.connect(port, is_usb);
+            app_state_clone.connect(port, is_usb, server_ip);
         }
     });
 

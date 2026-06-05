@@ -140,6 +140,7 @@ export component MainWindow inherits Window {
 
     in-out property <string> local_ip: "Determining IP...";
     in-out property <string> port: "47999";
+    in-out property <string> android_ip: "192.168.1.100";
     in-out property <bool> is_connected: false;
     in-out property <float> volume_level: 0.0;
     in-out property <string> status_text: "Disconnected";
@@ -216,7 +217,7 @@ export component MainWindow inherits Window {
                     }
                     if !is_usb : VerticalBox {
                         padding: 0;
-                        spacing: 6px;
+                        spacing: 8px;
                         Text {
                             text: "Wi-Fi Mode Instructions:";
                             font-size: 11px;
@@ -224,17 +225,29 @@ export component MainWindow inherits Window {
                             color: #A3A3B5;
                         }
                         Text {
-                            text: "1. Make sure phone and PC are on the same Wi-Fi network.\n2. Enter this PC's local IP address in the phone app:";
+                            text: "1. Make sure phone and PC are on the same Wi-Fi network.\n2. Start server on the Android app.\n3. Enter Android device's IP below:";
                             font-size: 10px;
                             color: #6C6C7E;
                             wrap: word-wrap;
                         }
-                        Text {
-                            text: local_ip;
-                            font-size: 18px;
-                            font-weight: 900;
-                            color: #00FFCC;
-                            horizontal-alignment: center;
+                        HorizontalBox {
+                            padding: 0;
+                            spacing: 12px;
+                            Text { 
+                                text: "Android IP:"; 
+                                vertical-alignment: center; 
+                                color: #A3A3B5; 
+                                font-size: 12px;
+                                font-weight: 700;
+                                width: 80px; 
+                            }
+                            LineEdit {
+                                text: android_ip;
+                                enabled: !is_connected;
+                                edited(t) => { android_ip = t; }
+                                horizontal-stretch: 1;
+                                placeholder-text: "e.g., 192.168.1.100";
+                            }
                         }
                     }
                 }
@@ -245,7 +258,7 @@ export component MainWindow inherits Window {
                 padding: 0;
                 spacing: 12px;
                 Text { 
-                    text: "Listen Port:"; 
+                    text: is_usb ? "Listen Port:" : "Server Port:"; 
                     vertical-alignment: center; 
                     color: #A3A3B5; 
                     font-size: 12px;
