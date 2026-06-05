@@ -13,6 +13,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -51,6 +52,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -84,7 +86,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen(activity: ComponentActivity) {
-    val sharedPref = activity.getSharedPreferences("projectm_pref", Context.MODE_PRIVATE)
+    val sharedPref = activity.getSharedPreferences("sonus_pref", Context.MODE_PRIVATE)
     
     var ipAddress by remember { mutableStateOf(sharedPref.getString("ip_address", "192.168.1.100") ?: "192.168.1.100") }
     var portString by remember { mutableStateOf(sharedPref.getString("port", "47999") ?: "47999") }
@@ -150,8 +152,13 @@ fun MainScreen(activity: ComponentActivity) {
             modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_launcher_mic),
+                contentDescription = "Sonus Logo",
+                modifier = Modifier.size(80.dp).padding(bottom = 12.dp)
+            )
             Text(
-                text = "PROJECT-M",
+                text = "SONUS",
                 fontSize = 32.sp,
                 fontWeight = FontWeight.Black,
                 fontFamily = FontFamily.Monospace,

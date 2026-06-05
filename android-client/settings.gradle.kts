@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "Project-M"
+rootProject.name = "Sonus"
 include(":app")

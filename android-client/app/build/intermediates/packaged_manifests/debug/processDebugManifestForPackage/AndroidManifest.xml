@@ -26,7 +26,7 @@
         android:debuggable="true"
         android:extractNativeLibs="false"
         android:icon="@drawable/ic_launcher_mic"
-        android:label="Project-M Mic"
+        android:label="Sonus"
         android:roundIcon="@drawable/ic_launcher_mic"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Material.NoActionBar" >

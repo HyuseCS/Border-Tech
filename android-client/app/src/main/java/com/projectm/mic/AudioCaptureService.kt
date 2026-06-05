@@ -111,7 +111,7 @@ class AudioCaptureService : Service() {
         }
 
         return builder
-            .setContentTitle("Project-M Microphone")
+            .setContentTitle("Sonus Microphone")
             .setContentText(contentText)
             .setSmallIcon(R.drawable.ic_launcher_mic)
             .setOngoing(true)

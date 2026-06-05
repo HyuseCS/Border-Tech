@@ -45,8 +45,8 @@
 27        android:extractNativeLibs="false"
 28        android:icon="@drawable/ic_launcher_mic"
 28-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:12:9-49
-29        android:label="Project-M Mic"
-29-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:13:9-38
+29        android:label="Sonus"
+29-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:13:9-30
 30        android:roundIcon="@drawable/ic_launcher_mic"
 30-->/home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:14:9-54
 31        android:supportsRtl="true"

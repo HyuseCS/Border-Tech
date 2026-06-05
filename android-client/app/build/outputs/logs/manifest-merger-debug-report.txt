@@ -99,7 +99,7 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] /home/hyuse/.gradle/caches/
 	android:supportsRtl
 		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:15:9-35
 	android:label
-		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:13:9-38
+		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:13:9-30
 	android:roundIcon
 		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:14:9-54
 	android:icon
