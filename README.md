@@ -1,56 +1,80 @@
-# WO Mic Client for Linux (Native)
+# Project-M: High-Fidelity Wireless Audio Link
 
-A high-performance, low-latency, native Linux client for the WO Mic mobile application. This replica is optimized for CachyOS and Arch-based systems, using PipeWire for modern audio integration.
+Project-M is a high-performance, low-latency wireless microphone system that turns your Android phone into a virtual PC microphone. It replaces the proprietary WO Mic connection with a custom, lossless, raw PCM streaming protocol over TCP. 
 
-## Features
+This repository is organized as a monorepo containing:
+1. **`pc-client/`**: A native Linux receiver (Rust & Slint UI) that streams incoming audio directly into a PipeWire virtual microphone.
+2. **`android-client/`**: A modern Android app (Kotlin & Jetpack Compose) that captures microphone audio and streams it to the PC.
 
-- **Native Rust Core:** Built for performance and memory safety.
-- **PipeWire Integration:** Creates a virtual microphone directly in the PipeWire graph.
-- **Low Latency:** Uses a lock-free ring buffer (via `ringbuf`) for zero-allocation audio streaming.
-- **Native UI:** A sleek, lightweight interface built with Slint.
-- **USB & WiFi Support:** Automatic ADB port forwarding for low-latency USB connections.
-- **Hardened Security:** Input validation and robust protocol resynchronization.
-- **Graceful Lifecycle:** Automatic cleanup of PipeWire nodes and ADB rules on exit.
+---
 
-## Prerequisites
+## Technical Specifications
+* **Protocol**: Custom TCP framed with Magic bytes `['M', 'C']` and 2-byte big-endian payload length.
+* **Audio Format**: Raw 16-bit Signed PCM, Little-Endian (`s16le`), Mono.
+* **Sample Rate**: 48,000 Hz.
+* **Jitter Buffer**: Lock-free ring buffer (via `ringbuf` in Rust) for ultra-low latency playback.
+* **Compatibility**: Optimized for Linux systems using PipeWire.
 
-Ensure you have the following system dependencies installed:
+---
 
-```bash
-sudo pacman -S base-devel pkgconf pipewire libpipewire android-tools opus
+## Directory Structure
+```
+project-m/
+├── Cargo.toml                  # Cargo Workspace configuration
+├── pc-client/                  # Rust Linux client (Slint UI)
+│   ├── Cargo.toml
+│   ├── src/
+│   │   ├── main.rs             # Receiver entry & UI runner
+│   │   ├── audio.rs            # PipeWire playback loop
+│   │   ├── protocol.rs         # TCP server framing receiver
+│   │   └── app_state.rs        # UI state & ADB port reverse setup
+│   └── ui/                     # Slint files
+└── android-client/             # Android app (Kotlin & Jetpack Compose)
+    ├── settings.gradle.kts
+    └── app/                    # AudioRecord, TCP client, Foreground Service
 ```
 
-## Installation & Build
+---
 
-1. **Clone the repository.**
-2. **Build the release version:**
-   ```bash
-   cargo build --release
-   ```
-3. **Run the client:**
-   ```bash
-   ./target/release/womic-linux
-   ```
+## How to Build & Run
 
-## Usage
+### 1. Linux PC Client (`pc-client/`)
+Ensure you have the following system dependencies installed (e.g. on Arch/CachyOS):
+```bash
+sudo pacman -S base-devel pkgconf pipewire libpipewire android-tools
+```
 
-1. **Open WO Mic on your Android phone.**
-2. **Select Transport:** Choose "USB" or "WiFi" in both the phone app and this client.
-3. **Connect:** Click "Connect" in the client UI.
-4. **Configure System Audio:** Open your sound settings (or `pavucontrol`) and select **"WOMIC-Virtual-Mic"** as your input device.
+Build and run:
+```bash
+cargo build --release
+./target/release/project-m
+```
 
-## Security Note
+### 2. Android App (`android-client/`)
+1. Open the `android-client/` folder in **Android Studio** or **IntelliJ IDEA**.
+2. Build the project (Gradle will automatically bootstrap and configure the project).
+3. Connect your Android phone with **USB Debugging** enabled.
+4. Run the app on your phone.
 
-- **USB Mode:** Highly recommended for lowest latency and maximum security (local only).
-- **WiFi Mode:** Use with caution on public networks as the WO Mic protocol is unencrypted (inherent limitation of the proprietary protocol).
+---
 
-## Technical Architecture
+## Usage Instructions
 
-- **`audio.rs`**: Manages the PipeWire stream and background main loop. Uses Atomic flags and SPA timers for safe cleanup.
-- **`protocol.rs`**: Implements the WO Mic handshake and a byte-by-byte resync loop to handle stream misalignment.
-- **`app_state.rs`**: Orchestrates connection tasks, cancellation tokens, and UI synchronization.
-- **`decoder.rs`**: Provides high-performance PCM and Opus decoding.
+### Connection via USB (Recommended for lowest latency)
+1. In the PC Client UI, toggle the mode to **USB (ADB)** and click **Start Listening**.
+2. In the Android App UI, enter `127.0.0.1` as the Receiver IP and click **START**.
+3. *Note: The PC client automatically configures ADB reverse port forwarding (`adb reverse tcp:47999 tcp:47999`), so any traffic from the phone's localhost goes directly to the PC.*
+
+### Connection via Wi-Fi
+1. Ensure both the phone and PC are on the same local network.
+2. In the PC Client UI, toggle the mode to **Wi-Fi**. It will display your PC's local IP address (e.g., `192.168.1.120`).
+3. Click **Start Listening** on the PC.
+4. In the Android App UI, enter the PC's IP address (e.g., `192.168.1.120`) and click **START**.
+
+### System Configuration
+Open your Linux system volume settings (or `pavucontrol`) and select **"Project-M-Virtual-Mic"** as your input device for Discord, OBS, Zoom, or any other application.
+
+---
 
 ## License
-
 MIT
