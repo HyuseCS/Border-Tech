@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0F172A"/> <stop offset="100%" stop-color="#020617"/> </linearGradient>
+    
+    <linearGradient id="trion" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00F0FF"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+    
+    <linearGradient id="wing-fill" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0284C7"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <g id="cube">
+      <polygon points="0,10 12,17 12,30 0,23" fill="#38BDF8" opacity="0.9"/>
+      <polygon points="12,17 24,10 24,23 12,30" fill="#0284C7" opacity="1"/>
+      <polygon points="0,10 12,3 24,10 12,17" fill="#E0FFFF" opacity="1"/>
+    </g>
+  </defs>
+
+  <rect width="512" height="512" rx="115" fill="url(#bg)"/>
+
+  <g transform="translate(0, 26)">
+    <g transform="translate(256, 230)">
+      <ellipse cx="0" cy="0" rx="160" ry="50" fill="none" stroke="url(#trion)" stroke-width="3" transform="rotate(-25)" opacity="0.5"/>
+      <ellipse cx="0" cy="0" rx="160" ry="50" fill="none" stroke="url(#trion)" stroke-width="3" transform="rotate(25)" opacity="0.5"/>
+      <ellipse cx="0" cy="0" rx="190" ry="60" fill="none" stroke="#00F0FF" stroke-width="1" transform="rotate(0)" stroke-dasharray="8 8" opacity="0.4"/>
+    </g>
+
+    <circle cx="256" cy="230" r="45" fill="#0F172A" stroke="url(#trion)" stroke-width="6" filter="url(#glow)"/>
+    <circle cx="256" cy="230" r="18" fill="#00F0FF" filter="url(#glow)"/>
+    <circle cx="256" cy="230" r="8" fill="#FFFFFF"/>
+
+    <polygon points="256,130 230,170 282,170" fill="url(#trion)" filter="url(#glow)"/>
+    <polygon points="256,130 256,170 282,170" fill="#E0FFFF" opacity="0.5"/>
+
+    <path d="M 240 140 Q 210 100 180 120" fill="none" stroke="url(#trion)" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="180" cy="120" r="8" fill="#00F0FF" filter="url(#glow)"/>
+    <path d="M 272 140 Q 302 100 332 120" fill="none" stroke="url(#trion)" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="332" cy="120" r="8" fill="#00F0FF" filter="url(#glow)"/>
+
+    <g stroke="#00F0FF" stroke-width="3" opacity="0.85">
+      <polygon points="216,190 70,170 120,260 210,230" fill="url(#wing-fill)"/>
+      <polygon points="216,190 145,215 210,230" fill="#E0FFFF" opacity="0.2"/> <polygon points="296,190 442,170 392,260 302,230" fill="url(#wing-fill)"/>
+      <polygon points="296,190 367,215 302,230" fill="#E0FFFF" opacity="0.2"/>
+    </g>
+
+    <g stroke="#00F0FF" stroke-width="4" opacity="0.95">
+      <polygon points="216,245 110,340 190,360 236,280" fill="#0F172A"/>
+      <polygon points="296,245 402,340 322,360 276,280" fill="#0F172A"/>
+    </g>
+
+    <polygon points="236,285 276,285 256,380" fill="url(#trion)" filter="url(#glow)"/>
+    <line x1="256" y1="285" x2="256" y2="380" stroke="#FFFFFF" stroke-width="2" opacity="0.6"/>
+
+    <use href="#cube" x="60" y="80" transform="translate(60, 80) scale(1.6) translate(-60, -80)"/>
+    <use href="#cube" x="410" y="310" transform="translate(410, 310) scale(1.3) translate(-410, -310)"/>
+    <use href="#cube" x="380" y="60" transform="translate(380, 60) scale(0.9) translate(-380, -60)"/>
+    <use href="#cube" x="120" y="360" transform="translate(120, 360) scale(1.1) translate(-120, -360)"/>
+  </g>
+</svg>

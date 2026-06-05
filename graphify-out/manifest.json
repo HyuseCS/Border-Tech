@@ -1,0 +1,62 @@
+{
+  "/home/hyuse/Desktop/project-m/pc-client/build.rs": {
+    "mtime": 1780630583.2256894,
+    "hash": "be199d2a360667ebdccf770889e6f78c"
+  },
+  "/home/hyuse/Desktop/project-m/pc-client/src/main.rs": {
+    "mtime": 1780653226.8394375,
+    "hash": "594326094cb4cf9e83a5c67af64124e7"
+  },
+  "/home/hyuse/Desktop/project-m/pc-client/src/audio.rs": {
+    "mtime": 1780653650.0802193,
+    "hash": "7f09dce86f398681fe83b6685721d3ba"
+  },
+  "/home/hyuse/Desktop/project-m/pc-client/src/protocol.rs": {
+    "mtime": 1780653220.90271,
+    "hash": "bbbd52f5732270303b4382b1c57fcbb4"
+  },
+  "/home/hyuse/Desktop/project-m/pc-client/src/app_state.rs": {
+    "mtime": 1780653251.447343,
+    "hash": "a8a783b618104c29128874d54884ff07"
+  },
+  "/home/hyuse/Desktop/project-m/android-client/settings.gradle.kts": {
+    "mtime": 1780653168.816262,
+    "hash": "ca75402682e605ff2d5a02d85532ee1c"
+  },
+  "/home/hyuse/Desktop/project-m/android-client/build.gradle.kts": {
+    "mtime": 1780656639.0486104,
+    "hash": "f55cf749d48fbadff2d6cdb018b09837"
+  },
+  "/home/hyuse/Desktop/project-m/android-client/gradlew": {
+    "mtime": 1780655952.4170501,
+    "hash": "f2cc5dea1e5914d55cee1ecf4f8d6038"
+  },
+  "/home/hyuse/Desktop/project-m/android-client/app/build.gradle.kts": {
+    "mtime": 1780657035.329019,
+    "hash": "20b8cf2b1cedeb5c7747bdee3658e3a8"
+  },
+  "/home/hyuse/Desktop/project-m/android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt": {
+    "mtime": 1780653180.972639,
+    "hash": "68f7108de24907d0be3deb4953109fe7"
+  },
+  "/home/hyuse/Desktop/project-m/android-client/app/src/main/java/com/projectm/mic/MainActivity.kt": {
+    "mtime": 1780653186.9363399,
+    "hash": "5dfe25291786f01a69088f93be7dc74d"
+  },
+  "/home/hyuse/Desktop/project-m/README.md": {
+    "mtime": 1780653282.6870306,
+    "hash": "a40fe787e004441bf41a834f3fdd6c5f"
+  },
+  "/home/hyuse/Desktop/project-m/project_plan.md": {
+    "mtime": 1780653293.3655999,
+    "hash": "7ed8d57ad005611be778f64d9eb0630c"
+  },
+  "/home/hyuse/Desktop/project-m/PRODUCT.md": {
+    "mtime": 1780655957.5032182,
+    "hash": "7c3938ddef2d0e3f9ddc577038ec5f58"
+  },
+  "/home/hyuse/Desktop/project-m/DESIGN.md": {
+    "mtime": 1780655963.8754263,
+    "hash": "b1b3c863aa1902e9a98b4745b68f9ce0"
+  }
+}
