@@ -1,0 +1,328 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:2:1-34:12
+INJECTED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:2:1-34:12
+INJECTED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:2:1-34:12
+INJECTED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:2:1-34:12
+MERGED from [androidx.compose.material3:material3-android:1.2.1] /home/hyuse/.gradle/caches/transforms-4/19854a349f99769d54f990951f020767/transformed/jetified-material3-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.material:material-android:1.6.0] /home/hyuse/.gradle/caches/transforms-4/25194c47f96f3f53c21e399099e15cc6/transformed/jetified-material-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-icons-core-android:1.6.0] /home/hyuse/.gradle/caches/transforms-4/72fc924c5d9e2d80babcfd814cf9de62/transformed/jetified-material-icons-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-ripple-android:1.6.0] /home/hyuse/.gradle/caches/transforms-4/d7a9ef628c827001f6e3cd2c82c40792/transformed/jetified-material-ripple-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.foundation:foundation-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/8d47b0ec3f724109936d74ae7a0b2d80/transformed/jetified-foundation-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/4175a73af77e64a2e5a3d6619fca3c06/transformed/jetified-foundation-layout-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.animation:animation-core-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/95b8e9df9f0348768139bc1ca41655cf/transformed/jetified-animation-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.animation:animation-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/04c76a25108f8d5c1971d60ee7ce7a06/transformed/jetified-animation-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-util-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/6b4683b19ee74b6da8cb1a44ce91e884/transformed/jetified-ui-util-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-unit-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/2d379a2f765833febf1e84ece5c51bfa/transformed/jetified-ui-unit-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-text-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/782d7aa517e701ffc70bb41102825155/transformed/jetified-ui-text-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-geometry-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/4ecdd53c8c5dc285331d67df2a20060f/transformed/jetified-ui-geometry-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/9f46302f84583d933b52e4109ff5e09b/transformed/jetified-ui-tooling-data-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/5e20fc9d1a2e6db21f4ddb616e0b2075/transformed/jetified-ui-tooling-preview-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.ui:ui-graphics-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/dd57df42628b9826842f94e90ec67dd2/transformed/jetified-ui-graphics-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/e206978a7689cc62c493548764760b76/transformed/jetified-ui-tooling-release/AndroidManifest.xml:17:1-28:12
+MERGED from [androidx.activity:activity:1.9.0] /home/hyuse/.gradle/caches/transforms-4/36cca648cad0dc7419859f03012ada54/transformed/jetified-activity-1.9.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity-ktx:1.9.0] /home/hyuse/.gradle/caches/transforms-4/57dc7b164dcdf0621000c1bfab3e4322/transformed/jetified-activity-ktx-1.9.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.activity:activity-compose:1.9.0] /home/hyuse/.gradle/caches/transforms-4/12a9503f120b29f7d0facd71b574c359/transformed/jetified-activity-compose-1.9.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/64a46c689213652da02a4e48e4fa0189/transformed/jetified-ui-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.autofill:autofill:1.0.0] /home/hyuse/.gradle/caches/transforms-4/495cb1ed01aa97fdf63c67553f75bb47/transformed/jetified-autofill-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.emoji2:emoji2:1.3.0] /home/hyuse/.gradle/caches/transforms-4/a16835dbf7a2acf7a3529a0f4fd32977/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.core:core:1.13.1] /home/hyuse/.gradle/caches/transforms-4/30a8ab7bc08d8a30507c883d8dd92505/transformed/core-1.13.1/AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/hyuse/.gradle/caches/transforms-4/c19d69a149439a38c46dd7cb40e575a7/transformed/jetified-customview-poolingcontainer-1.0.0/AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /home/hyuse/.gradle/caches/transforms-4/4e3a221fce33878216dec444f2b7aaa0/transformed/jetified-savedstate-ktx-1.2.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.2.1] /home/hyuse/.gradle/caches/transforms-4/e4e18e86d85d1375d4431eb7ec3b6b12/transformed/jetified-savedstate-1.2.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.1] /home/hyuse/.gradle/caches/transforms-4/ecf97d70a9cf1689a6596617f53b75dc/transformed/jetified-lifecycle-process-2.8.1/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.1] /home/hyuse/.gradle/caches/transforms-4/b16ed884d333362987a0376064d2f1a7/transformed/lifecycle-livedata-core-2.8.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.1] /home/hyuse/.gradle/caches/transforms-4/b9875729414592fe918888bf66952ff9/transformed/jetified-lifecycle-viewmodel-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.1] /home/hyuse/.gradle/caches/transforms-4/1ad5c4e989db2ef82405c8b2497554a7/transformed/jetified-lifecycle-runtime-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.1] /home/hyuse/.gradle/caches/transforms-4/54ed0f2717c37fa656d4fa61251359fb/transformed/jetified-lifecycle-viewmodel-ktx-2.8.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.1] /home/hyuse/.gradle/caches/transforms-4/fe9d098d9e7e0da0f7db8a2d1b7438f5/transformed/jetified-lifecycle-runtime-ktx-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.1] /home/hyuse/.gradle/caches/transforms-4/55af4167ca5408d0ade5543a4e5c5068/transformed/jetified-lifecycle-viewmodel-savedstate-2.8.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core-ktx:1.13.1] /home/hyuse/.gradle/caches/transforms-4/46c75a6df819f9db30a84bbdaa32e220/transformed/jetified-core-ktx-1.13.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.annotation:annotation-experimental:1.4.0] /home/hyuse/.gradle/caches/transforms-4/17b308651c7cbc54c2c7fc8929697a24/transformed/jetified-annotation-experimental-1.4.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/217543465a17627aef16d1f4143483b8/transformed/jetified-runtime-saveable-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.runtime:runtime-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/c2f8fc803725c41af3f60ae851d19315/transformed/jetified-runtime-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/hyuse/.gradle/caches/transforms-4/b84c77d5d99b899be5bf2f048481ba57/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/hyuse/.gradle/caches/transforms-4/54b274e5ba05613e4fae827356efe753/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:17:1-55:12
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/hyuse/.gradle/caches/transforms-4/88fe5474aad146623a1ad59788c1b4d3/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.tracing:tracing:1.0.0] /home/hyuse/.gradle/caches/transforms-4/83ccf4a46c69352dfaad5b393c0ef70a/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/hyuse/.gradle/caches/transforms-4/60647ed64acd54b2ced1beaf065b8c8f/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
+	package
+		INJECTED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.RECORD_AUDIO
+ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:4:5-71
+	android:name
+		ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:4:22-68
+uses-permission#android.permission.INTERNET
+ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:5:5-67
+	android:name
+		ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:5:22-64
+uses-permission#android.permission.FOREGROUND_SERVICE
+ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:6:5-77
+	android:name
+		ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:6:22-74
+uses-permission#android.permission.FOREGROUND_SERVICE_MICROPHONE
+ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:7:5-88
+	android:name
+		ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:7:22-85
+uses-permission#android.permission.POST_NOTIFICATIONS
+ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:8:5-77
+	android:name
+		ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:8:22-74
+application
+ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:10:5-33:19
+INJECTED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:10:5-33:19
+MERGED from [androidx.compose.ui:ui-tooling-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/e206978a7689cc62c493548764760b76/transformed/jetified-ui-tooling-release/AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.compose.ui:ui-tooling-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/e206978a7689cc62c493548764760b76/transformed/jetified-ui-tooling-release/AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.emoji2:emoji2:1.3.0] /home/hyuse/.gradle/caches/transforms-4/a16835dbf7a2acf7a3529a0f4fd32977/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.emoji2:emoji2:1.3.0] /home/hyuse/.gradle/caches/transforms-4/a16835dbf7a2acf7a3529a0f4fd32977/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.core:core:1.13.1] /home/hyuse/.gradle/caches/transforms-4/30a8ab7bc08d8a30507c883d8dd92505/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
+MERGED from [androidx.core:core:1.13.1] /home/hyuse/.gradle/caches/transforms-4/30a8ab7bc08d8a30507c883d8dd92505/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.1] /home/hyuse/.gradle/caches/transforms-4/ecf97d70a9cf1689a6596617f53b75dc/transformed/jetified-lifecycle-process-2.8.1/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.1] /home/hyuse/.gradle/caches/transforms-4/ecf97d70a9cf1689a6596617f53b75dc/transformed/jetified-lifecycle-process-2.8.1/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/hyuse/.gradle/caches/transforms-4/54b274e5ba05613e4fae827356efe753/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/hyuse/.gradle/caches/transforms-4/54b274e5ba05613e4fae827356efe753/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/hyuse/.gradle/caches/transforms-4/88fe5474aad146623a1ad59788c1b4d3/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/hyuse/.gradle/caches/transforms-4/88fe5474aad146623a1ad59788c1b4d3/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+	android:extractNativeLibs
+		INJECTED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.13.1] /home/hyuse/.gradle/caches/transforms-4/30a8ab7bc08d8a30507c883d8dd92505/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
+	android:supportsRtl
+		ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:15:9-35
+	android:label
+		ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:13:9-38
+	android:roundIcon
+		ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:14:9-63
+	android:icon
+		ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:12:9-58
+	android:allowBackup
+		ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:11:9-35
+	android:theme
+		ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:16:9-66
+service#com.projectm.mic.AudioCaptureService
+ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:18:9-22:58
+	android:enabled
+		ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:20:13-35
+	android:exported
+		ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:21:13-37
+	android:foregroundServiceType
+		ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:22:13-55
+	android:name
+		ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:19:13-48
+activity#com.projectm.mic.MainActivity
+ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:24:9-32:20
+	android:exported
+		ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:26:13-36
+	android:theme
+		ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:27:13-70
+	android:name
+		ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:25:13-41
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:28:13-31:29
+action#android.intent.action.MAIN
+ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:29:17-69
+	android:name
+		ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:29:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:30:17-77
+	android:name
+		ADDED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml:30:27-74
+uses-sdk
+INJECTED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml
+INJECTED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml
+MERGED from [androidx.compose.material3:material3-android:1.2.1] /home/hyuse/.gradle/caches/transforms-4/19854a349f99769d54f990951f020767/transformed/jetified-material3-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material3:material3-android:1.2.1] /home/hyuse/.gradle/caches/transforms-4/19854a349f99769d54f990951f020767/transformed/jetified-material3-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material:material-android:1.6.0] /home/hyuse/.gradle/caches/transforms-4/25194c47f96f3f53c21e399099e15cc6/transformed/jetified-material-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-android:1.6.0] /home/hyuse/.gradle/caches/transforms-4/25194c47f96f3f53c21e399099e15cc6/transformed/jetified-material-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-core-android:1.6.0] /home/hyuse/.gradle/caches/transforms-4/72fc924c5d9e2d80babcfd814cf9de62/transformed/jetified-material-icons-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-core-android:1.6.0] /home/hyuse/.gradle/caches/transforms-4/72fc924c5d9e2d80babcfd814cf9de62/transformed/jetified-material-icons-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-ripple-android:1.6.0] /home/hyuse/.gradle/caches/transforms-4/d7a9ef628c827001f6e3cd2c82c40792/transformed/jetified-material-ripple-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-ripple-android:1.6.0] /home/hyuse/.gradle/caches/transforms-4/d7a9ef628c827001f6e3cd2c82c40792/transformed/jetified-material-ripple-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/8d47b0ec3f724109936d74ae7a0b2d80/transformed/jetified-foundation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/8d47b0ec3f724109936d74ae7a0b2d80/transformed/jetified-foundation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/4175a73af77e64a2e5a3d6619fca3c06/transformed/jetified-foundation-layout-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/4175a73af77e64a2e5a3d6619fca3c06/transformed/jetified-foundation-layout-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-core-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/95b8e9df9f0348768139bc1ca41655cf/transformed/jetified-animation-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-core-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/95b8e9df9f0348768139bc1ca41655cf/transformed/jetified-animation-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/04c76a25108f8d5c1971d60ee7ce7a06/transformed/jetified-animation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/04c76a25108f8d5c1971d60ee7ce7a06/transformed/jetified-animation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-util-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/6b4683b19ee74b6da8cb1a44ce91e884/transformed/jetified-ui-util-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-util-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/6b4683b19ee74b6da8cb1a44ce91e884/transformed/jetified-ui-util-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-unit-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/2d379a2f765833febf1e84ece5c51bfa/transformed/jetified-ui-unit-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-unit-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/2d379a2f765833febf1e84ece5c51bfa/transformed/jetified-ui-unit-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-text-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/782d7aa517e701ffc70bb41102825155/transformed/jetified-ui-text-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-text-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/782d7aa517e701ffc70bb41102825155/transformed/jetified-ui-text-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-geometry-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/4ecdd53c8c5dc285331d67df2a20060f/transformed/jetified-ui-geometry-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-geometry-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/4ecdd53c8c5dc285331d67df2a20060f/transformed/jetified-ui-geometry-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/9f46302f84583d933b52e4109ff5e09b/transformed/jetified-ui-tooling-data-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/9f46302f84583d933b52e4109ff5e09b/transformed/jetified-ui-tooling-data-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/5e20fc9d1a2e6db21f4ddb616e0b2075/transformed/jetified-ui-tooling-preview-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/5e20fc9d1a2e6db21f4ddb616e0b2075/transformed/jetified-ui-tooling-preview-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-graphics-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/dd57df42628b9826842f94e90ec67dd2/transformed/jetified-ui-graphics-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-graphics-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/dd57df42628b9826842f94e90ec67dd2/transformed/jetified-ui-graphics-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/e206978a7689cc62c493548764760b76/transformed/jetified-ui-tooling-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/e206978a7689cc62c493548764760b76/transformed/jetified-ui-tooling-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.9.0] /home/hyuse/.gradle/caches/transforms-4/36cca648cad0dc7419859f03012ada54/transformed/jetified-activity-1.9.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.9.0] /home/hyuse/.gradle/caches/transforms-4/36cca648cad0dc7419859f03012ada54/transformed/jetified-activity-1.9.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity-ktx:1.9.0] /home/hyuse/.gradle/caches/transforms-4/57dc7b164dcdf0621000c1bfab3e4322/transformed/jetified-activity-ktx-1.9.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-ktx:1.9.0] /home/hyuse/.gradle/caches/transforms-4/57dc7b164dcdf0621000c1bfab3e4322/transformed/jetified-activity-ktx-1.9.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-compose:1.9.0] /home/hyuse/.gradle/caches/transforms-4/12a9503f120b29f7d0facd71b574c359/transformed/jetified-activity-compose-1.9.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-compose:1.9.0] /home/hyuse/.gradle/caches/transforms-4/12a9503f120b29f7d0facd71b574c359/transformed/jetified-activity-compose-1.9.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/64a46c689213652da02a4e48e4fa0189/transformed/jetified-ui-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/64a46c689213652da02a4e48e4fa0189/transformed/jetified-ui-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.autofill:autofill:1.0.0] /home/hyuse/.gradle/caches/transforms-4/495cb1ed01aa97fdf63c67553f75bb47/transformed/jetified-autofill-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.autofill:autofill:1.0.0] /home/hyuse/.gradle/caches/transforms-4/495cb1ed01aa97fdf63c67553f75bb47/transformed/jetified-autofill-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.emoji2:emoji2:1.3.0] /home/hyuse/.gradle/caches/transforms-4/a16835dbf7a2acf7a3529a0f4fd32977/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.emoji2:emoji2:1.3.0] /home/hyuse/.gradle/caches/transforms-4/a16835dbf7a2acf7a3529a0f4fd32977/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.core:core:1.13.1] /home/hyuse/.gradle/caches/transforms-4/30a8ab7bc08d8a30507c883d8dd92505/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.13.1] /home/hyuse/.gradle/caches/transforms-4/30a8ab7bc08d8a30507c883d8dd92505/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/hyuse/.gradle/caches/transforms-4/c19d69a149439a38c46dd7cb40e575a7/transformed/jetified-customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/hyuse/.gradle/caches/transforms-4/c19d69a149439a38c46dd7cb40e575a7/transformed/jetified-customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /home/hyuse/.gradle/caches/transforms-4/4e3a221fce33878216dec444f2b7aaa0/transformed/jetified-savedstate-ktx-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /home/hyuse/.gradle/caches/transforms-4/4e3a221fce33878216dec444f2b7aaa0/transformed/jetified-savedstate-ktx-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /home/hyuse/.gradle/caches/transforms-4/e4e18e86d85d1375d4431eb7ec3b6b12/transformed/jetified-savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /home/hyuse/.gradle/caches/transforms-4/e4e18e86d85d1375d4431eb7ec3b6b12/transformed/jetified-savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.1] /home/hyuse/.gradle/caches/transforms-4/ecf97d70a9cf1689a6596617f53b75dc/transformed/jetified-lifecycle-process-2.8.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.1] /home/hyuse/.gradle/caches/transforms-4/ecf97d70a9cf1689a6596617f53b75dc/transformed/jetified-lifecycle-process-2.8.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.1] /home/hyuse/.gradle/caches/transforms-4/b16ed884d333362987a0376064d2f1a7/transformed/lifecycle-livedata-core-2.8.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.1] /home/hyuse/.gradle/caches/transforms-4/b16ed884d333362987a0376064d2f1a7/transformed/lifecycle-livedata-core-2.8.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.1] /home/hyuse/.gradle/caches/transforms-4/b9875729414592fe918888bf66952ff9/transformed/jetified-lifecycle-viewmodel-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.1] /home/hyuse/.gradle/caches/transforms-4/b9875729414592fe918888bf66952ff9/transformed/jetified-lifecycle-viewmodel-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.1] /home/hyuse/.gradle/caches/transforms-4/1ad5c4e989db2ef82405c8b2497554a7/transformed/jetified-lifecycle-runtime-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.1] /home/hyuse/.gradle/caches/transforms-4/1ad5c4e989db2ef82405c8b2497554a7/transformed/jetified-lifecycle-runtime-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.1] /home/hyuse/.gradle/caches/transforms-4/54ed0f2717c37fa656d4fa61251359fb/transformed/jetified-lifecycle-viewmodel-ktx-2.8.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.1] /home/hyuse/.gradle/caches/transforms-4/54ed0f2717c37fa656d4fa61251359fb/transformed/jetified-lifecycle-viewmodel-ktx-2.8.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.1] /home/hyuse/.gradle/caches/transforms-4/fe9d098d9e7e0da0f7db8a2d1b7438f5/transformed/jetified-lifecycle-runtime-ktx-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.1] /home/hyuse/.gradle/caches/transforms-4/fe9d098d9e7e0da0f7db8a2d1b7438f5/transformed/jetified-lifecycle-runtime-ktx-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.1] /home/hyuse/.gradle/caches/transforms-4/55af4167ca5408d0ade5543a4e5c5068/transformed/jetified-lifecycle-viewmodel-savedstate-2.8.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.1] /home/hyuse/.gradle/caches/transforms-4/55af4167ca5408d0ade5543a4e5c5068/transformed/jetified-lifecycle-viewmodel-savedstate-2.8.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core-ktx:1.13.1] /home/hyuse/.gradle/caches/transforms-4/46c75a6df819f9db30a84bbdaa32e220/transformed/jetified-core-ktx-1.13.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.13.1] /home/hyuse/.gradle/caches/transforms-4/46c75a6df819f9db30a84bbdaa32e220/transformed/jetified-core-ktx-1.13.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.0] /home/hyuse/.gradle/caches/transforms-4/17b308651c7cbc54c2c7fc8929697a24/transformed/jetified-annotation-experimental-1.4.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.0] /home/hyuse/.gradle/caches/transforms-4/17b308651c7cbc54c2c7fc8929697a24/transformed/jetified-annotation-experimental-1.4.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/217543465a17627aef16d1f4143483b8/transformed/jetified-runtime-saveable-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/217543465a17627aef16d1f4143483b8/transformed/jetified-runtime-saveable-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/c2f8fc803725c41af3f60ae851d19315/transformed/jetified-runtime-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/c2f8fc803725c41af3f60ae851d19315/transformed/jetified-runtime-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/hyuse/.gradle/caches/transforms-4/b84c77d5d99b899be5bf2f048481ba57/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/hyuse/.gradle/caches/transforms-4/b84c77d5d99b899be5bf2f048481ba57/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/hyuse/.gradle/caches/transforms-4/54b274e5ba05613e4fae827356efe753/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/hyuse/.gradle/caches/transforms-4/54b274e5ba05613e4fae827356efe753/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/hyuse/.gradle/caches/transforms-4/88fe5474aad146623a1ad59788c1b4d3/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/hyuse/.gradle/caches/transforms-4/88fe5474aad146623a1ad59788c1b4d3/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.tracing:tracing:1.0.0] /home/hyuse/.gradle/caches/transforms-4/83ccf4a46c69352dfaad5b393c0ef70a/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /home/hyuse/.gradle/caches/transforms-4/83ccf4a46c69352dfaad5b393c0ef70a/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/hyuse/.gradle/caches/transforms-4/60647ed64acd54b2ced1beaf065b8c8f/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/hyuse/.gradle/caches/transforms-4/60647ed64acd54b2ced1beaf065b8c8f/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+	android:targetSdkVersion
+		INJECTED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/hyuse/Desktop/WO Mic Replica/android-client/app/src/main/AndroidManifest.xml
+activity#androidx.compose.ui.tooling.PreviewActivity
+ADDED from [androidx.compose.ui:ui-tooling-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/e206978a7689cc62c493548764760b76/transformed/jetified-ui-tooling-release/AndroidManifest.xml:23:9-25:39
+	android:exported
+		ADDED from [androidx.compose.ui:ui-tooling-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/e206978a7689cc62c493548764760b76/transformed/jetified-ui-tooling-release/AndroidManifest.xml:25:13-36
+	android:name
+		ADDED from [androidx.compose.ui:ui-tooling-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/e206978a7689cc62c493548764760b76/transformed/jetified-ui-tooling-release/AndroidManifest.xml:24:13-71
+provider#androidx.startup.InitializationProvider
+ADDED from [androidx.emoji2:emoji2:1.3.0] /home/hyuse/.gradle/caches/transforms-4/a16835dbf7a2acf7a3529a0f4fd32977/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.1] /home/hyuse/.gradle/caches/transforms-4/ecf97d70a9cf1689a6596617f53b75dc/transformed/jetified-lifecycle-process-2.8.1/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.1] /home/hyuse/.gradle/caches/transforms-4/ecf97d70a9cf1689a6596617f53b75dc/transformed/jetified-lifecycle-process-2.8.1/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/hyuse/.gradle/caches/transforms-4/88fe5474aad146623a1ad59788c1b4d3/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/hyuse/.gradle/caches/transforms-4/88fe5474aad146623a1ad59788c1b4d3/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+	tools:node
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/hyuse/.gradle/caches/transforms-4/a16835dbf7a2acf7a3529a0f4fd32977/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:28:13-31
+	android:authorities
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/hyuse/.gradle/caches/transforms-4/a16835dbf7a2acf7a3529a0f4fd32977/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:26:13-68
+	android:exported
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/hyuse/.gradle/caches/transforms-4/a16835dbf7a2acf7a3529a0f4fd32977/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/hyuse/.gradle/caches/transforms-4/a16835dbf7a2acf7a3529a0f4fd32977/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:25:13-67
+meta-data#androidx.emoji2.text.EmojiCompatInitializer
+ADDED from [androidx.emoji2:emoji2:1.3.0] /home/hyuse/.gradle/caches/transforms-4/a16835dbf7a2acf7a3529a0f4fd32977/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/hyuse/.gradle/caches/transforms-4/a16835dbf7a2acf7a3529a0f4fd32977/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/hyuse/.gradle/caches/transforms-4/a16835dbf7a2acf7a3529a0f4fd32977/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:30:17-75
+permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /home/hyuse/.gradle/caches/transforms-4/30a8ab7bc08d8a30507c883d8dd92505/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.13.1] /home/hyuse/.gradle/caches/transforms-4/30a8ab7bc08d8a30507c883d8dd92505/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /home/hyuse/.gradle/caches/transforms-4/30a8ab7bc08d8a30507c883d8dd92505/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+permission#com.projectm.mic.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /home/hyuse/.gradle/caches/transforms-4/30a8ab7bc08d8a30507c883d8dd92505/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.13.1] /home/hyuse/.gradle/caches/transforms-4/30a8ab7bc08d8a30507c883d8dd92505/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /home/hyuse/.gradle/caches/transforms-4/30a8ab7bc08d8a30507c883d8dd92505/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /home/hyuse/.gradle/caches/transforms-4/30a8ab7bc08d8a30507c883d8dd92505/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /home/hyuse/.gradle/caches/transforms-4/30a8ab7bc08d8a30507c883d8dd92505/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+uses-permission#com.projectm.mic.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /home/hyuse/.gradle/caches/transforms-4/30a8ab7bc08d8a30507c883d8dd92505/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /home/hyuse/.gradle/caches/transforms-4/30a8ab7bc08d8a30507c883d8dd92505/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+meta-data#androidx.lifecycle.ProcessLifecycleInitializer
+ADDED from [androidx.lifecycle:lifecycle-process:2.8.1] /home/hyuse/.gradle/caches/transforms-4/ecf97d70a9cf1689a6596617f53b75dc/transformed/jetified-lifecycle-process-2.8.1/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.1] /home/hyuse/.gradle/caches/transforms-4/ecf97d70a9cf1689a6596617f53b75dc/transformed/jetified-lifecycle-process-2.8.1/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.1] /home/hyuse/.gradle/caches/transforms-4/ecf97d70a9cf1689a6596617f53b75dc/transformed/jetified-lifecycle-process-2.8.1/AndroidManifest.xml:30:17-78
+meta-data#androidx.profileinstaller.ProfileInstallerInitializer
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+receiver#androidx.profileinstaller.ProfileInstallReceiver
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+	android:enabled
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+	android:exported
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+	android:permission
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+	android:directBootAware
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+action#androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+intent-filter#action:name:androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+action#androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+intent-filter#action:name:androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+action#androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+intent-filter#action:name:androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+action#androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/hyuse/.gradle/caches/transforms-4/85e1737c3a3fd0ffce1e39c13cc80c9d/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
