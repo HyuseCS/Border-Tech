@@ -1,5 +1,5 @@
 use tokio::io::{AsyncRead, AsyncReadExt, AsyncWrite, AsyncWriteExt};
-use tracing::{info, debug};
+use tracing::{info, debug, error};
 
 /// Handles the WO Mic proprietary protocol.
 /// Supports the initial handshake and robust audio packet extraction.
@@ -29,7 +29,8 @@ where
 
         // Config: 'f' + length(6) + payload
         info!("Sending Config command");
-        let config_payload = [0x66, 0x00, 0x00, 0x00, 0x06, 0x02, 0x02, 0x00, 0x00, 0xC0, 0x00];
+        // 0xBB, 0x80 = 48000 Hz sample rate
+        let config_payload = [0x66, 0x00, 0x00, 0x00, 0x06, 0x02, 0x02, 0x00, 0x00, 0xBB, 0x80];
         self.stream.write_all(&config_payload).await?;
 
         let mut resp = [0u8; 6];
@@ -51,30 +52,39 @@ where
     /// Reads an audio packet from the stream.
     /// Implements a resynchronization mechanism to handle malformed or non-audio packets.
     pub async fn read_audio_packet(&mut self, buf: &mut [u8]) -> anyhow::Result<usize> {
-        // Audio packets have a 4-byte header: 0x04 0x00 0x00 XX (XX is payload length)
-        // SEC-03: Implement robust resync loop
+        // WO Mic audio packet format:
+        //   Byte 0:    Packet type (0x04 = audio data)
+        //   Byte 1-3:  Payload length as 24-bit big-endian integer
+        //   Byte 4..N: Payload (raw PCM or Opus frames)
+        //
+        // SEC-03: Implement robust resync loop — scan byte-by-byte for 0x04 marker
         let mut header = [0u8; 4];
         
         loop {
             self.stream.read_exact(&mut header[0..1]).await?;
             if header[0] == 0x04 {
-                // Found potential start of header
+                // Found potential start of header — read the 3-byte length field
                 self.stream.read_exact(&mut header[1..4]).await?;
                 
-                // Secondary check: usually audio packets follow 04 00 00 XX
-                // If it looks like a valid header, proceed.
-                if header[1] == 0x00 && header[2] == 0x00 {
-                    let len = header[3] as usize;
-                    if len > 0 && len <= buf.len() {
-                        self.stream.read_exact(&mut buf[..len]).await?;
-                        return Ok(len);
-                    }
-                    if len > buf.len() {
-                        return Err(anyhow::anyhow!("Buffer overflow: packet length {} exceeds buffer size {}", len, buf.len()));
-                    }
+                // Parse 24-bit big-endian length from header[1..4]
+                let len = ((header[1] as usize) << 16)
+                        | ((header[2] as usize) << 8)
+                        |  (header[3] as usize);
+                
+                if len == 0 {
+                    // Zero-length audio packet, skip
+                    continue;
+                }
+                if len > buf.len() {
+                    error!("Buffer overflow: packet length {} exceeds buffer size {}", len, buf.len());
+                    return Err(anyhow::anyhow!(
+                        "Buffer overflow: packet length {} exceeds buffer size {}", len, buf.len()
+                    ));
                 }
                 
-                debug!("Sync lost? Header lookalike found but invalid length or format: {:x?}", header);
+                self.stream.read_exact(&mut buf[..len]).await?;
+                debug!("Read audio packet: len={}, header={:x?}", len, header);
+                return Ok(len);
             }
         }
     }

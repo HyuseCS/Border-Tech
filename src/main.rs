@@ -5,7 +5,6 @@ mod app_state;
 
 use clap::{Parser, ValueEnum};
 use tracing::{info, Level};
-use tracing_subscriber::FmtSubscriber;
 use crate::app_state::AppState;
 use slint::ComponentHandle;
 use std::sync::Arc;
@@ -63,11 +62,15 @@ async fn main() -> anyhow::Result<()> {
     let log_level = if args.debug {
         Level::DEBUG
     } else {
-        Level::INFO
+        Level::DEBUG // Force debug for now to diagnose the issue
     };
 
-    let subscriber = FmtSubscriber::builder()
+    let log_file = std::fs::File::create("/tmp/womic.log").expect("failed to create log file");
+
+    let subscriber = tracing_subscriber::fmt()
         .with_max_level(log_level)
+        .with_writer(log_file)
+        .with_ansi(false)
         .finish();
 
     tracing::subscriber::set_global_default(subscriber)

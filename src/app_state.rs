@@ -6,7 +6,7 @@ use crate::decoder::{Decoder, PcmDecoder, OpusDecoder};
 use crate::protocol::ProtocolHandler;
 use crate::{MainWindow, Codec};
 use tokio::net::TcpStream;
-use tracing::{info, error};
+use tracing::{info, error, debug};
 use std::net::IpAddr;
 use std::str::FromStr;
 use std::time::Duration;
@@ -14,7 +14,6 @@ use std::time::Duration;
 /// Orchestrates the application state, managing connection tasks and UI synchronization.
 pub struct AppState {
     ui: Weak<MainWindow>,
-    tokio_runtime: tokio::runtime::Runtime,
     // REL-01: Store the actual join handle and cancel token
     connection_task: Arc<Mutex<Option<(tokio::task::JoinHandle<()>, tokio::sync::oneshot::Sender<()>)>>>,
 }
@@ -24,10 +23,6 @@ impl AppState {
     pub fn new(ui: Weak<MainWindow>) -> Self {
         Self {
             ui,
-            tokio_runtime: tokio::runtime::Builder::new_multi_thread()
-                .enable_all()
-                .build()
-                .unwrap(),
             connection_task: Arc::new(Mutex::new(None)),
         }
     }
@@ -51,7 +46,7 @@ impl AppState {
         };
 
         let ui_weak = self.ui.clone();
-        self.tokio_runtime.spawn(async move {
+        tokio::spawn(async move {
             // REL-01: Cancel existing connection if any
             {
                 let mut task_opt = connection_task.lock().await;
@@ -72,7 +67,20 @@ impl AppState {
                         let res = Self::run_connection(ip, port, is_usb, codec, ui_weak_task.clone(), &mut rx).await;
                         
                         match res {
-                            Ok(_) => break, // Clean exit (disconnect requested)
+                            Ok(_) => {
+                                // Clean exit (disconnect requested)
+                                let _ = slint::invoke_from_event_loop({
+                                    let ui_weak = ui_weak_task.clone();
+                                    move || {
+                                        if let Some(ui) = ui_weak.upgrade() {
+                                            ui.set_is_connected(false);
+                                            ui.set_status_text("Disconnected".into());
+                                            ui.set_volume_level(0.0);
+                                        }
+                                    }
+                                });
+                                break;
+                            }
                             Err(e) => {
                                 error!("Connection error: {}. Retry {}/{}", e, retry_count + 1, MAX_RETRIES);
                                 
@@ -108,7 +116,7 @@ impl AppState {
     /// Disconnects from the current mobile app.
     pub fn disconnect(&self) {
         let connection_task = self.connection_task.clone();
-        self.tokio_runtime.spawn(async move {
+        tokio::spawn(async move {
             let mut task_opt = connection_task.lock().await;
             if let Some((handle, tx)) = task_opt.take() {
                 info!("Disconnecting...");
@@ -183,18 +191,25 @@ impl AppState {
             }
         });
 
-        let mut buf = [0u8; 4096];
+        let mut buf = [0u8; 8192]; // Increased buffer for larger audio packets
         let mut float_buf = Vec::with_capacity(4096);
+
+        // REL-01: Convert the oneshot into a future we can poll without consuming it
+        let mut stop_fut = stop_rx;
 
         loop {
             tokio::select! {
-                // REL-01: Check if stop requested periodically
-                _ = tokio::time::sleep(Duration::from_millis(50)) => {
-                    if stop_rx.try_recv().is_ok() {
-                        info!("Disconnect requested");
-                        return Ok(());
-                    }
+                biased;
+
+                // Check stop signal — this branch is a reference poll, 
+                // it won't cancel the read on the other branch because 
+                // biased mode tries this first and only if it's not ready, 
+                // falls through to the read.
+                _ = &mut stop_fut => {
+                    info!("Disconnect requested");
+                    return Ok(());
                 }
+
                 res = protocol.read_audio_packet(&mut buf) => {
                     match res {
                         Ok(0) => continue,
@@ -209,6 +224,8 @@ impl AppState {
                             for &s in &float_buf {
                                 max_abs = max_abs.max(s.abs());
                             }
+                            
+                            debug!("Decoded {} floats. max_abs={}", float_buf.len(), max_abs);
                             
                             sink.push_samples(&float_buf);
                             
@@ -230,3 +247,4 @@ impl AppState {
         }
     }
 }
+
