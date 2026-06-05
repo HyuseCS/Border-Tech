@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:2:1-34:12
-INJECTED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:2:1-34:12
-INJECTED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:2:1-34:12
-INJECTED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:2:1-34:12
+ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:2:1-36:12
+INJECTED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:2:1-36:12
+INJECTED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:2:1-36:12
+INJECTED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:2:1-36:12
 MERGED from [androidx.compose.material3:material3-android:1.2.1] /home/hyuse/.gradle/caches/transforms-4/19854a349f99769d54f990951f020767/transformed/jetified-material3-release/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.compose.material:material-android:1.6.0] /home/hyuse/.gradle/caches/transforms-4/25194c47f96f3f53c21e399099e15cc6/transformed/jetified-material-release/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.compose.material:material-icons-core-android:1.6.0] /home/hyuse/.gradle/caches/transforms-4/72fc924c5d9e2d80babcfd814cf9de62/transformed/jetified-material-icons-core-release/AndroidManifest.xml:2:1-7:12
@@ -63,21 +63,29 @@ uses-permission#android.permission.INTERNET
 ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:5:5-67
 	android:name
 		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:5:22-64
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:6:5-76
+	android:name
+		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:6:22-73
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:7:5-79
+	android:name
+		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:7:22-76
 uses-permission#android.permission.FOREGROUND_SERVICE
-ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:6:5-77
-	android:name
-		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:6:22-74
-uses-permission#android.permission.FOREGROUND_SERVICE_MICROPHONE
-ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:7:5-88
-	android:name
-		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:7:22-85
-uses-permission#android.permission.POST_NOTIFICATIONS
 ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:8:5-77
 	android:name
 		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:8:22-74
+uses-permission#android.permission.FOREGROUND_SERVICE_MICROPHONE
+ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:9:5-88
+	android:name
+		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:9:22-85
+uses-permission#android.permission.POST_NOTIFICATIONS
+ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:10:5-77
+	android:name
+		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:10:22-74
 application
-ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:10:5-33:19
-INJECTED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:10:5-33:19
+ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:12:5-35:19
+INJECTED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:12:5-35:19
 MERGED from [androidx.compose.ui:ui-tooling-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/e206978a7689cc62c493548764760b76/transformed/jetified-ui-tooling-release/AndroidManifest.xml:22:5-26:19
 MERGED from [androidx.compose.ui:ui-tooling-android:1.6.7] /home/hyuse/.gradle/caches/transforms-4/e206978a7689cc62c493548764760b76/transformed/jetified-ui-tooling-release/AndroidManifest.xml:22:5-26:19
 MERGED from [androidx.emoji2:emoji2:1.3.0] /home/hyuse/.gradle/caches/transforms-4/a16835dbf7a2acf7a3529a0f4fd32977/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
@@ -97,45 +105,45 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] /home/hyuse/.gradle/caches/
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.13.1] /home/hyuse/.gradle/caches/transforms-4/30a8ab7bc08d8a30507c883d8dd92505/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:15:9-35
+		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:17:9-35
 	android:label
-		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:13:9-30
+		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:15:9-30
 	android:roundIcon
-		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:14:9-54
+		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:16:9-54
 	android:icon
-		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:12:9-49
+		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:14:9-49
 	android:allowBackup
-		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:11:9-36
+		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:13:9-36
 	android:theme
-		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:16:9-66
+		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:18:9-66
 service#com.projectm.mic.AudioCaptureService
-ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:18:9-22:58
+ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:20:9-24:58
 	android:enabled
-		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:20:13-35
+		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:22:13-35
 	android:exported
-		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:21:13-37
+		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:23:13-37
 	android:foregroundServiceType
-		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:22:13-55
+		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:24:13-55
 	android:name
-		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:19:13-48
+		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:21:13-48
 activity#com.projectm.mic.MainActivity
-ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:24:9-32:20
+ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:26:9-34:20
 	android:exported
-		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:26:13-36
+		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:28:13-36
 	android:theme
-		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:27:13-70
+		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:29:13-70
 	android:name
-		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:25:13-41
+		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:27:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:28:13-31:29
+ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:30:13-33:29
 action#android.intent.action.MAIN
-ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:29:17-69
+ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:31:17-69
 	android:name
-		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:29:25-66
+		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:31:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:30:17-77
+ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:32:17-77
 	android:name
-		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:30:27-74
+		ADDED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml:32:27-74
 uses-sdk
 INJECTED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/hyuse/Desktop/project-m/android-client/app/src/main/AndroidManifest.xml

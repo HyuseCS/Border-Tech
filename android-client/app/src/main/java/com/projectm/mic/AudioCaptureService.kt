@@ -12,6 +12,7 @@ import android.media.AudioRecord
 import android.media.MediaRecorder
 import android.os.Build
 import android.os.IBinder
+import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.core.app.NotificationCompat
 import kotlinx.coroutines.CoroutineScope
@@ -21,15 +22,13 @@ import kotlinx.coroutines.launch
 import org.bouncycastle.asn1.x500.X500Name
 import org.bouncycastle.cert.jcajce.JcaX509CertificateConverter
 import org.bouncycastle.cert.jcajce.JcaX509v3CertificateBuilder
+import org.bouncycastle.jce.provider.BouncyCastleProvider
 import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder
 import java.io.OutputStream
 import java.math.BigInteger
 import java.net.ServerSocket
 import java.net.Socket
-import java.security.KeyPair
-import java.security.KeyPairGenerator
-import java.security.KeyStore
-import java.security.SecureRandom
+import java.security.*
 import java.security.cert.X509Certificate
 import java.util.Date
 import javax.net.ssl.KeyManagerFactory
@@ -47,6 +46,7 @@ class AudioCaptureService : Service() {
     }
 
     companion object {
+        private const val TAG = "AudioCaptureService"
         const val NOTIFICATION_ID = 1001
         const val CHANNEL_ID = "audio_capture_channel"
         
@@ -54,9 +54,10 @@ class AudioCaptureService : Service() {
         var errorMessage = mutableStateOf("")
         var isServiceRunning = mutableStateOf(false)
 
-        fun startService(context: Context, port: Int) {
+        fun startService(context: Context, port: Int, isUsb: Boolean) {
             val intent = Intent(context, AudioCaptureService::class.java).apply {
                 putExtra("EXTRA_PORT", port)
+                putExtra("EXTRA_IS_USB", isUsb)
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 context.startForegroundService(intent)
@@ -78,13 +79,20 @@ class AudioCaptureService : Service() {
 
     override fun onCreate() {
         super.onCreate()
+        Log.d(TAG, "Service onCreate")
         isServiceRunning.value = true
         createNotificationChannel()
+        
+        // Register BouncyCastle Provider
+        Security.removeProvider("BC")
+        Security.addProvider(BouncyCastleProvider())
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val port = intent?.getIntExtra("EXTRA_PORT", 47999) ?: 47999
+        val isUsb = intent?.getBooleanExtra("EXTRA_IS_USB", true) ?: true
 
+        Log.d(TAG, "onStartCommand: port=$port, isUsb=$isUsb")
         startForegroundNotification()
 
         state.value = ConnectionState.CONNECTING
@@ -92,14 +100,14 @@ class AudioCaptureService : Service() {
 
         captureJob?.cancel()
         captureJob = serviceScope.launch(Dispatchers.IO) {
-            runServerLoop(port)
+            runServerLoop(port, isUsb)
         }
 
         return START_NOT_STICKY
     }
 
     private fun startForegroundNotification() {
-        val notification = createNotification("Listening for PC client...")
+        val notification = createNotification("Initializing Sonus...")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             startForeground(
                 NOTIFICATION_ID, 
@@ -117,6 +125,7 @@ class AudioCaptureService : Service() {
             .setContentText(text)
             .setSmallIcon(R.drawable.ic_launcher_mic)
             .setOngoing(true)
+            .setPriority(NotificationCompat.PRIORITY_LOW)
             .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
             .build()
     }
@@ -141,33 +150,42 @@ class AudioCaptureService : Service() {
         }
     }
 
-    private fun runServerLoop(port: Int) {
+    private fun runServerLoop(port: Int, isUsb: Boolean) {
         try {
-            // Phase 2: TLS Setup with self-signed certificate
+            Log.d(TAG, "Setting up SSL Context...")
             val sslContext = setupSslContext()
             val ssf: SSLServerSocketFactory = sslContext.serverSocketFactory
             
+            Log.d(TAG, "Creating SSL Server Socket on port $port...")
             serverSocket = ssf.createServerSocket(port) as SSLServerSocket
             (serverSocket as SSLServerSocket).apply {
                 needClientAuth = false
                 enabledProtocols = arrayOf("TLSv1.3", "TLSv1.2")
             }
 
+            Log.d(TAG, "Server socket ready, entering accept loop")
             while (isServiceRunning.value) {
                 serviceScope.launch(Dispatchers.Main) {
                     state.value = ConnectionState.CONNECTING
-                    updateNotification("Waiting for PC connection on port $port")
+                    val modeText = if (isUsb) "USB" else "Wi-Fi"
+                    updateNotification("Waiting for $modeText connection on port $port")
                 }
 
-                val clientSocket = serverSocket?.accept() ?: break
+                val clientSocket = try {
+                    serverSocket?.accept()
+                } catch (e: Exception) {
+                    Log.e(TAG, "Accept error: ${e.message}")
+                    null
+                } ?: break
+                
                 handleClient(clientSocket)
             }
 
         } catch (e: Exception) {
-            e.printStackTrace()
+            Log.e(TAG, "Server loop error", e)
             serviceScope.launch(Dispatchers.Main) {
                 state.value = ConnectionState.ERROR
-                errorMessage.value = e.localizedMessage ?: "Unknown server error"
+                errorMessage.value = e.localizedMessage ?: e.javaClass.simpleName
                 updateNotification("Server Error: ${errorMessage.value}")
             }
         } finally {
@@ -177,6 +195,7 @@ class AudioCaptureService : Service() {
 
     private fun handleClient(socket: Socket) {
         try {
+            Log.d(TAG, "Client connected: ${socket.inetAddress}")
             socket.tcpNoDelay = true
             val outputStream = socket.getOutputStream()
             
@@ -209,6 +228,7 @@ class AudioCaptureService : Service() {
             }
 
             recorder.startRecording()
+            Log.d(TAG, "AudioRecord started, streaming...")
             
             val buffer = ByteArray(960)
 
@@ -218,16 +238,18 @@ class AudioCaptureService : Service() {
                 if (bytesRead > 0) {
                     sendAudioPacket(outputStream, buffer, bytesRead)
                 } else if (bytesRead < 0) {
+                    Log.w(TAG, "AudioRecord read error: $bytesRead")
                     break
                 }
             }
 
         } catch (e: Exception) {
-            e.printStackTrace()
+            Log.e(TAG, "Handle client error", e)
         } finally {
-            socket.close()
-            audioRecord?.stop()
-            audioRecord?.release()
+            Log.d(TAG, "Cleaning up client connection")
+            try { socket.close() } catch (e: Exception) {}
+            try { audioRecord?.stop() } catch (e: Exception) {}
+            try { audioRecord?.release() } catch (e: Exception) {}
             audioRecord = null
             
             serviceScope.launch(Dispatchers.Main) {
@@ -251,15 +273,15 @@ class AudioCaptureService : Service() {
 
     private fun setupSslContext(): SSLContext {
         // Generate ephemeral key pair
-        val keyPairGenerator = KeyPairGenerator.getInstance("RSA")
+        val keyPairGenerator = KeyPairGenerator.getInstance("RSA", "BC")
         keyPairGenerator.initialize(2048)
         val keyPair = keyPairGenerator.generateKeyPair()
 
         // Generate self-signed certificate
         val cert = generateSelfSignedCertificate(keyPair)
 
-        // Create a KeyStore and put the private key and cert in it
-        val keyStore = KeyStore.getInstance(KeyStore.getDefaultType())
+        // Create a KeyStore (PKCS12 is better for in-memory)
+        val keyStore = KeyStore.getInstance("PKCS12", "BC")
         keyStore.load(null, null)
         keyStore.setKeyEntry("sonus-key", keyPair.private, "password".toCharArray(), arrayOf(cert))
 
@@ -287,11 +309,12 @@ class AudioCaptureService : Service() {
             keyPair.public
         )
         
-        val signer = JcaContentSignerBuilder("SHA256withRSA").build(keyPair.private)
-        return JcaX509CertificateConverter().getCertificate(certBuilder.build(signer))
+        val signer = JcaContentSignerBuilder("SHA256withRSA").setProvider("BC").build(keyPair.private)
+        return JcaX509CertificateConverter().setProvider("BC").getCertificate(certBuilder.build(signer))
     }
 
     private fun cleanup() {
+        Log.d(TAG, "Service cleanup")
         try {
             audioRecord?.stop()
         } catch (_: Exception) {}
@@ -314,6 +337,7 @@ class AudioCaptureService : Service() {
     }
 
     override fun onDestroy() {
+        Log.d(TAG, "Service onDestroy")
         isServiceRunning.value = false
         captureJob?.cancel()
         cleanup()
