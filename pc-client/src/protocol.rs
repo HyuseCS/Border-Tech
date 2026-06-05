@@ -42,7 +42,13 @@ where
                         ));
                     }
                     
-                    self.stream.read_exact(&mut buf[..len]).await?;
+                    match tokio::time::timeout(std::time::Duration::from_secs(2), self.stream.read_exact(&mut buf[..len])).await {
+                        Ok(res) => { res?; },
+                        Err(_) => {
+                            error!("Timeout waiting for audio packet payload ({} bytes)", len);
+                            return Err(anyhow::anyhow!("Timeout waiting for audio packet payload"));
+                        }
+                    }
                     debug!("Read Project-M audio packet: len={}", len);
                     return Ok(len);
                 }

@@ -10,7 +10,7 @@ Restart=always
 RestartSec=5
 # Allow real-time scheduling
 CPUSchedulingPolicy=fifo
-CPUSchedulingPriority=99
+CPUSchedulingPriority=15
 # Optional: Capability for RT without root
 # CapabilityBoundingSet=CAP_SYS_NICE
 # AmbientCapabilities=CAP_SYS_NICE

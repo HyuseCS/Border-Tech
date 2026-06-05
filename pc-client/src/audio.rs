@@ -18,12 +18,7 @@ pub struct PipewireSink {
     quit_flag: Arc<AtomicBool>,
 }
 
-// SAFETY: PipewireSink is safe to send between threads because:
-// 1. The Producer (ringbuf) is wrapped in Arc<Mutex<>>, and its underlying storage is Arc<HeapRb>.
-// 2. The quit_flag is an AtomicBool wrapped in Arc.
-// 3. We do not hold any thread-local PipeWire objects (like MainLoopBox or Context) in this struct.
-//    Those are either moved into the background thread or exist only within the run_loop function.
-unsafe impl Send for PipewireSink {}
+// Note: In newer ringbuf versions, CachingProd is naturally Send.
 
 impl PipewireSink {
     /// Creates a new PipeWire sink with the given node name and sample rate.
@@ -105,8 +100,8 @@ impl PipewireSink {
                         };
                         
                         if n_samples > 0 {
-                            // SEC-02: Defensive bounds check
-                            debug_assert!(n_samples * 4 <= slice.len());
+                            // SEC-02: Hard bounds check to prevent overrun in release builds
+                            assert!(n_samples * 4 <= slice.len(), "Buffer overrun risk: requested {} bytes for {} byte slice", n_samples * 4, slice.len());
                             
                             unsafe {
                                 // PERF: Read directly from ring buffer into PipeWire slice
@@ -181,6 +176,8 @@ impl PipewireSink {
         let timer = mainloop_loop.add_timer(move |_expirations| {
             if quit_flag.load(Ordering::Relaxed) {
                 debug!("Received quit signal, stopping PipeWire loop");
+                // SAFETY: The timer is owned by the mainloop and cancelled/dropped before the mainloop 
+                // itself is dropped. Therefore, mainloop_ptr is strictly valid for the duration of this callback.
                 unsafe {
                     pw_sys::pw_main_loop_quit(mainloop_ptr);
                 }
@@ -201,12 +198,18 @@ impl PipewireSink {
 
     /// Pushes new audio samples into the sink's ring buffer.
     pub fn push_samples(&self, samples: &[f32]) {
-        let mut prod = self.producer.lock().unwrap();
-        // If ringbuf is full, we drop oldest samples to keep latency low
-        if prod.vacant_len() < samples.len() {
-            debug!("Audio buffer overflow, some samples may be dropped or delayed");
+        match self.producer.lock() {
+            Ok(mut prod) => {
+                // If ringbuf is full, we drop oldest samples to keep latency low
+                if prod.vacant_len() < samples.len() {
+                    debug!("Audio buffer overflow, some samples may be dropped or delayed");
+                }
+                prod.push_slice(samples);
+            }
+            Err(e) => {
+                error!("Audio producer mutex is poisoned: {}", e);
+            }
         }
-        prod.push_slice(samples);
     }
 }
 

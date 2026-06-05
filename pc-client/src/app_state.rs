@@ -8,6 +8,51 @@ use tokio::net::TcpListener;
 use tracing::{info, error};
 use std::time::Duration;
 
+pub trait AsyncStream: tokio::io::AsyncRead + tokio::io::AsyncWrite + Unpin + Send {}
+impl<T: tokio::io::AsyncRead + tokio::io::AsyncWrite + Unpin + Send> AsyncStream for T {}
+
+#[derive(Debug)]
+struct DummyVerifier;
+impl rustls::client::danger::ServerCertVerifier for DummyVerifier {
+    fn verify_server_cert(
+        &self,
+        _end_entity: &rustls::pki_types::CertificateDer<'_>,
+        _intermediates: &[rustls::pki_types::CertificateDer<'_>],
+        _server_name: &rustls::pki_types::ServerName<'_>,
+        _ocsp_response: &[u8],
+        _now: rustls::pki_types::UnixTime,
+    ) -> Result<rustls::client::danger::ServerCertVerified, rustls::Error> {
+        Ok(rustls::client::danger::ServerCertVerified::assertion())
+    }
+    
+    fn verify_tls12_signature(
+        &self,
+        _message: &[u8],
+        _cert: &rustls::pki_types::CertificateDer<'_>,
+        _dss: &rustls::DigitallySignedStruct,
+    ) -> Result<rustls::client::danger::HandshakeSignatureValid, rustls::Error> {
+        Ok(rustls::client::danger::HandshakeSignatureValid::assertion())
+    }
+    
+    fn verify_tls13_signature(
+        &self,
+        _message: &[u8],
+        _cert: &rustls::pki_types::CertificateDer<'_>,
+        _dss: &rustls::DigitallySignedStruct,
+    ) -> Result<rustls::client::danger::HandshakeSignatureValid, rustls::Error> {
+        Ok(rustls::client::danger::HandshakeSignatureValid::assertion())
+    }
+    
+    fn supported_verify_schemes(&self) -> Vec<rustls::SignatureScheme> {
+        vec![
+            rustls::SignatureScheme::RSA_PKCS1_SHA256,
+            rustls::SignatureScheme::ECDSA_NISTP256_SHA256,
+            rustls::SignatureScheme::ECDSA_NISTP384_SHA384,
+            rustls::SignatureScheme::ED25519,
+        ]
+    }
+}
+
 /// Orchestrates the application state, managing the TCP listener and UI synchronization.
 pub struct AppState {
     ui: Weak<MainWindow>,
@@ -24,7 +69,7 @@ impl AppState {
     }
 
     /// Starts connection logic.
-    pub fn connect(&self, port: u16, is_usb: bool, server_ip: String) {
+    pub fn connect(&self, port: u16, is_usb: bool, server_ip: String, use_tls: bool) {
         let connection_task = self.connection_task.clone();
 
         let ui_weak_task = self.ui.clone();
@@ -46,7 +91,7 @@ impl AppState {
                     const MAX_RETRIES: u32 = 5;
 
                     loop {
-                        let res = Self::run_connection(port, is_usb, server_ip_clone.clone(), ui_weak_run.clone(), &mut rx).await;
+                        let res = Self::run_connection(port, is_usb, server_ip_clone.clone(), use_tls, ui_weak_run.clone(), &mut rx).await;
                         
                         match res {
                             Ok(_) => {
@@ -112,6 +157,7 @@ impl AppState {
         port: u16, 
         is_usb: bool, 
         server_ip: String,
+        use_tls: bool,
         ui_weak: Weak<MainWindow>,
         stop_rx: &mut tokio::sync::oneshot::Receiver<()>
     ) -> anyhow::Result<()> {
@@ -132,8 +178,16 @@ impl AppState {
 
         // Set up ADB reverse forwarding if USB mode is active
         let _adb_cleanup = if is_usb {
-            info!("Configuring ADB port reverse forwarding for port {}...", port);
-            let out = tokio::process::Command::new("adb")
+            let adb_path = std::process::Command::new("which")
+                .arg("adb")
+                .output()
+                .ok()
+                .and_then(|o| String::from_utf8(o.stdout).ok())
+                .map(|s| s.trim().to_string())
+                .unwrap_or_else(|| "/usr/bin/adb".to_string());
+
+            info!("Configuring ADB port reverse forwarding for port {} using {}...", port, adb_path);
+            let out = tokio::process::Command::new(&adb_path)
                 .args(["reverse", &format!("tcp:{}", port), &format!("tcp:{}", port)])
                 .output().await?;
             
@@ -141,9 +195,9 @@ impl AppState {
                 return Err(anyhow::anyhow!("ADB reverse command failed: {}", String::from_utf8_lossy(&out.stderr)));
             }
 
-            Some(scopeguard::guard(port, |p| {
+            Some(scopeguard::guard((port, adb_path), |(p, adb_cmd)| {
                 info!("Removing ADB port reverse forwarding...");
-                let _ = std::process::Command::new("adb")
+                let _ = std::process::Command::new(&adb_cmd)
                     .args(["reverse", "--remove", &format!("tcp:{}", p)])
                     .output();
             }))
@@ -153,35 +207,80 @@ impl AppState {
 
         let mut stop_fut = stop_rx;
 
-        // Establish connection based on connection mode
-        let (stream, peer_addr) = if is_usb {
+        let (mut stream, peer_addr): (Box<dyn AsyncStream>, std::net::SocketAddr) = if is_usb {
             // Bind TCP Listener
-            let listener = TcpListener::bind(format!("0.0.0.0:{}", port)).await?;
-            info!("Listening for phone connection on port {}", port);
+            let listener = TcpListener::bind(format!("127.0.0.1:{}", port)).await?;
+            info!("Listening for phone connection on loopback port {}", port);
 
             // Accept connection or handle cancellation
-            let (stream, peer_addr) = tokio::select! {
+            let (tcp_stream, peer_addr) = tokio::select! {
                 res = listener.accept() => res?,
                 _ = &mut stop_fut => {
                     info!("Listening stopped before connection was accepted.");
                     return Ok(());
                 }
             };
-            (stream, peer_addr)
+            
+            if use_tls {
+                let cert = rcgen::generate_simple_self_signed(vec!["project-m.local".to_string()])?;
+                let key_der = cert.signing_key.serialize_der();
+                let cert_der = cert.cert.der().to_vec();
+                let key = rustls::pki_types::PrivateKeyDer::try_from(key_der)
+                    .map_err(|e| anyhow::anyhow!("Invalid private key: {}", e))?;
+                let certs = vec![rustls::pki_types::CertificateDer::from(cert_der)];
+
+                let config = rustls::ServerConfig::builder()
+                    .with_no_client_auth()
+                    .with_single_cert(certs, key)?;
+
+                let acceptor = tokio_rustls::TlsAcceptor::from(std::sync::Arc::new(config));
+                
+                info!("Accepting TLS connection...");
+                let tls_stream = tokio::select! {
+                    res = acceptor.accept(tcp_stream) => res?,
+                    _ = &mut stop_fut => {
+                        info!("Listening stopped during TLS handshake.");
+                        return Ok(());
+                    }
+                };
+                (Box::new(tls_stream), peer_addr)
+            } else {
+                (Box::new(tcp_stream), peer_addr)
+            }
         } else {
             // Wi-Fi Mode: Connect to Android device as a client
             let target_addr = format!("{}:{}", server_ip, port);
             info!("Connecting to Android device at {}...", target_addr);
 
-            let stream = tokio::select! {
+            let tcp_stream = tokio::select! {
                 res = tokio::net::TcpStream::connect(&target_addr) => res?,
                 _ = &mut stop_fut => {
                     info!("Connection attempt cancelled.");
                     return Ok(());
                 }
             };
-            let peer_addr = stream.peer_addr()?;
-            (stream, peer_addr)
+            let peer_addr = tcp_stream.peer_addr()?;
+            
+            if use_tls {
+                let mut config = rustls::ClientConfig::builder()
+                    .dangerous()
+                    .with_custom_certificate_verifier(std::sync::Arc::new(DummyVerifier))
+                    .with_no_client_auth();
+                let connector = tokio_rustls::TlsConnector::from(std::sync::Arc::new(config));
+                let domain = rustls::pki_types::ServerName::try_from("project-m.local").unwrap();
+                
+                info!("Initiating TLS handshake...");
+                let tls_stream = tokio::select! {
+                    res = connector.connect(domain, tcp_stream) => res?,
+                    _ = &mut stop_fut => {
+                        info!("Connection cancelled during TLS handshake.");
+                        return Ok(());
+                    }
+                };
+                (Box::new(tls_stream), peer_addr)
+            } else {
+                (Box::new(tcp_stream), peer_addr)
+            }
         };
 
         info!("Connection established with {}", peer_addr);
@@ -250,11 +349,8 @@ impl AppState {
 /// Converts little-endian 16-bit PCM bytes into normalized f32 audio samples.
 fn convert_s16_to_f32(s16_bytes: &[u8], dst: &mut Vec<f32>) {
     dst.clear();
-    let sample_count = s16_bytes.len() / 2;
-    for i in 0..sample_count {
-        let low = s16_bytes[i * 2];
-        let high = s16_bytes[i * 2 + 1];
-        let sample = i16::from_le_bytes([low, high]);
+    for chunk in s16_bytes.chunks_exact(2) {
+        let sample = i16::from_le_bytes([chunk[0], chunk[1]]);
         dst.push(sample as f32 / 32768.0);
     }
 }

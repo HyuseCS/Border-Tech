@@ -25,8 +25,12 @@ struct Args {
 pub fn get_local_ip() -> Option<String> {
     let socket = std::net::UdpSocket::bind("0.0.0.0:0").ok()?;
     // Connect to a public IP to determine which local network interface is routeable.
-    // This doesn't actually send any packets over the internet.
-    socket.connect("8.8.8.8:80").ok()?;
+    // Fallback to Cloudflare's 1.1.1.1 if Google's 8.8.8.8 fails, and finally to local multicast.
+    if socket.connect("8.8.8.8:80").is_err() {
+        if socket.connect("1.1.1.1:80").is_err() {
+            socket.connect("224.0.0.1:0").ok()?;
+        }
+    }
     socket.local_addr().ok().map(|addr| addr.ip().to_string())
 }
 
@@ -40,7 +44,13 @@ async fn main() -> anyhow::Result<()> {
         Level::INFO
     };
 
-    let log_file = std::fs::File::create("/tmp/projectm.log").expect("failed to create log file");
+    let mut log_dir = dirs::data_local_dir().unwrap_or_else(|| std::path::PathBuf::from("/tmp"));
+    log_dir.push("project-m");
+    std::fs::create_dir_all(&log_dir).ok();
+    log_dir.push("projectm.log");
+    let log_file = std::fs::File::create(&log_dir).unwrap_or_else(|_| {
+        std::fs::File::create("/tmp/projectm.log").expect("failed to create log file")
+    });
 
     let subscriber = tracing_subscriber::fmt()
         .with_max_level(log_level)
@@ -70,8 +80,9 @@ async fn main() -> anyhow::Result<()> {
             let is_usb = ui.get_is_usb();
             let server_ip = ui.get_android_ip().to_string();
             let port = port_str.parse::<u16>().unwrap_or(47999);
+            let use_tls = ui.get_use_tls();
 
-            app_state_clone.connect(port, is_usb, server_ip);
+            app_state_clone.connect(port, is_usb, server_ip, use_tls);
         }
     });
 
