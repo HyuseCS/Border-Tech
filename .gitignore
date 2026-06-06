@@ -8,9 +8,14 @@
 .idea/shelf/
 out/
 
+.gemini/
+
 # Rust (pc-client)
 pc-client/target/
-v1.1.0/
+pc-client/lampyris-linux-x86_64-v1.1.0.tar.gz
+pc-client/lampyris-v1.1.0-linux-x86_64
+pc-client/lampyris.desktop
+pc-client/install.sh
 **/*.rs.bk
 
 # Android & Gradle (android-client)
