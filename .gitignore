@@ -9,7 +9,8 @@
 out/
 
 # Rust (pc-client)
-**/target/
+pc-client/target/
+v1.1.0/
 **/*.rs.bk
 
 # Android & Gradle (android-client)
