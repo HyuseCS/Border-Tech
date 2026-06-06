@@ -5,30 +5,111 @@
     "hyperedges": [
       {
         "id": "audio_streaming_pipeline",
-        "label": "End-to-End Audio Streaming Pipeline",
+        "label": "Audio Streaming Pipeline",
         "nodes": [
-          "audiocaptureservice_audiocaptureservice",
-          "protocol_mc_framing_protocol",
-          "app_state_appstate",
-          "audio_pipewiresink"
+          "audiocaptureservice_handleclient",
+          "protocol_protocolhandler_read_audio_packet",
+          "app_state_appstate_run_connection",
+          "audio_pipewiresink_push_samples"
         ],
         "relation": "implement",
         "confidence": "INFERRED",
         "confidence_score": 0.95,
-        "source_file": "project_plan.md"
+        "source_file": "pc-client/src/app_state.rs"
       },
       {
-        "id": "tactical_neon_ui_theme",
-        "label": "Tactical Neon UI Theme Implementation",
+        "id": "security_boundary",
+        "label": "TLS Security Boundary",
         "nodes": [
-          "design_neon_audio_deck",
-          "main_main",
-          "mainactivity_mainactivity"
+          "app_state_dummyverifier",
+          "audiocaptureservice_setupsslcontext",
+          "readme_secure_by_design",
+          "findings_c_03"
+        ],
+        "relation": "participate_in",
+        "confidence": "INFERRED",
+        "confidence_score": 0.95,
+        "source_file": "findings.md"
+      },
+      {
+        "id": "android_pc_connection_loop",
+        "label": "Android-PC Connection and Tunneling",
+        "nodes": [
+          "app_state_adb_port_forwarding",
+          "app_state_appstate_run_connection",
+          "audiocaptureservice_runserverloop"
         ],
         "relation": "implement",
         "confidence": "INFERRED",
         "confidence_score": 0.95,
-        "source_file": "DESIGN.md"
+        "source_file": "pc-client/src/app_state.rs"
+      },
+      {
+        "id": "lampyris_bioluminescent_concept",
+        "label": "Bioluminescent Concept Elements",
+        "nodes": [
+          "lampyris_glowing_abdomen",
+          "lampyris_glow_filter",
+          "lampyris_trion_gradient"
+        ],
+        "relation": "participate_in",
+        "confidence": "INFERRED",
+        "confidence_score": 0.85,
+        "source_file": "pc-client/ui/Lampyris.svg"
+      },
+      {
+        "id": "lampyris_cybernetic_motif",
+        "label": "Cybernetic Motif Elements",
+        "nodes": [
+          "lampyris_cube",
+          "lampyris_orbital_rings",
+          "lampyris_trion_gradient"
+        ],
+        "relation": "participate_in",
+        "confidence": "INFERRED",
+        "confidence_score": 0.85,
+        "source_file": "pc-client/ui/Lampyris.svg"
+      },
+      {
+        "id": "lampyris_firefly_anatomy",
+        "label": "Firefly Anatomy Concept",
+        "nodes": [
+          "lampyris_central_core",
+          "lampyris_sensory_antennae",
+          "lampyris_polygonal_wings",
+          "lampyris_lantern_abdomen"
+        ],
+        "relation": "form",
+        "confidence": "INFERRED",
+        "confidence_score": 0.95,
+        "source_file": "Logos/Lampyris.svg"
+      },
+      {
+        "id": "lampyris_glowing_features",
+        "label": "Glowing Visual Features",
+        "nodes": [
+          "lampyris_central_core",
+          "lampyris_sensory_antennae",
+          "lampyris_lantern_abdomen"
+        ],
+        "relation": "implement",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "Logos/Lampyris.svg"
+      },
+      {
+        "id": "sonus_visual_identity",
+        "label": "Sonus Visual Identity",
+        "nodes": [
+          "sonus_logo",
+          "sonus_core_shard",
+          "sonus_sound_waves",
+          "sonus_color_scheme"
+        ],
+        "relation": "implement",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "Logos/Sonus.svg"
       }
     ]
   },
@@ -38,459 +119,459 @@
       "file_type": "code",
       "source_file": "pc-client/build.rs",
       "source_location": "L1",
-      "id": "pc_client_build_rs",
-      "community": 10,
-      "norm_label": "build.rs"
+      "community": 11,
+      "norm_label": "build.rs",
+      "id": "pc_client_build_rs"
     },
     {
       "label": "main()",
       "file_type": "code",
       "source_file": "pc-client/build.rs",
       "source_location": "L1",
-      "id": "pc_client_build_main",
-      "community": 10,
-      "norm_label": "main()"
+      "community": 11,
+      "norm_label": "main()",
+      "id": "pc_client_build_main"
     },
     {
       "label": "main.rs",
       "file_type": "code",
       "source_file": "pc-client/src/main.rs",
       "source_location": "L1",
-      "id": "pc_client_src_main_rs",
-      "community": 7,
-      "norm_label": "main.rs"
+      "community": 10,
+      "norm_label": "main.rs",
+      "id": "pc_client_src_main_rs"
     },
     {
       "label": "Args",
       "file_type": "code",
       "source_file": "pc-client/src/main.rs",
       "source_location": "L15",
-      "id": "src_main_args",
-      "community": 7,
-      "norm_label": "args"
+      "community": 10,
+      "norm_label": "args",
+      "id": "src_main_args"
     },
     {
       "label": "get_local_ip()",
       "file_type": "code",
       "source_file": "pc-client/src/main.rs",
       "source_location": "L25",
-      "id": "src_main_get_local_ip",
-      "community": 7,
-      "norm_label": "get_local_ip()"
+      "community": 10,
+      "norm_label": "get_local_ip()",
+      "id": "src_main_get_local_ip"
     },
     {
       "label": "main()",
       "file_type": "code",
       "source_file": "pc-client/src/main.rs",
-      "source_location": "L34",
-      "id": "src_main_main",
-      "community": 7,
-      "norm_label": "main()"
+      "source_location": "L38",
+      "community": 10,
+      "norm_label": "main()",
+      "id": "src_main_main"
     },
     {
       "label": "audio.rs",
       "file_type": "code",
       "source_file": "pc-client/src/audio.rs",
       "source_location": "L1",
-      "id": "pc_client_src_audio_rs",
-      "community": 5,
-      "norm_label": "audio.rs"
+      "community": 8,
+      "norm_label": "audio.rs",
+      "id": "pc_client_src_audio_rs"
     },
     {
       "label": "PipewireSink",
       "file_type": "code",
       "source_file": "pc-client/src/audio.rs",
       "source_location": "L16",
-      "id": "src_audio_pipewiresink",
-      "community": 5,
-      "norm_label": "pipewiresink"
+      "community": 8,
+      "norm_label": "pipewiresink",
+      "id": "src_audio_pipewiresink"
     },
     {
       "label": ".new()",
       "file_type": "code",
       "source_file": "pc-client/src/audio.rs",
-      "source_location": "L30",
-      "id": "src_audio_pipewiresink_new",
-      "community": 5,
-      "norm_label": ".new()"
+      "source_location": "L25",
+      "community": 8,
+      "norm_label": ".new()",
+      "id": "src_audio_pipewiresink_new"
     },
     {
       "label": ".run_loop()",
       "file_type": "code",
       "source_file": "pc-client/src/audio.rs",
-      "source_location": "L50",
-      "id": "src_audio_pipewiresink_run_loop",
-      "community": 5,
-      "norm_label": ".run_loop()"
+      "source_location": "L45",
+      "community": 8,
+      "norm_label": ".run_loop()",
+      "id": "src_audio_pipewiresink_run_loop"
     },
     {
       "label": ".push_samples()",
       "file_type": "code",
       "source_file": "pc-client/src/audio.rs",
-      "source_location": "L203",
-      "id": "src_audio_pipewiresink_push_samples",
-      "community": 5,
-      "norm_label": ".push_samples()"
+      "source_location": "L200",
+      "community": 8,
+      "norm_label": ".push_samples()",
+      "id": "src_audio_pipewiresink_push_samples"
     },
     {
       "label": ".drop()",
       "file_type": "code",
       "source_file": "pc-client/src/audio.rs",
-      "source_location": "L215",
-      "id": "src_audio_pipewiresink_drop",
-      "community": 5,
-      "norm_label": ".drop()"
+      "source_location": "L218",
+      "community": 8,
+      "norm_label": ".drop()",
+      "id": "src_audio_pipewiresink_drop"
     },
     {
       "label": "protocol.rs",
       "file_type": "code",
       "source_file": "pc-client/src/protocol.rs",
       "source_location": "L1",
-      "id": "pc_client_src_protocol_rs",
-      "community": 2,
-      "norm_label": "protocol.rs"
+      "community": 7,
+      "norm_label": "protocol.rs",
+      "id": "pc_client_src_protocol_rs"
     },
     {
       "label": "ProtocolHandler",
       "file_type": "code",
       "source_file": "pc-client/src/protocol.rs",
       "source_location": "L6",
-      "id": "src_protocol_protocolhandler",
-      "community": 2,
-      "norm_label": "protocolhandler"
+      "community": 7,
+      "norm_label": "protocolhandler",
+      "id": "src_protocol_protocolhandler"
     },
     {
       "label": "ProtocolHandler<S>",
       "file_type": "code",
       "source_file": "pc-client/src/protocol.rs",
       "source_location": "L10",
-      "id": "src_protocol_protocolhandler_s",
-      "community": 2,
-      "norm_label": "protocolhandler<s>"
+      "community": 7,
+      "norm_label": "protocolhandler<s>",
+      "id": "src_protocol_protocolhandler_s"
     },
     {
       "label": ".new()",
       "file_type": "code",
       "source_file": "pc-client/src/protocol.rs",
       "source_location": "L15",
-      "id": "src_protocol_protocolhandler_s_new",
-      "community": 2,
-      "norm_label": ".new()"
+      "community": 7,
+      "norm_label": ".new()",
+      "id": "src_protocol_protocolhandler_s_new"
     },
     {
       "label": ".read_audio_packet()",
       "file_type": "code",
       "source_file": "pc-client/src/protocol.rs",
       "source_location": "L21",
-      "id": "src_protocol_protocolhandler_s_read_audio_packet",
-      "community": 2,
-      "norm_label": ".read_audio_packet()"
+      "community": 7,
+      "norm_label": ".read_audio_packet()",
+      "id": "src_protocol_protocolhandler_s_read_audio_packet"
     },
     {
       "label": "test_valid_mc_packet_parsing()",
       "file_type": "code",
       "source_file": "pc-client/src/protocol.rs",
-      "source_location": "L60",
-      "id": "src_protocol_test_valid_mc_packet_parsing",
-      "community": 2,
-      "norm_label": "test_valid_mc_packet_parsing()"
+      "source_location": "L66",
+      "community": 7,
+      "norm_label": "test_valid_mc_packet_parsing()",
+      "id": "src_protocol_test_valid_mc_packet_parsing"
     },
     {
       "label": "test_protocol_resync_mc()",
       "file_type": "code",
       "source_file": "pc-client/src/protocol.rs",
-      "source_location": "L75",
-      "id": "src_protocol_test_protocol_resync_mc",
-      "community": 2,
-      "norm_label": "test_protocol_resync_mc()"
+      "source_location": "L81",
+      "community": 7,
+      "norm_label": "test_protocol_resync_mc()",
+      "id": "src_protocol_test_protocol_resync_mc"
     },
     {
       "label": "test_buffer_overflow_protection()",
       "file_type": "code",
       "source_file": "pc-client/src/protocol.rs",
-      "source_location": "L91",
-      "id": "src_protocol_test_buffer_overflow_protection",
-      "community": 2,
-      "norm_label": "test_buffer_overflow_protection()"
+      "source_location": "L97",
+      "community": 7,
+      "norm_label": "test_buffer_overflow_protection()",
+      "id": "src_protocol_test_buffer_overflow_protection"
     },
     {
       "label": "app_state.rs",
       "file_type": "code",
       "source_file": "pc-client/src/app_state.rs",
       "source_location": "L1",
-      "id": "pc_client_src_app_state_rs",
-      "community": 3,
-      "norm_label": "app_state.rs"
+      "community": 5,
+      "norm_label": "app_state.rs",
+      "id": "pc_client_src_app_state_rs"
     },
     {
       "label": "AppState",
       "file_type": "code",
       "source_file": "pc-client/src/app_state.rs",
-      "source_location": "L12",
-      "id": "src_app_state_appstate",
-      "community": 3,
-      "norm_label": "appstate"
+      "source_location": "L62",
+      "community": 5,
+      "norm_label": "appstate",
+      "id": "src_app_state_appstate"
     },
     {
       "label": ".new()",
       "file_type": "code",
       "source_file": "pc-client/src/app_state.rs",
-      "source_location": "L19",
-      "id": "src_app_state_appstate_new",
-      "community": 3,
-      "norm_label": ".new()"
+      "source_location": "L69",
+      "community": 5,
+      "norm_label": ".new()",
+      "id": "src_app_state_appstate_new"
     },
     {
       "label": ".connect()",
       "file_type": "code",
       "source_file": "pc-client/src/app_state.rs",
-      "source_location": "L27",
-      "id": "src_app_state_appstate_connect",
-      "community": 3,
-      "norm_label": ".connect()"
+      "source_location": "L77",
+      "community": 5,
+      "norm_label": ".connect()",
+      "id": "src_app_state_appstate_connect"
     },
     {
       "label": ".disconnect()",
       "file_type": "code",
       "source_file": "pc-client/src/app_state.rs",
-      "source_location": "L98",
-      "id": "src_app_state_appstate_disconnect",
-      "community": 3,
-      "norm_label": ".disconnect()"
+      "source_location": "L149",
+      "community": 5,
+      "norm_label": ".disconnect()",
+      "id": "src_app_state_appstate_disconnect"
     },
     {
       "label": ".run_connection()",
       "file_type": "code",
       "source_file": "pc-client/src/app_state.rs",
-      "source_location": "L110",
-      "id": "src_app_state_appstate_run_connection",
-      "community": 3,
-      "norm_label": ".run_connection()"
+      "source_location": "L161",
+      "community": 5,
+      "norm_label": ".run_connection()",
+      "id": "src_app_state_appstate_run_connection"
     },
     {
       "label": "convert_s16_to_f32()",
       "file_type": "code",
       "source_file": "pc-client/src/app_state.rs",
-      "source_location": "L225",
-      "id": "src_app_state_convert_s16_to_f32",
-      "community": 3,
-      "norm_label": "convert_s16_to_f32()"
+      "source_location": "L321",
+      "community": 5,
+      "norm_label": "convert_s16_to_f32()",
+      "id": "src_app_state_convert_s16_to_f32"
     },
     {
       "label": "calculate_peak_amplitude()",
       "file_type": "code",
       "source_file": "pc-client/src/app_state.rs",
-      "source_location": "L237",
-      "id": "src_app_state_calculate_peak_amplitude",
-      "community": 3,
-      "norm_label": "calculate_peak_amplitude()"
+      "source_location": "L330",
+      "community": 5,
+      "norm_label": "calculate_peak_amplitude()",
+      "id": "src_app_state_calculate_peak_amplitude"
     },
     {
       "label": "settings.gradle.kts",
       "file_type": "code",
       "source_file": "android-client/settings.gradle.kts",
       "source_location": "L1",
-      "id": "android_client_settings_gradle_kts",
-      "community": 11,
-      "norm_label": "settings.gradle.kts"
+      "community": 12,
+      "norm_label": "settings.gradle.kts",
+      "id": "android_client_settings_gradle_kts"
     },
     {
       "label": "build.gradle.kts",
       "file_type": "code",
       "source_file": "android-client/build.gradle.kts",
       "source_location": "L1",
-      "id": "android_client_build_gradle_kts",
-      "community": 12,
-      "norm_label": "build.gradle.kts"
+      "community": 13,
+      "norm_label": "build.gradle.kts",
+      "id": "android_client_build_gradle_kts"
     },
     {
       "label": "build.gradle.kts",
       "file_type": "code",
       "source_file": "android-client/app/build.gradle.kts",
       "source_location": "L1",
-      "id": "android_client_app_build_gradle_kts",
-      "community": 13,
-      "norm_label": "build.gradle.kts"
+      "community": 14,
+      "norm_label": "build.gradle.kts",
+      "id": "android_client_app_build_gradle_kts"
     },
     {
       "label": "AudioCaptureService.kt",
       "file_type": "code",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
       "source_location": "L1",
-      "id": "android_client_app_src_main_java_com_projectm_mic_audiocaptureservice_kt",
-      "community": 8,
-      "norm_label": "audiocaptureservice.kt"
+      "community": 2,
+      "norm_label": "audiocaptureservice.kt",
+      "id": "android_client_app_src_main_java_com_projectm_mic_audiocaptureservice_kt"
     },
     {
       "label": "AudioCaptureService",
       "file_type": "code",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L24",
-      "id": "mic_audiocaptureservice_audiocaptureservice",
-      "community": 0,
-      "norm_label": "audiocaptureservice"
+      "source_location": "L39",
+      "community": 2,
+      "norm_label": "audiocaptureservice",
+      "id": "mic_audiocaptureservice_audiocaptureservice"
     },
     {
       "label": "ConnectionState",
       "file_type": "code",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L26",
-      "id": "mic_audiocaptureservice_connectionstate",
-      "community": 8,
-      "norm_label": "connectionstate"
+      "source_location": "L41",
+      "community": 2,
+      "norm_label": "connectionstate",
+      "id": "mic_audiocaptureservice_connectionstate"
     },
     {
       "label": "startService()",
       "file_type": "code",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L41",
-      "id": "mic_audiocaptureservice_startservice",
-      "community": 8,
-      "norm_label": "startservice()"
+      "source_location": "L57",
+      "community": 2,
+      "norm_label": "startservice()",
+      "id": "mic_audiocaptureservice_startservice"
     },
     {
       "label": "stopService()",
       "file_type": "code",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L53",
-      "id": "mic_audiocaptureservice_stopservice",
-      "community": 8,
-      "norm_label": "stopservice()"
+      "source_location": "L69",
+      "community": 2,
+      "norm_label": "stopservice()",
+      "id": "mic_audiocaptureservice_stopservice"
     },
     {
       "label": ".onCreate()",
       "file_type": "code",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L64",
-      "id": "mic_audiocaptureservice_audiocaptureservice_oncreate",
-      "community": 0,
-      "norm_label": ".oncreate()"
+      "source_location": "L80",
+      "community": 2,
+      "norm_label": ".oncreate()",
+      "id": "mic_audiocaptureservice_audiocaptureservice_oncreate"
     },
     {
       "label": ".onStartCommand()",
       "file_type": "code",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L70",
-      "id": "mic_audiocaptureservice_audiocaptureservice_onstartcommand",
-      "community": 0,
-      "norm_label": ".onstartcommand()"
+      "source_location": "L91",
+      "community": 2,
+      "norm_label": ".onstartcommand()",
+      "id": "mic_audiocaptureservice_audiocaptureservice_onstartcommand"
     },
     {
       "label": ".startForegroundNotification()",
       "file_type": "code",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L87",
-      "id": "mic_audiocaptureservice_audiocaptureservice_startforegroundnotification",
-      "community": 0,
-      "norm_label": ".startforegroundnotification()"
+      "source_location": "L109",
+      "community": 2,
+      "norm_label": ".startforegroundnotification()",
+      "id": "mic_audiocaptureservice_audiocaptureservice_startforegroundnotification"
     },
     {
       "label": ".updateNotification()",
       "file_type": "code",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L100",
-      "id": "mic_audiocaptureservice_audiocaptureservice_updatenotification",
-      "community": 0,
-      "norm_label": ".updatenotification()"
+      "source_location": "L133",
+      "community": 2,
+      "norm_label": ".updatenotification()",
+      "id": "mic_audiocaptureservice_audiocaptureservice_updatenotification"
     },
     {
       "label": ".createNotification()",
       "file_type": "code",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L105",
-      "id": "mic_audiocaptureservice_audiocaptureservice_createnotification",
-      "community": 0,
-      "norm_label": ".createnotification()"
+      "source_location": "L122",
+      "community": 2,
+      "norm_label": ".createnotification()",
+      "id": "mic_audiocaptureservice_audiocaptureservice_createnotification"
     },
     {
       "label": ".createNotificationChannel()",
       "file_type": "code",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L121",
-      "id": "mic_audiocaptureservice_audiocaptureservice_createnotificationchannel",
-      "community": 0,
-      "norm_label": ".createnotificationchannel()"
+      "source_location": "L139",
+      "community": 2,
+      "norm_label": ".createnotificationchannel()",
+      "id": "mic_audiocaptureservice_audiocaptureservice_createnotificationchannel"
     },
     {
       "label": ".runCaptureLoop()",
       "file_type": "code",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
       "source_location": "L135",
-      "id": "mic_audiocaptureservice_audiocaptureservice_runcaptureloop",
-      "community": 0,
-      "norm_label": ".runcaptureloop()"
+      "community": 2,
+      "norm_label": ".runcaptureloop()",
+      "id": "mic_audiocaptureservice_audiocaptureservice_runcaptureloop"
     },
     {
       "label": ".sendAudioPacket()",
       "file_type": "code",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L197",
-      "id": "mic_audiocaptureservice_audiocaptureservice_sendaudiopacket",
-      "community": 0,
-      "norm_label": ".sendaudiopacket()"
+      "source_location": "L263",
+      "community": 2,
+      "norm_label": ".sendaudiopacket()",
+      "id": "mic_audiocaptureservice_audiocaptureservice_sendaudiopacket"
     },
     {
       "label": ".cleanup()",
       "file_type": "code",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L209",
-      "id": "mic_audiocaptureservice_audiocaptureservice_cleanup",
-      "community": 0,
-      "norm_label": ".cleanup()"
+      "source_location": "L316",
+      "community": 2,
+      "norm_label": ".cleanup()",
+      "id": "mic_audiocaptureservice_audiocaptureservice_cleanup"
     },
     {
       "label": ".onDestroy()",
       "file_type": "code",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L231",
-      "id": "mic_audiocaptureservice_audiocaptureservice_ondestroy",
-      "community": 0,
-      "norm_label": ".ondestroy()"
+      "source_location": "L339",
+      "community": 2,
+      "norm_label": ".ondestroy()",
+      "id": "mic_audiocaptureservice_audiocaptureservice_ondestroy"
     },
     {
       "label": ".onBind()",
       "file_type": "code",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L238",
-      "id": "mic_audiocaptureservice_audiocaptureservice_onbind",
-      "community": 0,
-      "norm_label": ".onbind()"
+      "source_location": "L347",
+      "community": 2,
+      "norm_label": ".onbind()",
+      "id": "mic_audiocaptureservice_audiocaptureservice_onbind"
     },
     {
       "label": "MainActivity.kt",
       "file_type": "code",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
       "source_location": "L1",
-      "id": "android_client_app_src_main_java_com_projectm_mic_mainactivity_kt",
-      "community": 9,
-      "norm_label": "mainactivity.kt"
+      "community": 3,
+      "norm_label": "mainactivity.kt",
+      "id": "android_client_app_src_main_java_com_projectm_mic_mainactivity_kt"
     },
     {
       "label": "MainActivity",
       "file_type": "code",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
-      "source_location": "L62",
-      "id": "mic_mainactivity_mainactivity",
-      "community": 9,
-      "norm_label": "mainactivity"
+      "source_location": "L58",
+      "community": 3,
+      "norm_label": "mainactivity",
+      "id": "mic_mainactivity_mainactivity"
     },
     {
       "label": ".onCreate()",
       "file_type": "code",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
-      "source_location": "L64",
-      "id": "mic_mainactivity_mainactivity_oncreate",
-      "community": 9,
-      "norm_label": ".oncreate()"
+      "source_location": "L59",
+      "community": 3,
+      "norm_label": ".oncreate()",
+      "id": "mic_mainactivity_mainactivity_oncreate"
     },
     {
       "label": "MainScreen()",
       "file_type": "code",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
-      "source_location": "L85",
-      "id": "mic_mainactivity_mainscreen",
-      "community": 9,
-      "norm_label": "mainscreen()"
+      "source_location": "L80",
+      "community": 3,
+      "norm_label": "mainscreen()",
+      "id": "mic_mainactivity_mainscreen"
     },
     {
       "label": "README.md",
@@ -501,9 +582,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_file",
-      "community": 4,
-      "norm_label": "readme.md"
+      "community": 1,
+      "norm_label": "readme.md",
+      "id": "readme_file"
     },
     {
       "label": "PRODUCT.md",
@@ -514,9 +595,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "product_file",
       "community": 6,
-      "norm_label": "product.md"
+      "norm_label": "product.md",
+      "id": "product_file"
     },
     {
       "label": "DESIGN.md",
@@ -527,9 +608,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "design_file",
       "community": 6,
-      "norm_label": "design.md"
+      "norm_label": "design.md",
+      "id": "design_file"
     },
     {
       "label": "project_plan.md",
@@ -540,9 +621,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "project_plan_file",
-      "community": 4,
-      "norm_label": "project_plan.md"
+      "community": 1,
+      "norm_label": "project_plan.md",
+      "id": "project_plan_file"
     },
     {
       "label": "build.rs",
@@ -553,9 +634,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "build_file",
-      "community": 14,
-      "norm_label": "build.rs"
+      "community": 15,
+      "norm_label": "build.rs",
+      "id": "build_file"
     },
     {
       "label": "main.rs",
@@ -566,9 +647,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "main_file",
-      "community": 15,
-      "norm_label": "main.rs"
+      "community": 16,
+      "norm_label": "main.rs",
+      "id": "main_file"
     },
     {
       "label": "audio.rs",
@@ -579,9 +660,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "audio_file",
-      "community": 16,
-      "norm_label": "audio.rs"
+      "community": 17,
+      "norm_label": "audio.rs",
+      "id": "audio_file"
     },
     {
       "label": "protocol.rs",
@@ -592,9 +673,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "protocol_file",
-      "community": 17,
-      "norm_label": "protocol.rs"
+      "community": 18,
+      "norm_label": "protocol.rs",
+      "id": "protocol_file"
     },
     {
       "label": "app_state.rs",
@@ -605,9 +686,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "app_state_file",
-      "community": 18,
-      "norm_label": "app_state.rs"
+      "community": 19,
+      "norm_label": "app_state.rs",
+      "id": "app_state_file"
     },
     {
       "label": "settings.gradle.kts",
@@ -618,9 +699,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "settings_file",
-      "community": 19,
-      "norm_label": "settings.gradle.kts"
+      "community": 20,
+      "norm_label": "settings.gradle.kts",
+      "id": "settings_file"
     },
     {
       "label": "build.gradle.kts",
@@ -631,9 +712,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "build_gradle_file",
-      "community": 20,
-      "norm_label": "build.gradle.kts"
+      "community": 21,
+      "norm_label": "build.gradle.kts",
+      "id": "build_gradle_file"
     },
     {
       "label": "gradlew",
@@ -644,9 +725,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "gradlew_file",
-      "community": 21,
-      "norm_label": "gradlew"
+      "community": 22,
+      "norm_label": "gradlew",
+      "id": "gradlew_file"
     },
     {
       "label": "app/build.gradle.kts",
@@ -657,9 +738,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "app_build_gradle_file",
-      "community": 22,
-      "norm_label": "app/build.gradle.kts"
+      "community": 23,
+      "norm_label": "app/build.gradle.kts",
+      "id": "app_build_gradle_file"
     },
     {
       "label": "AudioCaptureService.kt",
@@ -670,9 +751,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "audiocaptureservice_file",
-      "community": 23,
-      "norm_label": "audiocaptureservice.kt"
+      "community": 24,
+      "norm_label": "audiocaptureservice.kt",
+      "id": "audiocaptureservice_file"
     },
     {
       "label": "MainActivity.kt",
@@ -683,9 +764,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "mainactivity_file",
-      "community": 24,
-      "norm_label": "mainactivity.kt"
+      "community": 25,
+      "norm_label": "mainactivity.kt",
+      "id": "mainactivity_file"
     },
     {
       "label": "main",
@@ -696,9 +777,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "main_main",
       "community": 1,
-      "norm_label": "main"
+      "norm_label": "main",
+      "id": "main_main"
     },
     {
       "label": "get_local_ip",
@@ -709,9 +790,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "main_get_local_ip",
-      "community": 1,
-      "norm_label": "get_local_ip"
+      "community": 6,
+      "norm_label": "get_local_ip",
+      "id": "main_get_local_ip"
     },
     {
       "label": "PipewireSink",
@@ -722,9 +803,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "audio_pipewiresink",
-      "community": 1,
-      "norm_label": "pipewiresink"
+      "community": 0,
+      "norm_label": "pipewiresink",
+      "id": "audio_pipewiresink"
     },
     {
       "label": "PipewireSink::run_loop",
@@ -735,8 +816,454 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "audio_run_loop",
+      "community": 0,
+      "norm_label": "pipewiresink::run_loop",
+      "id": "audio_run_loop"
+    },
+    {
+      "label": "PipewireSink::push_samples",
+      "file_type": "code",
+      "source_file": "pc-client/src/audio.rs",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
       "community": 1,
+      "norm_label": "pipewiresink::push_samples",
+      "id": "audio_push_samples"
+    },
+    {
+      "label": "ProtocolHandler",
+      "file_type": "code",
+      "source_file": "pc-client/src/protocol.rs",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 1,
+      "norm_label": "protocolhandler",
+      "id": "protocol_protocolhandler"
+    },
+    {
+      "label": "ProtocolHandler::read_audio_packet",
+      "file_type": "code",
+      "source_file": "pc-client/src/protocol.rs",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 1,
+      "norm_label": "protocolhandler::read_audio_packet",
+      "id": "protocol_read_audio_packet"
+    },
+    {
+      "label": "AppState",
+      "file_type": "code",
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 1,
+      "norm_label": "appstate",
+      "id": "app_state_appstate"
+    },
+    {
+      "label": "AppState::connect",
+      "file_type": "code",
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 1,
+      "norm_label": "appstate::connect",
+      "id": "app_state_connect"
+    },
+    {
+      "label": "AppState::disconnect",
+      "file_type": "code",
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 1,
+      "norm_label": "appstate::disconnect",
+      "id": "app_state_disconnect"
+    },
+    {
+      "label": "AppState::run_connection",
+      "file_type": "code",
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 1,
+      "norm_label": "appstate::run_connection",
+      "id": "app_state_run_connection"
+    },
+    {
+      "label": "AudioCaptureService",
+      "file_type": "code",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 1,
+      "norm_label": "audiocaptureservice",
+      "id": "audiocaptureservice_audiocaptureservice"
+    },
+    {
+      "label": "AudioCaptureService::runCaptureLoop",
+      "file_type": "code",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 1,
+      "norm_label": "audiocaptureservice::runcaptureloop",
+      "id": "audiocaptureservice_runcaptureloop"
+    },
+    {
+      "label": "AudioCaptureService.sendAudioPacket",
+      "file_type": "code",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 1,
+      "norm_label": "audiocaptureservice.sendaudiopacket",
+      "id": "audiocaptureservice_sendaudiopacket"
+    },
+    {
+      "label": "MainActivity",
+      "file_type": "code",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 6,
+      "norm_label": "mainactivity",
+      "id": "mainactivity_mainactivity"
+    },
+    {
+      "label": "MainScreen",
+      "file_type": "code",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 6,
+      "norm_label": "mainscreen",
+      "id": "mainactivity_mainscreen"
+    },
+    {
+      "label": "MC Framing Protocol",
+      "file_type": "rationale",
+      "source_file": "pc-client/src/protocol.rs",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Lightweight framing over TCP using magic bytes 'MC' (0x4D, 0x43) and 2-byte big-endian payload length. Bypasses complex Opus compression, taking advantage of high USB/LAN bandwidth (>10Mbps) to stream raw s16le PCM audio under 100KB/s with near-zero latency and CPU overhead.",
+      "community": 1,
+      "norm_label": "mc framing protocol",
+      "id": "protocol_mc_framing_protocol"
+    },
+    {
+      "label": "Jitter Buffer",
+      "file_type": "rationale",
+      "source_file": "pc-client/src/audio.rs",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "A 40ms pre-buffering threshold (sample_rate / 25) prevents audio stuttering and buffer underrun/overrun, balancing latency and stability.",
+      "community": 0,
+      "norm_label": "jitter buffer",
+      "id": "audio_jitter_buffer"
+    },
+    {
+      "label": "ADB Port Reverse Forwarding",
+      "file_type": "rationale",
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Executes `adb reverse tcp:47999 tcp:47999` to forward the Android device's localhost TCP connection directly to the PC client, bypassing Wi-Fi jitter and firewall configurations.",
+      "community": 1,
+      "norm_label": "adb port reverse forwarding",
+      "id": "app_state_adb_reverse_forwarding"
+    },
+    {
+      "label": "The Neon Audio Deck Theme",
+      "file_type": "rationale",
+      "source_file": "DESIGN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Visual theme styled after cyberpunk decks and tactical gear. Features space black bases (#0A0A0E), oklch-based neon cyan accents (#00FFCC) for connection/active status, and neon pink (#FF3366) for errors/stop states. Uses border outlines to convey depth instead of shadows.",
+      "community": 6,
+      "norm_label": "the neon audio deck theme",
+      "id": "design_neon_audio_deck"
+    },
+    {
+      "label": "15% Accent Rule",
+      "file_type": "rationale",
+      "source_file": "DESIGN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Strict styling constraint where neon colors occupy <=15% of the total screen space. Ensures active states, visualizers, and errors have high visual contrast and do not overwhelm the dark cyberpunk theme.",
+      "community": 6,
+      "norm_label": "15% accent rule",
+      "id": "design_15_percent_accent_rule"
+    },
+    {
+      "label": "Foreground Capture Service",
+      "file_type": "rationale",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Ensures the Android app can stream microphone input continuously even when the screen is off or another app is in focus by running as a Foreground Service with type FOREGROUND_SERVICE_TYPE_MICROPHONE and a persistent system notification.",
+      "community": 1,
+      "norm_label": "foreground capture service",
+      "id": "audiocaptureservice_foreground_service"
+    },
+    {
+      "label": "AsyncStream",
+      "file_type": "code",
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": "L11",
+      "id": "src_app_state_asyncstream",
+      "community": 5,
+      "norm_label": "asyncstream"
+    },
+    {
+      "label": "T",
+      "file_type": "code",
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": "L12",
+      "id": "src_app_state_t",
+      "community": 26,
+      "norm_label": "t"
+    },
+    {
+      "label": "DummyVerifier",
+      "file_type": "code",
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": "L15",
+      "id": "src_app_state_dummyverifier",
+      "community": 5,
+      "norm_label": "dummyverifier"
+    },
+    {
+      "label": ".verify_server_cert()",
+      "file_type": "code",
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": "L17",
+      "id": "src_app_state_dummyverifier_verify_server_cert",
+      "community": 5,
+      "norm_label": ".verify_server_cert()"
+    },
+    {
+      "label": ".verify_tls12_signature()",
+      "file_type": "code",
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": "L28",
+      "id": "src_app_state_dummyverifier_verify_tls12_signature",
+      "community": 5,
+      "norm_label": ".verify_tls12_signature()"
+    },
+    {
+      "label": ".verify_tls13_signature()",
+      "file_type": "code",
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": "L37",
+      "id": "src_app_state_dummyverifier_verify_tls13_signature",
+      "community": 5,
+      "norm_label": ".verify_tls13_signature()"
+    },
+    {
+      "label": ".supported_verify_schemes()",
+      "file_type": "code",
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": "L46",
+      "id": "src_app_state_dummyverifier_supported_verify_schemes",
+      "community": 5,
+      "norm_label": ".supported_verify_schemes()"
+    },
+    {
+      "label": ".runServerLoop()",
+      "file_type": "code",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": "L153",
+      "id": "mic_audiocaptureservice_audiocaptureservice_runserverloop",
+      "community": 2,
+      "norm_label": ".runserverloop()"
+    },
+    {
+      "label": ".handleClient()",
+      "file_type": "code",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": "L196",
+      "id": "mic_audiocaptureservice_audiocaptureservice_handleclient",
+      "community": 2,
+      "norm_label": ".handleclient()"
+    },
+    {
+      "label": ".setupSslContext()",
+      "file_type": "code",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": "L274",
+      "id": "mic_audiocaptureservice_audiocaptureservice_setupsslcontext",
+      "community": 2,
+      "norm_label": ".setupsslcontext()"
+    },
+    {
+      "label": ".generateSelfSignedCertificate()",
+      "file_type": "code",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": "L297",
+      "id": "mic_audiocaptureservice_audiocaptureservice_generateselfsignedcertificate",
+      "community": 2,
+      "norm_label": ".generateselfsignedcertificate()"
+    },
+    {
+      "label": "SonusTheme",
+      "file_type": "code",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
+      "source_location": "L47",
+      "id": "mic_mainactivity_sonustheme",
+      "community": 3,
+      "norm_label": "sonustheme"
+    },
+    {
+      "label": "GlassCard()",
+      "file_type": "code",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
+      "source_location": "L343",
+      "id": "mic_mainactivity_glasscard",
+      "community": 3,
+      "norm_label": "glasscard()"
+    },
+    {
+      "label": "SelectorButton()",
+      "file_type": "code",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
+      "source_location": "L358",
+      "id": "mic_mainactivity_selectorbutton",
+      "community": 3,
+      "norm_label": "selectorbutton()"
+    },
+    {
+      "label": "PowerPulse()",
+      "file_type": "code",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
+      "source_location": "L394",
+      "id": "mic_mainactivity_powerpulse",
+      "community": 3,
+      "norm_label": "powerpulse()"
+    },
+    {
+      "label": "AmbientBlobs()",
+      "file_type": "code",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
+      "source_location": "L425",
+      "id": "mic_mainactivity_ambientblobs",
+      "community": 3,
+      "norm_label": "ambientblobs()"
+    },
+    {
+      "label": "getLocalIpAddress()",
+      "file_type": "code",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
+      "source_location": "L455",
+      "id": "mic_mainactivity_getlocalipaddress",
+      "community": 3,
+      "norm_label": "getlocalipaddress()"
+    },
+    {
+      "label": "Args",
+      "file_type": "code",
+      "source_file": "pc-client/src/main.rs",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "main_args",
+      "community": 27,
+      "norm_label": "args"
+    },
+    {
+      "label": "Fallback IP Discovery",
+      "file_type": "rationale",
+      "source_file": "pc-client/src/main.rs",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Fallback chain: 8.8.8.8 -> 1.1.1.1 -> 224.0.0.1. Avoids hard dependency on Google's public DNS for determining the active local interface, though it still contacts external networks on startup (finding L-01).",
+      "id": "main_fallback_ip_discovery",
+      "community": 6,
+      "norm_label": "fallback ip discovery"
+    },
+    {
+      "label": "PipewireSink::new",
+      "file_type": "code",
+      "source_file": "pc-client/src/audio.rs",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "audio_pipewiresink_new",
+      "community": 0,
+      "norm_label": "pipewiresink::new"
+    },
+    {
+      "label": "PipewireSink::run_loop",
+      "file_type": "code",
+      "source_file": "pc-client/src/audio.rs",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "audio_pipewiresink_run_loop",
+      "community": 0,
       "norm_label": "pipewiresink::run_loop"
     },
     {
@@ -748,12 +1275,39 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "audio_push_samples",
-      "community": 1,
+      "id": "audio_pipewiresink_push_samples",
+      "community": 0,
       "norm_label": "pipewiresink::push_samples"
     },
     {
-      "label": "ProtocolHandler",
+      "label": "PipewireSink::drop",
+      "file_type": "code",
+      "source_file": "pc-client/src/audio.rs",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "audio_pipewiresink_drop",
+      "community": 0,
+      "norm_label": "pipewiresink::drop"
+    },
+    {
+      "label": "Lock-Free Ring Buffer",
+      "file_type": "rationale",
+      "source_file": "pc-client/src/audio.rs",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Uses 'ringbuf' crate's CachingProd and CachingCons for O(1) lock-free thread-safe audio transfer from reader to Pipewire playback thread.",
+      "id": "audio_lock_free_ring_buffer",
+      "community": 0,
+      "norm_label": "lock-free ring buffer"
+    },
+    {
+      "label": "ProtocolHandler::new",
       "file_type": "code",
       "source_file": "pc-client/src/protocol.rs",
       "source_location": null,
@@ -761,9 +1315,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "protocol_protocolhandler",
-      "community": 1,
-      "norm_label": "protocolhandler"
+      "id": "protocol_protocolhandler_new",
+      "community": 0,
+      "norm_label": "protocolhandler::new"
     },
     {
       "label": "ProtocolHandler::read_audio_packet",
@@ -774,12 +1328,26 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "protocol_read_audio_packet",
-      "community": 4,
+      "id": "protocol_protocolhandler_read_audio_packet",
+      "community": 0,
       "norm_label": "protocolhandler::read_audio_packet"
     },
     {
-      "label": "AppState",
+      "label": "MC Framing Protocol",
+      "file_type": "rationale",
+      "source_file": "pc-client/src/protocol.rs",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "A lightweight custom protocol consisting of a 2-byte magic marker ['M', 'C'], followed by a 2-byte big-endian payload length, and then the raw PCM payload. It does not include authentication or integrity checks, which is marked as security finding C-03.",
+      "id": "protocol_mc_framing",
+      "community": 0,
+      "norm_label": "mc framing protocol"
+    },
+    {
+      "label": "AppState::new",
       "file_type": "code",
       "source_file": "pc-client/src/app_state.rs",
       "source_location": null,
@@ -787,9 +1355,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "app_state_appstate",
+      "id": "app_state_appstate_new",
       "community": 1,
-      "norm_label": "appstate"
+      "norm_label": "appstate::new"
     },
     {
       "label": "AppState::connect",
@@ -800,8 +1368,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "app_state_connect",
-      "community": 1,
+      "id": "app_state_appstate_connect",
+      "community": 0,
       "norm_label": "appstate::connect"
     },
     {
@@ -813,7 +1381,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "app_state_disconnect",
+      "id": "app_state_appstate_disconnect",
       "community": 1,
       "norm_label": "appstate::disconnect"
     },
@@ -826,105 +1394,51 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "app_state_run_connection",
-      "community": 1,
+      "id": "app_state_appstate_run_connection",
+      "community": 0,
       "norm_label": "appstate::run_connection"
     },
     {
-      "label": "AudioCaptureService",
+      "label": "DummyVerifier",
       "file_type": "code",
-      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_file": "pc-client/src/app_state.rs",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "audiocaptureservice_audiocaptureservice",
-      "community": 4,
-      "norm_label": "audiocaptureservice"
+      "id": "app_state_dummyverifier",
+      "community": 0,
+      "norm_label": "dummyverifier"
     },
     {
-      "label": "AudioCaptureService::runCaptureLoop",
+      "label": "convert_s16_to_f32",
       "file_type": "code",
-      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_file": "pc-client/src/app_state.rs",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "audiocaptureservice_runcaptureloop",
-      "community": 4,
-      "norm_label": "audiocaptureservice::runcaptureloop"
+      "id": "app_state_convert_s16_to_f32",
+      "community": 0,
+      "norm_label": "convert_s16_to_f32"
     },
     {
-      "label": "AudioCaptureService::sendAudioPacket",
+      "label": "calculate_peak_amplitude",
       "file_type": "code",
-      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_file": "pc-client/src/app_state.rs",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "audiocaptureservice_sendaudiopacket",
-      "community": 4,
-      "norm_label": "audiocaptureservice::sendaudiopacket"
+      "id": "app_state_calculate_peak_amplitude",
+      "community": 0,
+      "norm_label": "calculate_peak_amplitude"
     },
     {
-      "label": "MainActivity",
-      "file_type": "code",
-      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "mainactivity_mainactivity",
-      "community": 6,
-      "norm_label": "mainactivity"
-    },
-    {
-      "label": "MainScreen",
-      "file_type": "code",
-      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "mainactivity_mainscreen",
-      "community": 6,
-      "norm_label": "mainscreen"
-    },
-    {
-      "label": "MC Framing Protocol",
-      "file_type": "rationale",
-      "source_file": "pc-client/src/protocol.rs",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "rationale": "Lightweight framing over TCP using magic bytes 'MC' (0x4D, 0x43) and 2-byte big-endian payload length. Bypasses complex Opus compression, taking advantage of high USB/LAN bandwidth (>10Mbps) to stream raw s16le PCM audio under 100KB/s with near-zero latency and CPU overhead.",
-      "id": "protocol_mc_framing_protocol",
-      "community": 4,
-      "norm_label": "mc framing protocol"
-    },
-    {
-      "label": "Jitter Buffer",
-      "file_type": "rationale",
-      "source_file": "pc-client/src/audio.rs",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "rationale": "Lock-free ring buffer (via 'ringbuf' crate) using raw pointers to transfer samples from the network loop to PipeWire. Employs 40ms pre-buffering (1920 samples @ 48kHz) and automatic silence insertion to smooth network jitter without audio crackling.",
-      "id": "audio_jitter_buffer",
-      "community": 1,
-      "norm_label": "jitter buffer"
-    },
-    {
-      "label": "ADB Port Reverse Forwarding",
+      "label": "ADB Port Forwarding",
       "file_type": "rationale",
       "source_file": "pc-client/src/app_state.rs",
       "source_location": null,
@@ -932,41 +1446,117 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "rationale": "Executes `adb reverse tcp:47999 tcp:47999` to forward the Android device's localhost TCP connection directly to the PC client, bypassing Wi-Fi jitter and firewall configurations.",
-      "id": "app_state_adb_reverse_forwarding",
-      "community": 1,
-      "norm_label": "adb port reverse forwarding"
+      "rationale": "Uses 'adb forward' to tunnel TCP port 47999 from the PC client to the Android device. This allows seamless USB debugging connectivity without requiring Wi-Fi. It avoids command injection by parsing inputs strictly as u16 (finding H-01).",
+      "id": "app_state_adb_port_forwarding",
+      "community": 0,
+      "norm_label": "adb port forwarding"
     },
     {
-      "label": "The Neon Audio Deck Theme",
-      "file_type": "rationale",
-      "source_file": "DESIGN.md",
+      "label": "Sonus Gradle Settings",
+      "file_type": "code",
+      "source_file": "android-client/settings.gradle.kts",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "rationale": "Visual theme styled after cyberpunk decks and tactical gear. Features space black bases (#0A0A0E), oklch-based neon cyan accents (#00FFCC) for connection/active status, and neon pink (#FF3366) for errors/stop states. Uses border outlines to convey depth instead of shadows.",
-      "id": "design_neon_audio_deck",
-      "community": 6,
-      "norm_label": "the neon audio deck theme"
+      "id": "settings_sonus_project",
+      "community": 0,
+      "norm_label": "sonus gradle settings"
     },
     {
-      "label": "15% Accent Rule",
-      "file_type": "rationale",
-      "source_file": "DESIGN.md",
+      "label": "Sonus App Build Configuration",
+      "file_type": "code",
+      "source_file": "android-client/app/build.gradle.kts",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "rationale": "Strict styling constraint where neon colors occupy <=15% of the total screen space. Ensures active states, visualizers, and errors have high visual contrast and do not overwhelm the dark cyberpunk theme.",
-      "id": "design_15_percent_accent_rule",
-      "community": 6,
-      "norm_label": "15% accent rule"
+      "id": "build_build_gradle_config",
+      "community": 0,
+      "norm_label": "sonus app build configuration"
     },
     {
-      "label": "Foreground Capture Service",
+      "label": "AudioCaptureService.startService",
+      "file_type": "code",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "audiocaptureservice_startservice",
+      "community": 9,
+      "norm_label": "audiocaptureservice.startservice"
+    },
+    {
+      "label": "AudioCaptureService.stopService",
+      "file_type": "code",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "audiocaptureservice_stopservice",
+      "community": 6,
+      "norm_label": "audiocaptureservice.stopservice"
+    },
+    {
+      "label": "AudioCaptureService.runServerLoop",
+      "file_type": "code",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "audiocaptureservice_runserverloop",
+      "community": 9,
+      "norm_label": "audiocaptureservice.runserverloop"
+    },
+    {
+      "label": "AudioCaptureService.handleClient",
+      "file_type": "code",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "audiocaptureservice_handleclient",
+      "community": 0,
+      "norm_label": "audiocaptureservice.handleclient"
+    },
+    {
+      "label": "AudioCaptureService.setupSslContext",
+      "file_type": "code",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "audiocaptureservice_setupsslcontext",
+      "community": 9,
+      "norm_label": "audiocaptureservice.setupsslcontext"
+    },
+    {
+      "label": "AudioCaptureService.generateSelfSignedCertificate",
+      "file_type": "code",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "audiocaptureservice_generateselfsignedcertificate",
+      "community": 9,
+      "norm_label": "audiocaptureservice.generateselfsignedcertificate"
+    },
+    {
+      "label": "Ephemeral Self-Signed Certificates",
       "file_type": "rationale",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
       "source_location": null,
@@ -974,10 +1564,481 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "rationale": "Ensures the Android app can stream microphone input continuously even when the screen is off or another app is in focus by running as a Foreground Service with type FOREGROUND_SERVICE_TYPE_MICROPHONE and a persistent system notification.",
-      "id": "audiocaptureservice_foreground_service",
+      "rationale": "Generates self-signed X.509 certificates and an ephemeral 2048-bit RSA key pair on startup using BouncyCastle. This avoids hardcoding keys in the source while enabling TLS encryption, though it lacks client authentication (finding C-03).",
+      "id": "audiocaptureservice_ephemeral_certs",
+      "community": 9,
+      "norm_label": "ephemeral self-signed certificates"
+    },
+    {
+      "label": "SonusTheme",
+      "file_type": "code",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "mainactivity_sonustheme",
+      "community": 6,
+      "norm_label": "sonustheme"
+    },
+    {
+      "label": "Cinema Mobile Design",
+      "file_type": "rationale",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Establishes a rich visual style (neon accents, glassmorphic card layouts, ambient glowing background blobs, and button pulse animations) to provide a premium feel matching hardware microphones.",
+      "id": "mainactivity_cinema_mobile_design",
+      "community": 6,
+      "norm_label": "cinema mobile design"
+    },
+    {
+      "label": "getLocalIpAddress",
+      "file_type": "code",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "mainactivity_getlocalipaddress",
+      "community": 6,
+      "norm_label": "getlocalipaddress"
+    },
+    {
+      "label": "Lampyris Hub",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "readme_lampyris_hub",
+      "community": 1,
+      "norm_label": "lampyris hub"
+    },
+    {
+      "label": "Sonus Server",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "readme_sonus_server",
+      "community": 1,
+      "norm_label": "sonus server"
+    },
+    {
+      "label": "Flipped Architecture",
+      "file_type": "rationale",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Android acts as the TCP/TLS server, and the PC acts as the client. This mirrors professional hardware audio streaming setups but exposes port 47999 on all interfaces on Android (finding C-01).",
+      "id": "readme_flipped_architecture",
+      "community": 1,
+      "norm_label": "flipped architecture"
+    },
+    {
+      "label": "Secure by Design",
+      "file_type": "rationale",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Ensures transport-level security for streaming using TLS 1.3 or TLS 1.2. Self-signed certificates are generated on-device, though without mutual client-server validation.",
+      "id": "readme_secure_by_design",
+      "community": 1,
+      "norm_label": "secure by design"
+    },
+    {
+      "label": "Audit Findings Report",
+      "file_type": "document",
+      "source_file": "findings.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "findings_audit_report",
+      "community": 0,
+      "norm_label": "audit findings report"
+    },
+    {
+      "label": "Finding C-03: No stream authentication/integrity",
+      "file_type": "document",
+      "source_file": "findings.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "findings_c_03",
+      "community": 0,
+      "norm_label": "finding c-03: no stream authentication/integrity"
+    },
+    {
+      "label": "Finding M-02: Raw FFI dangling pointer",
+      "file_type": "document",
+      "source_file": "findings.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "findings_m_02",
+      "community": 0,
+      "norm_label": "finding m-02: raw ffi dangling pointer"
+    },
+    {
+      "label": "Finding M-07: Kotlin 2.0.0 Version Catalog Pin",
+      "file_type": "document",
+      "source_file": "findings.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "findings_m_07",
+      "community": 0,
+      "norm_label": "finding m-07: kotlin 2.0.0 version catalog pin"
+    },
+    {
+      "label": "Finding L-03: FFI safety comment missing",
+      "file_type": "document",
+      "source_file": "findings.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "findings_l_03",
+      "community": 0,
+      "norm_label": "finding l-03: ffi safety comment missing"
+    },
+    {
+      "label": "Finding P-01: Jitter/latency optimization",
+      "file_type": "document",
+      "source_file": "findings.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "findings_p_01",
+      "community": 0,
+      "norm_label": "finding p-01: jitter/latency optimization"
+    },
+    {
+      "label": "Finding L-01: 8.8.8.8 dependency for local IP",
+      "file_type": "document",
+      "source_file": "findings.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "findings_l_01",
+      "community": 6,
+      "norm_label": "finding l-01: 8.8.8.8 dependency for local ip"
+    },
+    {
+      "label": "Finding C-01: TCP server on all interfaces",
+      "file_type": "document",
+      "source_file": "findings.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "findings_c_01",
+      "community": 9,
+      "norm_label": "finding c-01: tcp server on all interfaces"
+    },
+    {
+      "label": "Finding H-01: ADB command injection check",
+      "file_type": "document",
+      "source_file": "findings.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "findings_h_01",
+      "community": 0,
+      "norm_label": "finding h-01: adb command injection check"
+    },
+    {
+      "label": "Lampyris SVG Logo",
+      "file_type": "image",
+      "source_file": "pc-client/ui/Lampyris.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "lampyris_logo",
       "community": 4,
-      "norm_label": "foreground capture service"
+      "norm_label": "lampyris svg logo"
+    },
+    {
+      "label": "Isometric 3D Cube Definition",
+      "file_type": "image",
+      "source_file": "pc-client/ui/Lampyris.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "lampyris_cube",
+      "community": 4,
+      "norm_label": "isometric 3d cube definition"
+    },
+    {
+      "label": "SVG Glow Filter Definition",
+      "file_type": "image",
+      "source_file": "pc-client/ui/Lampyris.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "lampyris_glow_filter",
+      "community": 4,
+      "norm_label": "svg glow filter definition"
+    },
+    {
+      "label": "Trion Cyber Gradient Definition",
+      "file_type": "image",
+      "source_file": "pc-client/ui/Lampyris.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "lampyris_trion_gradient",
+      "community": 4,
+      "norm_label": "trion cyber gradient definition"
+    },
+    {
+      "label": "Wing Fill Gradient Definition",
+      "file_type": "image",
+      "source_file": "pc-client/ui/Lampyris.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "lampyris_wing_fill",
+      "community": 4,
+      "norm_label": "wing fill gradient definition"
+    },
+    {
+      "label": "Background Slate Gradient Definition",
+      "file_type": "image",
+      "source_file": "pc-client/ui/Lampyris.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "lampyris_bg_gradient",
+      "community": 4,
+      "norm_label": "background slate gradient definition"
+    },
+    {
+      "label": "Orbital Circles Geometry",
+      "file_type": "image",
+      "source_file": "pc-client/ui/Lampyris.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "lampyris_orbital_rings",
+      "community": 4,
+      "norm_label": "orbital circles geometry"
+    },
+    {
+      "label": "Bioluminescent Light Organ",
+      "file_type": "image",
+      "source_file": "pc-client/ui/Lampyris.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "lampyris_glowing_abdomen",
+      "community": 4,
+      "norm_label": "bioluminescent light organ"
+    },
+    {
+      "label": "Glow Antennae Geometry",
+      "file_type": "image",
+      "source_file": "pc-client/ui/Lampyris.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "lampyris_antennae",
+      "community": 4,
+      "norm_label": "glow antennae geometry"
+    },
+    {
+      "label": "Lampyris Logo Concept",
+      "file_type": "image",
+      "source_file": "Logos/Lampyris.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "lampyris_logo_concept",
+      "community": 4,
+      "norm_label": "lampyris logo concept"
+    },
+    {
+      "label": "Isometric Cube Data Symbol",
+      "file_type": "image",
+      "source_file": "Logos/Lampyris.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "lampyris_isometric_cube",
+      "community": 4,
+      "norm_label": "isometric cube data symbol"
+    },
+    {
+      "label": "Central Nucleus Core",
+      "file_type": "image",
+      "source_file": "Logos/Lampyris.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "lampyris_central_core",
+      "community": 4,
+      "norm_label": "central nucleus core"
+    },
+    {
+      "label": "Sensory Head and Antennae",
+      "file_type": "image",
+      "source_file": "Logos/Lampyris.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "lampyris_sensory_antennae",
+      "community": 4,
+      "norm_label": "sensory head and antennae"
+    },
+    {
+      "label": "Polygonal Flight Wings",
+      "file_type": "image",
+      "source_file": "Logos/Lampyris.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "lampyris_polygonal_wings",
+      "community": 4,
+      "norm_label": "polygonal flight wings"
+    },
+    {
+      "label": "Glowing Lantern Abdomen",
+      "file_type": "image",
+      "source_file": "Logos/Lampyris.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "lampyris_lantern_abdomen",
+      "community": 4,
+      "norm_label": "glowing lantern abdomen"
+    },
+    {
+      "label": "Sonus SVG Logo",
+      "file_type": "image",
+      "source_file": "Logos/Sonus.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": "2026-06-06T02:07:26Z",
+      "author": null,
+      "contributor": null,
+      "id": "sonus_logo",
+      "community": 3,
+      "norm_label": "sonus svg logo"
+    },
+    {
+      "label": "Sonus Core Shard",
+      "file_type": "image",
+      "source_file": "Logos/Sonus.svg",
+      "source_location": "L13-L19",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "sonus_core_shard",
+      "community": 3,
+      "norm_label": "sonus core shard"
+    },
+    {
+      "label": "Sonus Sound Waves",
+      "file_type": "image",
+      "source_file": "Logos/Sonus.svg",
+      "source_location": "L25-L38",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "sonus_sound_waves",
+      "community": 3,
+      "norm_label": "sonus sound waves"
+    },
+    {
+      "label": "Sonus Alignment Points",
+      "file_type": "image",
+      "source_file": "Logos/Sonus.svg",
+      "source_location": "L44-L46",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "sonus_alignment_points",
+      "community": 3,
+      "norm_label": "sonus alignment points"
+    },
+    {
+      "label": "Sonus Color Scheme",
+      "file_type": "rationale",
+      "source_file": "Logos/Sonus.svg",
+      "source_location": "L3-L11",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "sonus_color_scheme",
+      "community": 3,
+      "norm_label": "sonus color scheme"
     }
   ],
   "links": [
@@ -987,9 +2048,9 @@
       "source_file": "pc-client/build.rs",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pc_client_build_rs",
-      "target": "pc_client_build_main",
-      "confidence_score": 1.0
+      "target": "pc_client_build_main"
     },
     {
       "relation": "contains",
@@ -997,9 +2058,9 @@
       "source_file": "pc-client/src/main.rs",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pc_client_src_main_rs",
-      "target": "src_main_args",
-      "confidence_score": 1.0
+      "target": "src_main_args"
     },
     {
       "relation": "contains",
@@ -1007,30 +2068,30 @@
       "source_file": "pc-client/src/main.rs",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pc_client_src_main_rs",
-      "target": "src_main_get_local_ip",
-      "confidence_score": 1.0
+      "target": "src_main_get_local_ip"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "pc-client/src/main.rs",
-      "source_location": "L34",
+      "source_location": "L38",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pc_client_src_main_rs",
-      "target": "src_main_main",
-      "confidence_score": 1.0
+      "target": "src_main_main"
     },
     {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "pc-client/src/main.rs",
-      "source_location": "L60",
+      "source_location": "L70",
       "weight": 1.0,
-      "source": "src_main_main",
-      "target": "src_main_get_local_ip",
-      "confidence_score": 1.0
+      "confidence_score": 1.0,
+      "source": "src_main_get_local_ip",
+      "target": "src_main_main"
     },
     {
       "relation": "contains",
@@ -1038,60 +2099,60 @@
       "source_file": "pc-client/src/audio.rs",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pc_client_src_audio_rs",
-      "target": "src_audio_pipewiresink",
-      "confidence_score": 1.0
+      "target": "src_audio_pipewiresink"
     },
     {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "pc-client/src/audio.rs",
-      "source_location": "L30",
+      "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_audio_pipewiresink",
-      "target": "src_audio_pipewiresink_new",
-      "confidence_score": 1.0
+      "target": "src_audio_pipewiresink_new"
     },
     {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "pc-client/src/audio.rs",
-      "source_location": "L50",
+      "source_location": "L45",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_audio_pipewiresink",
-      "target": "src_audio_pipewiresink_run_loop",
-      "confidence_score": 1.0
+      "target": "src_audio_pipewiresink_run_loop"
     },
     {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "pc-client/src/audio.rs",
-      "source_location": "L203",
+      "source_location": "L200",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_audio_pipewiresink",
-      "target": "src_audio_pipewiresink_push_samples",
-      "confidence_score": 1.0
+      "target": "src_audio_pipewiresink_push_samples"
     },
     {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "pc-client/src/audio.rs",
-      "source_location": "L215",
+      "source_location": "L218",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_audio_pipewiresink",
-      "target": "src_audio_pipewiresink_drop",
-      "confidence_score": 1.0
+      "target": "src_audio_pipewiresink_drop"
     },
     {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "pc-client/src/audio.rs",
-      "source_location": "L57",
+      "source_location": "L52",
       "weight": 1.0,
-      "source": "src_audio_pipewiresink_run_loop",
-      "target": "src_audio_pipewiresink_new",
-      "confidence_score": 1.0
+      "confidence_score": 1.0,
+      "source": "src_audio_pipewiresink_new",
+      "target": "src_audio_pipewiresink_run_loop"
     },
     {
       "relation": "contains",
@@ -1099,39 +2160,39 @@
       "source_file": "pc-client/src/protocol.rs",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pc_client_src_protocol_rs",
-      "target": "src_protocol_protocolhandler",
-      "confidence_score": 1.0
+      "target": "src_protocol_protocolhandler"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "pc-client/src/protocol.rs",
-      "source_location": "L60",
+      "source_location": "L66",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pc_client_src_protocol_rs",
-      "target": "src_protocol_test_valid_mc_packet_parsing",
-      "confidence_score": 1.0
+      "target": "src_protocol_test_valid_mc_packet_parsing"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "pc-client/src/protocol.rs",
-      "source_location": "L75",
+      "source_location": "L81",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pc_client_src_protocol_rs",
-      "target": "src_protocol_test_protocol_resync_mc",
-      "confidence_score": 1.0
+      "target": "src_protocol_test_protocol_resync_mc"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "pc-client/src/protocol.rs",
-      "source_location": "L91",
+      "source_location": "L97",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pc_client_src_protocol_rs",
-      "target": "src_protocol_test_buffer_overflow_protection",
-      "confidence_score": 1.0
+      "target": "src_protocol_test_buffer_overflow_protection"
     },
     {
       "relation": "method",
@@ -1139,9 +2200,9 @@
       "source_file": "pc-client/src/protocol.rs",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_protocol_protocolhandler_s",
-      "target": "src_protocol_protocolhandler_s_new",
-      "confidence_score": 1.0
+      "target": "src_protocol_protocolhandler_s_new"
     },
     {
       "relation": "method",
@@ -1149,167 +2210,187 @@
       "source_file": "pc-client/src/protocol.rs",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_protocol_protocolhandler_s",
-      "target": "src_protocol_protocolhandler_s_read_audio_packet",
-      "confidence_score": 1.0
+      "target": "src_protocol_protocolhandler_s_read_audio_packet"
     },
     {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "pc-client/src/protocol.rs",
-      "source_location": "L65",
+      "source_location": "L71",
       "weight": 1.0,
-      "source": "src_protocol_test_valid_mc_packet_parsing",
-      "target": "src_protocol_protocolhandler_s_new",
-      "confidence_score": 1.0
+      "confidence_score": 1.0,
+      "source": "src_protocol_protocolhandler_s_new",
+      "target": "src_protocol_test_valid_mc_packet_parsing"
     },
     {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "pc-client/src/protocol.rs",
-      "source_location": "L81",
+      "source_location": "L87",
       "weight": 1.0,
-      "source": "src_protocol_test_protocol_resync_mc",
-      "target": "src_protocol_protocolhandler_s_new",
-      "confidence_score": 1.0
+      "confidence_score": 1.0,
+      "source": "src_protocol_protocolhandler_s_new",
+      "target": "src_protocol_test_protocol_resync_mc"
     },
     {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "pc-client/src/protocol.rs",
-      "source_location": "L95",
+      "source_location": "L101",
       "weight": 1.0,
-      "source": "src_protocol_test_buffer_overflow_protection",
-      "target": "src_protocol_protocolhandler_s_new",
-      "confidence_score": 1.0
+      "confidence_score": 1.0,
+      "source": "src_protocol_protocolhandler_s_new",
+      "target": "src_protocol_test_buffer_overflow_protection"
     },
     {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "pc-client/src/protocol.rs",
+      "source_location": "L75",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_protocol_protocolhandler_s_read_audio_packet",
+      "target": "src_protocol_test_valid_mc_packet_parsing"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "pc-client/src/protocol.rs",
+      "source_location": "L91",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_protocol_protocolhandler_s_read_audio_packet",
+      "target": "src_protocol_test_protocol_resync_mc"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "pc-client/src/protocol.rs",
+      "source_location": "L105",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_protocol_protocolhandler_s_read_audio_packet",
+      "target": "src_protocol_test_buffer_overflow_protection"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": "L62",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pc_client_src_app_state_rs",
+      "target": "src_app_state_appstate"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": "L321",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pc_client_src_app_state_rs",
+      "target": "src_app_state_convert_s16_to_f32"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": "L330",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pc_client_src_app_state_rs",
+      "target": "src_app_state_calculate_peak_amplitude"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "pc_client_src_app_state_rs",
+      "target": "src_app_state_asyncstream",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "pc_client_src_app_state_rs",
+      "target": "src_app_state_dummyverifier",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "pc-client/src/app_state.rs",
       "source_location": "L69",
       "weight": 1.0,
-      "source": "src_protocol_test_valid_mc_packet_parsing",
-      "target": "src_protocol_protocolhandler_s_read_audio_packet",
-      "confidence_score": 1.0
+      "confidence_score": 1.0,
+      "source": "src_app_state_appstate",
+      "target": "src_app_state_appstate_new"
     },
     {
-      "relation": "calls",
-      "context": "call",
+      "relation": "method",
       "confidence": "EXTRACTED",
-      "source_file": "pc-client/src/protocol.rs",
-      "source_location": "L85",
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": "L77",
       "weight": 1.0,
-      "source": "src_protocol_test_protocol_resync_mc",
-      "target": "src_protocol_protocolhandler_s_read_audio_packet",
-      "confidence_score": 1.0
+      "confidence_score": 1.0,
+      "source": "src_app_state_appstate",
+      "target": "src_app_state_appstate_connect"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": "L149",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_state_appstate",
+      "target": "src_app_state_appstate_disconnect"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": "L161",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_state_appstate",
+      "target": "src_app_state_appstate_run_connection"
     },
     {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
-      "source_file": "pc-client/src/protocol.rs",
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": "L185",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_state_appstate_new",
+      "target": "src_app_state_appstate_run_connection"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "pc-client/src/app_state.rs",
       "source_location": "L99",
       "weight": 1.0,
-      "source": "src_protocol_test_buffer_overflow_protection",
-      "target": "src_protocol_protocolhandler_s_read_audio_packet",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "pc-client/src/app_state.rs",
-      "source_location": "L12",
-      "weight": 1.0,
-      "source": "pc_client_src_app_state_rs",
-      "target": "src_app_state_appstate",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "pc-client/src/app_state.rs",
-      "source_location": "L225",
-      "weight": 1.0,
-      "source": "pc_client_src_app_state_rs",
-      "target": "src_app_state_convert_s16_to_f32",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "pc-client/src/app_state.rs",
-      "source_location": "L237",
-      "weight": 1.0,
-      "source": "pc_client_src_app_state_rs",
-      "target": "src_app_state_calculate_peak_amplitude",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "pc-client/src/app_state.rs",
-      "source_location": "L19",
-      "weight": 1.0,
-      "source": "src_app_state_appstate",
-      "target": "src_app_state_appstate_new",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "pc-client/src/app_state.rs",
-      "source_location": "L27",
-      "weight": 1.0,
-      "source": "src_app_state_appstate",
-      "target": "src_app_state_appstate_connect",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "pc-client/src/app_state.rs",
-      "source_location": "L98",
-      "weight": 1.0,
-      "source": "src_app_state_appstate",
-      "target": "src_app_state_appstate_disconnect",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "pc-client/src/app_state.rs",
-      "source_location": "L110",
-      "weight": 1.0,
-      "source": "src_app_state_appstate",
-      "target": "src_app_state_appstate_run_connection",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "pc-client/src/app_state.rs",
-      "source_location": "L128",
-      "weight": 1.0,
-      "source": "src_app_state_appstate_run_connection",
-      "target": "src_app_state_appstate_new",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "pc-client/src/app_state.rs",
-      "source_location": "L48",
-      "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_state_appstate_connect",
-      "target": "src_app_state_appstate_run_connection",
-      "confidence_score": 1.0
+      "target": "src_app_state_appstate_run_connection"
     },
     {
       "relation": "calls",
@@ -1319,28 +2400,18 @@
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
       "source_location": "L140",
       "weight": 1.0,
-      "source": "mic_audiocaptureservice_audiocaptureservice_runcaptureloop",
-      "target": "src_app_state_appstate_connect"
+      "source": "src_app_state_appstate_connect",
+      "target": "mic_audiocaptureservice_audiocaptureservice_runcaptureloop"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L24",
+      "source_location": "L39",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "android_client_app_src_main_java_com_projectm_mic_audiocaptureservice_kt",
-      "target": "mic_audiocaptureservice_audiocaptureservice",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L26",
-      "weight": 1.0,
-      "source": "android_client_app_src_main_java_com_projectm_mic_audiocaptureservice_kt",
-      "target": "mic_audiocaptureservice_connectionstate",
-      "confidence_score": 1.0
+      "target": "mic_audiocaptureservice_audiocaptureservice"
     },
     {
       "relation": "contains",
@@ -1348,79 +2419,89 @@
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
       "source_location": "L41",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "android_client_app_src_main_java_com_projectm_mic_audiocaptureservice_kt",
-      "target": "mic_audiocaptureservice_startservice",
-      "confidence_score": 1.0
+      "target": "mic_audiocaptureservice_connectionstate"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L53",
+      "source_location": "L57",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "android_client_app_src_main_java_com_projectm_mic_audiocaptureservice_kt",
-      "target": "mic_audiocaptureservice_stopservice",
-      "confidence_score": 1.0
+      "target": "mic_audiocaptureservice_startservice"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": "L69",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "android_client_app_src_main_java_com_projectm_mic_audiocaptureservice_kt",
+      "target": "mic_audiocaptureservice_stopservice"
     },
     {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L64",
+      "source_location": "L80",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "mic_audiocaptureservice_audiocaptureservice",
-      "target": "mic_audiocaptureservice_audiocaptureservice_oncreate",
-      "confidence_score": 1.0
+      "target": "mic_audiocaptureservice_audiocaptureservice_oncreate"
     },
     {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L70",
+      "source_location": "L91",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "mic_audiocaptureservice_audiocaptureservice",
-      "target": "mic_audiocaptureservice_audiocaptureservice_onstartcommand",
-      "confidence_score": 1.0
+      "target": "mic_audiocaptureservice_audiocaptureservice_onstartcommand"
     },
     {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L87",
+      "source_location": "L109",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "mic_audiocaptureservice_audiocaptureservice",
-      "target": "mic_audiocaptureservice_audiocaptureservice_startforegroundnotification",
-      "confidence_score": 1.0
+      "target": "mic_audiocaptureservice_audiocaptureservice_startforegroundnotification"
     },
     {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L100",
+      "source_location": "L133",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "mic_audiocaptureservice_audiocaptureservice",
-      "target": "mic_audiocaptureservice_audiocaptureservice_updatenotification",
-      "confidence_score": 1.0
+      "target": "mic_audiocaptureservice_audiocaptureservice_updatenotification"
     },
     {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L105",
+      "source_location": "L122",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "mic_audiocaptureservice_audiocaptureservice",
-      "target": "mic_audiocaptureservice_audiocaptureservice_createnotification",
-      "confidence_score": 1.0
+      "target": "mic_audiocaptureservice_audiocaptureservice_createnotification"
     },
     {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L121",
+      "source_location": "L139",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "mic_audiocaptureservice_audiocaptureservice",
-      "target": "mic_audiocaptureservice_audiocaptureservice_createnotificationchannel",
-      "confidence_score": 1.0
+      "target": "mic_audiocaptureservice_audiocaptureservice_createnotificationchannel"
     },
     {
       "relation": "method",
@@ -1428,48 +2509,88 @@
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
       "source_location": "L135",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "mic_audiocaptureservice_audiocaptureservice",
-      "target": "mic_audiocaptureservice_audiocaptureservice_runcaptureloop",
+      "target": "mic_audiocaptureservice_audiocaptureservice_runcaptureloop"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": "L263",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mic_audiocaptureservice_audiocaptureservice",
+      "target": "mic_audiocaptureservice_audiocaptureservice_sendaudiopacket"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": "L316",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mic_audiocaptureservice_audiocaptureservice",
+      "target": "mic_audiocaptureservice_audiocaptureservice_cleanup"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": "L339",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mic_audiocaptureservice_audiocaptureservice",
+      "target": "mic_audiocaptureservice_audiocaptureservice_ondestroy"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": "L347",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mic_audiocaptureservice_audiocaptureservice",
+      "target": "mic_audiocaptureservice_audiocaptureservice_onbind"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": "L153",
+      "weight": 1.0,
+      "source": "mic_audiocaptureservice_audiocaptureservice",
+      "target": "mic_audiocaptureservice_audiocaptureservice_runserverloop",
       "confidence_score": 1.0
     },
     {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L197",
+      "source_location": "L196",
       "weight": 1.0,
       "source": "mic_audiocaptureservice_audiocaptureservice",
-      "target": "mic_audiocaptureservice_audiocaptureservice_sendaudiopacket",
+      "target": "mic_audiocaptureservice_audiocaptureservice_handleclient",
       "confidence_score": 1.0
     },
     {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L209",
+      "source_location": "L274",
       "weight": 1.0,
       "source": "mic_audiocaptureservice_audiocaptureservice",
-      "target": "mic_audiocaptureservice_audiocaptureservice_cleanup",
+      "target": "mic_audiocaptureservice_audiocaptureservice_setupsslcontext",
       "confidence_score": 1.0
     },
     {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L231",
+      "source_location": "L297",
       "weight": 1.0,
       "source": "mic_audiocaptureservice_audiocaptureservice",
-      "target": "mic_audiocaptureservice_audiocaptureservice_ondestroy",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L238",
-      "weight": 1.0,
-      "source": "mic_audiocaptureservice_audiocaptureservice",
-      "target": "mic_audiocaptureservice_audiocaptureservice_onbind",
+      "target": "mic_audiocaptureservice_audiocaptureservice_generateselfsignedcertificate",
       "confidence_score": 1.0
     },
     {
@@ -1477,22 +2598,22 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L67",
+      "source_location": "L84",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "mic_audiocaptureservice_audiocaptureservice_oncreate",
-      "target": "mic_audiocaptureservice_audiocaptureservice_createnotificationchannel",
-      "confidence_score": 1.0
+      "target": "mic_audiocaptureservice_audiocaptureservice_createnotificationchannel"
     },
     {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L74",
+      "source_location": "L96",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "mic_audiocaptureservice_audiocaptureservice_onstartcommand",
-      "target": "mic_audiocaptureservice_audiocaptureservice_startforegroundnotification",
-      "confidence_score": 1.0
+      "target": "mic_audiocaptureservice_audiocaptureservice_startforegroundnotification"
     },
     {
       "relation": "calls",
@@ -1501,8 +2622,19 @@
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
       "source_location": "L81",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "mic_audiocaptureservice_audiocaptureservice_onstartcommand",
-      "target": "mic_audiocaptureservice_audiocaptureservice_runcaptureloop",
+      "target": "mic_audiocaptureservice_audiocaptureservice_runcaptureloop"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": "L103",
+      "weight": 1.0,
+      "source": "mic_audiocaptureservice_audiocaptureservice_onstartcommand",
+      "target": "mic_audiocaptureservice_audiocaptureservice_runserverloop",
       "confidence_score": 1.0
     },
     {
@@ -1510,22 +2642,22 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L88",
+      "source_location": "L110",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "mic_audiocaptureservice_audiocaptureservice_startforegroundnotification",
-      "target": "mic_audiocaptureservice_audiocaptureservice_createnotification",
-      "confidence_score": 1.0
+      "target": "mic_audiocaptureservice_audiocaptureservice_createnotification"
     },
     {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L102",
+      "source_location": "L134",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "mic_audiocaptureservice_audiocaptureservice_updatenotification",
-      "target": "mic_audiocaptureservice_audiocaptureservice_createnotification",
-      "confidence_score": 1.0
+      "target": "mic_audiocaptureservice_audiocaptureservice_createnotification"
     },
     {
       "relation": "calls",
@@ -1534,8 +2666,30 @@
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
       "source_location": "L147",
       "weight": 1.0,
-      "source": "mic_audiocaptureservice_audiocaptureservice_runcaptureloop",
-      "target": "mic_audiocaptureservice_audiocaptureservice_updatenotification",
+      "confidence_score": 1.0,
+      "source": "mic_audiocaptureservice_audiocaptureservice_updatenotification",
+      "target": "mic_audiocaptureservice_audiocaptureservice_runcaptureloop"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": "L171",
+      "weight": 1.0,
+      "source": "mic_audiocaptureservice_audiocaptureservice_updatenotification",
+      "target": "mic_audiocaptureservice_audiocaptureservice_runserverloop",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": "L205",
+      "weight": 1.0,
+      "source": "mic_audiocaptureservice_audiocaptureservice_updatenotification",
+      "target": "mic_audiocaptureservice_audiocaptureservice_handleclient",
       "confidence_score": 1.0
     },
     {
@@ -1545,9 +2699,9 @@
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
       "source_location": "L179",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "mic_audiocaptureservice_audiocaptureservice_runcaptureloop",
-      "target": "mic_audiocaptureservice_audiocaptureservice_sendaudiopacket",
-      "confidence_score": 1.0
+      "target": "mic_audiocaptureservice_audiocaptureservice_sendaudiopacket"
     },
     {
       "relation": "calls",
@@ -1556,8 +2710,19 @@
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
       "source_location": "L193",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "mic_audiocaptureservice_audiocaptureservice_runcaptureloop",
-      "target": "mic_audiocaptureservice_audiocaptureservice_cleanup",
+      "target": "mic_audiocaptureservice_audiocaptureservice_cleanup"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": "L239",
+      "weight": 1.0,
+      "source": "mic_audiocaptureservice_audiocaptureservice_sendaudiopacket",
+      "target": "mic_audiocaptureservice_audiocaptureservice_handleclient",
       "confidence_score": 1.0
     },
     {
@@ -1565,40 +2730,133 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
-      "source_location": "L233",
+      "source_location": "L343",
       "weight": 1.0,
-      "source": "mic_audiocaptureservice_audiocaptureservice_ondestroy",
-      "target": "mic_audiocaptureservice_audiocaptureservice_cleanup",
+      "confidence_score": 1.0,
+      "source": "mic_audiocaptureservice_audiocaptureservice_cleanup",
+      "target": "mic_audiocaptureservice_audiocaptureservice_ondestroy"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": "L192",
+      "weight": 1.0,
+      "source": "mic_audiocaptureservice_audiocaptureservice_cleanup",
+      "target": "mic_audiocaptureservice_audiocaptureservice_runserverloop",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
-      "source_location": "L62",
+      "source_location": "L58",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "android_client_app_src_main_java_com_projectm_mic_mainactivity_kt",
+      "target": "mic_mainactivity_mainactivity"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
+      "source_location": "L80",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "android_client_app_src_main_java_com_projectm_mic_mainactivity_kt",
+      "target": "mic_mainactivity_mainscreen"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
+      "source_location": "L47",
       "weight": 1.0,
       "source": "android_client_app_src_main_java_com_projectm_mic_mainactivity_kt",
-      "target": "mic_mainactivity_mainactivity",
+      "target": "mic_mainactivity_sonustheme",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
-      "source_location": "L85",
+      "source_location": "L343",
       "weight": 1.0,
       "source": "android_client_app_src_main_java_com_projectm_mic_mainactivity_kt",
-      "target": "mic_mainactivity_mainscreen",
+      "target": "mic_mainactivity_glasscard",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
+      "source_location": "L358",
+      "weight": 1.0,
+      "source": "android_client_app_src_main_java_com_projectm_mic_mainactivity_kt",
+      "target": "mic_mainactivity_selectorbutton",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
+      "source_location": "L394",
+      "weight": 1.0,
+      "source": "android_client_app_src_main_java_com_projectm_mic_mainactivity_kt",
+      "target": "mic_mainactivity_powerpulse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
+      "source_location": "L425",
+      "weight": 1.0,
+      "source": "android_client_app_src_main_java_com_projectm_mic_mainactivity_kt",
+      "target": "mic_mainactivity_ambientblobs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
+      "source_location": "L455",
+      "weight": 1.0,
+      "source": "android_client_app_src_main_java_com_projectm_mic_mainactivity_kt",
+      "target": "mic_mainactivity_getlocalipaddress",
       "confidence_score": 1.0
     },
     {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
-      "source_location": "L64",
+      "source_location": "L59",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "mic_mainactivity_mainactivity",
-      "target": "mic_mainactivity_mainactivity_oncreate",
+      "target": "mic_mainactivity_mainactivity_oncreate"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
+      "source_location": "L73",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mic_mainactivity_mainactivity_oncreate",
+      "target": "mic_mainactivity_mainscreen"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
+      "source_location": "L117",
+      "weight": 1.0,
+      "source": "mic_mainactivity_mainscreen",
+      "target": "mic_mainactivity_getlocalipaddress",
       "confidence_score": 1.0
     },
     {
@@ -1606,10 +2864,43 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
-      "source_location": "L78",
+      "source_location": "L139",
       "weight": 1.0,
-      "source": "mic_mainactivity_mainactivity_oncreate",
-      "target": "mic_mainactivity_mainscreen",
+      "source": "mic_mainactivity_mainscreen",
+      "target": "mic_mainactivity_ambientblobs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
+      "source_location": "L180",
+      "weight": 1.0,
+      "source": "mic_mainactivity_mainscreen",
+      "target": "mic_mainactivity_glasscard",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
+      "source_location": "L234",
+      "weight": 1.0,
+      "source": "mic_mainactivity_mainscreen",
+      "target": "mic_mainactivity_selectorbutton",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
+      "source_location": "L253",
+      "weight": 1.0,
+      "source": "mic_mainactivity_mainscreen",
+      "target": "mic_mainactivity_powerpulse",
       "confidence_score": 1.0
     },
     {
@@ -1719,8 +3010,68 @@
       "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
       "source_location": null,
       "weight": 1.0,
-      "source": "mainactivity_mainactivity",
-      "target": "main_main"
+      "source": "main_main",
+      "target": "mainactivity_mainactivity"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pc-client/src/main.rs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "main_main",
+      "target": "app_state_appstate_new"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pc-client/src/main.rs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "main_main",
+      "target": "app_state_appstate_connect"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pc-client/src/main.rs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "main_main",
+      "target": "app_state_appstate_disconnect"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "pc-client/src/main.rs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "main_get_local_ip",
+      "target": "main_fallback_ip_discovery"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "pc-client/src/main.rs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "main_get_local_ip",
+      "target": "mainactivity_getlocalipaddress"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "findings.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "main_get_local_ip",
+      "target": "findings_l_01"
     },
     {
       "relation": "calls",
@@ -1729,8 +3080,8 @@
       "source_file": "pc-client/src/app_state.rs",
       "source_location": null,
       "weight": 1.0,
-      "source": "app_state_run_connection",
-      "target": "audio_pipewiresink"
+      "source": "audio_pipewiresink",
+      "target": "app_state_run_connection"
     },
     {
       "relation": "calls",
@@ -1749,8 +3100,8 @@
       "source_file": "pc-client/src/audio.rs",
       "source_location": null,
       "weight": 1.0,
-      "source": "audio_jitter_buffer",
-      "target": "audio_run_loop"
+      "source": "audio_run_loop",
+      "target": "audio_jitter_buffer"
     },
     {
       "relation": "calls",
@@ -1759,8 +3110,8 @@
       "source_file": "pc-client/src/app_state.rs",
       "source_location": null,
       "weight": 1.0,
-      "source": "app_state_run_connection",
-      "target": "audio_push_samples"
+      "source": "audio_push_samples",
+      "target": "app_state_run_connection"
     },
     {
       "relation": "calls",
@@ -1769,8 +3120,8 @@
       "source_file": "pc-client/src/app_state.rs",
       "source_location": null,
       "weight": 1.0,
-      "source": "app_state_run_connection",
-      "target": "protocol_protocolhandler"
+      "source": "protocol_protocolhandler",
+      "target": "app_state_run_connection"
     },
     {
       "relation": "calls",
@@ -1779,8 +3130,8 @@
       "source_file": "pc-client/src/app_state.rs",
       "source_location": null,
       "weight": 1.0,
-      "source": "app_state_run_connection",
-      "target": "protocol_read_audio_packet"
+      "source": "protocol_read_audio_packet",
+      "target": "app_state_run_connection"
     },
     {
       "relation": "shares_data_with",
@@ -1789,8 +3140,8 @@
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
       "source_location": null,
       "weight": 1.0,
-      "source": "audiocaptureservice_sendaudiopacket",
-      "target": "protocol_read_audio_packet"
+      "source": "protocol_read_audio_packet",
+      "target": "audiocaptureservice_sendaudiopacket"
     },
     {
       "relation": "rationale_for",
@@ -1799,8 +3150,18 @@
       "source_file": "pc-client/src/protocol.rs",
       "source_location": null,
       "weight": 1.0,
-      "source": "protocol_mc_framing_protocol",
-      "target": "protocol_read_audio_packet"
+      "source": "protocol_read_audio_packet",
+      "target": "protocol_mc_framing_protocol"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "app_state_appstate",
+      "target": "readme_lampyris_hub"
     },
     {
       "relation": "calls",
@@ -1829,8 +3190,8 @@
       "source_file": "pc-client/src/app_state.rs",
       "source_location": null,
       "weight": 1.0,
-      "source": "app_state_adb_reverse_forwarding",
-      "target": "app_state_run_connection"
+      "source": "app_state_run_connection",
+      "target": "app_state_adb_reverse_forwarding"
     },
     {
       "relation": "calls",
@@ -1843,14 +3204,14 @@
       "target": "audiocaptureservice_runcaptureloop"
     },
     {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
       "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
       "source_location": null,
       "weight": 1.0,
-      "source": "mainactivity_mainscreen",
-      "target": "audiocaptureservice_audiocaptureservice"
+      "source": "audiocaptureservice_audiocaptureservice",
+      "target": "mainactivity_mainscreen"
     },
     {
       "relation": "rationale_for",
@@ -1859,8 +3220,18 @@
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
       "source_location": null,
       "weight": 1.0,
-      "source": "audiocaptureservice_foreground_service",
-      "target": "audiocaptureservice_audiocaptureservice"
+      "source": "audiocaptureservice_audiocaptureservice",
+      "target": "audiocaptureservice_foreground_service"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "audiocaptureservice_audiocaptureservice",
+      "target": "readme_sonus_server"
     },
     {
       "relation": "calls",
@@ -1879,8 +3250,28 @@
       "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
       "source_location": null,
       "weight": 1.0,
-      "source": "protocol_mc_framing_protocol",
-      "target": "audiocaptureservice_sendaudiopacket"
+      "source": "audiocaptureservice_sendaudiopacket",
+      "target": "protocol_mc_framing_protocol"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "audiocaptureservice_sendaudiopacket",
+      "target": "audiocaptureservice_handleclient"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "findings.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "audiocaptureservice_sendaudiopacket",
+      "target": "findings_c_03"
     },
     {
       "relation": "calls",
@@ -1899,8 +3290,8 @@
       "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
       "source_location": null,
       "weight": 1.0,
-      "source": "design_neon_audio_deck",
-      "target": "mainactivity_mainactivity"
+      "source": "mainactivity_mainactivity",
+      "target": "design_neon_audio_deck"
     },
     {
       "relation": "rationale_for",
@@ -1909,38 +3300,1022 @@
       "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
       "source_location": null,
       "weight": 1.0,
-      "source": "design_15_percent_accent_rule",
-      "target": "mainactivity_mainscreen"
+      "source": "mainactivity_mainscreen",
+      "target": "design_15_percent_accent_rule"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "mainactivity_mainscreen",
+      "target": "audiocaptureservice_startservice"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "mainactivity_mainscreen",
+      "target": "audiocaptureservice_stopservice"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "mainactivity_mainscreen",
+      "target": "mainactivity_getlocalipaddress"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "mainactivity_mainscreen",
+      "target": "mainactivity_sonustheme"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/MainActivity.kt",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "mainactivity_mainscreen",
+      "target": "mainactivity_cinema_mobile_design"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "pc-client/src/audio.rs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "audio_jitter_buffer",
+      "target": "audio_pipewiresink_run_loop"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "pc-client/src/audio.rs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "audio_jitter_buffer",
+      "target": "findings_p_01"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "src_app_state_dummyverifier",
+      "target": "src_app_state_dummyverifier_verify_server_cert",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "src_app_state_dummyverifier",
+      "target": "src_app_state_dummyverifier_verify_tls12_signature",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": "L37",
+      "weight": 1.0,
+      "source": "src_app_state_dummyverifier",
+      "target": "src_app_state_dummyverifier_verify_tls13_signature",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": "L46",
+      "weight": 1.0,
+      "source": "src_app_state_dummyverifier",
+      "target": "src_app_state_dummyverifier_supported_verify_schemes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": "L156",
+      "weight": 1.0,
+      "source": "mic_audiocaptureservice_audiocaptureservice_runserverloop",
+      "target": "mic_audiocaptureservice_audiocaptureservice_setupsslcontext",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": "L181",
+      "weight": 1.0,
+      "source": "mic_audiocaptureservice_audiocaptureservice_runserverloop",
+      "target": "mic_audiocaptureservice_audiocaptureservice_handleclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": "L281",
+      "weight": 1.0,
+      "source": "mic_audiocaptureservice_audiocaptureservice_setupsslcontext",
+      "target": "mic_audiocaptureservice_audiocaptureservice_generateselfsignedcertificate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "Logos/Sonus.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "mic_mainactivity_sonustheme",
+      "target": "sonus_color_scheme"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pc-client/src/audio.rs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "audio_pipewiresink_new",
+      "target": "audio_pipewiresink_run_loop"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "pc-client/src/audio.rs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "audio_pipewiresink_new",
+      "target": "audio_lock_free_ring_buffer"
+    },
+    {
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "pc-client/src/audio.rs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "audio_pipewiresink_new",
+      "target": "audio_pipewiresink_push_samples"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "audio_pipewiresink_new",
+      "target": "app_state_appstate_run_connection"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "pc-client/src/audio.rs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "audio_pipewiresink_run_loop",
+      "target": "audio_lock_free_ring_buffer"
+    },
+    {
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "pc-client/src/audio.rs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "audio_pipewiresink_run_loop",
+      "target": "audio_pipewiresink_drop"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "findings.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "audio_pipewiresink_run_loop",
+      "target": "findings_m_02"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "findings.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "audio_pipewiresink_run_loop",
+      "target": "findings_l_03"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "findings.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "audio_pipewiresink_run_loop",
+      "target": "findings_p_01"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "audio_pipewiresink_push_samples",
+      "target": "app_state_appstate_run_connection"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "protocol_protocolhandler_new",
+      "target": "app_state_appstate_run_connection"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "pc-client/src/protocol.rs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "protocol_protocolhandler_read_audio_packet",
+      "target": "protocol_mc_framing"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "protocol_protocolhandler_read_audio_packet",
+      "target": "app_state_appstate_run_connection"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "findings.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "protocol_protocolhandler_read_audio_packet",
+      "target": "findings_c_03"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "app_state_appstate_connect",
+      "target": "app_state_appstate_run_connection"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "app_state_appstate_run_connection",
+      "target": "app_state_dummyverifier"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "app_state_appstate_run_connection",
+      "target": "app_state_convert_s16_to_f32"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "app_state_appstate_run_connection",
+      "target": "app_state_calculate_peak_amplitude"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "pc-client/src/app_state.rs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "app_state_appstate_run_connection",
+      "target": "app_state_adb_port_forwarding"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "findings.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "app_state_appstate_run_connection",
+      "target": "findings_h_01"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "android-client/app/build.gradle.kts",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "settings_sonus_project",
+      "target": "build_build_gradle_config"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "findings.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "build_build_gradle_config",
+      "target": "findings_m_07"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "audiocaptureservice_startservice",
+      "target": "audiocaptureservice_runserverloop"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "audiocaptureservice_runserverloop",
+      "target": "audiocaptureservice_setupsslcontext"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "audiocaptureservice_runserverloop",
+      "target": "audiocaptureservice_handleclient"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "findings.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "audiocaptureservice_runserverloop",
+      "target": "findings_c_01"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "findings.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "audiocaptureservice_handleclient",
+      "target": "findings_p_01"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "audiocaptureservice_setupsslcontext",
+      "target": "audiocaptureservice_generateselfsignedcertificate"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "audiocaptureservice_setupsslcontext",
+      "target": "audiocaptureservice_ephemeral_certs"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "audiocaptureservice_generateselfsignedcertificate",
+      "target": "audiocaptureservice_ephemeral_certs"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "audiocaptureservice_ephemeral_certs",
+      "target": "readme_secure_by_design"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_lampyris_hub",
+      "target": "readme_flipped_architecture"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_lampyris_hub",
+      "target": "readme_secure_by_design"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_sonus_server",
+      "target": "readme_flipped_architecture"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_sonus_server",
+      "target": "readme_secure_by_design"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "findings.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "findings_audit_report",
+      "target": "findings_c_03"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "findings.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "findings_audit_report",
+      "target": "findings_m_02"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "findings.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "findings_audit_report",
+      "target": "findings_m_07"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "findings.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "findings_audit_report",
+      "target": "findings_l_03"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "findings.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "findings_audit_report",
+      "target": "findings_p_01"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "findings.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "findings_audit_report",
+      "target": "findings_l_01"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "findings.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "findings_audit_report",
+      "target": "findings_c_01"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "findings.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "findings_audit_report",
+      "target": "findings_h_01"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pc-client/ui/Lampyris.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_logo",
+      "target": "lampyris_bg_gradient"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pc-client/ui/Lampyris.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_logo",
+      "target": "lampyris_orbital_rings"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pc-client/ui/Lampyris.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_logo",
+      "target": "lampyris_glowing_abdomen"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pc-client/ui/Lampyris.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_logo",
+      "target": "lampyris_antennae"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pc-client/ui/Lampyris.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_logo",
+      "target": "lampyris_wing_fill"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pc-client/ui/Lampyris.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_logo",
+      "target": "lampyris_cube"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "Logos/Sonus.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_logo",
+      "target": "sonus_logo"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "pc-client/ui/Lampyris.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_cube",
+      "target": "lampyris_trion_gradient"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "pc-client/ui/Lampyris.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_cube",
+      "target": "lampyris_orbital_rings"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pc-client/ui/Lampyris.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_glow_filter",
+      "target": "lampyris_glowing_abdomen"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pc-client/ui/Lampyris.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_glow_filter",
+      "target": "lampyris_antennae"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Logos/Lampyris.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_glow_filter",
+      "target": "lampyris_central_core"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Logos/Lampyris.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_glow_filter",
+      "target": "lampyris_sensory_antennae"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Logos/Lampyris.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_glow_filter",
+      "target": "lampyris_lantern_abdomen"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pc-client/ui/Lampyris.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_trion_gradient",
+      "target": "lampyris_glowing_abdomen"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pc-client/ui/Lampyris.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_trion_gradient",
+      "target": "lampyris_antennae"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pc-client/ui/Lampyris.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_trion_gradient",
+      "target": "lampyris_orbital_rings"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "pc-client/ui/Lampyris.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_wing_fill",
+      "target": "lampyris_bg_gradient"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Logos/Lampyris.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_orbital_rings",
+      "target": "lampyris_logo_concept"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "Logos/Lampyris.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_orbital_rings",
+      "target": "lampyris_central_core"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "Logos/Lampyris.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_orbital_rings",
+      "target": "lampyris_isometric_cube"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "pc-client/ui/Lampyris.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_glowing_abdomen",
+      "target": "lampyris_antennae"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Logos/Lampyris.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_logo_concept",
+      "target": "lampyris_central_core"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Logos/Lampyris.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_logo_concept",
+      "target": "lampyris_sensory_antennae"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Logos/Lampyris.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_logo_concept",
+      "target": "lampyris_polygonal_wings"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Logos/Lampyris.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_logo_concept",
+      "target": "lampyris_lantern_abdomen"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Logos/Lampyris.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_logo_concept",
+      "target": "lampyris_isometric_cube"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "Logos/Lampyris.svg",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "lampyris_central_core",
+      "target": "lampyris_lantern_abdomen"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Logos/Sonus.svg",
+      "source_location": "L40-L42",
+      "weight": 1.0,
+      "source": "sonus_logo",
+      "target": "sonus_core_shard"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Logos/Sonus.svg",
+      "source_location": "L25-L38",
+      "weight": 1.0,
+      "source": "sonus_logo",
+      "target": "sonus_sound_waves"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Logos/Sonus.svg",
+      "source_location": "L44-L46",
+      "weight": 1.0,
+      "source": "sonus_logo",
+      "target": "sonus_alignment_points"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Logos/Sonus.svg",
+      "source_location": "L3-L11",
+      "weight": 1.0,
+      "source": "sonus_logo",
+      "target": "sonus_color_scheme"
     }
   ],
   "hyperedges": [
     {
       "id": "audio_streaming_pipeline",
-      "label": "End-to-End Audio Streaming Pipeline",
+      "label": "Audio Streaming Pipeline",
       "nodes": [
-        "audiocaptureservice_audiocaptureservice",
-        "protocol_mc_framing_protocol",
-        "app_state_appstate",
-        "audio_pipewiresink"
+        "audiocaptureservice_handleclient",
+        "protocol_protocolhandler_read_audio_packet",
+        "app_state_appstate_run_connection",
+        "audio_pipewiresink_push_samples"
       ],
       "relation": "implement",
       "confidence": "INFERRED",
       "confidence_score": 0.95,
-      "source_file": "project_plan.md"
+      "source_file": "pc-client/src/app_state.rs"
     },
     {
-      "id": "tactical_neon_ui_theme",
-      "label": "Tactical Neon UI Theme Implementation",
+      "id": "security_boundary",
+      "label": "TLS Security Boundary",
       "nodes": [
-        "design_neon_audio_deck",
-        "main_main",
-        "mainactivity_mainactivity"
+        "app_state_dummyverifier",
+        "audiocaptureservice_setupsslcontext",
+        "readme_secure_by_design",
+        "findings_c_03"
+      ],
+      "relation": "participate_in",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "findings.md"
+    },
+    {
+      "id": "android_pc_connection_loop",
+      "label": "Android-PC Connection and Tunneling",
+      "nodes": [
+        "app_state_adb_port_forwarding",
+        "app_state_appstate_run_connection",
+        "audiocaptureservice_runserverloop"
       ],
       "relation": "implement",
       "confidence": "INFERRED",
       "confidence_score": 0.95,
-      "source_file": "DESIGN.md"
+      "source_file": "pc-client/src/app_state.rs"
+    },
+    {
+      "id": "lampyris_bioluminescent_concept",
+      "label": "Bioluminescent Concept Elements",
+      "nodes": [
+        "lampyris_glowing_abdomen",
+        "lampyris_glow_filter",
+        "lampyris_trion_gradient"
+      ],
+      "relation": "participate_in",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "pc-client/ui/Lampyris.svg"
+    },
+    {
+      "id": "lampyris_cybernetic_motif",
+      "label": "Cybernetic Motif Elements",
+      "nodes": [
+        "lampyris_cube",
+        "lampyris_orbital_rings",
+        "lampyris_trion_gradient"
+      ],
+      "relation": "participate_in",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "pc-client/ui/Lampyris.svg"
+    },
+    {
+      "id": "lampyris_firefly_anatomy",
+      "label": "Firefly Anatomy Concept",
+      "nodes": [
+        "lampyris_central_core",
+        "lampyris_sensory_antennae",
+        "lampyris_polygonal_wings",
+        "lampyris_lantern_abdomen"
+      ],
+      "relation": "form",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "Logos/Lampyris.svg"
+    },
+    {
+      "id": "lampyris_glowing_features",
+      "label": "Glowing Visual Features",
+      "nodes": [
+        "lampyris_central_core",
+        "lampyris_sensory_antennae",
+        "lampyris_lantern_abdomen"
+      ],
+      "relation": "implement",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Logos/Lampyris.svg"
+    },
+    {
+      "id": "sonus_visual_identity",
+      "label": "Sonus Visual Identity",
+      "nodes": [
+        "sonus_logo",
+        "sonus_core_shard",
+        "sonus_sound_waves",
+        "sonus_color_scheme"
+      ],
+      "relation": "implement",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Logos/Sonus.svg"
     }
   ],
-  "built_at_commit": "efd43813e3928fbb2b03eee157bab77217af34b5"
+  "built_at_commit": "d94c0b2a7f5b98bd6466e43b3ec3b3ed2ca46427"
 }

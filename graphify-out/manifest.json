@@ -4,24 +4,24 @@
     "hash": "be199d2a360667ebdccf770889e6f78c"
   },
   "/home/hyuse/Desktop/project-m/pc-client/src/main.rs": {
-    "mtime": 1780653226.8394375,
-    "hash": "594326094cb4cf9e83a5c67af64124e7"
+    "mtime": 1780680267.7176127,
+    "hash": "480a25b172ef56f5c34f96f335beef71"
   },
   "/home/hyuse/Desktop/project-m/pc-client/src/audio.rs": {
-    "mtime": 1780653650.0802193,
-    "hash": "7f09dce86f398681fe83b6685721d3ba"
+    "mtime": 1780671067.154892,
+    "hash": "d05def2416b1e3f5a5626a1b935ed530"
   },
   "/home/hyuse/Desktop/project-m/pc-client/src/protocol.rs": {
-    "mtime": 1780653220.90271,
-    "hash": "bbbd52f5732270303b4382b1c57fcbb4"
+    "mtime": 1780671069.3658981,
+    "hash": "5436cd9f7c7fa2492b28e9453fe2d993"
   },
   "/home/hyuse/Desktop/project-m/pc-client/src/app_state.rs": {
-    "mtime": 1780653251.447343,
-    "hash": "a8a783b618104c29128874d54884ff07"
+    "mtime": 1780680295.3216205,
+    "hash": "2d23f52ef5883b0495ae17b5af05210e"
   },
   "/home/hyuse/Desktop/project-m/android-client/settings.gradle.kts": {
-    "mtime": 1780653168.816262,
-    "hash": "ca75402682e605ff2d5a02d85532ee1c"
+    "mtime": 1780672515.0495112,
+    "hash": "17f5b716bc1e67d023cf477ac73c180c"
   },
   "/home/hyuse/Desktop/project-m/android-client/build.gradle.kts": {
     "mtime": 1780656639.0486104,
@@ -32,20 +32,20 @@
     "hash": "f2cc5dea1e5914d55cee1ecf4f8d6038"
   },
   "/home/hyuse/Desktop/project-m/android-client/app/build.gradle.kts": {
-    "mtime": 1780657035.329019,
-    "hash": "20b8cf2b1cedeb5c7747bdee3658e3a8"
+    "mtime": 1780676562.8480585,
+    "hash": "7f9d9e012e393ee5145299804c2aba87"
   },
   "/home/hyuse/Desktop/project-m/android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt": {
-    "mtime": 1780653180.972639,
-    "hash": "68f7108de24907d0be3deb4953109fe7"
+    "mtime": 1780678710.3860602,
+    "hash": "1db8cd6acc5326bad555d31140511e50"
   },
   "/home/hyuse/Desktop/project-m/android-client/app/src/main/java/com/projectm/mic/MainActivity.kt": {
-    "mtime": 1780653186.9363399,
-    "hash": "5dfe25291786f01a69088f93be7dc74d"
+    "mtime": 1780679591.501624,
+    "hash": "accd9307f625b54c762bb26783e88ae0"
   },
   "/home/hyuse/Desktop/project-m/README.md": {
-    "mtime": 1780653282.6870306,
-    "hash": "a40fe787e004441bf41a834f3fdd6c5f"
+    "mtime": 1780682156.1983166,
+    "hash": "a5ae6b994eb6df8e10828de38bec01a2"
   },
   "/home/hyuse/Desktop/project-m/project_plan.md": {
     "mtime": 1780653293.3655999,
@@ -58,5 +58,21 @@
   "/home/hyuse/Desktop/project-m/DESIGN.md": {
     "mtime": 1780655963.8754263,
     "hash": "b1b3c863aa1902e9a98b4745b68f9ce0"
+  },
+  "/home/hyuse/Desktop/project-m/findings.md": {
+    "mtime": 1780680732.791091,
+    "hash": "72d13f91f5f92b8ba20ecc07ba05ab29"
+  },
+  "/home/hyuse/Desktop/project-m/pc-client/ui/Lampyris.svg": {
+    "mtime": 1780671630.1258473,
+    "hash": "10c514c0ade299f2036af2e9dff6f904"
+  },
+  "/home/hyuse/Desktop/project-m/Logos/Lampyris.svg": {
+    "mtime": 1780671326.6074572,
+    "hash": "10c514c0ade299f2036af2e9dff6f904"
+  },
+  "/home/hyuse/Desktop/project-m/Logos/Sonus.svg": {
+    "mtime": 1780673783.7309232,
+    "hash": "d1f4c9ee0360c1d1948f044e4804a41e"
   }
 }
