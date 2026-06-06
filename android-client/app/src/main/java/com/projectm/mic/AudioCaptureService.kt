@@ -53,6 +53,7 @@ class AudioCaptureService : Service() {
         var state = mutableStateOf(ConnectionState.DISCONNECTED)
         var errorMessage = mutableStateOf("")
         var isServiceRunning = mutableStateOf(false)
+        var authPin = mutableStateOf(String.format("%06d", java.util.Random().nextInt(1000000)))
 
         fun startService(context: Context, port: Int, isUsb: Boolean) {
             val intent = Intent(context, AudioCaptureService::class.java).apply {
@@ -198,6 +199,26 @@ class AudioCaptureService : Service() {
             Log.d(TAG, "Client connected: ${socket.inetAddress}")
             socket.tcpNoDelay = true
             val outputStream = socket.getOutputStream()
+            val inputStream = socket.getInputStream()
+            
+            // Read AUTH packet
+            val authHeader = ByteArray(4)
+            var bytesRead = inputStream.read(authHeader)
+            if (bytesRead != 4 || String(authHeader) != "AUTH") {
+                Log.e(TAG, "Invalid AUTH header")
+                socket.close()
+                return
+            }
+            
+            val pinBuffer = ByteArray(6)
+            bytesRead = inputStream.read(pinBuffer)
+            val receivedPin = String(pinBuffer, 0, bytesRead)
+            
+            if (receivedPin != authPin.value) {
+                Log.e(TAG, "Invalid PIN: $receivedPin")
+                socket.close()
+                return
+            }
             
             val peerAddr = socket.inetAddress.hostAddress
             serviceScope.launch(Dispatchers.Main) {
@@ -211,7 +232,7 @@ class AudioCaptureService : Service() {
             val audioFormat = AudioFormat.ENCODING_PCM_16BIT
             
             val minBufferSize = AudioRecord.getMinBufferSize(sampleRate, channelConfig, audioFormat)
-            val bufferSize = minBufferSize.coerceAtLeast(960 * 2)
+            val bufferSize = minBufferSize.coerceAtLeast(480 * 2)
 
             @Suppress("MissingPermission")
             val recorder = AudioRecord(
@@ -230,7 +251,7 @@ class AudioCaptureService : Service() {
             recorder.startRecording()
             Log.d(TAG, "AudioRecord started, streaming...")
             
-            val buffer = ByteArray(960)
+            val buffer = ByteArray(480)
 
             // Streaming loop for this client
             while (isServiceRunning.value && socket.isConnected && !socket.isClosed) {

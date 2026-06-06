@@ -161,7 +161,7 @@ fun MainScreen(activity: ComponentActivity) {
                         letterSpacing = 4.sp
                     )
                     Text(
-                        text = "v1.0.0 Stable",
+                        text = "v1.1.0 Stable",
                         fontSize = 10.sp,
                         color = SonusTheme.TextMuted,
                         letterSpacing = 1.sp
@@ -213,6 +213,15 @@ fun MainScreen(activity: ComponentActivity) {
                             text = if (isUsb) "Run: adb reverse tcp:$portString tcp:$portString" else "Connect PC to $localIp:$portString",
                             color = SonusTheme.TextMuted,
                             fontSize = 11.sp,
+                            textAlign = TextAlign.Center
+                        )
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text(
+                            text = "AUTH PIN: ${AudioCaptureService.authPin.value}",
+                            color = SonusTheme.PrimaryAccent,
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            letterSpacing = 4.sp,
                             textAlign = TextAlign.Center
                         )
                     }
