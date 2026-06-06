@@ -6,7 +6,7 @@ use tracing::{error, info, debug};
 use spa::pod::Pod;
 use ringbuf::{HeapRb, traits::{Split, Producer, Consumer, Observer}, CachingProd, CachingCons};
 use std::sync::{Arc, Mutex};
-use std::sync::atomic::{AtomicBool, Ordering};
+
 
 // SEC-02: Compile-time guard for f32 size
 const _: () = assert!(std::mem::size_of::<f32>() == 4);
@@ -15,7 +15,7 @@ const _: () = assert!(std::mem::size_of::<f32>() == 4);
 /// Creates a virtual source in the PipeWire graph and streams F32LE audio.
 pub struct PipewireSink {
     producer: Arc<Mutex<CachingProd<Arc<HeapRb<f32>>>>>,
-    quit_flag: Arc<AtomicBool>,
+    quit_tx: Option<pw::channel::Sender<()>>,
 }
 
 // Note: In newer ringbuf versions, CachingProd is naturally Send.
@@ -27,18 +27,18 @@ impl PipewireSink {
         let rb = HeapRb::<f32>::new(sample_rate as usize * 2); // 2 seconds buffer
         let (prod, cons) = rb.split();
         let producer = Arc::new(Mutex::new(prod));
-        let quit_flag = Arc::new(AtomicBool::new(false));
-        let quit_flag_clone = quit_flag.clone();
+        
+        let (quit_tx, quit_rx) = pw::channel::channel::<()>();
 
         std::thread::spawn(move || {
-            if let Err(e) = Self::run_loop(node_name, sample_rate, cons, quit_flag_clone) {
+            if let Err(e) = Self::run_loop(node_name, sample_rate, cons, quit_rx) {
                 error!("PipeWire loop error: {}", e);
             }
         });
 
         Ok(Self { 
             producer,
-            quit_flag,
+            quit_tx: Some(quit_tx),
         })
     }
 
@@ -46,7 +46,7 @@ impl PipewireSink {
         node_name: String, 
         sample_rate: u32, 
         mut consumer: CachingCons<Arc<HeapRb<f32>>>,
-        quit_flag: Arc<AtomicBool>
+        quit_rx: pw::channel::Receiver<()>
     ) -> anyhow::Result<()> {
         pw::init();
         let mainloop = pw::main_loop::MainLoopBox::new(None)?;
@@ -66,8 +66,8 @@ impl PipewireSink {
         let stream = StreamBox::new(&core, &node_name, props)?;
 
         let mut is_buffering = true;
-        // 40ms pre-buffering threshold: sample_rate * 40 / 1000 = sample_rate / 25
-        let prebuffer_threshold = (sample_rate / 25) as usize;
+        // 10ms pre-buffering threshold: sample_rate * 10 / 1000 = sample_rate / 100
+        let prebuffer_threshold = (sample_rate / 100) as usize;
 
         let _listener = stream
             .add_local_listener::<()>()
@@ -103,6 +103,9 @@ impl PipewireSink {
                             // SEC-02: Hard bounds check to prevent overrun in release builds
                             assert!(n_samples * 4 <= slice.len(), "Buffer overrun risk: requested {} bytes for {} byte slice", n_samples * 4, slice.len());
                             
+                            // SAFETY: The `slice` bounds are explicitly checked above (`n_samples * 4 <= slice.len()`).
+                            // The ring buffer ensures that `as_slices()` returns valid memory.
+                            // We are safely copying standard PCM floats into the pipewire buffer.
                             unsafe {
                                 // PERF: Read directly from ring buffer into PipeWire slice
                                 let (s1, s2) = consumer.as_slices();
@@ -170,25 +173,16 @@ impl PipewireSink {
             &mut params,
         )?;
 
-        // REL-02: Monitor quit flag using a repeating timer
+        // REL-02: Monitor quit signal via pipewire channel
         let mainloop_ptr = mainloop.as_raw_ptr();
-        let mainloop_loop = mainloop.loop_();
-        let timer = mainloop_loop.add_timer(move |_expirations| {
-            if quit_flag.load(Ordering::Relaxed) {
-                debug!("Received quit signal, stopping PipeWire loop");
-                // SAFETY: The timer is owned by the mainloop and cancelled/dropped before the mainloop 
-                // itself is dropped. Therefore, mainloop_ptr is strictly valid for the duration of this callback.
-                unsafe {
-                    pw_sys::pw_main_loop_quit(mainloop_ptr);
-                }
+        let _receiver = quit_rx.attach(&mainloop.loop_(), move |_| {
+            debug!("Received quit signal, stopping PipeWire loop");
+            // SAFETY: The receiver is owned by the mainloop and cancelled/dropped before the mainloop 
+            // itself is dropped. Therefore, mainloop_ptr is strictly valid for the duration of this callback.
+            unsafe {
+                pw_sys::pw_main_loop_quit(mainloop_ptr);
             }
         });
-        
-        // Arm as repeating timer: value = 100ms, interval = 100ms
-        timer.update_timer(
-            Some(std::time::Duration::from_millis(100)),
-            Some(std::time::Duration::from_millis(100)),
-        );
 
         mainloop.run();
         info!("PipeWire loop exited cleanly");
@@ -217,6 +211,8 @@ impl PipewireSink {
 impl Drop for PipewireSink {
     fn drop(&mut self) {
         info!("Shutting down PipeWire sink...");
-        self.quit_flag.store(true, Ordering::Relaxed);
+        if let Some(tx) = self.quit_tx.take() {
+            let _ = tx.send(());
+        }
     }
 }

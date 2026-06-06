@@ -23,15 +23,7 @@ struct Args {
 }
 
 pub fn get_local_ip() -> Option<String> {
-    let socket = std::net::UdpSocket::bind("0.0.0.0:0").ok()?;
-    // Connect to a public IP to determine which local network interface is routeable.
-    // Fallback to Cloudflare's 1.1.1.1 if Google's 8.8.8.8 fails, and finally to local multicast.
-    if socket.connect("8.8.8.8:80").is_err() {
-        if socket.connect("1.1.1.1:80").is_err() {
-            socket.connect("224.0.0.1:0").ok()?;
-        }
-    }
-    socket.local_addr().ok().map(|addr| addr.ip().to_string())
+    local_ip_address::local_ip().ok().map(|ip| ip.to_string())
 }
 
 #[tokio::main]
@@ -79,8 +71,9 @@ async fn main() -> anyhow::Result<()> {
             let port_str = ui.get_port().to_string();
             let is_usb = ui.get_is_usb();
             let server_ip = ui.get_android_ip().to_string();
+            let auth_pin = ui.get_auth_pin().to_string();
             let port = port_str.parse::<u16>().unwrap_or(47999);
-            app_state_clone.connect(port, is_usb, server_ip);
+            app_state_clone.connect(port, is_usb, server_ip, auth_pin);
         }
     });
 

@@ -1,6 +1,7 @@
 use slint::Weak;
 use std::sync::Arc;
 use tokio::sync::Mutex;
+use tokio::io::AsyncWriteExt;
 use crate::audio::PipewireSink;
 use crate::protocol::ProtocolHandler;
 use crate::MainWindow;
@@ -74,7 +75,7 @@ impl AppState {
     }
 
     /// Starts connection logic.
-    pub fn connect(&self, port: u16, is_usb: bool, server_ip: String) {
+    pub fn connect(&self, port: u16, is_usb: bool, server_ip: String, auth_pin: String) {
         let connection_task = self.connection_task.clone();
 
         let ui_weak_task = self.ui.clone();
@@ -96,7 +97,7 @@ impl AppState {
                     const MAX_RETRIES: u32 = 5;
 
                     loop {
-                        let res = Self::run_connection(port, is_usb, server_ip_clone.clone(), ui_weak_run.clone(), &mut rx).await;
+                        let res = Self::run_connection(port, is_usb, server_ip_clone.clone(), auth_pin.clone(), ui_weak_run.clone(), &mut rx).await;
                         
                         match res {
                             Ok(_) => {
@@ -162,6 +163,7 @@ impl AppState {
         port: u16, 
         is_usb: bool, 
         server_ip: String,
+        auth_pin: String,
         ui_weak: Weak<MainWindow>,
         stop_rx: &mut tokio::sync::oneshot::Receiver<()>
     ) -> anyhow::Result<()> {
@@ -233,6 +235,7 @@ impl AppState {
             }
         };
         let peer_addr = tcp_stream.peer_addr()?;
+        tcp_stream.set_nodelay(true)?;
         
         let config = rustls::ClientConfig::builder()
             .dangerous()
@@ -252,7 +255,16 @@ impl AppState {
                 return Ok(());
             }
         };
-        let stream: Box<dyn AsyncStream> = Box::new(tls_stream);
+        let mut stream: Box<dyn AsyncStream> = Box::new(tls_stream);
+
+        info!("Sending authentication PIN...");
+        let mut auth_pkt = vec![b'A', b'U', b'T', b'H'];
+        let mut pin_bytes = auth_pin.as_bytes().to_vec();
+        // Pad or truncate to exactly 6 bytes
+        pin_bytes.resize(6, b'0');
+        auth_pkt.extend_from_slice(&pin_bytes);
+        stream.write_all(&auth_pkt).await?;
+        stream.flush().await?;
 
         info!("Connection established with {}", peer_addr);
         
