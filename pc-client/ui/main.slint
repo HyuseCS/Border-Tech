@@ -146,6 +146,7 @@ export component MainWindow inherits Window {
     in-out property <float> volume_level: 0.0;
     in-out property <string> status_text: "Disconnected";
     in-out property <bool> is_usb: true;
+    in-out property <string> auth_pin: "";
 
 
     callback connect_clicked(); 
@@ -271,6 +272,27 @@ export component MainWindow inherits Window {
                     enabled: !is_connected;
                     edited(t) => { port = t; }
                     horizontal-stretch: 1;
+                }
+            }
+
+            // Auth PIN configuration line edit
+            HorizontalBox {
+                padding: 0;
+                spacing: 12px;
+                Text { 
+                    text: "Auth PIN:"; 
+                    vertical-alignment: center; 
+                    color: #A3A3B5; 
+                    font-size: 12px;
+                    font-weight: 700;
+                    width: 80px; 
+                }
+                LineEdit {
+                    text: auth_pin;
+                    enabled: !is_connected;
+                    edited(t) => { auth_pin = t; }
+                    horizontal-stretch: 1;
+                    placeholder-text: "6-digit PIN from app";
                 }
             }
         }
