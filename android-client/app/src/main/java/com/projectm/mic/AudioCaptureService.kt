@@ -35,6 +35,7 @@ import javax.net.ssl.KeyManagerFactory
 import javax.net.ssl.SSLContext
 import javax.net.ssl.SSLServerSocket
 import javax.net.ssl.SSLServerSocketFactory
+import javax.net.ssl.SSLSocket
 
 class AudioCaptureService : Service() {
 
@@ -53,7 +54,21 @@ class AudioCaptureService : Service() {
         var state = mutableStateOf(ConnectionState.DISCONNECTED)
         var errorMessage = mutableStateOf("")
         var isServiceRunning = mutableStateOf(false)
-        var authPin = mutableStateOf(String.format("%06d", java.util.Random().nextInt(1000000)))
+        var authPin = mutableStateOf(String.format("%06d", SecureRandom().nextInt(1000000)))
+        
+        private var failedAttempts = 0
+        private var lockoutUntil = 0L
+
+        private fun handleAuthFailure() {
+            failedAttempts++
+            if (failedAttempts >= 6) {
+                lockoutUntil = System.currentTimeMillis() + 5 * 60 * 1000L
+                Log.w(TAG, "5 minute brute-force lockout engaged")
+            } else if (failedAttempts >= 3) {
+                lockoutUntil = System.currentTimeMillis() + 30 * 1000L
+                Log.w(TAG, "30 second brute-force lockout engaged")
+            }
+        }
 
         fun startService(context: Context, port: Int, isUsb: Boolean) {
             val intent = Intent(context, AudioCaptureService::class.java).apply {
@@ -158,7 +173,8 @@ class AudioCaptureService : Service() {
             val ssf: SSLServerSocketFactory = sslContext.serverSocketFactory
             
             Log.d(TAG, "Creating SSL Server Socket on port $port...")
-            serverSocket = ssf.createServerSocket(port) as SSLServerSocket
+            val bindAddress = if (isUsb) java.net.InetAddress.getByName("127.0.0.1") else null
+            serverSocket = ssf.createServerSocket(port, 50, bindAddress) as SSLServerSocket
             (serverSocket as SSLServerSocket).apply {
                 needClientAuth = false
                 enabledProtocols = arrayOf("TLSv1.3", "TLSv1.2")
@@ -196,29 +212,119 @@ class AudioCaptureService : Service() {
 
     private fun handleClient(socket: Socket) {
         try {
+            if (System.currentTimeMillis() < lockoutUntil) {
+                Log.w(TAG, "Connection rejected: Active lockout")
+                socket.close()
+                return
+            }
+            
+            if (socket is SSLSocket) {
+                Log.d(TAG, "Starting TLS handshake with ${socket.inetAddress}...")
+                socket.startHandshake()
+                Log.d(TAG, "TLS handshake successful")
+            }
+
             Log.d(TAG, "Client connected: ${socket.inetAddress}")
             socket.tcpNoDelay = true
             val outputStream = socket.getOutputStream()
             val inputStream = socket.getInputStream()
             
-            // Read AUTH packet
+            // SRP Authentication
             val authHeader = ByteArray(4)
             var bytesRead = inputStream.read(authHeader)
-            if (bytesRead != 4 || String(authHeader) != "AUTH") {
-                Log.e(TAG, "Invalid AUTH header")
+            if (bytesRead != 4 || String(authHeader) != "SRP1") {
+                Log.e(TAG, "Invalid SRP1 header: ${if (bytesRead > 0) String(authHeader.sliceArray(0 until bytesRead)) else "EMPTY"}")
+                handleAuthFailure()
                 socket.close()
                 return
             }
             
-            val pinBuffer = ByteArray(6)
-            bytesRead = inputStream.read(pinBuffer)
-            val receivedPin = String(pinBuffer, 0, bytesRead)
-            
-            if (receivedPin != authPin.value) {
-                Log.e(TAG, "Invalid PIN: $receivedPin")
+            val aBytes = ByteArray(256)
+            var totalRead = 0
+            while (totalRead < 256) {
+                val r = inputStream.read(aBytes, totalRead, 256 - totalRead)
+                if (r == -1) break
+                totalRead += r
+            }
+            if (totalRead != 256) {
+                Log.e(TAG, "Failed to read SRP A bytes")
+                handleAuthFailure()
                 socket.close()
                 return
             }
+            
+            val A = java.math.BigInteger(1, aBytes)
+            
+            val digest = org.bouncycastle.crypto.digests.SHA256Digest()
+            val group = org.bouncycastle.crypto.agreement.srp.SRP6StandardGroups.rfc5054_2048
+            val vGen = org.bouncycastle.crypto.agreement.srp.SRP6VerifierGenerator()
+            vGen.init(group.n, group.g, digest)
+            val salt = ByteArray(16)
+            SecureRandom().nextBytes(salt)
+            val identity = "client".toByteArray()
+            val password = authPin.value.toByteArray()
+            val verifier = vGen.generateVerifier(salt, identity, password)
+            
+            val srpServer = org.bouncycastle.crypto.agreement.srp.SRP6Server()
+            srpServer.init(group.n, group.g, verifier, digest, SecureRandom())
+            val B = srpServer.generateServerCredentials()
+            val bBytesArray = B.toByteArray()
+            val bPad = ByteArray(256)
+            val bOffset = Math.max(0, bBytesArray.size - 256)
+            val bLen = Math.min(256, bBytesArray.size)
+            System.arraycopy(bBytesArray, bOffset, bPad, 256 - bLen, bLen)
+            
+            outputStream.write("SRP2".toByteArray())
+            outputStream.write(salt)
+            outputStream.write(bPad)
+            outputStream.flush()
+            
+            val m1Header = ByteArray(4)
+            if (inputStream.read(m1Header) != 4 || String(m1Header) != "SRP3") {
+                Log.e(TAG, "Invalid SRP3 header")
+                handleAuthFailure()
+                socket.close()
+                return
+            }
+            
+            val m1Bytes = ByteArray(32)
+            totalRead = 0
+            while (totalRead < 32) {
+                val r = inputStream.read(m1Bytes, totalRead, 32 - totalRead)
+                if (r == -1) break
+                totalRead += r
+            }
+            
+            val secret = srpServer.calculateSecret(A)
+            
+            val sBytesArray = secret.toByteArray()
+            val sPad = ByteArray(256)
+            val sOffset = Math.max(0, sBytesArray.size - 256)
+            val sLen = Math.min(256, sBytesArray.size)
+            System.arraycopy(sBytesArray, sOffset, sPad, 256 - sLen, sLen)
+            
+            val md = MessageDigest.getInstance("SHA-256")
+            md.update("M1".toByteArray())
+            val expectedM1 = md.digest(sPad)
+
+            if (!MessageDigest.isEqual(m1Bytes, expectedM1)) {
+                Log.e(TAG, "Invalid Custom SRP M1 attempt from ${socket.inetAddress}")
+                handleAuthFailure()
+                socket.close()
+                return
+            }
+            
+            // Authentication Success
+            failedAttempts = 0
+            lockoutUntil = 0L
+            
+            md.reset()
+            md.update("M2".toByteArray())
+            val m2Pad = md.digest(sPad)
+            
+            outputStream.write("SRP4".toByteArray())
+            outputStream.write(m2Pad)
+            outputStream.flush()
             
             val peerAddr = socket.inetAddress.hostAddress
             serviceScope.launch(Dispatchers.Main) {
@@ -293,22 +399,27 @@ class AudioCaptureService : Service() {
     }
 
     private fun setupSslContext(): SSLContext {
-        // Generate ephemeral key pair
-        val keyPairGenerator = KeyPairGenerator.getInstance("RSA", "BC")
-        keyPairGenerator.initialize(2048)
+        // Generate ephemeral key pair using ECDSA (secp256r1) for maximum compatibility
+        val keyPairGenerator = KeyPairGenerator.getInstance("EC", "BC")
+        keyPairGenerator.initialize(256, SecureRandom())
         val keyPair = keyPairGenerator.generateKeyPair()
 
         // Generate self-signed certificate
         val cert = generateSelfSignedCertificate(keyPair)
 
-        // Create a KeyStore (PKCS12 is better for in-memory)
-        val keyStore = KeyStore.getInstance("PKCS12", "BC")
+        // Generate secure random password for the in-memory keystore
+        val randomPassword = ByteArray(32)
+        SecureRandom().nextBytes(randomPassword)
+        val passwordChars = android.util.Base64.encodeToString(randomPassword, android.util.Base64.NO_WRAP).toCharArray()
+
+        // Create a KeyStore (PKCS12)
+        val keyStore = KeyStore.getInstance("PKCS12")
         keyStore.load(null, null)
-        keyStore.setKeyEntry("sonus-key", keyPair.private, "password".toCharArray(), arrayOf(cert))
+        keyStore.setKeyEntry("sonus-key", keyPair.private, passwordChars, arrayOf(cert))
 
         // Set up KeyManagerFactory
         val kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm())
-        kmf.init(keyStore, "password".toCharArray())
+        kmf.init(keyStore, passwordChars)
 
         val sslContext = SSLContext.getInstance("TLS")
         sslContext.init(kmf.keyManagers, null, SecureRandom())
@@ -330,7 +441,8 @@ class AudioCaptureService : Service() {
             keyPair.public
         )
         
-        val signer = JcaContentSignerBuilder("SHA256withRSA").setProvider("BC").build(keyPair.private)
+        // Use SHA256withECDSA for the signature
+        val signer = JcaContentSignerBuilder("SHA256withECDSA").setProvider("BC").build(keyPair.private)
         return JcaX509CertificateConverter().setProvider("BC").getCertificate(certBuilder.build(signer))
     }
 
