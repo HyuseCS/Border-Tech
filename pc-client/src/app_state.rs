@@ -91,6 +91,7 @@ impl rustls::client::danger::ServerCertVerifier for TofuVerifier {
 }
 
 /// Orchestrates the application state, managing the TCP listener and UI synchronization.
+#[allow(clippy::type_complexity)]
 pub struct AppState {
     ui: Weak<MainWindow>,
     connection_task: Arc<Mutex<Option<(tokio::task::JoinHandle<()>, tokio::sync::oneshot::Sender<()>)>>>,
@@ -288,20 +289,18 @@ impl AppState {
         };
 
         // Save TOFU pin if not already pinned
-        if let Some(certs) = tls_stream.get_ref().1.peer_certificates() {
-            if let Some(end_entity) = certs.first() {
-                let mut hasher = Sha256::new();
-                hasher.update(end_entity.as_ref());
-                let hash = hasher.finalize();
-                let hash_hex = hex::encode(hash);
+        if let Some(end_entity) = tls_stream.get_ref().1.peer_certificates().and_then(|certs| certs.first()) {
+            let mut hasher = Sha256::new();
+            hasher.update(end_entity.as_ref());
+            let hash = hasher.finalize();
+            let hash_hex = hex::encode(hash);
 
-                let mut path = dirs::config_dir().unwrap_or_else(|| std::env::current_dir().unwrap());
-                path.push("project-m");
-                let pin_path = path.join("pinned_cert.sha256");
-                if !pin_path.exists() {
-                    info!("Pinning server certificate: {}", hash_hex);
-                    let _ = std::fs::write(pin_path, hash_hex);
-                }
+            let mut path = dirs::config_dir().unwrap_or_else(|| std::env::current_dir().unwrap());
+            path.push("project-m");
+            let pin_path = path.join("pinned_cert.sha256");
+            if !pin_path.exists() {
+                info!("Pinning server certificate: {}", hash_hex);
+                let _ = std::fs::write(pin_path, hash_hex);
             }
         }
 

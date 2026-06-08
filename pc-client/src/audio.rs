@@ -50,7 +50,7 @@ impl PipewireSink {
     ) -> anyhow::Result<()> {
         pw::init();
         let mainloop = pw::main_loop::MainLoopBox::new(None)?;
-        let context = pw::context::ContextBox::new(&mainloop.loop_(), None)?;
+        let context = pw::context::ContextBox::new(mainloop.loop_(), None)?;
         let core = context.connect(None)?;
 
         let props = pw::properties::properties! {
@@ -175,7 +175,7 @@ impl PipewireSink {
 
         // REL-02: Monitor quit signal via pipewire channel
         let mainloop_ptr = mainloop.as_raw_ptr();
-        let _receiver = quit_rx.attach(&mainloop.loop_(), move |_| {
+        let _receiver = quit_rx.attach(mainloop.loop_(), move |_| {
             debug!("Received quit signal, stopping PipeWire loop");
             // SAFETY: The receiver is owned by the mainloop and cancelled/dropped before the mainloop 
             // itself is dropped. Therefore, mainloop_ptr is strictly valid for the duration of this callback.
