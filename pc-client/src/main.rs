@@ -85,7 +85,7 @@ async fn main() -> anyhow::Result<()> {
     // Handle Graceful Shutdown
     let app_state_shutdown = app_state.clone();
     tokio::spawn(async move {
-        if let Ok(_) = tokio::signal::ctrl_c().await {
+        if tokio::signal::ctrl_c().await.is_ok() {
             info!("Received Ctrl+C, shutting down...");
             app_state_shutdown.disconnect();
             let _ = slint::invoke_from_event_loop(|| {
