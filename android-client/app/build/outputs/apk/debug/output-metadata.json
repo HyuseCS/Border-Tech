@@ -11,9 +11,9 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 1,
-      "versionName": "1.0",
-      "outputFile": "Sonus-v1.0.apk"
+      "versionCode": 2,
+      "versionName": "1.1.0",
+      "outputFile": "Sonus-v1.1.0.apk"
     }
   ],
   "elementType": "File",
