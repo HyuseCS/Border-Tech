@@ -358,12 +358,56 @@ class AudioCaptureService : Service() {
             Log.d(TAG, "AudioRecord started, streaming...")
             
             val buffer = ByteArray(480)
+            var seqNum: Short = 0
+            var writeStallsCount = 0
+            var writeOkCount = 0
+            var isDegraded = false
 
             // Streaming loop for this client
             while (isServiceRunning.value && socket.isConnected && !socket.isClosed) {
                 val bytesRead = recorder.read(buffer, 0, buffer.size)
                 if (bytesRead > 0) {
-                    sendAudioPacket(outputStream, buffer, bytesRead)
+                    val payloadToSend: ByteArray
+                    val lengthToSend: Int
+                    if (isDegraded) {
+                        payloadToSend = downsampleTo24kHz(buffer, bytesRead)
+                        lengthToSend = payloadToSend.size
+                    } else {
+                        payloadToSend = buffer
+                        lengthToSend = bytesRead
+                    }
+
+                    val startTime = System.currentTimeMillis()
+                    try {
+                        sendAudioPacket(outputStream, payloadToSend, lengthToSend, seqNum, isDegraded)
+                        outputStream.flush()
+                    } catch (e: Exception) {
+                        Log.e(TAG, "Socket write error", e)
+                        break
+                    }
+                    val duration = System.currentTimeMillis() - startTime
+                    
+                    seqNum = (seqNum + 1).toShort()
+
+                    if (duration > 50) {
+                        writeStallsCount++
+                        writeOkCount = 0
+                        if (writeStallsCount >= 3 && !isDegraded) {
+                            isDegraded = true
+                            Log.w(TAG, "TCP write stall detected (${duration}ms for ${writeStallsCount} frames). Degrading to 24kHz.")
+                        }
+                    } else {
+                        writeStallsCount = 0
+                        if (duration <= 10) {
+                            writeOkCount++
+                            if (writeOkCount >= 10 && isDegraded) {
+                                isDegraded = false
+                                Log.i(TAG, "TCP backpressure cleared (10 frames sent in <= 10ms). Restoring to 48kHz.")
+                            }
+                        } else {
+                            writeOkCount = 0
+                        }
+                    }
                 } else if (bytesRead < 0) {
                     Log.w(TAG, "AudioRecord read error: $bytesRead")
                     break
@@ -387,10 +431,14 @@ class AudioCaptureService : Service() {
         }
     }
 
-    private fun sendAudioPacket(out: OutputStream, pcmData: ByteArray, length: Int) {
+    private fun sendAudioPacket(out: OutputStream, pcmData: ByteArray, length: Int, seqNum: Short, is24khz: Boolean) {
+        val verFlags = ((1 shl 4) or (if (is24khz) 1 else 0)).toByte()
         val header = byteArrayOf(
             'M'.code.toByte(),
             'C'.code.toByte(),
+            verFlags,
+            (seqNum.toInt() shr 8).toByte(),
+            (seqNum.toInt() and 0xFF).toByte(),
             (length shr 8).toByte(),
             (length and 0xFF).toByte()
         )
@@ -398,24 +446,45 @@ class AudioCaptureService : Service() {
         out.write(pcmData, 0, length)
     }
 
+    private fun downsampleTo24kHz(pcm48: ByteArray, length48: Int): ByteArray {
+        val numSamples48 = length48 / 2
+        val numSamples24 = numSamples48 / 2
+        val pcm24 = ByteArray(numSamples24 * 2)
+        for (i in 0 until numSamples24) {
+            // Copy 16-bit sample (2 bytes) from index i*4 to i*2
+            pcm24[i * 2] = pcm48[i * 4]
+            pcm24[i * 2 + 1] = pcm48[i * 4 + 1]
+        }
+        return pcm24
+    }
+
     private fun setupSslContext(): SSLContext {
-        // Generate ephemeral key pair using ECDSA (secp256r1) for maximum compatibility
-        val keyPairGenerator = KeyPairGenerator.getInstance("EC", "BC")
-        keyPairGenerator.initialize(256, SecureRandom())
-        val keyPair = keyPairGenerator.generateKeyPair()
-
-        // Generate self-signed certificate
-        val cert = generateSelfSignedCertificate(keyPair)
-
-        // Generate secure random password for the in-memory keystore
-        val randomPassword = ByteArray(32)
-        SecureRandom().nextBytes(randomPassword)
-        val passwordChars = android.util.Base64.encodeToString(randomPassword, android.util.Base64.NO_WRAP).toCharArray()
-
-        // Create a KeyStore (PKCS12)
+        val keystoreFile = java.io.File(filesDir, "keystore.p12")
+        val passwordChars = "sonus_keystore_pass".toCharArray()
         val keyStore = KeyStore.getInstance("PKCS12")
-        keyStore.load(null, null)
-        keyStore.setKeyEntry("sonus-key", keyPair.private, passwordChars, arrayOf(cert))
+
+        if (keystoreFile.exists()) {
+            Log.i(TAG, "Loading persistent keystore from ${keystoreFile.absolutePath}")
+            java.io.FileInputStream(keystoreFile).use { fis ->
+                keyStore.load(fis, passwordChars)
+            }
+        } else {
+            Log.i(TAG, "Generating new persistent keystore...")
+            // Generate ephemeral key pair using ECDSA (secp256r1) for maximum compatibility
+            val keyPairGenerator = KeyPairGenerator.getInstance("EC", "BC")
+            keyPairGenerator.initialize(256, SecureRandom())
+            val keyPair = keyPairGenerator.generateKeyPair()
+
+            // Generate self-signed certificate
+            val cert = generateSelfSignedCertificate(keyPair)
+
+            // Save to keystore file
+            keyStore.load(null, null)
+            keyStore.setKeyEntry("sonus-key", keyPair.private, passwordChars, arrayOf(cert))
+            java.io.FileOutputStream(keystoreFile).use { fos ->
+                keyStore.store(fos, passwordChars)
+            }
+        }
 
         // Set up KeyManagerFactory
         val kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm())
