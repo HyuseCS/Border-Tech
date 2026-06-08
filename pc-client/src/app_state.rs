@@ -1,7 +1,7 @@
 use slint::Weak;
 use std::sync::Arc;
 use tokio::sync::Mutex;
-use tokio::io::AsyncWriteExt;
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use crate::audio::PipewireSink;
 use crate::protocol::ProtocolHandler;
 use crate::MainWindow;
@@ -12,18 +12,49 @@ use std::time::Duration;
 pub trait AsyncStream: tokio::io::AsyncRead + tokio::io::AsyncWrite + Unpin + Send {}
 impl<T: tokio::io::AsyncRead + tokio::io::AsyncWrite + Unpin + Send> AsyncStream for T {}
 
+use std::fs;
+use std::path::PathBuf;
+use sha2::{Sha256, Digest};
+
 #[derive(Debug)]
-struct DummyVerifier;
-impl rustls::client::danger::ServerCertVerifier for DummyVerifier {
+struct TofuVerifier {
+    pin_path: PathBuf,
+}
+
+impl TofuVerifier {
+    fn new() -> Self {
+        let mut path = dirs::config_dir().unwrap_or_else(|| std::env::current_dir().unwrap());
+        path.push("project-m");
+        fs::create_dir_all(&path).ok();
+        path.push("pinned_cert.sha256");
+        Self { pin_path: path }
+    }
+}
+
+impl rustls::client::danger::ServerCertVerifier for TofuVerifier {
     fn verify_server_cert(
         &self,
-        _end_entity: &rustls::pki_types::CertificateDer<'_>,
+        end_entity: &rustls::pki_types::CertificateDer<'_>,
         _intermediates: &[rustls::pki_types::CertificateDer<'_>],
         _server_name: &rustls::pki_types::ServerName<'_>,
         _ocsp_response: &[u8],
         _now: rustls::pki_types::UnixTime,
     ) -> Result<rustls::client::danger::ServerCertVerified, rustls::Error> {
-        Ok(rustls::client::danger::ServerCertVerified::assertion())
+        let mut hasher = Sha256::new();
+        hasher.update(end_entity.as_ref());
+        let hash = hasher.finalize();
+        let hash_hex = hex::encode(hash);
+
+        if let Ok(pinned) = fs::read_to_string(&self.pin_path) {
+            if pinned.trim() == hash_hex {
+                Ok(rustls::client::danger::ServerCertVerified::assertion())
+            } else {
+                Err(rustls::Error::General(format!("Certificate pinning failed! Expected {}, got {}", pinned.trim(), hash_hex)))
+            }
+        } else {
+            // No pin exists yet, accept for now (TOFU). We will save the pin after SPAKE2 succeeds.
+            Ok(rustls::client::danger::ServerCertVerified::assertion())
+        }
     }
     
     fn verify_tls12_signature(
@@ -46,12 +77,12 @@ impl rustls::client::danger::ServerCertVerifier for DummyVerifier {
     
     fn supported_verify_schemes(&self) -> Vec<rustls::SignatureScheme> {
         vec![
+            rustls::SignatureScheme::ED25519,
             rustls::SignatureScheme::RSA_PKCS1_SHA256,
             rustls::SignatureScheme::RSA_PKCS1_SHA384,
             rustls::SignatureScheme::RSA_PKCS1_SHA512,
             rustls::SignatureScheme::ECDSA_NISTP256_SHA256,
             rustls::SignatureScheme::ECDSA_NISTP384_SHA384,
-            rustls::SignatureScheme::ED25519,
             rustls::SignatureScheme::RSA_PSS_SHA256,
             rustls::SignatureScheme::RSA_PSS_SHA384,
             rustls::SignatureScheme::RSA_PSS_SHA512,
@@ -239,7 +270,7 @@ impl AppState {
         
         let config = rustls::ClientConfig::builder()
             .dangerous()
-            .with_custom_certificate_verifier(std::sync::Arc::new(DummyVerifier))
+            .with_custom_certificate_verifier(std::sync::Arc::new(TofuVerifier::new()))
             .with_no_client_auth();
         let connector = tokio_rustls::TlsConnector::from(std::sync::Arc::new(config));
         let ip_str = if is_usb { "127.0.0.1" } else { server_ip.as_str() };
@@ -255,16 +286,110 @@ impl AppState {
                 return Ok(());
             }
         };
+
+        // Save TOFU pin if not already pinned
+        if let Some(certs) = tls_stream.get_ref().1.peer_certificates() {
+            if let Some(end_entity) = certs.first() {
+                let mut hasher = Sha256::new();
+                hasher.update(end_entity.as_ref());
+                let hash = hasher.finalize();
+                let hash_hex = hex::encode(hash);
+
+                let mut path = dirs::config_dir().unwrap_or_else(|| std::env::current_dir().unwrap());
+                path.push("project-m");
+                let pin_path = path.join("pinned_cert.sha256");
+                if !pin_path.exists() {
+                    info!("Pinning server certificate: {}", hash_hex);
+                    let _ = std::fs::write(pin_path, hash_hex);
+                }
+            }
+        }
+
         let mut stream: Box<dyn AsyncStream> = Box::new(tls_stream);
 
-        info!("Sending authentication PIN...");
-        let mut auth_pkt = vec![b'A', b'U', b'T', b'H'];
-        let mut pin_bytes = auth_pin.as_bytes().to_vec();
-        // Pad or truncate to exactly 6 bytes
-        pin_bytes.resize(6, b'0');
-        auth_pkt.extend_from_slice(&pin_bytes);
+        info!("Sending authentication PIN via SRP...");
+        use sha2::Sha256;
+        use srp::{ClientG2048, EphemeralSecret, Generate};
+        let srp_client = ClientG2048::<Sha256>::new();
+        let a_sec = EphemeralSecret::generate();
+        let a_pub = srp_client.compute_public_ephemeral(&a_sec);
+        let a_bytes = &a_pub;
+
+        info!("SRP: A computed (len={})", a_bytes.len());
+
+        let mut auth_pkt = vec![b'S', b'R', b'P', b'1'];
+        // Ensure A is 256 bytes, pad if needed
+        let mut a_pad = vec![0u8; 256];
+        let offset = 256usize.saturating_sub(a_bytes.len());
+        let len = std::cmp::min(256, a_bytes.len());
+        a_pad[offset..offset+len].copy_from_slice(&a_bytes[a_bytes.len()-len..]);
+        
+        auth_pkt.extend_from_slice(&a_pad);
         stream.write_all(&auth_pkt).await?;
         stream.flush().await?;
+        info!("SRP: Sent SRP1 (A)");
+
+        // Read SRP2
+        let mut srp2_hdr = [0u8; 4];
+        stream.read_exact(&mut srp2_hdr).await?;
+        if &srp2_hdr != b"SRP2" {
+            error!("SRP: Invalid SRP2 header: {:?}", srp2_hdr);
+            return Err(anyhow::anyhow!("Invalid SRP2 header"));
+        }
+        let mut salt = [0u8; 16];
+        stream.read_exact(&mut salt).await?;
+        let mut b_bytes = [0u8; 256];
+        stream.read_exact(&mut b_bytes).await?;
+        info!("SRP: Received SRP2 (salt + B)");
+
+        // Process reply
+        let verifier = srp_client.process_reply(&a_sec, b"client", auth_pin.as_bytes(), &salt, &b_bytes)
+            .map_err(|e| {
+                error!("SRP: process_reply failed: {:?}", e);
+                anyhow::anyhow!("SRP invalid server B")
+            })?;
+        
+        let s_bytes = verifier.key();
+        let mut s_pad = vec![0u8; 256];
+        let offset = 256usize.saturating_sub(s_bytes.len());
+        let len = std::cmp::min(256, s_bytes.len());
+        s_pad[offset..offset+len].copy_from_slice(&s_bytes[s_bytes.len()-len..]);
+
+        let mut hasher = Sha256::new();
+        hasher.update(b"M1");
+        hasher.update(&s_pad);
+        let custom_m1 = hasher.finalize();
+
+        // Send SRP3
+        let mut srp3_pkt = vec![b'S', b'R', b'P', b'3'];
+        srp3_pkt.extend_from_slice(&custom_m1);
+        stream.write_all(&srp3_pkt).await?;
+        stream.flush().await?;
+        info!("SRP: Sent SRP3 (Custom M1)");
+
+        // Read SRP4
+        let mut srp4_hdr = [0u8; 4];
+        stream.read_exact(&mut srp4_hdr).await?;
+        if &srp4_hdr != b"SRP4" {
+            error!("SRP: Invalid SRP4 header: {:?}", srp4_hdr);
+            return Err(anyhow::anyhow!("Invalid SRP4 header"));
+        }
+        let mut m2 = [0u8; 32];
+        stream.read_exact(&mut m2).await?;
+        info!("SRP: Received SRP4 (Custom M2)");
+
+        let mut hasher2 = Sha256::new();
+        hasher2.update(b"M2");
+        hasher2.update(&s_pad);
+        let expected_m2 = hasher2.finalize();
+
+        use subtle::ConstantTimeEq;
+        if expected_m2.ct_eq(&m2).unwrap_u8() != 1 {
+            return Err(anyhow::anyhow!("SRP server verification failed"));
+        }
+
+        info!("SRP: Handshake successful!");
+
 
         info!("Connection established with {}", peer_addr);
         
