@@ -20,6 +20,12 @@ pub struct PipewireSink {
 
 // Note: In newer ringbuf versions, CachingProd is naturally Send.
 
+impl crate::audio::AudioBackend for PipewireSink {
+    fn push_samples(&self, samples: &[f32]) {
+        self.push_samples(samples);
+    }
+}
+
 impl PipewireSink {
     /// Creates a new PipeWire sink with the given node name and sample rate.
     pub fn new(node_name: String, sample_rate: u32) -> anyhow::Result<Self> {

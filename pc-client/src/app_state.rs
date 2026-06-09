@@ -2,7 +2,7 @@ use slint::Weak;
 use std::sync::Arc;
 use tokio::sync::Mutex;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
-use crate::audio::PipewireSink;
+use crate::audio::DefaultAudioBackend;
 use crate::protocol::ProtocolHandler;
 use crate::MainWindow;
 
@@ -403,8 +403,8 @@ impl AppState {
             }
         });
 
-        // Initialize PipeWire virtual source sink at 48kHz
-        let sink = PipewireSink::new("Lampyris-Virtual-Mic".to_string(), 48000)?;
+        // Initialize virtual source sink at 48kHz
+        let sink = DefaultAudioBackend::new("Lampyris-Virtual-Mic".to_string(), 48000)?;
         let mut protocol = ProtocolHandler::new(stream);
         
         // 960 bytes = 480 samples of 16-bit Mono @ 48kHz
