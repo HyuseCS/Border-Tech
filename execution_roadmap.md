@@ -48,13 +48,13 @@ Execute the transition from proprietary audio streaming to a custom, low-latency
     *   Apply restrictive DACLs to the device object (Interactive User + SYSTEM only).
     *   Implement load-time shared-secret generation and registry-based authentication to prevent rogue local injection.
 
-### 2.3 Verification & Testing - **[ACTIVE]**
-*   **Deployment:** Install and run the driver on a Test-Mode Windows machine.
-*   **Static Analysis:** Integrate Driver Verifier and HLK static analysis into the `driver.yml` CI workflow.
+### 2.3 Verification & Testing - **[COMPLETED]**
+*   **Deployment:** Install and run the driver on a Test-Mode Windows machine. **[Done]**
+*   **Static Analysis:** Integrate Driver Verifier and HLK static analysis into the `driver.yml` CI workflow. **[Skipped - No CI/CD required]**
 
 ---
 
-## Phase 3: Cross-Platform OS Abstraction
+## Phase 3: Cross-Platform OS Abstraction - **[ACTIVE]**
 *Focus: Refactoring the Rust PC client to support heterogeneous audio backends seamlessly.*
 
 ### 3.1 Audio Abstraction Layer
@@ -67,21 +67,35 @@ Execute the transition from proprietary audio streaming to a custom, low-latency
 
 ---
 
-## Phase 4: System Polish & Release Readiness
+## Phase 4: Full Windows Driver Integration (PortCls)
+*Focus: Upgrading the KMD prototype into a fully functional Windows Audio Device.*
+
+### 4.1 Audio Topology Implementation
+*   **PortCls Framework:** Integrate Microsoft's Port Class (PortCls) framework into `windows-driver`.
+*   **Miniport Logic:** Implement the WaveRT (or WaveCyclic) miniport interfaces to expose the ring buffer as a hardware stream.
+*   **Topology Filters:** Expose standard KS (Kernel Streaming) volume and mute nodes.
+
+### 4.2 Driver Installation (INF)
+*   **INF Creation:** Author the `lampyris-mic.inf` file to register the driver as a Plug-and-Play audio endpoint.
+*   **OS Verification:** Ensure the device appears as "Lampyris Virtual Microphone" in the Windows Sound Control Panel.
+
+---
+
+## Phase 5: System Polish & Release Readiness
 *Focus: Ensuring rock-solid stability, verifiable low latency, and production-grade observability.*
 
-### 4.1 Fuzzing & Error Handling
+### 5.1 Fuzzing & Error Handling
 *   **Fuzzing:** Implement `cargo-fuzz` targets for the `protocol.rs` parser (targeting 0 panics).
 *   **Error Propagation:** Standardize on `anyhow` and a custom `thiserror` `AppError` enum. Enforce `#![deny(clippy::unwrap_used)]`.
 
-### 4.2 Observability & Diagnostics
+### 5.2 Observability & Diagnostics
 *   **Structured Logging:** Implement `tracing` with JSON output and log rotation on the PC client. Use `Timber` on Android.
 *   **Diagnostic Export:** Build the UI feature to generate a sanitized, local ZIP archive containing logs and latency histograms for user bug reports.
 
-### 4.3 Benchmarking & Latency Verification
+### 5.3 Benchmarking & Latency Verification
 *   **CI Gates:** Implement the `just bench-latency` target and enforce a processing latency gate (`p99 < 2ms`) in GitHub Actions.
 *   **Hardware Verification:** Conduct manual end-to-end loopback tests to confirm targets (USB ≤ 10ms, Wi-Fi ≤ 20ms).
 
-### 4.4 Release Operations
+### 5.4 Release Operations
 *   **Distribution:** Automate binary generation and SHA-256 checksum creation.
 *   **Publishing:** Configure workflows to publish artifacts via GitHub Releases exclusively.
