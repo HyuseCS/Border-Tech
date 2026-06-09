@@ -32,6 +32,8 @@ NTSTATUS WriteTokenToRegistry(VOID);
 VOID GenerateRandomToken(UCHAR* Buffer, ULONG Length);
 NTSTATUS PushAudioData(PVOID Buffer, ULONG Length);
 
+extern "C" ULONG NTAPI RtlRandomEx(PULONG Seed);
+
 // Generates a pseudo-random token using RtlRandomEx seeded with interrupt time
 VOID GenerateRandomToken(UCHAR* Buffer, ULONG Length) {
     ULONG Seed = (ULONG)KeQueryInterruptTime();
