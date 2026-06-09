@@ -37,18 +37,18 @@ Execute the transition from proprietary audio streaming to a custom, low-latency
 ## Phase 2: Windows Driver Prototype
 *Focus: Tackling the highest-risk architectural component—the Windows Kernel Virtual Audio Driver.*
 
-### 2.1 Driver Initialization - **[ACTIVE]**
+### 2.1 Driver Initialization - **[COMPLETED]**
 *   **Scaffolding:** Fork the Microsoft `sysvad` sample into a new `windows-driver/` directory.
 *   **Configuration:** Set up the Visual Studio Solution and WDK build configurations.
 
-### 2.2 IOCTL Implementation & Security
+### 2.2 IOCTL Implementation & Security - **[COMPLETED]**
 *   **Data Handling:** Implement `METHOD_BUFFERED` IOCTLs for receiving PCM data.
 *   **Validation:** Strictly validate all incoming buffer sizes against the 4,800-byte limit.
 *   **Access Control:**
     *   Apply restrictive DACLs to the device object (Interactive User + SYSTEM only).
     *   Implement load-time shared-secret generation and registry-based authentication to prevent rogue local injection.
 
-### 2.3 Verification & Testing
+### 2.3 Verification & Testing - **[ACTIVE]**
 *   **Deployment:** Install and run the driver on a Test-Mode Windows machine.
 *   **Static Analysis:** Integrate Driver Verifier and HLK static analysis into the `driver.yml` CI workflow.
 
