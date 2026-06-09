@@ -10,8 +10,6 @@ clap = { version = "4.6.1", features = ["derive"] }
 dirs = "6.0.0"
 libc = "0.2.186"
 local-ip-address = "0.6.13"
-pipewire = { version = "0.10.0", package = "pipewire" }
-pw_sys = { version = "0.10.0", package = "pipewire-sys" }
 rcgen = "0.14.8"
 ringbuf = "0.5.0"
 rustls = "0.23.40"
@@ -22,12 +20,16 @@ hex = "0.4.3"
 spake2 = "0.4.0"
 srp = "0.7.0-rc.3"
 slint = "1.16.1"
-spa_sys = { version = "0.10.0", package = "libspa-sys" }
 tokio = { version = "1.52.3", features = ["full"] }
 tokio-rustls = "0.26.4"
 tracing = "0.1.44"
 tracing-subscriber = "0.3.23"
 subtle = "2.6.1"
+
+[target.'cfg(target_os = "linux")'.dependencies]
+pipewire = { version = "0.10.0", package = "pipewire" }
+pw_sys = { version = "0.10.0", package = "pipewire-sys" }
+spa_sys = { version = "0.10.0", package = "libspa-sys" }
 
 [build-dependencies]
 slint-build = "1.16.1"
@@ -41,5 +43,6 @@ windows = { version = "0.52.0", features = [
     "Win32_Storage_FileSystem",
     "Win32_System_IO",
     "Win32_Foundation",
-    "Win32_System_Registry"
+    "Win32_System_Registry",
+    "Win32_Security"
 ] }

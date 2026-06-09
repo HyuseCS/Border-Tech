@@ -216,15 +216,21 @@ impl AppState {
 
         // Set up ADB reverse forwarding if USB mode is active
         let _adb_cleanup = if is_usb {
-            let adb_path = std::process::Command::new("which")
-                .arg("adb")
-                .output()
-                .ok()
-                .and_then(|o| String::from_utf8(o.stdout).ok())
-                .map(|s| s.trim().to_string())
-                .unwrap_or_else(|| "/usr/bin/adb".to_string());
+            let adb_path = if cfg!(target_os = "windows") {
+                "adb".to_string()
+            } else {
+                std::process::Command::new("which")
+                    .arg("adb")
+                    .output()
+                    .ok()
+                    .and_then(|o| String::from_utf8(o.stdout).ok())
+                    .map(|s| s.trim().to_string())
+                    .filter(|s| !s.is_empty())
+                    .unwrap_or_else(|| "/usr/bin/adb".to_string())
+            };
 
             info!("Configuring ADB port forwarding (PC -> Phone) for port {} using {}...", port, adb_path);
+
             
             // Proactively remove any existing dangling bindings to avoid "Address already in use" errors
             let _ = tokio::process::Command::new(&adb_path)

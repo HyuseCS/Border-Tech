@@ -1,13 +1,13 @@
 use std::sync::{Arc, Mutex};
 use tracing::{error, info, debug};
-use windows::core::{PCWSTR, w};
+use windows::core::w;
 use windows::Win32::Foundation::{HANDLE, CloseHandle, GENERIC_WRITE, GENERIC_READ};
 use windows::Win32::Storage::FileSystem::{
     CreateFileW, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, FILE_SHARE_READ, FILE_SHARE_WRITE
 };
 use windows::Win32::System::IO::DeviceIoControl;
 use windows::Win32::System::Registry::{
-    RegOpenKeyExW, RegQueryValueExW, RegCloseKey, HKEY_LOCAL_MACHINE, HKEY, REG_BINARY, KEY_READ
+    RegOpenKeyExW, RegQueryValueExW, RegCloseKey, HKEY_LOCAL_MACHINE, HKEY, KEY_READ, REG_VALUE_TYPE
 };
 use ringbuf::{HeapRb, traits::{Split, Producer, Consumer, Observer}, CachingProd, CachingCons};
 
@@ -83,7 +83,7 @@ impl WindowsSink {
                 hkey,
                 w!("SessionToken"),
                 None,
-                Some(&mut val_type),
+                Some(&mut val_type as *mut _ as *mut _),
                 Some(token.as_mut_ptr() as *mut _),
                 Some(&mut token_len)
             );
