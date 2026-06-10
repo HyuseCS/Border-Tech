@@ -93,6 +93,7 @@ impl WindowsSink {
             if status.is_err() || token_len != 32 {
                 return Err(anyhow::anyhow!("Failed to read SessionToken from registry or invalid size"));
             }
+            debug!("Read SessionToken from registry: {:?}", token);
         }
 
         let handle = unsafe {
@@ -106,7 +107,7 @@ impl WindowsSink {
                 None
             )
         };
-        
+
         let handle = handle.map_err(|e| anyhow::anyhow!("Failed to open \\\\.\\LampyrisMic2: {}", e))?;
         let hw = HandleWrapper(handle);
 

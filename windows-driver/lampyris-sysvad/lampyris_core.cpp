@@ -54,6 +54,7 @@ NTSTATUS WriteTokenToRegistry(VOID) {
     );
     
     ULONG Disposition;
+    // We must use OBJ_OPENIF to open it if it exists or create it if it doesn't
     Status = ZwCreateKey(
         &KeyHandle,
         KEY_WRITE,
