@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lampyris-mic", "lampyris-mic.vcxproj", "{8FCE2B3A-644E-43B0-8356-D7E5191C3E20}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lampyris-mic", "lampyris-sysvad\TabletAudioSample\TabletAudioSample.vcxproj", "{12345678-1234-1234-1234-123456789ABC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
