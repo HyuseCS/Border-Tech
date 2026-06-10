@@ -97,7 +97,7 @@ impl WindowsSink {
 
         let handle = unsafe {
             CreateFileW(
-                w!("\\\\.\\LampyrisMic"),
+                w!("\\\\.\\LampyrisMic2"),
                 GENERIC_READ.0 | GENERIC_WRITE.0,
                 FILE_SHARE_READ | FILE_SHARE_WRITE,
                 None,
@@ -107,7 +107,7 @@ impl WindowsSink {
             )
         };
         
-        let handle = handle.map_err(|e| anyhow::anyhow!("Failed to open \\\\.\\LampyrisMic: {}", e))?;
+        let handle = handle.map_err(|e| anyhow::anyhow!("Failed to open \\\\.\\LampyrisMic2: {}", e))?;
         let hw = HandleWrapper(handle);
 
         let mut bytes_returned = 0u32;

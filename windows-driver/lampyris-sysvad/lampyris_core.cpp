@@ -3,6 +3,14 @@
 #include <wdmsec.h>
 #include "..\ioctl.h"
 
+#ifdef ExAllocatePool2
+#undef ExAllocatePool2
+#endif
+#pragma warning(disable: 4996)
+#pragma warning(disable: 4100)
+__inline PVOID LampyrisExAllocatePool2Core(ULONG64 Flags, SIZE_T Size, ULONG Tag) { PVOID p = ExAllocatePoolWithTag(NonPagedPoolNx, Size, Tag); if (p) { RtlZeroMemory(p, Size); } return p; }
+#define ExAllocatePool2 LampyrisExAllocatePool2Core
+
 // Global driver state
 UCHAR g_SessionToken[32];
 BOOLEAN g_Authenticated = FALSE;
@@ -228,8 +236,8 @@ extern "C" NTSTATUS LampyrisInit(PDRIVER_OBJECT DriverObject) {
     UNICODE_STRING DeviceName;
     UNICODE_STRING SymbolicLinkName;
     
-    RtlInitUnicodeString(&DeviceName, L"\\Device\\LampyrisMic");
-    RtlInitUnicodeString(&SymbolicLinkName, L"\\DosDevices\\LampyrisMic");
+    RtlInitUnicodeString(&DeviceName, L"\\Device\\LampyrisMic2");
+    RtlInitUnicodeString(&SymbolicLinkName, L"\\DosDevices\\LampyrisMic2");
     
     KeInitializeSpinLock(&g_BufferLock);
     
@@ -271,7 +279,7 @@ extern "C" NTSTATUS LampyrisInit(PDRIVER_OBJECT DriverObject) {
 
 extern "C" VOID LampyrisCleanup() {
     UNICODE_STRING SymbolicLinkName;
-    RtlInitUnicodeString(&SymbolicLinkName, L"\\DosDevices\\LampyrisMic");
+    RtlInitUnicodeString(&SymbolicLinkName, L"\\DosDevices\\LampyrisMic2");
     IoDeleteSymbolicLink(&SymbolicLinkName);
     
     if (g_ControlDeviceObject != NULL) {

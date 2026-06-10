@@ -16,6 +16,7 @@ Abstract:
 #define _SYSVAD_H_
 
 #include <portcls.h>
+#include "lookaside_polyfill.h"
 #include <stdunk.h>
 #include <ksdebug.h>
 #include <ntintsafe.h>
@@ -213,4 +214,13 @@ NTSTATUS PropertyHandler_GenericPin
 #include "kshelper.h"
 
 #endif
+
+
+#ifdef ExAllocatePool2
+#undef ExAllocatePool2
+#endif
+#pragma warning(disable: 4996)
+#pragma warning(disable: 4100)
+__inline PVOID LampyrisExAllocatePool2(ULONG64 Flags, SIZE_T Size, ULONG Tag) { PVOID p = ExAllocatePoolWithTag(NonPagedPoolNx, Size, Tag); if (p) { RtlZeroMemory(p, Size); } return p; }
+#define ExAllocatePool2 LampyrisExAllocatePool2
 

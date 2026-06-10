@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lampyris-mic", "lampyris-sysvad\TabletAudioSample\TabletAudioSample.vcxproj", "{12345678-1234-1234-1234-123456789ABC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TabletAudioSample", "lampyris-sysvad\TabletAudioSample\TabletAudioSample.vcxproj", "{E4DF0EEE-D35B-47F2-A9B1-41EA97C465FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -10,12 +10,12 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8FCE2B3A-644E-43B0-8356-D7E5191C3E20}.Debug|x64.ActiveCfg = Debug|x64
-		{8FCE2B3A-644E-43B0-8356-D7E5191C3E20}.Debug|x64.Build.0 = Debug|x64
-		{8FCE2B3A-644E-43B0-8356-D7E5191C3E20}.Debug|x64.Deploy.0 = Debug|x64
-		{8FCE2B3A-644E-43B0-8356-D7E5191C3E20}.Release|x64.ActiveCfg = Release|x64
-		{8FCE2B3A-644E-43B0-8356-D7E5191C3E20}.Release|x64.Build.0 = Release|x64
-		{8FCE2B3A-644E-43B0-8356-D7E5191C3E20}.Release|x64.Deploy.0 = Release|x64
+		{E4DF0EEE-D35B-47F2-A9B1-41EA97C465FF}.Debug|x64.ActiveCfg = Debug|x64
+		{E4DF0EEE-D35B-47F2-A9B1-41EA97C465FF}.Debug|x64.Build.0 = Debug|x64
+		{E4DF0EEE-D35B-47F2-A9B1-41EA97C465FF}.Debug|x64.Deploy.0 = Debug|x64
+		{E4DF0EEE-D35B-47F2-A9B1-41EA97C465FF}.Release|x64.ActiveCfg = Release|x64
+		{E4DF0EEE-D35B-47F2-A9B1-41EA97C465FF}.Release|x64.Build.0 = Release|x64
+		{E4DF0EEE-D35B-47F2-A9B1-41EA97C465FF}.Release|x64.Deploy.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

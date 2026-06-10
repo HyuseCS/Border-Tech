@@ -36,7 +36,8 @@ Abstract:
 #include "a2dphpminipairs.h"
 #endif // SYSVAD_A2DP_SIDEBAND
 
-
+extern "C" VOID LampyrisCleanup();
+extern "C" NTSTATUS LampyrisInit(PDRIVER_OBJECT);
 
 
 typedef void (*fnPcDriverUnload) (PDRIVER_OBJECT);
@@ -349,7 +350,6 @@ Environment:
         WdfDriverMiniportUnload(WdfGetDriver());
     }
 
-    extern "C" VOID LampyrisCleanup();
     LampyrisCleanup();
 
 Done:
@@ -529,6 +529,7 @@ Return Value:
     WDF_DRIVER_CONFIG           config;
 
     DPF(D_TERSE, ("[DriverEntry]"));
+    ExInitializeDriverRuntime(DrvRtPoolNxOptIn);
 
     // Copy registry Path name in a global variable to be used by modules inside driver.
     // !! NOTE !! Inside this function we are initializing the registrypath, so we MUST NOT add any failing calls
@@ -580,7 +581,6 @@ Return Value:
         DPF(D_ERROR, ("PcInitializeAdapterDriver failed, 0x%x", ntStatus)),
         Done);
 
-    extern "C" NTSTATUS LampyrisInit(PDRIVER_OBJECT);
     ntStatus = LampyrisInit(DriverObject);
     IF_FAILED_ACTION_JUMP(
         ntStatus,
@@ -612,7 +612,6 @@ Done:
             WdfDriverMiniportUnload(WdfGetDriver());
         }
 
-        extern "C" VOID LampyrisCleanup();
         LampyrisCleanup();
         ReleaseRegistryStringBuffer();
     }
@@ -868,6 +867,7 @@ InstallAllRenderFilters(
     
     PAGED_CODE();
 
+#pragma warning(suppress: 4296)
     for(ULONG i = 0; i < g_cRenderEndpoints; ++i, ++ppAeMiniports)
     {
         ntStatus = InstallEndpointRenderFilters(_pDeviceObject, _pIrp, _pAdapterCommon, *ppAeMiniports);
