@@ -11,12 +11,12 @@ PnpLockDown = 1
 222="SYSVAD Driver Disk","",222
 
 [SourceDisksFiles]
-tabletaudiosample.sys=222
-keywordDetectorContosoAdapter.dll=222
+lampyris-mic.sys=222
+
 
 [SignatureAttributes]
-tabletaudiosample.sys=SignatureAttributes.DRM
-keyworddetectorcontosoadapter.dll=SignatureAttributes.PETrust
+lampyris-mic.sys=SignatureAttributes.DRM
+
 
 [SignatureAttributes.DRM]
 DRMLevel=1300
@@ -25,27 +25,27 @@ DRMLevel=1300
 PETrust=true
 
 [Manufacturer]
-%MfgName%=LAMPYRIS,NT$ARCH$.10.0...22621
+%MfgName%=LAMPYRIS,NT$ARCH$.10.0
 
-[LAMPYRIS.NT$ARCH$.10.0...22621]
+[LAMPYRIS.NT$ARCH$.10.0]
 %SYSVAD_SA.DeviceDesc%=SYSVAD_SA, Root\sysvad_ComponentizedAudioSample
 
 [DestinationDirs]
-SYSVAD_SA.CopyList=13 ; 13=Package's DriverStore directory
-KEYWORDDETECTORCONTOSOADAPTER.CopyList=13 ;
+SYSVAD_SA.CopyList=12 ; 13=Package's DriverStore directory
+
 
 ;======================================================
 ; SYSVAD_SA
 ;======================================================
 [SYSVAD_SA.CopyList]
-tabletaudiosample.sys
+lampyris-mic.sys
 
 [KEYWORDDETECTORCONTOSOADAPTER.CopyList]
 keyworddetectorcontosoadapter.dll
 
 [SYSVAD_SA.AddReg]
 HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
-HKR,,Driver,,tabletaudiosample.sys
+HKR,,Driver,,lampyris-mic.sys
 
 ;
 ; For demo only, please review these power management settings for your architecture. 
@@ -71,16 +71,16 @@ HKR,%MEDIA_CATEGORIES%\%MicArray3CustomNameGUID%,Name,,%MicArray3CustomName%
 HKR,%MEDIA_CATEGORIES%\%MicInCustomNameGUID%,Name,,%MicInCustomName%
 
 
-[KEYWORDDETECTORCONTOSOADAPTER.AddReg]
-HKCR,CLSID\%KEYWORDDETECTORCONTOSOADAPTER_CLSID%,,,"KeywordDetectorContosoAdapter Class"
-HKCR,CLSID\%KEYWORDDETECTORCONTOSOADAPTER_CLSID%\InProcServer32,,0x00020000,%13%\keyworddetectorcontosoadapter.dll
-HKCR,CLSID\%KEYWORDDETECTORCONTOSOADAPTER_CLSID%\InProcServer32,ThreadingModel,,"Apartment"
-HKCR,CLSID\%KEYWORDDETECTORCONTOSOADAPTER_CLSID%\Version,,,"1.0"
 
-HKCR,CLSID\%KEYWORDDETECTORCONTOSOADAPTER_CLSID2%,,,"KeywordDetectorContosoAdapter2 Class"
-HKCR,CLSID\%KEYWORDDETECTORCONTOSOADAPTER_CLSID2%\InProcServer32,,0x00020000,%13%\keyworddetectorcontosoadapter.dll
-HKCR,CLSID\%KEYWORDDETECTORCONTOSOADAPTER_CLSID2%\InProcServer32,ThreadingModel,,"Apartment"
-HKCR,CLSID\%KEYWORDDETECTORCONTOSOADAPTER_CLSID2%\Version,,,"1.0"
+
+
+
+
+
+
+
+
+
 
 ;======================================================
 ; render interfaces: speaker (internal)
@@ -348,8 +348,8 @@ HKR,FX\0,%PKEY_FX_KeywordDetector_ModeEffectClsid%,,%FX_DISCOVER_EFFECTS_APO_CLS
 [SYSVAD_SA.NT]
 Include=ks.inf,wdmaudio.inf
 Needs=KS.Registration, WDMAUDIO.Registration
-CopyFiles=SYSVAD_SA.CopyList,KEYWORDDETECTORCONTOSOADAPTER.CopyList
-AddReg=SYSVAD_SA.AddReg,KEYWORDDETECTORCONTOSOADAPTER.AddReg
+CopyFiles=SYSVAD_SA.CopyList
+AddReg=SYSVAD_SA.AddReg
 
 [SYSVAD_SA.NT.Interfaces]
 ;
@@ -468,7 +468,7 @@ DisplayName=%SYSVAD_ComponentizedAudioSample.SvcDesc%
 ServiceType=1
 StartType=3
 ErrorControl=1
-ServiceBinary=%13%\tabletaudiosample.sys
+ServiceBinary=%12%\lampyris-mic.sys
 
 [SYSVAD_SA.NT.HW]
 AddReg = AUDIOHW.AddReg
