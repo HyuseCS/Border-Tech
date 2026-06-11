@@ -70,7 +70,7 @@ impl WindowsSink {
                 HKEY_LOCAL_MACHINE,
                 w!("SOFTWARE\\Lampyris"),
                 0,
-                KEY_READ,
+                KEY_READ | windows::Win32::System::Registry::KEY_WOW64_64KEY,
                 &mut hkey
             );
             if status.is_err() {
