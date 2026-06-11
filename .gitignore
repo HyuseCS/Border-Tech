@@ -8,6 +8,7 @@
 .idea/shelf/
 out/
 
+.vs/
 .gemini/
 
 # Rust (pc-client)

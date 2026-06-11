@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>D:\Border-Tech\windows-driver\lampyris-sysvad\TabletAudioSample\x64\Release\lampyris-mic.sys</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\Border-Tech\windows-driver\lampyris-sysvad\x64\Release\package</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles />
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>

@@ -38,48 +38,14 @@ VOID GenerateRandomToken(UCHAR* Buffer, ULONG Length) {
 }
 
 NTSTATUS WriteTokenToRegistry(VOID) {
-    UNICODE_STRING KeyPath;
-    OBJECT_ATTRIBUTES ObjectAttributes;
-    HANDLE KeyHandle = NULL;
-    NTSTATUS Status;
-    
-    RtlInitUnicodeString(&KeyPath, L"\\Registry\\Machine\\Software\\Lampyris");
-    
-    InitializeObjectAttributes(
-        &ObjectAttributes,
-        &KeyPath,
-        OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE,
-        NULL,
-        NULL
+    NTSTATUS Status = RtlWriteRegistryValue(
+        RTL_REGISTRY_ABSOLUTE,
+        L"\\Registry\\Machine\\Software\\Lampyris",
+        L"SessionToken",
+        REG_BINARY,
+        g_SessionToken,
+        32
     );
-    
-    ULONG Disposition;
-    // We must use OBJ_OPENIF to open it if it exists or create it if it doesn't
-    Status = ZwCreateKey(
-        &KeyHandle,
-        KEY_WRITE,
-        &ObjectAttributes,
-        0,
-        NULL,
-        REG_OPTION_NON_VOLATILE,
-        &Disposition
-    );
-    
-    if (NT_SUCCESS(Status)) {
-        UNICODE_STRING ValueName;
-        RtlInitUnicodeString(&ValueName, L"SessionToken");
-        
-        Status = ZwSetValueKey(
-            KeyHandle,
-            &ValueName,
-            0,
-            REG_BINARY,
-            g_SessionToken,
-            32
-        );
-        ZwClose(KeyHandle);
-    }
-    
     return Status;
 }
 

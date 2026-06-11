@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|ARM64">
@@ -19,21 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KeywordDetectorAdapter\KeywordDetectorContosoAdapter.vcxproj">
-      <Project>{E0F02048-78A4-4FE8-B863-66E6CB6A2C37}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\APO\SwapAPO\SwapAPO.vcxproj">
-      <Project>{691F1D0F-CA50-46CD-8BBA-A59E9E8EB601}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\APO\DelayAPO\DelayAPO.vcxproj">
-      <Project>{8851AB85-70B3-4798-A149-BA366DF9EC25}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\APO\KWSApo\KwsAPO.vcxproj">
-      <Project>{47358AD6-A48A-465B-965F-0A66F8BDFE23}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\APO\AecApo\AecAPO.vcxproj">
-      <Project>{83A1B9B0-3CB7-4249-ADEC-C336B0EDDE76}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\TabletAudioSample\TabletAudioSample.vcxproj">
       <Project>{E4DF0EEE-D35B-47F2-A9B1-41EA97C465FF}</Project>
     </ProjectReference>
@@ -50,6 +35,7 @@
     <ProjectGuid>{830B14D5-0E32-4F9E-AEFA-4C9F6FC13C2A}</ProjectGuid>
     <SampleGuid>{E9D167E6-E633-4284-8F02-FF86DF3B6D7F}</SampleGuid>
     <RootNamespace>$(MSBuildProjectName)</RootNamespace>
+      <SpectreMitigation>false</SpectreMitigation>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <TargetVersion>Windows10</TargetVersion>
@@ -114,4 +100,9 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <PropertyGroup>
+    <SpectreMitigation>false</SpectreMitigation>
+  </PropertyGroup>
 </Project>
+
+
