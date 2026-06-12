@@ -2,11 +2,13 @@ use pipewire as pw;
 use pw::spa;
 use pw::spa::utils::Direction;
 use pw::stream::{StreamBox, StreamFlags};
-use tracing::{error, info, debug};
+use ringbuf::{
+    CachingCons, CachingProd, HeapRb,
+    traits::{Consumer, Observer, Producer, Split},
+};
 use spa::pod::Pod;
-use ringbuf::{HeapRb, traits::{Split, Producer, Consumer, Observer}, CachingProd, CachingCons};
 use std::sync::{Arc, Mutex};
-
+use tracing::{debug, error, info};
 
 // SEC-02: Compile-time guard for f32 size
 const _: () = assert!(std::mem::size_of::<f32>() == 4);
@@ -33,7 +35,7 @@ impl PipewireSink {
         let rb = HeapRb::<f32>::new(sample_rate as usize * 2); // 2 seconds buffer
         let (prod, cons) = rb.split();
         let producer = Arc::new(Mutex::new(prod));
-        
+
         let (quit_tx, quit_rx) = pw::channel::channel::<()>();
 
         std::thread::spawn(move || {
@@ -42,17 +44,17 @@ impl PipewireSink {
             }
         });
 
-        Ok(Self { 
+        Ok(Self {
             producer,
             quit_tx: Some(quit_tx),
         })
     }
 
     fn run_loop(
-        node_name: String, 
-        sample_rate: u32, 
+        node_name: String,
+        sample_rate: u32,
         mut consumer: CachingCons<Arc<HeapRb<f32>>>,
-        quit_rx: pw::channel::Receiver<()>
+        quit_rx: pw::channel::Receiver<()>,
     ) -> anyhow::Result<()> {
         pw::init();
         let mainloop = pw::main_loop::MainLoopBox::new(None)?;
@@ -81,18 +83,21 @@ impl PipewireSink {
                 if let Some(mut buffer) = stream.dequeue_buffer() {
                     let datas = buffer.datas_mut();
                     let data = &mut datas[0];
-                    
+
                     if let Some(slice) = data.data() {
                         let total_len = slice.len();
                         let requested_samples = total_len / 4;
-                        
+
                         let occupied = consumer.occupied_len();
 
                         // Jitter Buffer logic
                         if is_buffering {
                             if occupied >= prebuffer_threshold {
                                 is_buffering = false;
-                                debug!("Jitter buffer filled ({} samples). Starting audio playback.", occupied);
+                                debug!(
+                                    "Jitter buffer filled ({} samples). Starting audio playback.",
+                                    occupied
+                                );
                             }
                         } else if occupied == 0 {
                             is_buffering = true;
@@ -104,11 +109,16 @@ impl PipewireSink {
                         } else {
                             requested_samples.min(occupied)
                         };
-                        
+
                         if n_samples > 0 {
                             // SEC-02: Hard bounds check to prevent overrun in release builds
-                            assert!(n_samples * 4 <= slice.len(), "Buffer overrun risk: requested {} bytes for {} byte slice", n_samples * 4, slice.len());
-                            
+                            assert!(
+                                n_samples * 4 <= slice.len(),
+                                "Buffer overrun risk: requested {} bytes for {} byte slice",
+                                n_samples * 4,
+                                slice.len()
+                            );
+
                             // SAFETY: The `slice` bounds are explicitly checked above (`n_samples * 4 <= slice.len()`).
                             // The ring buffer ensures that `as_slices()` returns valid memory.
                             // We are safely copying standard PCM floats into the pipewire buffer.
@@ -116,13 +126,13 @@ impl PipewireSink {
                                 // PERF: Read directly from ring buffer into PipeWire slice
                                 let (s1, s2) = consumer.as_slices();
                                 let first_len = s1.len().min(n_samples);
-                                
+
                                 std::ptr::copy_nonoverlapping(
                                     s1.as_ptr() as *const u8,
                                     slice.as_mut_ptr(),
                                     first_len * 4,
                                 );
-                                
+
                                 if first_len < n_samples {
                                     let second_len = n_samples - first_len;
                                     std::ptr::copy_nonoverlapping(
@@ -133,7 +143,7 @@ impl PipewireSink {
                                 }
                             }
                             consumer.skip(n_samples);
-                            
+
                             let chunk = data.chunk_mut();
                             *chunk.offset_mut() = 0;
                             *chunk.size_mut() = (n_samples * 4) as u32;
@@ -168,7 +178,8 @@ impl PipewireSink {
         .0
         .into_inner();
 
-        let mut params = [Pod::from_bytes(&values).ok_or_else(|| anyhow::anyhow!("Pod from_bytes failed"))?];
+        let mut params =
+            [Pod::from_bytes(&values).ok_or_else(|| anyhow::anyhow!("Pod from_bytes failed"))?];
 
         info!("Connecting PipeWire stream as a source node: {}", node_name);
 
@@ -183,7 +194,7 @@ impl PipewireSink {
         let mainloop_ptr = mainloop.as_raw_ptr();
         let _receiver = quit_rx.attach(mainloop.loop_(), move |_| {
             debug!("Received quit signal, stopping PipeWire loop");
-            // SAFETY: The receiver is owned by the mainloop and cancelled/dropped before the mainloop 
+            // SAFETY: The receiver is owned by the mainloop and cancelled/dropped before the mainloop
             // itself is dropped. Therefore, mainloop_ptr is strictly valid for the duration of this callback.
             unsafe {
                 pw_sys::pw_main_loop_quit(mainloop_ptr);

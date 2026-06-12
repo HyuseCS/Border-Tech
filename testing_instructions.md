@@ -11,12 +11,14 @@ git commit -F commit_message.md
 ## 2. Pull and Build on the Target PC
 Once you are on the target PC (which has Rust installed), pull the repository.
 
-**Rebuild the PC Client:**
-Navigate to the `pc-client` directory and compile the optimized release build:
+**Rebuild the PC Client (Windows .exe):**
+Navigate to the `pc-client` directory and compile the optimized release build for Windows:
 ```bash
 cd pc-client
-cargo build --release
+rustup target add x86_64-pc-windows-gnu
+cargo build --release --target x86_64-pc-windows-gnu
 ```
+*(Note: If the target PC is running Linux, you may need to install the Mingw-w64 toolchain first, e.g., `sudo apt install mingw-w64`. If you are building directly on a Windows PC, a simple `cargo build --release` will automatically produce the `.exe`.)*
 
 ## 3. Deploy the Driver Update to the VM
 Copy the newly built driver release folder from your target PC into the VM.

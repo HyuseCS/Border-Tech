@@ -10,9 +10,9 @@ pub struct ProtocolHandler<S> {
     rx_queue: Vec<u8>,
 }
 
-impl<S> ProtocolHandler<S> 
-where 
-    S: AsyncRead + AsyncWrite + Unpin + Send 
+impl<S> ProtocolHandler<S>
+where
+    S: AsyncRead + AsyncWrite + Unpin + Send,
 {
     /// Creates a new ProtocolHandler wrapping an asynchronous stream.
     pub fn new(stream: S) -> Self {
@@ -26,7 +26,7 @@ where
     /// Reads the next frame from the network stream, parses its header, and returns the payload, sequence number, and is_24khz flag.
     async fn read_next_frame(&mut self) -> anyhow::Result<(Vec<u8>, u16, bool)> {
         let mut header = [0u8; 7];
-        
+
         loop {
             // Scan for magic 'M'
             self.stream.read_exact(&mut header[0..1]).await?;
@@ -37,37 +37,52 @@ where
                     // Read the remaining 5 bytes of the header:
                     // Ver/Flags (1B), Seq No (2B BE), Payload Size (2B BE)
                     self.stream.read_exact(&mut header[2..7]).await?;
-                    
+
                     let ver_flags = header[2];
                     let version = ver_flags >> 4;
                     let flags = ver_flags & 0x0F;
                     let is_24khz = (flags & 0x01) != 0;
-                    
+
                     if version != 1 {
                         error!("Unsupported protocol version: {}", version);
                         return Err(anyhow::anyhow!("Unsupported protocol version: {}", version));
                     }
-                    
+
                     let seq = u16::from_be_bytes([header[3], header[4]]);
                     let len = u16::from_be_bytes([header[5], header[6]]) as usize;
-                    
+
                     if len == 0 {
                         continue;
                     }
                     if len > 4800 {
                         error!("Payload size {} exceeds limit of 4800 bytes", len);
-                        return Err(anyhow::anyhow!("Payload size {} exceeds limit of 4800 bytes", len));
+                        return Err(anyhow::anyhow!(
+                            "Payload size {} exceeds limit of 4800 bytes",
+                            len
+                        ));
                     }
-                    
+
                     let mut payload = vec![0u8; len];
-                    match tokio::time::timeout(std::time::Duration::from_secs(2), self.stream.read_exact(&mut payload)).await {
-                        Ok(res) => { res?; },
+                    match tokio::time::timeout(
+                        std::time::Duration::from_secs(2),
+                        self.stream.read_exact(&mut payload),
+                    )
+                    .await
+                    {
+                        Ok(res) => {
+                            res?;
+                        }
                         Err(_) => {
                             error!("Timeout waiting for audio packet payload ({} bytes)", len);
-                            return Err(anyhow::anyhow!("Timeout waiting for audio packet payload"));
+                            return Err(anyhow::anyhow!(
+                                "Timeout waiting for audio packet payload"
+                            ));
                         }
                     }
-                    debug!("Read Lampyris audio packet: seq={}, len={}, 24kHz={}", seq, len, is_24khz);
+                    debug!(
+                        "Read Lampyris audio packet: seq={}, len={}, 24kHz={}",
+                        seq, len, is_24khz
+                    );
                     return Ok((payload, seq, is_24khz));
                 }
             }
@@ -79,28 +94,30 @@ where
     pub async fn read_audio_packet(&mut self, buf: &mut [u8]) -> anyhow::Result<usize> {
         while self.rx_queue.len() < buf.len() {
             let (payload, seq, is_24khz) = self.read_next_frame().await?;
-            
+
             // Sequence gap detection
             if let Some(expected) = self.expected_seq {
                 let gap = seq.wrapping_sub(expected);
                 if gap > 0 && gap < 3000 {
                     // Calculate silence bytes to insert: each missing frame is assumed to be
                     // the same size as the current frame (upsampled to 48kHz if 24kHz).
-                    let frame_size = if is_24khz { payload.len() * 2 } else { payload.len() };
+                    let frame_size = if is_24khz {
+                        payload.len() * 2
+                    } else {
+                        payload.len()
+                    };
                     let silence_len = (gap as usize * frame_size).min(48000); // Cap silence at 0.5s
-                        
+
                     warn!(
                         "Sequence gap detected: expected {}, got {}. Inserting {} bytes of silence.",
-                        expected,
-                        seq,
-                        silence_len
+                        expected, seq, silence_len
                     );
-                    
+
                     self.rx_queue.resize(self.rx_queue.len() + silence_len, 0);
                 }
             }
             self.expected_seq = Some(seq.wrapping_add(1));
-            
+
             // Process payload: upsample if degraded (24kHz)
             if is_24khz {
                 if payload.len() % 2 != 0 {
@@ -118,7 +135,7 @@ where
                 self.rx_queue.extend_from_slice(&payload);
             }
         }
-        
+
         let to_read = buf.len().min(self.rx_queue.len());
         buf[..to_read].copy_from_slice(&self.rx_queue[..to_read]);
         self.rx_queue.drain(..to_read);
@@ -173,7 +190,12 @@ mod tests {
 
         let result = handler.read_audio_packet(&mut buf).await;
         assert!(result.is_err());
-        assert!(result.unwrap_err().to_string().contains("exceeds limit of 4800"));
+        assert!(
+            result
+                .unwrap_err()
+                .to_string()
+                .contains("exceeds limit of 4800")
+        );
     }
 
     #[tokio::test]
@@ -195,8 +217,8 @@ mod tests {
     async fn test_sequence_gap_silence_insertion() {
         let data = [
             b'M', b'C', 0x10, 0x00, 0x01, 0x00, 0x04, // Header: seq 1, len 4
-            0x01, 0x02, 0x03, 0x04,
-            b'M', b'C', 0x10, 0x00, 0x03, 0x00, 0x04, // Header: seq 3 (missing 2), len 4
+            0x01, 0x02, 0x03, 0x04, b'M', b'C', 0x10, 0x00, 0x03, 0x00,
+            0x04, // Header: seq 3 (missing 2), len 4
             0x05, 0x06, 0x07, 0x08,
         ];
         let mock = Builder::new().read(&data).build();
@@ -210,7 +232,7 @@ mod tests {
             &[
                 0x01, 0x02, 0x03, 0x04, // Packet 1
                 0x00, 0x00, 0x00, 0x00, // Silence inserted for missing Packet 2
-                0x05, 0x06, 0x07, 0x08  // Packet 3
+                0x05, 0x06, 0x07, 0x08 // Packet 3
             ]
         );
     }

@@ -1,20 +1,20 @@
-use slint::Weak;
-use std::sync::Arc;
-use tokio::sync::Mutex;
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use crate::MainWindow;
 use crate::audio::DefaultAudioBackend;
 use crate::protocol::ProtocolHandler;
-use crate::MainWindow;
+use slint::Weak;
+use std::sync::Arc;
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::sync::Mutex;
 
-use tracing::{info, error};
 use std::time::Duration;
+use tracing::{error, info};
 
 pub trait AsyncStream: tokio::io::AsyncRead + tokio::io::AsyncWrite + Unpin + Send {}
 impl<T: tokio::io::AsyncRead + tokio::io::AsyncWrite + Unpin + Send> AsyncStream for T {}
 
+use sha2::{Digest, Sha256};
 use std::fs;
 use std::path::PathBuf;
-use sha2::{Sha256, Digest};
 
 #[derive(Debug)]
 struct TofuVerifier {
@@ -49,14 +49,18 @@ impl rustls::client::danger::ServerCertVerifier for TofuVerifier {
             if pinned.trim() == hash_hex {
                 Ok(rustls::client::danger::ServerCertVerified::assertion())
             } else {
-                Err(rustls::Error::General(format!("Certificate pinning failed! Expected {}, got {}", pinned.trim(), hash_hex)))
+                Err(rustls::Error::General(format!(
+                    "Certificate pinning failed! Expected {}, got {}",
+                    pinned.trim(),
+                    hash_hex
+                )))
             }
         } else {
             // No pin exists yet, accept for now (TOFU). We will save the pin after SPAKE2 succeeds.
             Ok(rustls::client::danger::ServerCertVerified::assertion())
         }
     }
-    
+
     fn verify_tls12_signature(
         &self,
         _message: &[u8],
@@ -65,7 +69,7 @@ impl rustls::client::danger::ServerCertVerifier for TofuVerifier {
     ) -> Result<rustls::client::danger::HandshakeSignatureValid, rustls::Error> {
         Ok(rustls::client::danger::HandshakeSignatureValid::assertion())
     }
-    
+
     fn verify_tls13_signature(
         &self,
         _message: &[u8],
@@ -74,7 +78,7 @@ impl rustls::client::danger::ServerCertVerifier for TofuVerifier {
     ) -> Result<rustls::client::danger::HandshakeSignatureValid, rustls::Error> {
         Ok(rustls::client::danger::HandshakeSignatureValid::assertion())
     }
-    
+
     fn supported_verify_schemes(&self) -> Vec<rustls::SignatureScheme> {
         vec![
             rustls::SignatureScheme::ED25519,
@@ -94,7 +98,14 @@ impl rustls::client::danger::ServerCertVerifier for TofuVerifier {
 #[allow(clippy::type_complexity)]
 pub struct AppState {
     ui: Weak<MainWindow>,
-    connection_task: Arc<Mutex<Option<(tokio::task::JoinHandle<()>, tokio::sync::oneshot::Sender<()>)>>>,
+    connection_task: Arc<
+        Mutex<
+            Option<(
+                tokio::task::JoinHandle<()>,
+                tokio::sync::oneshot::Sender<()>,
+            )>,
+        >,
+    >,
 }
 
 impl AppState {
@@ -129,8 +140,16 @@ impl AppState {
                     const MAX_RETRIES: u32 = 5;
 
                     loop {
-                        let res = Self::run_connection(port, is_usb, server_ip_clone.clone(), auth_pin.clone(), ui_weak_run.clone(), &mut rx).await;
-                        
+                        let res = Self::run_connection(
+                            port,
+                            is_usb,
+                            server_ip_clone.clone(),
+                            auth_pin.clone(),
+                            ui_weak_run.clone(),
+                            &mut rx,
+                        )
+                        .await;
+
                         match res {
                             Ok(_) => {
                                 // Clean exit (disconnect requested)
@@ -147,8 +166,13 @@ impl AppState {
                                 break;
                             }
                             Err(e) => {
-                                error!("Connection error: {}. Retry {}/{}", e, retry_count + 1, MAX_RETRIES);
-                                
+                                error!(
+                                    "Connection error: {}. Retry {}/{}",
+                                    e,
+                                    retry_count + 1,
+                                    MAX_RETRIES
+                                );
+
                                 if rx.try_recv().is_ok() || retry_count >= MAX_RETRIES {
                                     let _ = slint::invoke_from_event_loop(move || {
                                         if let Some(ui) = ui_weak_run.upgrade() {
@@ -164,7 +188,9 @@ impl AppState {
                                     let ui_weak = ui_weak_run.clone();
                                     move || {
                                         if let Some(ui) = ui_weak.upgrade() {
-                                            ui.set_status_text(format!("Retrying ({})...", retry_count).into());
+                                            ui.set_status_text(
+                                                format!("Retrying ({})...", retry_count).into(),
+                                            );
                                         }
                                     }
                                 });
@@ -192,12 +218,12 @@ impl AppState {
     }
 
     async fn run_connection(
-        port: u16, 
-        is_usb: bool, 
+        port: u16,
+        is_usb: bool,
         server_ip: String,
         auth_pin: String,
         ui_weak: Weak<MainWindow>,
-        stop_rx: &mut tokio::sync::oneshot::Receiver<()>
+        stop_rx: &mut tokio::sync::oneshot::Receiver<()>,
     ) -> anyhow::Result<()> {
         let status_msg = if is_usb {
             "Waiting for connection...".to_string()
@@ -229,20 +255,31 @@ impl AppState {
                     .unwrap_or_else(|| "/usr/bin/adb".to_string())
             };
 
-            info!("Configuring ADB port forwarding (PC -> Phone) for port {} using {}...", port, adb_path);
+            info!(
+                "Configuring ADB port forwarding (PC -> Phone) for port {} using {}...",
+                port, adb_path
+            );
 
-            
             // Proactively remove any existing dangling bindings to avoid "Address already in use" errors
             let _ = tokio::process::Command::new(&adb_path)
                 .args(["forward", "--remove", &format!("tcp:{}", port)])
-                .output().await;
+                .output()
+                .await;
 
             let out = tokio::process::Command::new(&adb_path)
-                .args(["forward", &format!("tcp:{}", port), &format!("tcp:{}", port)])
-                .output().await?;
-            
+                .args([
+                    "forward",
+                    &format!("tcp:{}", port),
+                    &format!("tcp:{}", port),
+                ])
+                .output()
+                .await?;
+
             if !out.status.success() {
-                return Err(anyhow::anyhow!("ADB forward command failed: {}", String::from_utf8_lossy(&out.stderr)));
+                return Err(anyhow::anyhow!(
+                    "ADB forward command failed: {}",
+                    String::from_utf8_lossy(&out.stderr)
+                ));
             }
 
             Some(scopeguard::guard((port, adb_path), |(p, adb_cmd)| {
@@ -274,17 +311,21 @@ impl AppState {
         };
         let peer_addr = tcp_stream.peer_addr()?;
         tcp_stream.set_nodelay(true)?;
-        
+
         let config = rustls::ClientConfig::builder()
             .dangerous()
             .with_custom_certificate_verifier(std::sync::Arc::new(TofuVerifier::new()))
             .with_no_client_auth();
         let connector = tokio_rustls::TlsConnector::from(std::sync::Arc::new(config));
-        let ip_str = if is_usb { "127.0.0.1" } else { server_ip.as_str() };
-        let domain = rustls::pki_types::ServerName::try_from(ip_str).unwrap_or_else(|_| {
-            rustls::pki_types::ServerName::try_from("localhost").unwrap()
-        }).to_owned();
-        
+        let ip_str = if is_usb {
+            "127.0.0.1"
+        } else {
+            server_ip.as_str()
+        };
+        let domain = rustls::pki_types::ServerName::try_from(ip_str)
+            .unwrap_or_else(|_| rustls::pki_types::ServerName::try_from("localhost").unwrap())
+            .to_owned();
+
         info!("Initiating TLS handshake...");
         let tls_stream = tokio::select! {
             res = connector.connect(domain, tcp_stream) => res?,
@@ -295,7 +336,12 @@ impl AppState {
         };
 
         // Save TOFU pin if not already pinned
-        if let Some(end_entity) = tls_stream.get_ref().1.peer_certificates().and_then(|certs| certs.first()) {
+        if let Some(end_entity) = tls_stream
+            .get_ref()
+            .1
+            .peer_certificates()
+            .and_then(|certs| certs.first())
+        {
             let mut hasher = Sha256::new();
             hasher.update(end_entity.as_ref());
             let hash = hasher.finalize();
@@ -327,8 +373,8 @@ impl AppState {
         let mut a_pad = vec![0u8; 256];
         let offset = 256usize.saturating_sub(a_bytes.len());
         let len = std::cmp::min(256, a_bytes.len());
-        a_pad[offset..offset+len].copy_from_slice(&a_bytes[a_bytes.len()-len..]);
-        
+        a_pad[offset..offset + len].copy_from_slice(&a_bytes[a_bytes.len() - len..]);
+
         auth_pkt.extend_from_slice(&a_pad);
         stream.write_all(&auth_pkt).await?;
         stream.flush().await?;
@@ -348,17 +394,18 @@ impl AppState {
         info!("SRP: Received SRP2 (salt + B)");
 
         // Process reply
-        let verifier = srp_client.process_reply(&a_sec, b"client", auth_pin.as_bytes(), &salt, &b_bytes)
+        let verifier = srp_client
+            .process_reply(&a_sec, b"client", auth_pin.as_bytes(), &salt, &b_bytes)
             .map_err(|e| {
                 error!("SRP: process_reply failed: {:?}", e);
                 anyhow::anyhow!("SRP invalid server B")
             })?;
-        
+
         let s_bytes = verifier.key();
         let mut s_pad = vec![0u8; 256];
         let offset = 256usize.saturating_sub(s_bytes.len());
         let len = std::cmp::min(256, s_bytes.len());
-        s_pad[offset..offset+len].copy_from_slice(&s_bytes[s_bytes.len()-len..]);
+        s_pad[offset..offset + len].copy_from_slice(&s_bytes[s_bytes.len() - len..]);
 
         let mut hasher = Sha256::new();
         hasher.update(b"M1");
@@ -395,9 +442,8 @@ impl AppState {
 
         info!("SRP: Handshake successful!");
 
-
         info!("Connection established with {}", peer_addr);
-        
+
         let _ = slint::invoke_from_event_loop({
             let ui_weak = ui_weak.clone();
             let peer = peer_addr.to_string();
@@ -412,7 +458,7 @@ impl AppState {
         // Initialize virtual source sink at 48kHz
         let sink = DefaultAudioBackend::new("Lampyris-Virtual-Mic".to_string(), 48000)?;
         let mut protocol = ProtocolHandler::new(stream);
-        
+
         // 960 bytes = 480 samples of 16-bit Mono @ 48kHz
         let mut buf = [0u8; 960];
         let mut float_buf = Vec::with_capacity(480);

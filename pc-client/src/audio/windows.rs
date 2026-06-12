@@ -1,15 +1,19 @@
+use ringbuf::{
+    CachingCons, CachingProd, HeapRb,
+    traits::{Consumer, Observer, Producer, Split},
+};
 use std::sync::{Arc, Mutex};
-use tracing::{error, info, debug};
-use windows::core::w;
-use windows::Win32::Foundation::{HANDLE, CloseHandle, GENERIC_WRITE, GENERIC_READ};
+use tracing::{debug, error, info};
+use windows::Win32::Foundation::{CloseHandle, GENERIC_READ, GENERIC_WRITE, HANDLE};
 use windows::Win32::Storage::FileSystem::{
-    CreateFileW, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, FILE_SHARE_READ, FILE_SHARE_WRITE
+    CreateFileW, FILE_ATTRIBUTE_NORMAL, FILE_SHARE_READ, FILE_SHARE_WRITE, OPEN_EXISTING,
 };
 use windows::Win32::System::IO::DeviceIoControl;
 use windows::Win32::System::Registry::{
-    RegOpenKeyExW, RegQueryValueExW, RegCloseKey, HKEY_LOCAL_MACHINE, HKEY, KEY_READ, REG_VALUE_TYPE
+    HKEY, HKEY_LOCAL_MACHINE, KEY_READ, RegCloseKey, RegOpenKeyExW,
+    RegQueryValueExW,
 };
-use ringbuf::{HeapRb, traits::{Split, Producer, Consumer, Observer}, CachingProd, CachingCons};
+use windows::core::w;
 
 const FILE_DEVICE_LAMPYRIS: u32 = 0x8001;
 const LAMPYRIS_FUNC_AUTHENTICATE: u32 = 0x801;
@@ -21,8 +25,18 @@ const fn ctl_code(device_type: u32, function: u32, method: u32, access: u32) -> 
     (device_type << 16) | (access << 14) | (function << 2) | method
 }
 
-const IOCTL_LAMPYRIS_AUTHENTICATE: u32 = ctl_code(FILE_DEVICE_LAMPYRIS, LAMPYRIS_FUNC_AUTHENTICATE, METHOD_BUFFERED, FILE_WRITE_ACCESS);
-const IOCTL_LAMPYRIS_PUSH_AUDIO: u32 = ctl_code(FILE_DEVICE_LAMPYRIS, LAMPYRIS_FUNC_PUSH_AUDIO, METHOD_BUFFERED, FILE_WRITE_ACCESS);
+const IOCTL_LAMPYRIS_AUTHENTICATE: u32 = ctl_code(
+    FILE_DEVICE_LAMPYRIS,
+    LAMPYRIS_FUNC_AUTHENTICATE,
+    METHOD_BUFFERED,
+    FILE_WRITE_ACCESS,
+);
+const IOCTL_LAMPYRIS_PUSH_AUDIO: u32 = ctl_code(
+    FILE_DEVICE_LAMPYRIS,
+    LAMPYRIS_FUNC_PUSH_AUDIO,
+    METHOD_BUFFERED,
+    FILE_WRITE_ACCESS,
+);
 
 const LAMPYRIS_MAX_AUDIO_PAYLOAD: usize = 4800;
 
@@ -54,7 +68,9 @@ unsafe impl Sync for HandleWrapper {}
 impl Drop for HandleWrapper {
     fn drop(&mut self) {
         if !self.0.is_invalid() {
-            unsafe { let _ = CloseHandle(self.0); }
+            unsafe {
+                let _ = CloseHandle(self.0);
+            }
         }
     }
 }
@@ -62,7 +78,7 @@ impl Drop for HandleWrapper {
 impl WindowsSink {
     pub fn new(_node_name: String, sample_rate: u32) -> anyhow::Result<Self> {
         let mut token = [0u8; 32];
-        
+
         unsafe {
             let mut hkey = HKEY::default();
             // Note: KEY_READ requires WIN32_SYSTEM_REGISTRY features
@@ -71,12 +87,12 @@ impl WindowsSink {
                 w!("SOFTWARE\\Lampyris"),
                 0,
                 KEY_READ | windows::Win32::System::Registry::KEY_WOW64_64KEY,
-                &mut hkey
+                &mut hkey,
             );
             if status.is_err() {
                 return Err(anyhow::anyhow!("Failed to open registry key: {:?}", status));
             }
-            
+
             let mut token_len = 32u32;
             let mut val_type = 0u32;
             let status = RegQueryValueExW(
@@ -85,13 +101,15 @@ impl WindowsSink {
                 None,
                 Some(&mut val_type as *mut _ as *mut _),
                 Some(token.as_mut_ptr() as *mut _),
-                Some(&mut token_len)
+                Some(&mut token_len),
             );
-            
+
             let _ = RegCloseKey(hkey);
-            
+
             if status.is_err() || token_len != 32 {
-                return Err(anyhow::anyhow!("Failed to read SessionToken from registry or invalid size"));
+                return Err(anyhow::anyhow!(
+                    "Failed to read SessionToken from registry or invalid size"
+                ));
             }
             debug!("Read SessionToken from registry: {:?}", token);
         }
@@ -104,15 +122,16 @@ impl WindowsSink {
                 None,
                 OPEN_EXISTING,
                 FILE_ATTRIBUTE_NORMAL,
-                None
+                None,
             )
         };
 
-        let handle = handle.map_err(|e| anyhow::anyhow!("Failed to open \\\\.\\LampyrisMic2: {}", e))?;
+        let handle =
+            handle.map_err(|e| anyhow::anyhow!("Failed to open \\\\.\\LampyrisMic2: {}", e))?;
         let hw = HandleWrapper(handle);
 
         let mut bytes_returned = 0u32;
-        let mut auth_payload = LampyrisAuthPayload { token };
+        let auth_payload = LampyrisAuthPayload { token };
         let success = unsafe {
             DeviceIoControl(
                 hw.0,
@@ -122,18 +141,21 @@ impl WindowsSink {
                 None,
                 0,
                 Some(&mut bytes_returned),
-                None
+                None,
             )
         };
 
         if success.is_err() {
-            return Err(anyhow::anyhow!("Failed to authenticate with LampyrisMic: {:?}", success));
+            return Err(anyhow::anyhow!(
+                "Failed to authenticate with LampyrisMic: {:?}",
+                success
+            ));
         }
-        
+
         let rb = HeapRb::<f32>::new(sample_rate as usize * 2);
         let (prod, cons) = rb.split();
         let producer = Arc::new(Mutex::new(prod));
-        
+
         let (quit_tx, quit_rx) = std::sync::mpsc::channel();
 
         std::thread::spawn(move || {
@@ -142,26 +164,26 @@ impl WindowsSink {
             }
         });
 
-        Ok(Self { 
+        Ok(Self {
             producer,
             quit_tx: Some(quit_tx),
         })
     }
 
     fn run_loop(
-        sample_rate: u32, 
+        sample_rate: u32,
         mut consumer: CachingCons<Arc<HeapRb<f32>>>,
         quit_rx: std::sync::mpsc::Receiver<()>,
-        hw: HandleWrapper
+        hw: HandleWrapper,
     ) -> anyhow::Result<()> {
         let mut is_buffering = true;
         let prebuffer_threshold = (sample_rate / 100) as usize;
-        
+
         let mut audio_payload = LampyrisAudioPayload {
             length: 0,
             data: [0u8; LAMPYRIS_MAX_AUDIO_PAYLOAD],
         };
-        
+
         loop {
             if quit_rx.try_recv().is_ok() {
                 break;
@@ -195,33 +217,33 @@ impl WindowsSink {
                         break;
                     }
                 }
-                
+
                 audio_payload.length = (samples_read * 2) as u32;
                 audio_payload.data[..samples_read * 2].copy_from_slice(&pcm_bytes);
-                
+
                 let mut bytes_returned = 0u32;
                 let success = unsafe {
                     DeviceIoControl(
                         hw.0,
                         IOCTL_LAMPYRIS_PUSH_AUDIO,
                         Some(&audio_payload as *const _ as *const _),
-                        std::mem::size_of::<u32>() as u32 + audio_payload.length,
+                        std::mem::size_of::<LampyrisAudioPayload>() as u32,
                         None,
                         0,
                         Some(&mut bytes_returned),
-                        None
+                        None,
                     )
                 };
-                
+
                 if let Err(e) = success {
                     error!("DeviceIoControl IOCTL_LAMPYRIS_PUSH_AUDIO failed: {:?}", e);
                     std::thread::sleep(std::time::Duration::from_millis(5));
                 }
             }
-            
+
             std::thread::sleep(std::time::Duration::from_millis(5));
         }
-        
+
         info!("Windows audio loop exited cleanly");
         Ok(())
     }
