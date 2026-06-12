@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\Border-Tech\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Border-Tech\\DriverInstruction.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DriverInstruction.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Border-Tech\\test_instructions.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:test_instructions.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
     }
@@ -23,15 +27,26 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "DriverInstruction.md",
+              "DocumentMoniker": "D:\\Border-Tech\\DriverInstruction.md",
+              "RelativeDocumentMoniker": "DriverInstruction.md",
+              "ToolTip": "D:\\Border-Tech\\DriverInstruction.md",
+              "RelativeToolTip": "DriverInstruction.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-06-11T02:35:11.334Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "test_instructions.md",
               "DocumentMoniker": "D:\\Border-Tech\\test_instructions.md",
               "RelativeDocumentMoniker": "test_instructions.md",
               "ToolTip": "D:\\Border-Tech\\test_instructions.md",
               "RelativeToolTip": "test_instructions.md",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
-              "WhenOpened": "2026-06-09T06:30:52.763Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-09T06:30:52.763Z"
             }
           ]
         }
