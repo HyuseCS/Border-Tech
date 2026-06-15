@@ -29,7 +29,7 @@ The project uses `just` as a top-level command runner.
 *   **Protocol Framework**: The architecture is "flipped" - the Android device is the TCP/TLS server, and the PC is the client.
 *   **Data Framing**: Uses a custom `['M', 'C']` Magic Marker + 2-byte Big-Endian Length + PCM Payload.
 *   **Security**: Mandatory end-to-end TLS 1.3 / 1.2 encryption using dynamic, on-device generated X.509 certificates.
-*   **Windows Security Isolation**: The Windows driver uses an authenticated session token registry handshake (`IOCTL_LAMPYRIS_AUTHENTICATE`) to secure user-space interaction.
+*   **Windows Security Isolation**: The Windows driver uses strict Security Descriptors (SDDL) limiting access to the `SYSTEM` and the Interactive User (`IU`). The previous `SessionToken` registry handshake has been removed to decouple client and driver release cycles.
 
 ### Design System (The "Neon Audio Deck")
 The ecosystem strictly adheres to a cohesive "Tactical Neon Hi-Fi" design system defined in `DESIGN.md`. Ensure these principles are maintained:

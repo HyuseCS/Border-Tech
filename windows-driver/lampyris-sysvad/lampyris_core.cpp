@@ -12,8 +12,6 @@ __inline PVOID LampyrisExAllocatePool2Core(ULONG64 Flags, SIZE_T Size, ULONG Tag
 #define ExAllocatePool2 LampyrisExAllocatePool2Core
 
 // Global driver state
-UCHAR g_SessionToken[32];
-BOOLEAN g_Authenticated = FALSE;
 PDEVICE_OBJECT g_ControlDeviceObject = NULL;
 
 // Audio ring buffer configuration: 2 seconds of 48kHz mono 16-bit PCM (192,000 bytes)
@@ -27,27 +25,6 @@ KSPIN_LOCK g_BufferLock;
 PDRIVER_DISPATCH g_PcDeviceControl = NULL;
 PDRIVER_DISPATCH g_PcCreate = NULL;
 PDRIVER_DISPATCH g_PcClose = NULL;
-
-extern "C" ULONG NTAPI RtlRandomEx(PULONG Seed);
-
-VOID GenerateRandomToken(UCHAR* Buffer, ULONG Length) {
-    ULONG Seed = (ULONG)KeQueryInterruptTime();
-    for (ULONG i = 0; i < Length; i++) {
-        Buffer[i] = (UCHAR)(RtlRandomEx(&Seed) & 0xFF);
-    }
-}
-
-NTSTATUS WriteTokenToRegistry(VOID) {
-    NTSTATUS Status = RtlWriteRegistryValue(
-        RTL_REGISTRY_ABSOLUTE,
-        L"\\Registry\\Machine\\Software\\Lampyris",
-        L"SessionToken",
-        REG_BINARY,
-        g_SessionToken,
-        32
-    );
-    return Status;
-}
 
 NTSTATUS PushAudioData(PVOID Buffer, ULONG Length) {
     KLOCK_QUEUE_HANDLE LockHandle;
@@ -117,11 +94,6 @@ NTSTATUS LampyrisCreateClose(PDEVICE_OBJECT DeviceObject, PIRP Irp) {
         return STATUS_SUCCESS;
     }
     
-    PIO_STACK_LOCATION IrpSp = IoGetCurrentIrpStackLocation(Irp);
-    if (IrpSp->MajorFunction == IRP_MJ_CREATE) {
-        g_Authenticated = FALSE;
-    }
-    
     Irp->IoStatus.Status = STATUS_SUCCESS;
     Irp->IoStatus.Information = 0;
     IoCompleteRequest(Irp, IO_NO_INCREMENT);
@@ -146,34 +118,7 @@ NTSTATUS LampyrisDeviceControl(PDEVICE_OBJECT DeviceObject, PIRP Irp) {
     PVOID SystemBuffer = Irp->AssociatedIrp.SystemBuffer;
     
     switch (IoControlCode) {
-        case IOCTL_LAMPYRIS_AUTHENTICATE: {
-            if (InputBufferLength < sizeof(LAMPYRIS_AUTH_PAYLOAD)) {
-                Status = STATUS_INVALID_PARAMETER;
-                break;
-            }
-            
-            PLAMPYRIS_AUTH_PAYLOAD Auth = (PLAMPYRIS_AUTH_PAYLOAD)SystemBuffer;
-            BOOLEAN Match = TRUE;
-            for (int i = 0; i < 32; i++) {
-                if (Auth->Token[i] != g_SessionToken[i]) Match = FALSE;
-            }
-            
-            if (Match) {
-                g_Authenticated = TRUE;
-                Status = STATUS_SUCCESS;
-            } else {
-                g_Authenticated = FALSE;
-                Status = STATUS_ACCESS_DENIED;
-            }
-            break;
-        }
-        
         case IOCTL_LAMPYRIS_PUSH_AUDIO: {
-            if (!g_Authenticated) {
-                Status = STATUS_ACCESS_DENIED;
-                break;
-            }
-            
             if (InputBufferLength < sizeof(LAMPYRIS_AUDIO_PAYLOAD)) {
                 Status = STATUS_INVALID_PARAMETER;
                 break;
@@ -210,9 +155,6 @@ extern "C" NTSTATUS LampyrisInit(PDRIVER_OBJECT DriverObject) {
     
     g_AudioRingBuffer = (UCHAR*)ExAllocatePool2(POOL_FLAG_NON_PAGED, RING_BUFFER_SIZE, 'LMPY');
     if (g_AudioRingBuffer == NULL) return STATUS_INSUFFICIENT_RESOURCES;
-    
-    GenerateRandomToken(g_SessionToken, 32);
-    WriteTokenToRegistry();
     
     DECLARE_CONST_UNICODE_STRING(SddlString, L"D:P(A;;GA;;;SY)(A;;GA;;;IU)");
     

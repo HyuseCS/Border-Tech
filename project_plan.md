@@ -152,7 +152,7 @@ Windows isolates audio hardware representations in the kernel. Creating a Kernel
 ### IOCTL Security Requirements
 * **Input Validation**: Validate all IOCTL input buffer sizes in the driver before copying. Reject buffers exceeding the maximum frame size (4,800 bytes). Never trust user-mode length fields.
 * **Buffer Method**: Use `METHOD_BUFFERED` for all IOCTLs to prevent user-mode pointer abuse.
-* **Access Control (DACL + Shared Secret)**: Set a restrictive DACL on the device object — only the current interactive user session + `SYSTEM` should have write access. Additionally, the driver generates a random 32-byte session token at load time and writes it to a registry key readable only by the current user. The Rust client must present this token via an initial `IOCTL_LAMPYRIS_AUTHENTICATE` call before `IOCTL_LAMPYRIS_PUSH_AUDIO` is accepted. This prevents rogue user-space apps from injecting fake microphone audio even if running as the same user.
+* **Access Control (DACL)**: Set a restrictive DACL on the device object via SDDL — only the current interactive user session (`IU`) + `SYSTEM` should have read/write access. This prevents unauthorized cross-session access. The previous `SessionToken` registry mechanism was explicitly removed to decouple client and driver release cycles and eliminate registry-related access denied errors.
 * **Rate Limiting**: Reject IOCTL calls exceeding the expected PCM data rate by >10%.
 * **Ring Buffer Overflow**: Silently drop oldest data on overflow. Never block the calling thread, never trigger a bugcheck (BSOD).
 * **Fuzzing**: Run the IOCTL interface through Driver Verifier + IoSpy/IoAttack before any release.

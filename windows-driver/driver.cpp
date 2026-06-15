@@ -4,8 +4,6 @@
 #include "ioctl.h"
 
 // Global driver state
-static UCHAR g_SessionToken[32];
-static BOOLEAN g_Authenticated = FALSE;
 static PDEVICE_OBJECT g_DeviceObject = NULL;
 
 // Audio ring buffer configuration: 2 seconds of 48kHz mono 16-bit PCM (192,000 bytes)
@@ -28,66 +26,7 @@ extern "C" {
 NTSTATUS LampyrisDefaultDispatch(PDEVICE_OBJECT DeviceObject, PIRP Irp);
 NTSTATUS LampyrisCreateClose(PDEVICE_OBJECT DeviceObject, PIRP Irp);
 NTSTATUS LampyrisDeviceControl(PDEVICE_OBJECT DeviceObject, PIRP Irp);
-NTSTATUS WriteTokenToRegistry(VOID);
-VOID GenerateRandomToken(UCHAR* Buffer, ULONG Length);
 NTSTATUS PushAudioData(PVOID Buffer, ULONG Length);
-
-extern "C" ULONG NTAPI RtlRandomEx(PULONG Seed);
-
-// Generates a pseudo-random token using RtlRandomEx seeded with interrupt time
-VOID GenerateRandomToken(UCHAR* Buffer, ULONG Length) {
-    ULONG Seed = (ULONG)KeQueryInterruptTime();
-    for (ULONG i = 0; i < Length; i++) {
-        Buffer[i] = (UCHAR)(RtlRandomEx(&Seed) & 0xFF);
-    }
-}
-
-// Writes the 32-byte session token to HKLM\Software\Lampyris
-NTSTATUS WriteTokenToRegistry(VOID) {
-    UNICODE_STRING KeyPath;
-    OBJECT_ATTRIBUTES ObjectAttributes;
-    HANDLE KeyHandle = NULL;
-    NTSTATUS Status;
-    
-    RtlInitUnicodeString(&KeyPath, L"\\Registry\\Machine\\Software\\Lampyris");
-    
-    InitializeObjectAttributes(
-        &ObjectAttributes,
-        &KeyPath,
-        OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE,
-        NULL,
-        NULL
-    );
-    
-    ULONG Disposition;
-    Status = ZwCreateKey(
-        &KeyHandle,
-        KEY_WRITE,
-        &ObjectAttributes,
-        0,
-        NULL,
-        REG_OPTION_NON_VOLATILE,
-        &Disposition
-    );
-    
-    if (NT_SUCCESS(Status)) {
-        UNICODE_STRING ValueName;
-        RtlInitUnicodeString(&ValueName, L"SessionToken");
-        
-        Status = ZwSetValueKey(
-            KeyHandle,
-            &ValueName,
-            0,
-            REG_BINARY,
-            g_SessionToken,
-            32
-        );
-        
-        ZwClose(KeyHandle);
-    }
-    
-    return Status;
-}
 
 // Push audio data into the circular buffer. Overwrites oldest data on overflow.
 NTSTATUS PushAudioData(PVOID Buffer, ULONG Length) {
@@ -171,15 +110,6 @@ extern "C" NTSTATUS DriverEntry(
         return STATUS_INSUFFICIENT_RESOURCES;
     }
     
-    GenerateRandomToken(g_SessionToken, 32);
-    
-    Status = WriteTokenToRegistry();
-    if (!NT_SUCCESS(Status)) {
-        ExFreePoolWithTag(g_AudioRingBuffer, 'LMPY');
-        g_AudioRingBuffer = NULL;
-        return Status;
-    }
-    
     // Secure Device Creation: System and Interactive User get full access
     DECLARE_CONST_UNICODE_STRING(SddlString, L"D:P(A;;GA;;;SY)(A;;GA;;;IU)");
     
@@ -256,12 +186,6 @@ NTSTATUS LampyrisDefaultDispatch(PDEVICE_OBJECT DeviceObject, PIRP Irp) {
 NTSTATUS LampyrisCreateClose(PDEVICE_OBJECT DeviceObject, PIRP Irp) {
     UNREFERENCED_PARAMETER(DeviceObject);
     
-    // Clear authentication state on new handle creation
-    PIO_STACK_LOCATION IrpSp = IoGetCurrentIrpStackLocation(Irp);
-    if (IrpSp->MajorFunction == IRP_MJ_CREATE) {
-        g_Authenticated = FALSE;
-    }
-    
     Irp->IoStatus.Status = STATUS_SUCCESS;
     Irp->IoStatus.Information = 0;
     IoCompleteRequest(Irp, IO_NO_INCREMENT);
@@ -281,38 +205,7 @@ NTSTATUS LampyrisDeviceControl(PDEVICE_OBJECT DeviceObject, PIRP Irp) {
     PVOID SystemBuffer = Irp->AssociatedIrp.SystemBuffer;
     
     switch (IoControlCode) {
-        case IOCTL_LAMPYRIS_AUTHENTICATE: {
-            if (InputBufferLength < sizeof(LAMPYRIS_AUTH_PAYLOAD)) {
-                Status = STATUS_INVALID_PARAMETER;
-                break;
-            }
-            
-            PLAMPYRIS_AUTH_PAYLOAD Auth = (PLAMPYRIS_AUTH_PAYLOAD)SystemBuffer;
-            
-            // Constant-time validation of session token
-            BOOLEAN Match = TRUE;
-            for (int i = 0; i < 32; i++) {
-                if (Auth->Token[i] != g_SessionToken[i]) {
-                    Match = FALSE;
-                }
-            }
-            
-            if (Match) {
-                g_Authenticated = TRUE;
-                Status = STATUS_SUCCESS;
-            } else {
-                g_Authenticated = FALSE;
-                Status = STATUS_ACCESS_DENIED;
-            }
-            break;
-        }
-        
         case IOCTL_LAMPYRIS_PUSH_AUDIO: {
-            if (!g_Authenticated) {
-                Status = STATUS_ACCESS_DENIED;
-                break;
-            }
-            
             if (InputBufferLength < sizeof(LAMPYRIS_AUDIO_PAYLOAD)) {
                 Status = STATUS_INVALID_PARAMETER;
                 break;

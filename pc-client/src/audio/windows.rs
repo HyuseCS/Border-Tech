@@ -9,14 +9,9 @@ use windows::Win32::Storage::FileSystem::{
     CreateFileW, FILE_ATTRIBUTE_NORMAL, FILE_SHARE_READ, FILE_SHARE_WRITE, OPEN_EXISTING,
 };
 use windows::Win32::System::IO::DeviceIoControl;
-use windows::Win32::System::Registry::{
-    HKEY, HKEY_LOCAL_MACHINE, KEY_READ, RegCloseKey, RegOpenKeyExW,
-    RegQueryValueExW,
-};
 use windows::core::w;
 
 const FILE_DEVICE_LAMPYRIS: u32 = 0x8001;
-const LAMPYRIS_FUNC_AUTHENTICATE: u32 = 0x801;
 const LAMPYRIS_FUNC_PUSH_AUDIO: u32 = 0x802;
 const METHOD_BUFFERED: u32 = 0;
 const FILE_WRITE_ACCESS: u32 = 2;
@@ -25,12 +20,6 @@ const fn ctl_code(device_type: u32, function: u32, method: u32, access: u32) -> 
     (device_type << 16) | (access << 14) | (function << 2) | method
 }
 
-const IOCTL_LAMPYRIS_AUTHENTICATE: u32 = ctl_code(
-    FILE_DEVICE_LAMPYRIS,
-    LAMPYRIS_FUNC_AUTHENTICATE,
-    METHOD_BUFFERED,
-    FILE_WRITE_ACCESS,
-);
 const IOCTL_LAMPYRIS_PUSH_AUDIO: u32 = ctl_code(
     FILE_DEVICE_LAMPYRIS,
     LAMPYRIS_FUNC_PUSH_AUDIO,
@@ -39,11 +28,6 @@ const IOCTL_LAMPYRIS_PUSH_AUDIO: u32 = ctl_code(
 );
 
 const LAMPYRIS_MAX_AUDIO_PAYLOAD: usize = 4800;
-
-#[repr(C)]
-struct LampyrisAuthPayload {
-    token: [u8; 32],
-}
 
 #[repr(C)]
 struct LampyrisAudioPayload {
@@ -77,43 +61,6 @@ impl Drop for HandleWrapper {
 
 impl WindowsSink {
     pub fn new(_node_name: String, sample_rate: u32) -> anyhow::Result<Self> {
-        let mut token = [0u8; 32];
-
-        unsafe {
-            let mut hkey = HKEY::default();
-            // Note: KEY_READ requires WIN32_SYSTEM_REGISTRY features
-            let status = RegOpenKeyExW(
-                HKEY_LOCAL_MACHINE,
-                w!("SOFTWARE\\Lampyris"),
-                0,
-                KEY_READ | windows::Win32::System::Registry::KEY_WOW64_64KEY,
-                &mut hkey,
-            );
-            if status.is_err() {
-                return Err(anyhow::anyhow!("Failed to open registry key: {:?}", status));
-            }
-
-            let mut token_len = 32u32;
-            let mut val_type = 0u32;
-            let status = RegQueryValueExW(
-                hkey,
-                w!("SessionToken"),
-                None,
-                Some(&mut val_type as *mut _ as *mut _),
-                Some(token.as_mut_ptr() as *mut _),
-                Some(&mut token_len),
-            );
-
-            let _ = RegCloseKey(hkey);
-
-            if status.is_err() || token_len != 32 {
-                return Err(anyhow::anyhow!(
-                    "Failed to read SessionToken from registry or invalid size"
-                ));
-            }
-            debug!("Read SessionToken from registry: {:?}", token);
-        }
-
         let handle = unsafe {
             CreateFileW(
                 w!("\\\\.\\LampyrisMic2"),
@@ -129,28 +76,6 @@ impl WindowsSink {
         let handle =
             handle.map_err(|e| anyhow::anyhow!("Failed to open \\\\.\\LampyrisMic2: {}", e))?;
         let hw = HandleWrapper(handle);
-
-        let mut bytes_returned = 0u32;
-        let auth_payload = LampyrisAuthPayload { token };
-        let success = unsafe {
-            DeviceIoControl(
-                hw.0,
-                IOCTL_LAMPYRIS_AUTHENTICATE,
-                Some(&auth_payload as *const _ as *const _),
-                std::mem::size_of::<LampyrisAuthPayload>() as u32,
-                None,
-                0,
-                Some(&mut bytes_returned),
-                None,
-            )
-        };
-
-        if success.is_err() {
-            return Err(anyhow::anyhow!(
-                "Failed to authenticate with LampyrisMic: {:?}",
-                success
-            ));
-        }
 
         let rb = HeapRb::<f32>::new(sample_rate as usize * 2);
         let (prod, cons) = rb.split();
@@ -209,7 +134,7 @@ impl WindowsSink {
                 let mut samples_read = 0;
                 while samples_read < requested_samples {
                     if let Some(f) = consumer.try_pop() {
-                        let clipped = f.max(-1.0).min(1.0);
+                        let clipped = f.clamp(-1.0, 1.0);
                         let i = (clipped * 32767.0) as i16;
                         pcm_bytes.extend_from_slice(&i.to_le_bytes());
                         samples_read += 1;

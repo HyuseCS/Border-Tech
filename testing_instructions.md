@@ -41,7 +41,7 @@ Inside the VM, force Windows to load the new kernel code:
 3. Bring the newly compiled `lampyris.exe` (from step 2) into the VM.
 4. Run the PC client in the VM:
    ```cmd
-   set SLINT_BACKEND=winit-software && lampyris.exe --debug
+   a && lampyris.exe --debug
    ```
 5. Speak into your phone. 
 6. Check the **Recording** tab in the Windows Sound Settings inside the VM. The green volume meter next to the Lampyris Microphone should finally light up and bounce to your voice!
