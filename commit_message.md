@@ -1,13 +1,10 @@
-# Commit Summary
+Fix audio pipeline format rejection and fake peak meter
 
-**Title**: Implement rate-limited DbgPrint kernel tracing for audio engine diagnostics
+This commit addresses several critical issues preventing the Windows Virtual Audio Driver from properly streaming audio from the Rust client:
 
-**Description**:
-*   **Safety-First Instrumentation**: Injected targeted, rate-limited `DbgPrint` statements into the `lampyris-sysvad` Windows driver to safely trace the audio execution flow without freezing the DPC queue or causing watchdog BSODs.
-*   **IOCTL & Ring Buffer Tracing**: Added logging to `LampyrisDeviceControl` (in `lampyris_core.cpp`) to verify the exact payload size being pushed by the PC client and the current available capacity of `g_AudioRingBuffer`.
-*   **Data Copy Tracing**: Added logging to `ReadAudioData` (in `lampyris_core.cpp`) to track exactly how many bytes the Windows Audio Engine requests versus how many bytes the driver successfully copies out of the ring buffer.
-*   **Audio Engine Hooks**: Instrumented `CMiniportWaveRTStream::GetPosition`, `UpdatePosition`, and `TimerNotifyRT` (in `minwavertstream.cpp`) to monitor the hardware DMA cursor (`PlayOffset` / `WriteOffset`), calculated byte displacement, and the firing of event-driven audio notifications.
-*   **Driver Compilation**: Rebuilt and test-signed the kernel driver (`lampyris-mic.sys`) for x64 Release using MSBuild.
+- **Build Pipeline Fix:** Integrated `EndpointsCommon.vcxproj` into `lampyris-mic.sln` to ensure modifications to `minwavertstream.cpp` (such as `RtlZeroMemory` fixes) are correctly compiled and statically linked into the driver payload.
+- **Fake Volume Meter Fix:** Changed the hardcoded PeakMeter initialization in `hw.cpp` from `PEAKMETER_SIGNED_MAXIMUM / 2` to `0`, successfully resolving the bug where the volume meter was permanently stuck at 50%.
+- **Windows Format Rejection Fix (Kernel):** Updated `micinwavtable.h` to officially advertise `KSAUDIO_SPEAKER_STEREO` (2 Channels) at 48000Hz. This ensures the Windows Audio Engine no longer rejects the capture stream format.
+- **Format Match (Rust Client):** Updated `pc-client/src/audio/windows.rs` to double the `LAMPYRIS_MAX_AUDIO_PAYLOAD` to `9600` bytes and modified the audio loop to duplicate incoming Mono samples into Stereo (Left/Right) channels to accurately match the driver's new expected format.
 
-### Next Steps / Context
-This commit leaves the driver fully instrumented for DebugView diagnosis. The goal is to identify why "Listen to this device" yields silent output, specifically checking if the OS rejects the format (no `GetPosition` calls), if the DMA clock is frozen, if the event timer is starving, or if it's a simple buffer under-run issue.
+*Note: A known issue remains regarding an IOCTL buffer size mismatch (`STATUS_INVALID_BUFFER_SIZE`) in `ioctl.h` causing silent packets, which will be addressed in a follow-up commit.*

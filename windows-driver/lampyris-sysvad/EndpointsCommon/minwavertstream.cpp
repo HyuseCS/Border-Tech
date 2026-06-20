@@ -591,6 +591,9 @@ NTSTATUS CMiniportWaveRTStream::AllocateBufferWithNotification
     //  A WaveRT miniport driver should not require software access to the audio buffer itself."
     //   
     m_pDmaBuffer = (BYTE*)m_pPortStream->MapAllocatedPages(pBufferMdl, MmCached);
+    if (m_pDmaBuffer != NULL) {
+        RtlZeroMemory(m_pDmaBuffer, RequestedSize_);
+    }
     m_ulNotificationsPerBuffer = NotificationCount_;
     m_ulDmaBufferSize = RequestedSize_;
     ulBufferDurationMs = (RequestedSize_ * 1000) / m_ulDmaMovementRate;
@@ -827,6 +830,9 @@ _Out_   MEMORY_CACHING_TYPE    *CacheType_
     //  A WaveRT miniport driver should not require software access to the audio buffer itself."
     //   
     m_pDmaBuffer = (BYTE*)m_pPortStream->MapAllocatedPages(pBufferMdl, MmCached);
+    if (m_pDmaBuffer != NULL) {
+        RtlZeroMemory(m_pDmaBuffer, RequestedSize_);
+    }
 
     m_ulDmaBufferSize = RequestedSize_;
     m_ulNotificationsPerBuffer = 0;

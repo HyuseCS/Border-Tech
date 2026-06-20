@@ -27,7 +27,7 @@ const IOCTL_LAMPYRIS_PUSH_AUDIO: u32 = ctl_code(
     FILE_WRITE_ACCESS,
 );
 
-const LAMPYRIS_MAX_AUDIO_PAYLOAD: usize = 4800;
+const LAMPYRIS_MAX_AUDIO_PAYLOAD: usize = 9600;
 
 #[repr(C)]
 struct LampyrisAudioPayload {
@@ -125,13 +125,15 @@ impl WindowsSink {
 
             let requested_samples = 2400.min(occupied);
             if requested_samples > 0 {
-                let mut pcm_bytes = Vec::with_capacity(requested_samples * 2);
+                let mut pcm_bytes = Vec::with_capacity(requested_samples * 4);
                 let mut samples_read = 0;
                 while samples_read < requested_samples {
                     if let Some(f) = consumer.try_pop() {
                         let clipped = f.clamp(-1.0, 1.0);
                         let i = (clipped * 32767.0) as i16;
-                        pcm_bytes.extend_from_slice(&i.to_le_bytes());
+                        let bytes = i.to_le_bytes();
+                        pcm_bytes.extend_from_slice(&bytes); // Left
+                        pcm_bytes.extend_from_slice(&bytes); // Right
                         samples_read += 1;
                     } else {
                         break;
@@ -142,8 +144,8 @@ impl WindowsSink {
                     length: 0,
                     data: [0; LAMPYRIS_MAX_AUDIO_PAYLOAD],
                 };
-                audio_payload.length = (samples_read * 2) as u32;
-                audio_payload.data[..samples_read * 2].copy_from_slice(&pcm_bytes);
+                audio_payload.length = (samples_read * 4) as u32;
+                audio_payload.data[..samples_read * 4].copy_from_slice(&pcm_bytes);
 
                 let mut bytes_returned = 0u32;
                 let success = unsafe {

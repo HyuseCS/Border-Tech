@@ -4,6 +4,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TabletAudioSample", "lampyris-sysvad\TabletAudioSample\TabletAudioSample.vcxproj", "{E4DF0EEE-D35B-47F2-A9B1-41EA97C465FF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EndpointsCommon", "lampyris-sysvad\EndpointsCommon\EndpointsCommon.vcxproj", "{33E61864-6F2C-4F9F-BE70-8F8985A4F283}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -16,6 +18,10 @@ Global
 		{E4DF0EEE-D35B-47F2-A9B1-41EA97C465FF}.Release|x64.ActiveCfg = Release|x64
 		{E4DF0EEE-D35B-47F2-A9B1-41EA97C465FF}.Release|x64.Build.0 = Release|x64
 		{E4DF0EEE-D35B-47F2-A9B1-41EA97C465FF}.Release|x64.Deploy.0 = Release|x64
+		{33E61864-6F2C-4F9F-BE70-8F8985A4F283}.Debug|x64.ActiveCfg = Debug|x64
+		{33E61864-6F2C-4F9F-BE70-8F8985A4F283}.Debug|x64.Build.0 = Debug|x64
+		{33E61864-6F2C-4F9F-BE70-8F8985A4F283}.Release|x64.ActiveCfg = Release|x64
+		{33E61864-6F2C-4F9F-BE70-8F8985A4F283}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -342,7 +342,7 @@ Return Value:
 
     for (ULONG i=0; i<MAX_TOPOLOGY_NODES; ++i)
     {
-        m_PeakMeterControls[i] = PEAKMETER_SIGNED_MAXIMUM/2;
+        m_PeakMeterControls[i] = 0;
     }
     
     // BUGBUG change this depending on the topology
