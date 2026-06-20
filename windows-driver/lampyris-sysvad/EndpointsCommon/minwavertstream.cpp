@@ -877,6 +877,11 @@ NTSTATUS CMiniportWaveRTStream::GetPosition
     Position_->PlayOffset = m_ullPlayPosition;
     Position_->WriteOffset = m_ullWritePosition;
 
+    static ULONG getPosCount = 0;
+    if (getPosCount++ % 100 == 0) {
+        DbgPrint("[LAMPYRIS] GetPosition: PlayOffset %llu, WriteOffset %llu (State: %d)\n", m_ullPlayPosition, m_ullWritePosition, m_KsState);
+    }
+
     KeReleaseSpinLock(&m_PositionSpinLock, oldIrql);
 
     ntStatus = STATUS_SUCCESS;
@@ -1425,6 +1430,11 @@ VOID CMiniportWaveRTStream::UpdatePosition
     // Increment presentation position even after last buffer is rendered.
     m_ullPresentationPosition += ByteDisplacement;
 
+    static ULONG updPosCount = 0;
+    if (updPosCount++ % 100 == 0) {
+        DbgPrint("[LAMPYRIS] UpdatePosition: TimeElapsedInMS %lu, ByteDisplacement %lu, Rate %lu\n", TimeElapsedInMS, ByteDisplacement, m_ulDmaMovementRate);
+    }
+
     if (m_bCapture)
     {
         // Write sine wave to buffer.
@@ -1769,6 +1779,11 @@ TimerNotifyRT
         // Save the last time DPC ran at notification interval
         _this->m_ullLastDPCTimeStamp = hnsCurrentTime;
         bufferCompleted = TRUE;
+        
+        static ULONG notifyCount = 0;
+        if (notifyCount++ % 100 == 0) {
+            DbgPrint("[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.\n");
+        }
     }
 
     if (!bufferCompleted && !_this->m_bEoSReceived)

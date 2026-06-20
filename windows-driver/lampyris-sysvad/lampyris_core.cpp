@@ -79,6 +79,11 @@ ULONG ReadAudioData(PVOID Buffer, ULONG Length) {
         RtlZeroMemory((UCHAR*)Buffer + BytesRead, Length - BytesRead);
     }
     
+    static ULONG readCount = 0;
+    if (readCount++ % 100 == 0) {
+        DbgPrint("[LAMPYRIS] ReadAudioData: Requested %d bytes. Read %d bytes. Available: %d\n", Length, BytesRead, Available);
+    }
+    
     KeReleaseInStackQueuedSpinLock(&LockHandle);
     return Length;
 }
@@ -133,6 +138,11 @@ NTSTATUS LampyrisDeviceControl(PDEVICE_OBJECT DeviceObject, PIRP Irp) {
             
             Status = PushAudioData(Audio->Data, Audio->Length);
             if (NT_SUCCESS(Status)) BytesTransferred = 0;
+            
+            static ULONG pushCount = 0;
+            if (pushCount++ % 100 == 0) {
+                DbgPrint("[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length %d. Ring buffer available: %d\n", Audio->Length, g_RingBufferLength);
+            }
             break;
         }
     }

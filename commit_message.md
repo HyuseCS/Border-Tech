@@ -1,22 +1,13 @@
 # Commit Summary
 
-**Title**: Fix driver IOCTL status, optimize rust client audio loop, and configure static MSVC CRT 
+**Title**: Implement rate-limited DbgPrint kernel tracing for audio engine diagnostics
 
 **Description**:
-*   **Driver Kernel Patch (`lampyris_core.cpp`)**: 
-    Fixed an issue where `DeviceIoControl` would fail in user space due to the Windows IO Manager overriding the completion status with `STATUS_BUFFER_OVERFLOW` (0x80000005). The `BytesTransferred` is now correctly set to `0` instead of `Audio->Length` when processing `IOCTL_LAMPYRIS_PUSH_AUDIO` because there is no output buffer expected.
-*   **Audio Engine Jitter Fix (`pc-client/src/audio/windows.rs`)**: 
-    Re-wrote the core `run_loop` to completely remove an unconditional `std::thread::sleep(5ms)`. Previously, default Windows timer resolutions caused this sleep to extend up to ~15.6ms, leading to severe buffer starvation in the driver every cycle. 
-*   **Resiliency Buffering (`pc-client/src/audio/windows.rs`)**: 
-    Increased the `prebuffer_threshold` from 10ms to 50ms, allowing the ring buffer to absorb packet arrival jitter without underrunning the Kernel driver.
-*   **Runtime Dependency (`pc-client/.cargo/config.toml`)**: 
-    Configured the PC client to compile the `x86_64-pc-windows-msvc` target with `target-feature=+crt-static`, eliminating the dynamic CRT dependency on `VCRUNTIME140.dll` and making it portable to bare-bones VMs out of the box.
+*   **Safety-First Instrumentation**: Injected targeted, rate-limited `DbgPrint` statements into the `lampyris-sysvad` Windows driver to safely trace the audio execution flow without freezing the DPC queue or causing watchdog BSODs.
+*   **IOCTL & Ring Buffer Tracing**: Added logging to `LampyrisDeviceControl` (in `lampyris_core.cpp`) to verify the exact payload size being pushed by the PC client and the current available capacity of `g_AudioRingBuffer`.
+*   **Data Copy Tracing**: Added logging to `ReadAudioData` (in `lampyris_core.cpp`) to track exactly how many bytes the Windows Audio Engine requests versus how many bytes the driver successfully copies out of the ring buffer.
+*   **Audio Engine Hooks**: Instrumented `CMiniportWaveRTStream::GetPosition`, `UpdatePosition`, and `TimerNotifyRT` (in `minwavertstream.cpp`) to monitor the hardware DMA cursor (`PlayOffset` / `WriteOffset`), calculated byte displacement, and the firing of event-driven audio notifications.
+*   **Driver Compilation**: Rebuilt and test-signed the kernel driver (`lampyris-mic.sys`) for x64 Release using MSBuild.
 
----
-
-### Known Issues & Current State
-**Status: Audio Output Still Silent**
-While the end-to-end connection works flawlessly (Android -> PC Client -> Driver IOCTL), the virtual microphone device is still not producing audio in Windows. 
-1.  **Pipeline Verified**: PC client successfully detects mobile audio (UI visualizer moves).
-2.  **Driver I/O Verified**: `lampyris.exe` pushes `LampyrisAudioPayload` to the driver successfully.
-3.  **Failure Point**: The `Listen to this device` option yields no sound, and the Windows Sound Control Panel meter does not move. The data entering `g_AudioRingBuffer` is seemingly not being correctly picked up by the `CMiniportWaveRT` audio engine hooks, or the audio format properties do not match what Windows is expecting to render.
+### Next Steps / Context
+This commit leaves the driver fully instrumented for DebugView diagnosis. The goal is to identify why "Listen to this device" yields silent output, specifically checking if the OS rejects the format (no `GetPosition` calls), if the DMA clock is frozen, if the event timer is starving, or if it's a simple buffer under-run issue.
