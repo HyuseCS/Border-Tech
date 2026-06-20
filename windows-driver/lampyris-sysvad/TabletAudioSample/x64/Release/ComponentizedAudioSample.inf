@@ -3,7 +3,7 @@ Signature   = "$Windows NT$"
 Class       = MEDIA
 Provider    = %ProviderName%
 ClassGUID   = {4d36e96c-e325-11ce-bfc1-08002be10318}
-DriverVer = 06/11/2026,17.12.0.199
+DriverVer = 06/20/2026,13.36.5.258
 CatalogFile = sysvad.cat
 PnpLockDown = 1
 

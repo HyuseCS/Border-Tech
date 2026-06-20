@@ -101,13 +101,8 @@ impl WindowsSink {
         quit_rx: std::sync::mpsc::Receiver<()>,
         hw: HandleWrapper,
     ) -> anyhow::Result<()> {
+        let prebuffer_threshold = (sample_rate / 20) as usize; // 50ms prebuffer
         let mut is_buffering = true;
-        let prebuffer_threshold = (sample_rate / 100) as usize;
-
-        let mut audio_payload = LampyrisAudioPayload {
-            length: 0,
-            data: [0u8; LAMPYRIS_MAX_AUDIO_PAYLOAD],
-        };
 
         loop {
             if quit_rx.try_recv().is_ok() {
@@ -143,6 +138,10 @@ impl WindowsSink {
                     }
                 }
 
+                let mut audio_payload = LampyrisAudioPayload {
+                    length: 0,
+                    data: [0; LAMPYRIS_MAX_AUDIO_PAYLOAD],
+                };
                 audio_payload.length = (samples_read * 2) as u32;
                 audio_payload.data[..samples_read * 2].copy_from_slice(&pcm_bytes);
 
@@ -160,13 +159,12 @@ impl WindowsSink {
                     )
                 };
 
-                if let Err(e) = success {
-                    error!("DeviceIoControl IOCTL_LAMPYRIS_PUSH_AUDIO failed: {:?}", e);
-                    std::thread::sleep(std::time::Duration::from_millis(5));
+                if success.is_err() {
+                    error!("Failed to push audio to Lampyris driver");
                 }
+            } else {
+                std::thread::sleep(std::time::Duration::from_millis(1));
             }
-
-            std::thread::sleep(std::time::Duration::from_millis(5));
         }
 
         info!("Windows audio loop exited cleanly");

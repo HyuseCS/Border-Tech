@@ -132,7 +132,7 @@ NTSTATUS LampyrisDeviceControl(PDEVICE_OBJECT DeviceObject, PIRP Irp) {
             }
             
             Status = PushAudioData(Audio->Data, Audio->Length);
-            if (NT_SUCCESS(Status)) BytesTransferred = Audio->Length;
+            if (NT_SUCCESS(Status)) BytesTransferred = 0;
             break;
         }
     }
