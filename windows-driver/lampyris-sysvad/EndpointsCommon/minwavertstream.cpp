@@ -1271,11 +1271,10 @@ NTSTATUS CMiniportWaveRTStream::SetState
                     m_pMiniport->m_KeywordDetector.Stop();
                 }
 
-                // Pause DMA
-                if (m_ulNotificationIntervalMs > 0)
+                // Pause DMA - always cancel timer for both event and polled modes
+                ExCancelTimer(m_pNotificationTimer, NULL);
+                KeFlushQueuedDpcs(); 
                 {
-                    ExCancelTimer(m_pNotificationTimer, NULL);
-                    KeFlushQueuedDpcs(); 
 
                     // If pin is transitioning from RUN, save the time since last buffer completion event was sent 
                     // so if the pin goes to RUN state again we can send the buffer completion event at correct time.
@@ -1355,21 +1354,24 @@ NTSTATUS CMiniportWaveRTStream::SetState
             ullPerfCounterTemp = KeQueryPerformanceCounter(&m_ullPerformanceCounterFrequency);
             m_ullLastDPCTimeStamp = m_ullDmaTimeStamp = KSCONVERT_PERFORMANCE_TIME(m_ullPerformanceCounterFrequency.QuadPart, ullPerfCounterTemp);
 
-            if (m_ulNotificationIntervalMs > 0)
+            // For polled capture streams, m_ulNotificationIntervalMs will be 0
+            // because AllocateAudioBuffer doesn't set it. Default to 10ms so
+            // the DMA simulation timer fires and pulls audio from the ring buffer.
+            if (m_ulNotificationIntervalMs == 0)
             {
-                // Set timer for 1 ms. This will cause DPC to run every 1 ms but driver will send out 
-                // notification events only after notification interval. This timer is used by Sysvad to 
-                // emulate hardware and send out notification event. Real hardware should not use this
-                // timer to fire notification event as it will drain power if the timer is running at 1 msec.
-                ExSetTimer
-                (
-                    m_pNotificationTimer,
-                    (-1) * HNSTIME_PER_MILLISECOND,
-                    HNSTIME_PER_MILLISECOND, // 1 ms 
-                    NULL
-                 );
-
+                m_ulNotificationIntervalMs = 10; // Default 10ms for polled capture
             }
+
+            // Always start timer for both event-driven and polled modes.
+            // Timer fires every 1ms; buffer completion events are gated by
+            // m_ulNotificationIntervalMs inside TimerNotifyRT.
+            ExSetTimer
+            (
+                m_pNotificationTimer,
+                (-1) * HNSTIME_PER_MILLISECOND,
+                HNSTIME_PER_MILLISECOND, // 1 ms 
+                NULL
+             );
 
             break;
     }

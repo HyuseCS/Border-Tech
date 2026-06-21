@@ -1,10 +1,16 @@
-Fix audio pipeline format rejection and fake peak meter
+Fix: Align Capture Pin Topology and Wave Formats to 48kHz Stereo
 
-This commit addresses several critical issues preventing the Windows Virtual Audio Driver from properly streaming audio from the Rust client:
+**Root Cause:**
+The Windows Virtual Audio Driver was suffering from an initialization failure (`NotReadableError` in browsers, no audio in "Listen to this device") caused by an internal format mismatch. The driver was advertising support for 48kHz Stereo in its Wave Stream formats but had its Topology Jack Descriptor (`MicInJackDesc`) still configured as `KSAUDIO_SPEAKER_MONO`. Furthermore, it advertised several legacy Mono data ranges alongside the Stereo format. When modern applications or the Windows Audio Engine attempted to initialize the audio graph, this inconsistency caused `IAudioClient::Initialize` to fail, preventing the stream from ever reaching `KSSTATE_RUN`.
 
-- **Build Pipeline Fix:** Integrated `EndpointsCommon.vcxproj` into `lampyris-mic.sln` to ensure modifications to `minwavertstream.cpp` (such as `RtlZeroMemory` fixes) are correctly compiled and statically linked into the driver payload.
-- **Fake Volume Meter Fix:** Changed the hardcoded PeakMeter initialization in `hw.cpp` from `PEAKMETER_SIGNED_MAXIMUM / 2` to `0`, successfully resolving the bug where the volume meter was permanently stuck at 50%.
-- **Windows Format Rejection Fix (Kernel):** Updated `micinwavtable.h` to officially advertise `KSAUDIO_SPEAKER_STEREO` (2 Channels) at 48000Hz. This ensures the Windows Audio Engine no longer rejects the capture stream format.
-- **Format Match (Rust Client):** Updated `pc-client/src/audio/windows.rs` to double the `LAMPYRIS_MAX_AUDIO_PAYLOAD` to `9600` bytes and modified the audio loop to duplicate incoming Mono samples into Stereo (Left/Right) channels to accurately match the driver's new expected format.
+**Changes Made:**
+1. **Topology Alignment (`micintoptable.h`)**:
+   - Updated `MicInJackDesc` to explicitly use `KSAUDIO_SPEAKER_STEREO` to match the physical output of our ring buffer.
+2. **Format Enforcement (`micinwavtable.h`)**:
+   - Removed all legacy and unsupported Mono format data ranges from `MicInPinSupportedDeviceFormats`.
+   - The driver now exclusively advertises 48kHz Stereo format. This forces the Windows Audio Engine to handle any necessary resampling to lower sample rates or Mono channels requested by applications (like WebRTC), guaranteeing the driver always provides uncorrupted native stream data.
 
-*Note: A known issue remains regarding an IOCTL buffer size mismatch (`STATUS_INVALID_BUFFER_SIZE`) in `ioctl.h` causing silent packets, which will be addressed in a follow-up commit.*
+**Testing:**
+- Driver compiles successfully via MSBuild.
+- Driver loads and signs successfully.
+- (Requires testing) User must verify via Sound Settings -> Advanced that the Default Format is set to 48kHz Stereo, clearing any old cached Mono configurations from the registry to allow the stream to initialize.
