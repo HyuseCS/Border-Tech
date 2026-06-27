@@ -19,7 +19,7 @@
     CTL_CODE(FILE_DEVICE_LAMPYRIS, LAMPYRIS_FUNC_PUSH_AUDIO, METHOD_BUFFERED, FILE_WRITE_ACCESS)
 
 // Audio payload structure (max payload size 4800 bytes)
-#define LAMPYRIS_MAX_AUDIO_PAYLOAD 4800
+#define LAMPYRIS_MAX_AUDIO_PAYLOAD 9600
 
 typedef struct _LAMPYRIS_AUDIO_PAYLOAD {
     ULONG Length; // Length of raw PCM data
