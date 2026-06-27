@@ -1476,7 +1476,13 @@ CMiniportWaveRT::IsFormatSupported
         PKSDATAFORMAT_WAVEFORMATEXTENSIBLE pFormat = &pPinFormats[iFormat];
         // KSDATAFORMAT VALIDATION
         if (!IsEqualGUIDAligned(pFormat->DataFormat.MajorFormat, _pDataFormat->MajorFormat)) { continue; }
-        if (!IsEqualGUIDAligned(pFormat->DataFormat.SubFormat, _pDataFormat->SubFormat)) { continue; }
+        if (!IsEqualGUIDAligned(pFormat->DataFormat.SubFormat, _pDataFormat->SubFormat)) 
+        {
+            if (!IsEqualGUIDAligned(_pDataFormat->SubFormat, KSDATAFORMAT_SUBTYPE_WAVEFORMATEX)) 
+            {
+                continue; 
+            }
+        }
         if (!IsEqualGUIDAligned(pFormat->DataFormat.Specifier, _pDataFormat->Specifier)) { continue; }
         if (pFormat->DataFormat.FormatSize < sizeof(KSDATAFORMAT_WAVEFORMATEX)) { continue; }
 
@@ -1503,7 +1509,7 @@ CMiniportWaveRT::IsFormatSupported
 
         PWAVEFORMATEXTENSIBLE pWaveFormatExt = reinterpret_cast<PWAVEFORMATEXTENSIBLE>(pWaveFormat);
         if (pWaveFormatExt->Samples.wValidBitsPerSample != pFormat->WaveFormatExt.Samples.wValidBitsPerSample) { continue; }
-        if (pWaveFormatExt->dwChannelMask != pFormat->WaveFormatExt.dwChannelMask) { continue; }
+        if (pWaveFormatExt->dwChannelMask != pFormat->WaveFormatExt.dwChannelMask && pWaveFormatExt->dwChannelMask != 0) { continue; }
         if (!IsEqualGUIDAligned(pWaveFormatExt->SubFormat, pFormat->WaveFormatExt.SubFormat)) { continue; }
 
         ntStatus = STATUS_SUCCESS;

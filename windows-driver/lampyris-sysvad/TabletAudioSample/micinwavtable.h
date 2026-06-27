@@ -21,7 +21,7 @@ Abstract:
 #define MICIN_DEVICE_MAX_CHANNELS           2       // Max Channels.
 #define MICIN_MIN_BITS_PER_SAMPLE_PCM       16      // Min Bits Per Sample
 #define MICIN_MAX_BITS_PER_SAMPLE_PCM       16      // Max Bits Per Sample
-#define MICIN_MIN_SAMPLE_RATE               8000    // Min Sample Rate
+#define MICIN_MIN_SAMPLE_RATE               48000    // Min Sample Rate
 #define MICIN_MAX_SAMPLE_RATE               48000   // Max Sample Rate
 
 //
