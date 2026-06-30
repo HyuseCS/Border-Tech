@@ -837,6 +837,8 @@ _Out_   MEMORY_CACHING_TYPE    *CacheType_
     m_ulDmaBufferSize = RequestedSize_;
     m_ulNotificationsPerBuffer = 0;
 
+    DbgPrint("[LAMPYRIS] AllocBuffer: size=%u rate=%lu\n", m_ulDmaBufferSize, m_ulDmaMovementRate); // LAMPYRIS-DEBUG
+
     *AudioBufferMdl_ = pBufferMdl;
     *ActualSize_ = RequestedSize_;
     *OffsetFromFirstPage_ = 0;
@@ -1165,6 +1167,8 @@ NTSTATUS CMiniportWaveRTStream::SetState
     NTSTATUS        ntStatus        = STATUS_SUCCESS;
     PADAPTERCOMMON  pAdapterComm    = m_pMiniport->GetAdapterCommObj();
     KIRQL oldIrql;
+
+    DbgPrint("[LAMPYRIS] SetState: Pin=%u %d -> %d (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)\n", m_ulPin, m_KsState, State_); // LAMPYRIS-DEBUG
 
     // Spew an event for a pin state change request from portcls
     //Event type: eMINIPORT_PIN_STATE

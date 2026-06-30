@@ -1,0 +1,86 @@
+# Capture-Open Bisect — Build & Capture Instructions (Windows PC)
+
+Temporary DbgPrint instrumentation was added to the driver to find **why the
+Lampyris mic is silent** (green meter never moves, browsers throw
+`NotReadableError`). The drain pipeline is proven correct; the failure is in
+pin/format **negotiation** — the OS never drives the pin to `KSSTATE_RUN`. These
+prints turn one DebugView capture into a bisect that names the failing step.
+
+All added lines are tagged `// LAMPYRIS-DEBUG` (grep to remove later).
+
+## What was instrumented (in call order)
+
+| Stage | File | Print |
+|------|------|-------|
+| Format probe | `EndpointsCommon/minwavert.cpp` `DataRangeIntersection` | `DRI: Pin=.. MyCh=.. ClientCh=.. -> NO_MATCH/PASS` |
+| Stream create | `EndpointsCommon/minwavert.cpp` `NewStream` | `NewStream ENTER: Pin=.. Capture=..` / `NewStream EXIT: .. status=0x..` |
+| Format check | `EndpointsCommon/minwavert.cpp` `IsFormatSupported` | `IsFormatSupported: Pin=.. req Nch/HzHz/Nbit/blkN -> 0x..` |
+| DMA alloc | `EndpointsCommon/minwavertstream.cpp` `AllocateAudioBuffer` | `AllocBuffer: size=.. rate=..` |
+| State change | `EndpointsCommon/minwavertstream.cpp` `SetState` | `SetState: Pin=.. X -> Y (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)` |
+
+(Existing producer/drain prints stay: `IOCTL_LAMPYRIS_PUSH_AUDIO`,
+`ReadAudioData`, `TimerNotifyRT`, `GetPosition`.)
+
+## 1. Build
+
+Open an **x64 WDK/EWDK Developer Command Prompt** and build the active driver
+project (`TabletAudioSample`, which compiles `..\lampyris_core.cpp` and links
+`EndpointsCommon.lib`):
+
+```
+cd windows-driver\lampyris-sysvad
+msbuild TabletAudioSample\TabletAudioSample.vcxproj /p:Configuration=Debug /p:Platform=x64
+```
+
+Confirm a clean compile. Then test-sign as usual (`sign_driver.ps1`). Ensure the
+VM/host is in test-signing mode (`bcdedit /set testsigning on`, reboot).
+
+## 2. Clean reinstall on the Windows test machine
+
+A stale cached endpoint default format can mask the real result, so reinstall
+clean:
+
+1. Device Manager → Sound, video and game controllers → **Lampyris Virtual
+   Microphone** → Uninstall → check **"Delete the driver software for this
+   device"**.
+2. Install the freshly built test-signed driver (INF right-click → Install, or
+   `pnputil /add-driver ... /install`).
+
+## 3. Capture with DebugView
+
+1. Run Sysinternals **DebugView** (`Dbgview.exe`) **as Administrator**.
+2. **Capture** menu → enable **Capture Kernel**, **Enable Verbose Kernel
+   Output**, **Capture Events**. (Same setup that produced
+   `debug_logs/WINDOWSVM.log`; the kernel print filter is already non-zero on
+   that machine.)
+3. **Trigger an open:** Settings → System → Sound → the Lampyris mic →
+   Properties → **"Listen to this device"** (and/or open `mictests.com`).
+4. In parallel, start the PC client streaming from Android so the producer side
+   is live (rules out "ring simply empty").
+5. **File → Save** the log.
+
+## 4. Read the log — decision tree
+
+- **Only `DRI ... ClientCh=1 -> NO_MATCH`, no `NewStream ENTER`** → CONFIRMED:
+  the stereo-only data range rejects mono consumers (the "Listen" meter, WebRTC,
+  voice apps open mono). Negotiation dies before stream creation.
+  → Fix: add a mono (1ch/48kHz/16-bit) data range + matching supported-format /
+  mode entries, or relax the channel-exact intersection handler.
+
+- **`NewStream ENTER` then `IsFormatSupported ... -> 0x...` (non-zero / NO_MATCH)**
+  → the supported-formats table is too strict for the requested rate/bits.
+  → Fix: widen `MicInPinSupportedDeviceFormats`.
+
+- **`SetState ... -> 3` (RUN) appears, drain prints still absent / meter flat**
+  → negotiation is fine; the bug is genuinely downstream in the WaveRT DMA /
+  position path (`WriteBytes` / `UpdatePosition` / `GetReadPacket`). Re-scope.
+
+## 5. Cleanup
+
+After the failing step is confirmed, remove the scaffolding:
+
+```
+grep -rn "LAMPYRIS-DEBUG" windows-driver/lampyris-sysvad/EndpointsCommon/
+```
+
+Delete those lines (or keep a minimal subset for future debugging).

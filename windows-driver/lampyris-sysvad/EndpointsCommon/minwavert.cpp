@@ -296,9 +296,18 @@ Arguments:
     // range for each supported channel count.
     if (((PKSDATARANGE_AUDIO)MyDataRange)->MaximumChannels != ((PKSDATARANGE_AUDIO)ClientDataRange)->MaximumChannels)
     {
+        DbgPrint("[LAMPYRIS] DRI: Pin=%u MyCh=%u ClientCh=%u -> NO_MATCH\n",
+                 PinId,
+                 ((PKSDATARANGE_AUDIO)MyDataRange)->MaximumChannels,
+                 ((PKSDATARANGE_AUDIO)ClientDataRange)->MaximumChannels); // LAMPYRIS-DEBUG
         return STATUS_NO_MATCH;
     }
-    
+
+    DbgPrint("[LAMPYRIS] DRI: Pin=%u MyCh=%u ClientCh=%u -> PASS\n",
+             PinId,
+             ((PKSDATARANGE_AUDIO)MyDataRange)->MaximumChannels,
+             ((PKSDATARANGE_AUDIO)ClientDataRange)->MaximumChannels); // LAMPYRIS-DEBUG
+
     //
     // Ok, let the class handler do the rest.
     //
@@ -671,6 +680,8 @@ Return Value:
 
     DPF_ENTER(("[CMiniportWaveRT::NewStream]"));
 
+    DbgPrint("[LAMPYRIS] NewStream ENTER: Pin=%u Capture=%u\n", Pin, Capture); // LAMPYRIS-DEBUG
+
     NTSTATUS                    ntStatus = STATUS_SUCCESS;
     PCMiniportWaveRTStream      stream = NULL;
     GUID                        signalProcessingMode = AUDIO_SIGNALPROCESSINGMODE_DEFAULT;
@@ -746,7 +757,9 @@ Return Value:
     {
         stream->Release();
     }
-    
+
+    DbgPrint("[LAMPYRIS] NewStream EXIT: Pin=%u status=0x%X\n", Pin, ntStatus); // LAMPYRIS-DEBUG
+
     return ntStatus;
 } // NewStream
 
@@ -1514,6 +1527,13 @@ CMiniportWaveRT::IsFormatSupported
 
         ntStatus = STATUS_SUCCESS;
         break;
+    }
+
+    {
+        PWAVEFORMATEX pReqWf = reinterpret_cast<PWAVEFORMATEX>(_pDataFormat + 1);
+        DbgPrint("[LAMPYRIS] IsFormatSupported: Pin=%u req %uch/%luHz/%ubit/blk%u -> 0x%X\n",
+                 _ulPin, pReqWf->nChannels, pReqWf->nSamplesPerSec,
+                 pReqWf->wBitsPerSample, pReqWf->nBlockAlign, ntStatus); // LAMPYRIS-DEBUG
     }
 
     return ntStatus;
