@@ -21,19 +21,46 @@ All added lines are tagged `// LAMPYRIS-DEBUG` (grep to remove later).
 (Existing producer/drain prints stay: `IOCTL_LAMPYRIS_PUSH_AUDIO`,
 `ReadAudioData`, `TimerNotifyRT`, `GetPosition`.)
 
-## 1. Build
+## 1. Build (Release — must match the sign script)
 
 Open an **x64 WDK/EWDK Developer Command Prompt** and build the active driver
 project (`TabletAudioSample`, which compiles `..\lampyris_core.cpp` and links
-`EndpointsCommon.lib`):
+`EndpointsCommon.lib`). **Build Release**, not Debug — `sign_driver.ps1`
+hardcodes the `x64\Release` output dir, so a Debug build would leave the script
+signing a stale/missing binary:
 
 ```
 cd windows-driver\lampyris-sysvad
-msbuild TabletAudioSample\TabletAudioSample.vcxproj /p:Configuration=Debug /p:Platform=x64
+msbuild TabletAudioSample\TabletAudioSample.vcxproj /p:Configuration=Release /p:Platform=x64
 ```
 
-Confirm a clean compile. Then test-sign as usual (`sign_driver.ps1`). Ensure the
-VM/host is in test-signing mode (`bcdedit /set testsigning on`, reboot).
+Confirm a clean compile. (MSBuild does NOT auto-sign — the `<DriverSign>` block
+only sets the hash algorithm; signing is the separate step below.)
+
+## 1b. Sign (test certificate)
+
+```
+cd windows-driver
+powershell -ExecutionPolicy Bypass -File sign_driver.ps1
+```
+
+This runs Inf2Cat → `sysvad.cat`, then signtool-signs **both** the catalog and
+`lampyris-mic.sys` with the WDK test cert (thumb `DF5BB8…`) and verifies. Output
+package: `lampyris-sysvad\TabletAudioSample\x64\SignedPackage\`
+(`lampyris-mic.sys`, `ComponentizedAudioSample.inf`, `sysvad.cat`,
+`lampyris-mic.cer`).
+
+## 1c. Trust prerequisites on the target machine (one-time)
+
+The install wizard rejects the package unless the test cert is trusted and test
+signing is on. You've installed prior builds, so these are likely already set —
+verify if a fresh machine:
+
+```
+bcdedit /set testsigning on            :: then reboot
+certutil -addstore -f root             lampyris-mic.cer
+certutil -addstore -f TrustedPublisher lampyris-mic.cer
+```
 
 ## 2. Clean reinstall on the Windows test machine
 
