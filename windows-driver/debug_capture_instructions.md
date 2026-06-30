@@ -23,19 +23,30 @@ All added lines are tagged `// LAMPYRIS-DEBUG` (grep to remove later).
 
 ## 1. Build (Release — must match the sign script)
 
-Open an **x64 WDK/EWDK Developer Command Prompt** and build the active driver
-project (`TabletAudioSample`, which compiles `..\lampyris_core.cpp` and links
-`EndpointsCommon.lib`). **Build Release**, not Debug — `sign_driver.ps1`
-hardcodes the `x64\Release` output dir, so a Debug build would leave the script
-signing a stale/missing binary:
+Open an **x64 WDK/EWDK Developer Command Prompt** and build the **whole
+solution** — NOT the single `TabletAudioSample` project. Critical: the audio
+negotiation/stream code (`minwavert.cpp`, `minwavertstream.cpp`) compiles into
+the **`EndpointsCommon.lib`** static lib, and `TabletAudioSample.vcxproj`
+references that lib only as a raw link input (no `<ProjectReference>`). Building
+just `TabletAudioSample.vcxproj` relinks against a **stale** `EndpointsCommon.lib`
+— any change in those two files is silently dropped from the .sys. (This exact
+trap made the first instrumentation capture show only the `lampyris_core.cpp`
+IOCTL prints and none of the open-path prints.)
+
+**Build Release** (not Debug — `sign_driver.ps1` hardcodes the `x64\Release`
+output dir):
 
 ```
 cd windows-driver\lampyris-sysvad
-msbuild TabletAudioSample\TabletAudioSample.vcxproj /p:Configuration=Release /p:Platform=x64
+msbuild sysvad.sln /p:Configuration=Release /p:Platform=x64
 ```
 
-Confirm a clean compile. (MSBuild does NOT auto-sign — the `<DriverSign>` block
-only sets the hash algorithm; signing is the separate step below.)
+(Equivalent: build `EndpointsCommon\EndpointsCommon.vcxproj` first, then
+`TabletAudioSample\TabletAudioSample.vcxproj`.)
+
+Confirm a clean compile and that `EndpointsCommon.lib`'s timestamp updated.
+(MSBuild does NOT auto-sign — the `<DriverSign>` block only sets the hash
+algorithm; signing is the separate step below.)
 
 ## 1b. Sign (test certificate)
 
