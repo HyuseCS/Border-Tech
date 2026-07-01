@@ -4,87 +4,100 @@
 throw `NotReadableError`, Voice Recorder sees "no microphone". Producer
 (PC client → IOCTL → ring buffer) works fine.
 
-## ROOT CAUSE FOUND — the device fails to start
+## Current state (latest capture)
 
-Device Manager → Lampyris Virtual Microphone → **Events** tab:
+- **The device now STARTS cleanly.** With a clean full-solution rebuild, the
+  start-path instrumentation shows **every** step returning `0x0`:
+  `StartDevice: AdapterCommon->Init / PcRegisterAdapterPowerManagement /
+  InstallAllRenderFilters`, both `InstallSubdevice TopologyMicIn` and
+  `WaveMicIn` (CreateAudioInterface → PcNewPort → MiniportCreate → port->Init →
+  PcRegisterSubdevice all `0x0`), `ConnectTopologies -> 0x0`,
+  `InstallAllCaptureFilters -> 0x0`.
+- **The earlier `0xC00000BB` (STATUS_NOT_SUPPORTED) failed-start was a STALE
+  BINARY**, not a real bug. A single-project build had been relinking a stale
+  `EndpointsCommon.lib`; the clean solution rebuild fixed the start. Do NOT keep
+  chasing the start failure.
+- **But the mic still won't open.** Even during a real WASAPI open ("Listen to
+  this device"), the log shows format enumeration only — the engine probes the
+  1ch/2ch matrix, accepts `2ch/48000/16bit -> 0x0`, and then **`NewStream` is
+  STILL never called** (no `DRI`, no `SetState`, no drain). The engine aborts
+  the open *before* reaching our miniport.
 
-```
-Device ROOT\MEDIA\0000 had a problem starting.
-Service: sysvad_componentizedaudiosample
-Problem: 0x15            (CM_PROB_FAILED_START — "device cannot start")
-Problem Status: 0xC00000BB  (STATUS_NOT_SUPPORTED)
-```
-
-The PortCls **audio adapter never starts**, so there is no functional KS capture
-filter. That's why:
-- ffmpeg `-list_devices` tags the mic **`(none)`** (not `(audio)`), and opening
-  it fails with **`Unable to BindToObject`**.
-- WASAPI `NewStream` is **never** called (no pin to open).
-- Sound settings still *shows* the endpoint (stale MMDevice registration) with a
-  greyed, unchangeable default format.
-
-The IOCTL producer still works because its control device (`\Device\LampyrisMic2`)
-is created in `DriverEntry`, independent of the failing PortCls adapter.
+So we are back to the ORIGINAL bug, now from a healthy-start baseline:
+**a capture stream never opens.** The failed-start detour was a red herring.
 
 ## What's been ruled OUT (by evidence, don't re-try these)
 
-- **Wave format table.** The pre-pivot config (jack=MONO + many mono ranges) and
-  the current stereo-only config **both fail identically**. Format enumeration
-  works and accepts `2ch/48000/16bit -> 0x0`. Not the cause. (Git: commit
-  `634691d` did the mono→stereo pivot; it did NOT fix the start failure.)
-- **APOs.** The MicIn endpoint has zero FX/APO references in the INF, so the APO
-  subproject build failures are irrelevant to it.
-- **WaveRT miniport `Init`.** Returns SUCCESS for a capture device (skips the
-  whole render/offload block; MicIn has no audio modules).
-- **Topology descriptor.** `micintoptable.h` nodes (VOLUME/MUTE/PEAKMETER) and
-  connections are consistent; `C_ASSERT`s hold.
-- **Mic privacy settings.** All on (checked in Windows Settings).
+- **Device start / registration.** All start steps return `0x0` (see above).
+- **Wave format table.** Pre-pivot (mono-heavy) and current (stereo-only) configs
+  fail identically; format enumeration works and accepts `2ch/48000/16bit`.
+- **APOs.** MicIn endpoint has zero FX/APO references in the INF.
+- **Topology descriptor.** `micintoptable.h` nodes/connections consistent.
+- **WaveRT miniport `Init`.** Returns SUCCESS for a capture device.
+- **Mic privacy settings.** All on.
+- **ffmpeg / DirectShow (`Unable to BindToObject`, `(none)` tag).** RED HERRING —
+  DirectShow's legacy KsProxy handles WaveRT capture endpoints poorly. The real
+  clients (browser, Voice Recorder, WASAPI) use a different path. Stop using
+  ffmpeg as the probe.
 
-## Where the failure is (narrowed)
+## Leading suspect
 
-Only ONE endpoint is registered: `MicInMiniports` (minipairs.h;
-`g_cRenderEndpoints == 0`). So the failing call is inside:
+**Event-driven (pull) mode mismatch.** The INF opts the MicIn endpoint into
+event-driven capture:
+`HKR,EP\0,%PKEY_AudioEndpoint_Supports_EventDriven_Mode%,...,0x1`.
+The audio engine's capture pump opens the WaveRT pin in event-driven mode, which
+requires the miniport stream to implement the notification contract
+(`AllocateBufferWithNotification` / notification event). The custom drain uses a
+polled `ExSetTimer`/`GetPosition` model instead — if the stream doesn't support
+notifications, `IAudioClient::Initialize(EVENTCALLBACK)` fails, possibly before
+`NewStream`. Unconfirmed — the probe below will confirm or refute it.
 
-`StartDevice` (adapter.cpp) → `InstallAllCaptureFilters` →
-`InstallEndpointFilters(MicIn)` (common.cpp) →
-`InstallSubdevice(Topo)` / `InstallSubdevice(Wave)` →
-{`CreateAudioInterfaceWithProperties` → `PcNewPort` → `MiniportCreate` →
-`port->Init` → `PcRegisterSubdevice`} → `ConnectTopologies`.
+## NEXT ACTION — run the WASAPI probe (no driver rebuild)
 
-`port->Init` and `PcRegisterSubdevice` are PortCls black boxes — can't pin the
-exact line by reading. So the start path is now **instrumented** (see below).
+Wrote `windows-driver/tools/wasapi_probe.cpp` — a user-space program that opens
+the Lampyris endpoint exactly like a browser/Voice Recorder and prints the exact
+`AUDCLNT_*` HRESULT at each step. It tries TWO ways: shared-mode WITHOUT the
+event flag, then WITH it (to isolate the event-driven theory).
 
-## Current step: start-path instrumentation (awaiting a capture)
+On the Windows PC, in an x64 Developer/WDK command prompt:
+```
+cd windows-driver\tools
+cl /EHsc /W3 wasapi_probe.cpp ole32.lib
+wasapi_probe.exe
+```
 
-Added `DbgPrint`s tagged `// LAMPYRIS-DEBUG` at every step of the start path:
-- `adapter.cpp` `StartDevice` — after Init / power / render / capture installs.
-- `common.cpp` `InstallSubdevice` — after CreateAudioInterface / PcNewPort /
-  MiniportCreate / port->Init / PcRegisterSubdevice (each tagged with the
-  subdevice Name: `TopologyMicIn` or `WaveMicIn`).
-- `common.cpp` `InstallEndpointFilters` — after `ConnectTopologies`.
-
-**Next action (on Windows):** build the whole solution → sign → install →
-run DebugView (Capture Kernel) → **Device Manager: Disable then Enable the
-Lampyris mic** to re-run `StartDevice` → save log. The first print showing
-`-> 0xC00000BB` names the exact failing call. Full steps + decision tree in
-`debug_capture_instructions.md` §3–4.
+Interpret the output:
+- **Attempt 1 (no event) SUCCEEDS, Attempt 2 (event) FAILS at `Initialize`**
+  → confirms the event-driven/notification mismatch. Fix = implement the WaveRT
+  notification contract, OR drop the event-driven opt-in from the INF
+  (`ComponentizedAudioSample.inx`, the `SYSVAD.I.TopologyMicIn.AddReg` /
+  `WaveMicIn` EP lines) so the engine uses the timer/polled model the driver
+  already has.
+- **`Initialize -> AUDCLNT_E_UNSUPPORTED_FORMAT`** → engine mix format vs pin
+  format mismatch (channel mask). Fixable in the format table.
+- **`AUDCLNT_E_ENDPOINT_CREATE_FAILED`** → PortCls can't build the capture pin
+  graph — WaveRT pin/DMA config.
+- **`>>> OPEN SUCCEEDED <<<`** → driver side is fine; pivot to client/permission.
 
 ## Build/capture reminders (gotchas already hit)
 
 - Build the **whole solution** (`msbuild sysvad.sln /p:Configuration=Release
-  /p:Platform=x64`). `adapter.cpp`/`common.cpp` compile into the `.sys`, but the
-  earlier `minwavert.cpp`/`minwavertstream.cpp` prints live in
-  `EndpointsCommon.lib` (no `<ProjectReference>` from TabletAudioSample), so a
-  single-project build silently drops them. Build the solution.
+  /p:Platform=x64`). Single-project builds relink a STALE `EndpointsCommon.lib`
+  (no `<ProjectReference>` from TabletAudioSample) — this exact trap caused the
+  phantom `0xC00000BB` failed-start. Always build the solution.
 - Build **Release** (`sign_driver.ps1` hardcodes `x64\Release`).
-- APO subprojects (KWSApo/AecApo/DelayAPO/SwapAPO/KeywordDetector) fail to build
-  — not needed for `lampyris-mic.sys`. See `build_errors.md`.
-- Start-path prints fire at **device start**, not mic-open — capture while
-  disabling/enabling the device.
+- Install `SignedPackage\ComponentizedAudioSample.inf` (regenerated by the build
+  + sign). Ignore the APO and Extension INFs — not needed for the mic.
+- APO subprojects fail to build — not needed for `lampyris-mic.sys`.
+- Start-path prints fire at **device start** (boot/install/enable); format-path
+  prints fire at **mic open**. Capture with DebugView running at the right moment.
 
 ## Instrumentation locations (remove later: `grep -rn "LAMPYRIS-DEBUG"`)
 
 - `adapter.cpp` — StartDevice step results.
 - `common.cpp` — InstallSubdevice steps, ConnectTopologies.
-- `EndpointsCommon/minwavert.cpp` — DataRangeIntersection, NewStream, IsFormatSupported (format-path, earlier).
-- `EndpointsCommon/minwavertstream.cpp` — AllocateAudioBuffer, SetState (format-path, earlier).
+- `EndpointsCommon/minwavert.cpp` — DataRangeIntersection, NewStream, IsFormatSupported.
+- `EndpointsCommon/minwavertstream.cpp` — AllocateAudioBuffer, SetState.
+
+(`windows-driver/tools/wasapi_probe.cpp` is a standalone diagnostic, not driver
+code — delete or keep as you like.)
