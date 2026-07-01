@@ -1,92 +1,90 @@
 # Lampyris Mic — Silence Debug Progress (handoff)
 
-**Symptom:** virtual mic outputs silence — green level meter never moves, browsers
-throw `NotReadableError`. Producer (PC client → IOCTL → ring buffer) works fine.
+**Symptom:** virtual mic outputs silence — green meter never moves, browsers
+throw `NotReadableError`, Voice Recorder sees "no microphone". Producer
+(PC client → IOCTL → ring buffer) works fine.
 
-## Where we are
+## ROOT CAUSE FOUND — the device fails to start
 
-The audio **drain pipeline is wired correctly** (`IOCTL push → g_AudioRingBuffer
-→ TimerNotifyRT → UpdatePosition → WriteBytes → ReadAudioData → m_pDmaBuffer`),
-but it **never executes** because the OS never opens the capture stream.
+Device Manager → Lampyris Virtual Microphone → **Events** tab:
 
-We added temporary DbgPrint instrumentation (all tagged `// LAMPYRIS-DEBUG`) to
-the open/negotiation path and captured a fresh DebugView log
-(`debug_logs/WINDOWSVM.log`, 769 lines). Full-log stage tally:
+```
+Device ROOT\MEDIA\0000 had a problem starting.
+Service: sysvad_componentizedaudiosample
+Problem: 0x15            (CM_PROB_FAILED_START — "device cannot start")
+Problem Status: 0xC00000BB  (STATUS_NOT_SUPPORTED)
+```
 
-| Stage | Count | Meaning |
-|------|------:|---------|
-| `IsFormatSupported` | 752 | format probing only |
-| `IOCTL_PUSH_AUDIO` | 16 | producer pushing audio (works) |
-| `NewStream` | **0** | stream never instantiated |
-| `DataRangeIntersection` | 0 | engine uses PROPOSEDATAFORMAT path instead |
-| `AllocBuffer` | 0 | — |
-| `SetState` | 0 | never reaches RUN |
-| drain (ReadAudioData/Timer/GetPosition) | 0 | never runs |
+The PortCls **audio adapter never starts**, so there is no functional KS capture
+filter. That's why:
+- ffmpeg `-list_devices` tags the mic **`(none)`** (not `(audio)`), and opening
+  it fails with **`Unable to BindToObject`**.
+- WASAPI `NewStream` is **never** called (no pin to open).
+- Sound settings still *shows* the endpoint (stale MMDevice registration) with a
+  greyed, unchangeable default format.
 
-## Confirmed / refuted
+The IOCTL producer still works because its control device (`\Device\LampyrisMic2`)
+is created in `DriverEntry`, independent of the failing PortCls adapter.
 
-- **REFUTED — mono-rejection theory.** `IsFormatSupported` *accepts*
-  `2ch/48000Hz/16bit -> 0x0` (SUCCESS) and rejects all else (`0xC0000272` =
-  `STATUS_NO_MATCH`). Format negotiation is healthy; the driver is fine with
-  stereo 48k. `DataRangeIntersection` is never even called.
-- **CONFIRMED mechanism.** `IsFormatSupported` is called *from* `NewStream`
-  (minwavert.cpp:701), yet `NewStream` count is 0 → all 752 hits are pure
-  enumeration, **no stream open ever attempted**. No `NewStream` → no
-  `SetState(RUN)` → timer never starts → ring fills to 192000 and never drains →
-  silence.
-- **Failure location:** *above* our miniport. The Windows audio engine
-  enumerates formats, picks one, then aborts `IAudioClient::Initialize`
-  **before** calling our driver's `NewStream`. That pre-NewStream abort is what
-  surfaces as the browser `NotReadableError`.
+## What's been ruled OUT (by evidence, don't re-try these)
 
-## Leading causes (next to investigate)
+- **Wave format table.** The pre-pivot config (jack=MONO + many mono ranges) and
+  the current stereo-only config **both fail identically**. Format enumeration
+  works and accepts `2ch/48000/16bit -> 0x0`. Not the cause. (Git: commit
+  `634691d` did the mono→stereo pivot; it did NOT fix the start failure.)
+- **APOs.** The MicIn endpoint has zero FX/APO references in the INF, so the APO
+  subproject build failures are irrelevant to it.
+- **WaveRT miniport `Init`.** Returns SUCCESS for a capture device (skips the
+  whole render/offload block; MicIn has no audio modules).
+- **Topology descriptor.** `micintoptable.h` nodes (VOLUME/MUTE/PEAKMETER) and
+  connections are consistent; `C_ASSERT`s hold.
+- **Mic privacy settings.** All on (checked in Windows Settings).
 
-1. **Stale cached default format (top suspect).** `HKLM\...\MMDevices\Audio\
-   Capture` may still hold a **mono** default from earlier mono-era installs.
-   Engine tries to Initialize at mono → driver rejects mono → bails before
-   NewStream, even though stereo would work. Only a true clean uninstall clears
-   it. OPEN QUESTION: did the last reinstall include Device Manager → "Delete
-   the driver software for this device" (or `pnputil /delete-driver`)? If it was
-   an install-over-the-top, the cached mono default survives.
-2. **Single rigid format.** Offering only 48k stereo gives the engine no mono
-   option for the many capture clients that want mono. MS comment in
-   `DataRangeIntersection` says you must add a separate mono data range to
-   support mono.
+## Where the failure is (narrowed)
 
-## Next steps (in priority order)
+Only ONE endpoint is registered: `MicInMiniports` (minipairs.h;
+`g_cRenderEndpoints == 0`). So the failing call is inside:
 
-1. **Get the real error code first (cheapest, highest value).** On the VM:
-   Event Viewer → Applications and Services Logs → Microsoft → Windows → Audio
-   (Operational) + the System log, at the timestamp of the open attempt. The
-   `AUDCLNT_*` / NTSTATUS there names the exact failure — beats another build
-   cycle of guessing.
-2. **Confirm a truly clean reinstall** (uninstall + delete driver software →
-   reboot → reinstall) to flush any cached mono default, then re-capture.
-3. **If it still won't open:** re-add a mono (1ch/48k/16-bit) format + matching
-   `KSDATARANGE_AUDIO` to `TabletAudioSample/micinwavtable.h` so the engine can
-   open the endpoint directly in mono. The PC client has the real mono signal
-   before it duplicates to stereo, so a mono endpoint is closer to the source
-   anyway. (The stereo-only pivot was the regression that started this.)
+`StartDevice` (adapter.cpp) → `InstallAllCaptureFilters` →
+`InstallEndpointFilters(MicIn)` (common.cpp) →
+`InstallSubdevice(Topo)` / `InstallSubdevice(Wave)` →
+{`CreateAudioInterfaceWithProperties` → `PcNewPort` → `MiniportCreate` →
+`port->Init` → `PcRegisterSubdevice`} → `ConnectTopologies`.
+
+`port->Init` and `PcRegisterSubdevice` are PortCls black boxes — can't pin the
+exact line by reading. So the start path is now **instrumented** (see below).
+
+## Current step: start-path instrumentation (awaiting a capture)
+
+Added `DbgPrint`s tagged `// LAMPYRIS-DEBUG` at every step of the start path:
+- `adapter.cpp` `StartDevice` — after Init / power / render / capture installs.
+- `common.cpp` `InstallSubdevice` — after CreateAudioInterface / PcNewPort /
+  MiniportCreate / port->Init / PcRegisterSubdevice (each tagged with the
+  subdevice Name: `TopologyMicIn` or `WaveMicIn`).
+- `common.cpp` `InstallEndpointFilters` — after `ConnectTopologies`.
+
+**Next action (on Windows):** build the whole solution → sign → install →
+run DebugView (Capture Kernel) → **Device Manager: Disable then Enable the
+Lampyris mic** to re-run `StartDevice` → save log. The first print showing
+`-> 0xC00000BB` names the exact failing call. Full steps + decision tree in
+`debug_capture_instructions.md` §3–4.
 
 ## Build/capture reminders (gotchas already hit)
 
-- Build the **whole solution** (`msbuild sysvad.sln`) or build
-  `EndpointsCommon.vcxproj` **then** `TabletAudioSample.vcxproj` — the latter has
-  no `<ProjectReference>` to EndpointsCommon, so building it alone relinks a
-  **stale** `EndpointsCommon.lib` and silently drops changes to
-  `minwavert.cpp` / `minwavertstream.cpp`. (This wasted one capture cycle.)
+- Build the **whole solution** (`msbuild sysvad.sln /p:Configuration=Release
+  /p:Platform=x64`). `adapter.cpp`/`common.cpp` compile into the `.sys`, but the
+  earlier `minwavert.cpp`/`minwavertstream.cpp` prints live in
+  `EndpointsCommon.lib` (no `<ProjectReference>` from TabletAudioSample), so a
+  single-project build silently drops them. Build the solution.
+- Build **Release** (`sign_driver.ps1` hardcodes `x64\Release`).
 - APO subprojects (KWSApo/AecApo/DelayAPO/SwapAPO/KeywordDetector) fail to build
-  (missing sample headers/IDL) — not needed for `lampyris-mic.sys`; build
-  EndpointsCommon + TabletAudioSample directly. See `build_errors.md`.
-- Build **Release** (sign_driver.ps1 hardcodes `x64\Release`).
-- During capture, actually open a capture client (Sound settings "Listen to this
-  device" / mictests / Voice Recorder) — IOCTL pushes happen regardless of any
-  consumer.
+  — not needed for `lampyris-mic.sys`. See `build_errors.md`.
+- Start-path prints fire at **device start**, not mic-open — capture while
+  disabling/enabling the device.
 
-## Instrumentation locations (to remove later: `grep -rn "LAMPYRIS-DEBUG"`)
+## Instrumentation locations (remove later: `grep -rn "LAMPYRIS-DEBUG"`)
 
-- `EndpointsCommon/minwavert.cpp` — DataRangeIntersection, NewStream ENTER/EXIT,
-  IsFormatSupported result.
-- `EndpointsCommon/minwavertstream.cpp` — AllocateAudioBuffer, SetState.
-
-See `debug_capture_instructions.md` for full build/sign/capture steps.
+- `adapter.cpp` — StartDevice step results.
+- `common.cpp` — InstallSubdevice steps, ConnectTopologies.
+- `EndpointsCommon/minwavert.cpp` — DataRangeIntersection, NewStream, IsFormatSupported (format-path, earlier).
+- `EndpointsCommon/minwavertstream.cpp` — AllocateAudioBuffer, SetState (format-path, earlier).
