@@ -1,207 +1,248 @@
-00000076	31.08735275	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
-00000077	31.08735657	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
-00000078	31.08742332	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
-00000079	31.08768272	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
-00000080	31.08768654	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
-00000081	31.08769035	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
-00000082	31.08769226	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
-00000083	31.08769608	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
-00000084	31.08769608	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
-00000085	31.08769608	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
-00000086	31.08774757	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
-00000087	31.08774757	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
-00000088	31.08827591	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
-00000089	31.08827782	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
-00000090	31.08828163	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
-00000091	31.08828163	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
-00000092	31.08828545	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
-00000093	31.08828735	System	[LAMPYRIS] PDF2 EXIT: mode=0xC18E2F7E -> 0x0 (returned default fmt)	
-00000094	31.08828735	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
-00000095	31.08831596	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
-00000096	31.08831978	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
-00000097	31.08939934	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
-00000098	31.08940125	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
-00000099	31.08940506	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
-00000100	31.08940506	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
-00000101	31.08940887	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
-00000102	31.08941078	System	[LAMPYRIS] PDF2 EXIT: mode=0x98951333 -> 0x0 (returned default fmt)	
-00000103	31.08941078	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
-00000104	31.08943939	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
-00000105	31.08944321	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
-00000106	31.08967590	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
-00000107	31.08967972	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
-00000108	31.08975601	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
-00000109	31.08975983	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
-00000110	31.08976364	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
-00000111	31.08976555	System	[LAMPYRIS] PDF2 EXIT: mode=0x28941CBA -> 0x0 (returned default fmt)	
-00000112	31.08976555	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
-00000113	31.08979797	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
-00000114	31.08980179	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
-00000115	31.09340096	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
-00000116	31.09397125	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
-00000117	31.09634590	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
-00000118	31.09634590	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
-00000119	31.09638786	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
-00000120	31.09642220	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
-00000121	31.09642601	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
-00000122	31.09642792	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
-00000123	31.09642792	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
-00000124	31.09643173	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
-00000125	31.09643173	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
-00000126	31.09643555	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
-00000127	31.09645462	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
-00000128	31.09645844	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
-00000129	31.09741211	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
-00000130	31.09741211	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
-00000131	31.09741783	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
-00000132	31.09741783	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
-00000133	31.09742165	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
-00000134	31.09742355	System	[LAMPYRIS] PDF2 EXIT: mode=0xC18E2F7E -> 0x0 (returned default fmt)	
-00000135	31.09742355	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
-00000136	31.09748077	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
-00000137	31.09748077	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
-00000138	31.09821510	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
-00000139	31.09821701	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
-00000140	31.09822083	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
-00000141	31.09822464	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
-00000142	31.09822655	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
-00000143	31.09822655	System	[LAMPYRIS] PDF2 EXIT: mode=0x98951333 -> 0x0 (returned default fmt)	
-00000144	31.09822655	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
-00000145	31.09825897	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
-00000146	31.09825897	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
-00000147	31.09855270	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
-00000148	31.09855652	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
-00000149	31.09856033	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
-00000150	31.09856033	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
-00000151	31.09856415	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
-00000152	31.09856606	System	[LAMPYRIS] PDF2 EXIT: mode=0x28941CBA -> 0x0 (returned default fmt)	
-00000153	31.09856606	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
-00000154	31.09859467	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
-00000155	31.09859467	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
-00000156	31.10199356	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
-00000157	31.10250854	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
-00000158	31.10336685	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
-00000159	31.10336685	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
-00000160	31.10544586	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
-00000161	31.10544968	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
-00000162	31.10549164	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
-00000163	31.10552597	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
-00000164	31.10552597	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
-00000165	31.10552979	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
-00000166	31.10552979	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
-00000167	31.10553360	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
-00000168	31.10553551	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
-00000169	31.10553551	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
-00000170	31.10555840	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
-00000171	31.10555840	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
-00000172	31.10648727	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
-00000173	31.10648727	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
-00000174	31.10649300	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
-00000175	31.10649300	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
-00000176	31.10649681	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
-00000177	31.10649872	System	[LAMPYRIS] PDF2 EXIT: mode=0xC18E2F7E -> 0x0 (returned default fmt)	
-00000178	31.10649872	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
-00000179	31.10653496	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
-00000180	31.10653496	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
-00000181	31.10739517	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
-00000182	31.10739899	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
-00000183	31.10740089	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
-00000184	31.10740089	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
-00000185	31.10740471	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
-00000186	31.10740852	System	[LAMPYRIS] PDF2 EXIT: mode=0x98951333 -> 0x0 (returned default fmt)	
-00000187	31.10740852	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
-00000188	31.10743713	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
-00000189	31.10744095	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
-00000190	31.10790443	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
-00000191	31.10790634	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
-00000192	31.10791016	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
-00000193	31.10791016	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
-00000194	31.10791397	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
-00000195	31.10791588	System	[LAMPYRIS] PDF2 EXIT: mode=0x28941CBA -> 0x0 (returned default fmt)	
-00000196	31.10791588	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
-00000197	31.10795212	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
-00000198	31.10795593	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
-00000199	31.11085510	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
-00000200	31.11152267	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
-00000201	31.11434555	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
-00000202	31.11434937	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
-00000203	31.11438751	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
-00000204	31.11459160	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
-00000205	31.11459160	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
-00000206	31.11459541	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
-00000207	31.11459923	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
-00000208	31.11460114	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
-00000209	31.11460114	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
-00000210	31.11460114	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
-00000211	31.11462975	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
-00000212	31.11462975	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
-00000213	31.11519051	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
-00000214	31.11519432	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
-00000215	31.11520004	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
-00000216	31.11520004	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
-00000217	31.11520386	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
-00000218	31.11520576	System	[LAMPYRIS] PDF2 EXIT: mode=0xC18E2F7E -> 0x0 (returned default fmt)	
-00000219	31.11520576	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
-00000220	31.11524391	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
-00000221	31.11524391	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
-00000222	31.11572456	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
-00000223	31.11572456	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
-00000224	31.11572838	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
-00000225	31.11573029	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
-00000226	31.11573410	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
-00000227	31.11573410	System	[LAMPYRIS] PDF2 EXIT: mode=0x98951333 -> 0x0 (returned default fmt)	
-00000228	31.11573792	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
-00000229	31.11576653	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
-00000230	31.11576653	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
-00000231	31.11649895	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
-00000232	31.11649895	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
-00000233	31.11650467	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
-00000234	31.11650467	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
-00000235	31.11650848	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
-00000236	31.11650848	System	[LAMPYRIS] PDF2 EXIT: mode=0x28941CBA -> 0x0 (returned default fmt)	
-00000237	31.11651230	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
-00000238	31.11654091	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
-00000239	31.11654091	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
-00000240	31.11824036	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
-00000241	31.11893082	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
-00000242	31.12238312	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
-00000243	31.12238693	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
-00000244	31.12243271	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
-00000245	31.12247086	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
-00000246	31.12247086	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
-00000247	31.12247276	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
-00000248	31.12247276	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
-00000249	31.12247658	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
-00000250	31.12248039	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
-00000251	31.12248039	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
-00000252	31.12250328	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
-00000253	31.12250328	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
-00000254	31.12448883	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
-00000255	31.12448883	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
-00000256	31.12449646	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
-00000257	31.12449646	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
-00000258	31.12449837	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
-00000259	31.12450218	System	[LAMPYRIS] PDF2 EXIT: mode=0xC18E2F7E -> 0x0 (returned default fmt)	
-00000260	31.12450218	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
-00000261	31.12453079	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
-00000262	31.12453461	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
-00000263	31.12529373	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
-00000264	31.12529373	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
-00000265	31.12529945	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
-00000266	31.12529945	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
-00000267	31.12530327	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
-00000268	31.12530518	System	[LAMPYRIS] PDF2 EXIT: mode=0x98951333 -> 0x0 (returned default fmt)	
-00000269	31.12530518	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
-00000270	31.12533379	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
-00000271	31.12533379	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
-00000272	31.12579536	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
-00000273	31.12579918	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
-00000274	31.12580109	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
-00000275	31.12580490	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
-00000276	31.12580872	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
-00000277	31.12580872	System	[LAMPYRIS] PDF2 EXIT: mode=0x28941CBA -> 0x0 (returned default fmt)	
-00000278	31.12580872	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
-00000279	31.12583923	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
-00000280	31.12583923	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
-00000281	31.12862015	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
-00000282	31.12916565	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
+00000073	27.28933716	System	[LAMPYRIS] PDF1 SET: ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00000074	27.28934097	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00000075	27.28934479	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000076	27.28944016	System	[LAMPYRIS] PDF1 SET: ValSize=64 too small for any format -> BUFFER_TOO_SMALL	
+00000077	27.28944016	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
+00000078	27.28949165	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000079	27.28949356	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000080	27.28949738	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000081	27.28950119	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000082	27.28950310	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000083	27.28950310	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
+00000084	27.28950691	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000085	27.28954315	System	[LAMPYRIS] PDF1 SET: ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00000086	27.28954315	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00000087	27.28954315	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000088	27.29008865	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000089	27.29009247	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000090	27.29009628	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000091	27.29010010	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000092	27.29010201	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000093	27.29010201	System	[LAMPYRIS] PDF2 EXIT: mode=0xC18E2F7E -> 0x0 (returned default fmt)	
+00000094	27.29010201	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000095	27.29013443	System	[LAMPYRIS] PDF1 SET: ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00000096	27.29013443	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00000097	27.29013443	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000098	27.29104233	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000099	27.29104614	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000100	27.29105186	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000101	27.29105186	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000102	27.29105949	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000103	27.29105949	System	[LAMPYRIS] PDF2 EXIT: mode=0x98951333 -> 0x0 (returned default fmt)	
+00000104	27.29106331	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000105	27.29110336	System	[LAMPYRIS] PDF1 SET: ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00000106	27.29110718	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00000107	27.29110718	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000108	27.29132462	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000109	27.29132843	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000110	27.29133415	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000111	27.29133415	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000112	27.29133987	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000113	27.29133987	System	[LAMPYRIS] PDF2 EXIT: mode=0x28941CBA -> 0x0 (returned default fmt)	
+00000114	27.29134369	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000115	27.29138565	System	[LAMPYRIS] PDF1 SET: ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00000116	27.29138947	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00000117	27.29138947	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000118	27.29338646	System	[LAMPYRIS] PDF1 SET: ValSize=64 too small for any format -> BUFFER_TOO_SMALL	
+00000119	27.29338837	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
+00000120	27.29479980	System	[LAMPYRIS] PDF1 SET: ValSize=64 too small for any format -> BUFFER_TOO_SMALL	
+00000121	27.29480362	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
+00000122	27.29695320	System	[LAMPYRIS] PDF1 SET: ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00000123	27.29695320	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00000124	27.29695702	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000125	27.29699898	System	[LAMPYRIS] PDF1 SET: ValSize=64 too small for any format -> BUFFER_TOO_SMALL	
+00000126	27.29700089	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
+00000127	27.29703712	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000128	27.29703712	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000129	27.29704094	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000130	27.29704285	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000131	27.29704666	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000132	27.29704666	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
+00000133	27.29705048	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000134	27.29707146	System	[LAMPYRIS] PDF1 SET: ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00000135	27.29707146	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00000136	27.29707527	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000137	27.29741669	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000138	27.29742050	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000139	27.29743004	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000140	27.29743004	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000141	27.29743385	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000142	27.29743767	System	[LAMPYRIS] PDF2 EXIT: mode=0xC18E2F7E -> 0x0 (returned default fmt)	
+00000143	27.29743767	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000144	27.29754829	System	[LAMPYRIS] PDF1 SET: ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00000145	27.29754829	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00000146	27.29755211	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000147	27.29784966	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000148	27.29784966	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000149	27.29785538	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000150	27.29785538	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000151	27.29785919	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000152	27.29786301	System	[LAMPYRIS] PDF2 EXIT: mode=0x98951333 -> 0x0 (returned default fmt)	
+00000153	27.29786301	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000154	27.29789352	System	[LAMPYRIS] PDF1 SET: ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00000155	27.29789352	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00000156	27.29789352	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000157	27.29799652	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000158	27.29799652	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000159	27.29800034	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000160	27.29800415	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000161	27.29800606	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000162	27.29800606	System	[LAMPYRIS] PDF2 EXIT: mode=0x28941CBA -> 0x0 (returned default fmt)	
+00000163	27.29800606	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000164	27.29803276	System	[LAMPYRIS] PDF1 SET: ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00000165	27.29803467	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00000166	27.29803467	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000167	27.30080605	System	[LAMPYRIS] PDF1 SET: ValSize=64 too small for any format -> BUFFER_TOO_SMALL	
+00000168	27.30080605	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
+00000169	27.30135727	System	[LAMPYRIS] PDF1 SET: ValSize=64 too small for any format -> BUFFER_TOO_SMALL	
+00000170	27.30135918	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
+00000171	27.30230713	System	[LAMPYRIS] PDF1 SET: ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00000172	27.30231094	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00000173	27.30231094	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000174	27.30701447	System	[LAMPYRIS] PDF1 SET: ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00000175	27.30701828	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00000176	27.30701828	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000177	27.30705833	System	[LAMPYRIS] PDF1 SET: ValSize=64 too small for any format -> BUFFER_TOO_SMALL	
+00000178	27.30706215	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
+00000179	27.30709839	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000180	27.30711746	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000181	27.30712318	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000182	27.30712700	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000183	27.30712891	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000184	27.30713272	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
+00000185	27.30713272	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000186	27.30716515	System	[LAMPYRIS] PDF1 SET: ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00000187	27.30716515	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00000188	27.30716705	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000189	27.30799103	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000190	27.30799294	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000191	27.30800056	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000192	27.30800056	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000193	27.30800247	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000194	27.30800629	System	[LAMPYRIS] PDF2 EXIT: mode=0xC18E2F7E -> 0x0 (returned default fmt)	
+00000195	27.30800629	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000196	27.30809593	System	[LAMPYRIS] PDF1 SET: ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00000197	27.30809593	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00000198	27.30809975	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000199	27.30915260	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000200	27.30915451	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000201	27.30915833	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000202	27.30915833	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000203	27.30916405	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000204	27.30916405	System	[LAMPYRIS] PDF2 EXIT: mode=0x98951333 -> 0x0 (returned default fmt)	
+00000205	27.30916405	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000206	27.30920410	System	[LAMPYRIS] PDF1 SET: ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00000207	27.30920410	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00000208	27.30920410	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000209	27.30974770	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000210	27.30974770	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000211	27.30975342	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000212	27.30975342	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000213	27.30975723	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000214	27.30975914	System	[LAMPYRIS] PDF2 EXIT: mode=0x28941CBA -> 0x0 (returned default fmt)	
+00000215	27.30975914	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000216	27.30978966	System	[LAMPYRIS] PDF1 SET: ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00000217	27.30979156	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00000218	27.30979156	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000219	27.31293106	System	[LAMPYRIS] PDF1 SET: ValSize=64 too small for any format -> BUFFER_TOO_SMALL	
+00000220	27.31293106	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
+00000221	27.31355286	System	[LAMPYRIS] PDF1 SET: ValSize=64 too small for any format -> BUFFER_TOO_SMALL	
+00000222	27.31355476	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
+00000223	27.31627464	System	[LAMPYRIS] PDF1 SET: ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00000224	27.31627846	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00000225	27.31627846	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000226	27.31632233	System	[LAMPYRIS] PDF1 SET: ValSize=64 too small for any format -> BUFFER_TOO_SMALL	
+00000227	27.31632233	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
+00000228	27.31635857	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000229	27.31635857	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000230	27.31636238	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000231	27.31636429	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000232	27.31636429	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000233	27.31636810	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
+00000234	27.31636810	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000235	27.31639099	System	[LAMPYRIS] PDF1 SET: ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00000236	27.31639099	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00000237	27.31639290	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000238	27.31697655	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000239	27.31697655	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000240	27.31698608	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000241	27.31698608	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000242	27.31699181	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000243	27.31699562	System	[LAMPYRIS] PDF2 EXIT: mode=0xC18E2F7E -> 0x0 (returned default fmt)	
+00000244	27.31699562	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000245	27.31711388	System	[LAMPYRIS] PDF1 SET: ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00000246	27.31711769	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00000247	27.31711769	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000248	27.31780815	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000249	27.31781197	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000250	27.31799316	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000251	27.31799698	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000252	27.31800270	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000253	27.31800270	System	[LAMPYRIS] PDF2 EXIT: mode=0x98951333 -> 0x0 (returned default fmt)	
+00000254	27.31800652	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000255	27.31803513	System	[LAMPYRIS] PDF1 SET: ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00000256	27.31803894	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00000257	27.31803894	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000258	27.31879997	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000259	27.31880379	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000260	27.31880569	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000261	27.31880951	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000262	27.31881332	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000263	27.31881332	System	[LAMPYRIS] PDF2 EXIT: mode=0x28941CBA -> 0x0 (returned default fmt)	
+00000264	27.31881332	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000265	27.31899261	System	[LAMPYRIS] PDF1 SET: ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00000266	27.31899452	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00000267	27.31899452	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000268	27.32212448	System	[LAMPYRIS] PDF1 SET: ValSize=64 too small for any format -> BUFFER_TOO_SMALL	
+00000269	27.32212448	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
+00000270	27.32267761	System	[LAMPYRIS] PDF1 SET: ValSize=64 too small for any format -> BUFFER_TOO_SMALL	
+00000271	27.32268143	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
+00000272	27.32573509	System	[LAMPYRIS] PDF1 SET: ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00000273	27.32573700	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00000274	27.32573700	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000275	27.32578278	System	[LAMPYRIS] PDF1 SET: ValSize=64 too small for any format -> BUFFER_TOO_SMALL	
+00000276	27.32578468	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
+00000277	27.32582092	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000278	27.32582092	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000279	27.32582474	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000280	27.32582664	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000281	27.32583046	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000282	27.32583046	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
+00000283	27.32583046	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000284	27.32585335	System	[LAMPYRIS] PDF1 SET: ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00000285	27.32585526	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00000286	27.32585526	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000287	27.32640076	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000288	27.32640266	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000289	27.32641029	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000290	27.32641220	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000291	27.32642937	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000292	27.32642937	System	[LAMPYRIS] PDF2 EXIT: mode=0xC18E2F7E -> 0x0 (returned default fmt)	
+00000293	27.32643127	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000294	27.32653999	System	[LAMPYRIS] PDF1 SET: ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00000295	27.32653999	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00000296	27.32654381	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000297	27.32712936	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000298	27.32713318	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000299	27.32713890	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000300	27.32713890	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000301	27.32716751	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000302	27.32716751	System	[LAMPYRIS] PDF2 EXIT: mode=0x98951333 -> 0x0 (returned default fmt)	
+00000303	27.32716751	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000304	27.32720566	System	[LAMPYRIS] PDF1 SET: ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00000305	27.32720947	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00000306	27.32720947	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000307	27.32752991	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000308	27.32752991	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000309	27.32754326	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000310	27.32754517	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000311	27.32754898	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000312	27.32755280	System	[LAMPYRIS] PDF2 EXIT: mode=0x28941CBA -> 0x0 (returned default fmt)	
+00000313	27.32755280	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000314	27.32758713	System	[LAMPYRIS] PDF1 SET: ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00000315	27.32759094	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00000316	27.32759094	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000317	27.33041954	System	[LAMPYRIS] PDF1 SET: ValSize=64 too small for any format -> BUFFER_TOO_SMALL	
+00000318	27.33041954	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
+00000319	27.33131218	System	[LAMPYRIS] PDF1 SET: ValSize=64 too small for any format -> BUFFER_TOO_SMALL	
+00000320	27.33131599	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000023	
