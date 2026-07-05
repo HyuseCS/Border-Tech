@@ -2154,6 +2154,10 @@ CMiniportWaveRT::PropertyHandlerProposedFormat2
         return STATUS_INVALID_PARAMETER;
     }
 
+    // LAMPYRIS-DEBUG
+    DbgPrint("[LAMPYRIS] PDF2 ENTER: Pin=%u Verb=0x%X InstSize=%u ValSize=%u\n",
+             kspPin->PinId, PropertyRequest->Verb, PropertyRequest->InstanceSize, PropertyRequest->ValueSize);
+
     //
     // This property is supported only on some streaming pins.
     //
@@ -2163,6 +2167,7 @@ CMiniportWaveRT::PropertyHandlerProposedFormat2
 
     if (modeInfo == NULL)
     {
+        DbgPrint("[LAMPYRIS] PDF2 EXIT: Pin=%u no modes -> NOT_SUPPORTED\n", kspPin->PinId); // LAMPYRIS-DEBUG
         return STATUS_NOT_SUPPORTED;
     }
 
@@ -2201,6 +2206,7 @@ CMiniportWaveRT::PropertyHandlerProposedFormat2
     ntStatus = GetAttributesFromAttributeList(pKsItemsHeader, cbItemsList, &signalProcessingMode);
     if (!NT_SUCCESS(ntStatus))
     {
+        DbgPrint("[LAMPYRIS] PDF2 EXIT: GetAttributesFromAttributeList -> 0x%X\n", ntStatus); // LAMPYRIS-DEBUG
         return ntStatus;
     }
 
@@ -2221,6 +2227,10 @@ CMiniportWaveRT::PropertyHandlerProposedFormat2
     // proprosed format for this specific mode.
     if (!bFound || modeInfo->DefaultFormat == NULL)
     {
+        // LAMPYRIS-DEBUG: mode GUID Data1 identifies which mode the engine asked for
+        // (DEFAULT=0xC18E2F7E, RAW=0x9E90EA20, SPEECH=0xFC1CFC9B, COMMUNICATIONS=0x98951333, FFS=0x1064E603)
+        DbgPrint("[LAMPYRIS] PDF2 EXIT: mode=0x%08X found=%d -> NOT_SUPPORTED\n",
+                 ((const ULONG*)&signalProcessingMode)[0], bFound); // LAMPYRIS-DEBUG
         return STATUS_NOT_SUPPORTED;
     }
 
@@ -2274,8 +2284,12 @@ CMiniportWaveRT::PropertyHandlerProposedFormat2
     ASSERT(cbItemsList > 0);
     ((KSDATAFORMAT*)PropertyRequest->Value)->Flags = KSDATAFORMAT_ATTRIBUTES;
     RtlCopyMemory(pKsItemsHeaderOut, pKsItemsHeader, cbItemsList);
-    
+
     PropertyRequest->ValueSize = cbMinSize;
+
+    // LAMPYRIS-DEBUG
+    DbgPrint("[LAMPYRIS] PDF2 EXIT: mode=0x%08X -> 0x0 (returned default fmt)\n",
+             ((const ULONG*)&signalProcessingMode)[0]);
 
     return STATUS_SUCCESS;
 } // PropertyHandlerProposedFormat
@@ -3297,6 +3311,13 @@ Return Value:
                 
         }
     }
+
+    // LAMPYRIS-DEBUG: log every wave-filter property verdict (property-set GUID Data1 + id + verb).
+    DbgPrint("[LAMPYRIS] WaveFilterProp: set=0x%08X id=%u verb=0x%X -> 0x%X\n",
+             ((const ULONG*)PropertyRequest->PropertyItem->Set)[0],
+             PropertyRequest->PropertyItem->Id,
+             PropertyRequest->Verb,
+             ntStatus);
 
     pWaveHelper->Release();
 
