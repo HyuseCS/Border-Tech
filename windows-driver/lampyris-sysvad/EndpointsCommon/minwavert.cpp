@@ -1676,18 +1676,67 @@ CMiniportWaveRT::PropertyHandlerProposedFormat
         PropertyRequest->ValueSize = cbMinSize;
         return STATUS_BUFFER_OVERFLOW;
     }
+
+    // LAMPYRIS FIX: the audio engine canonicalizes simple formats (<= 2ch, <= 16-bit PCM)
+    // to a plain KSDATAFORMAT + WAVEFORMATEX (82 bytes) when proposing via
+    // KSPROPERTY_PIN_PROPOSEDATAFORMAT (SET). Stock sysvad rejected anything smaller
+    // than KSDATAFORMAT_WAVEFORMATEXTENSIBLE (104 bytes) with STATUS_BUFFER_TOO_SMALL,
+    // which the engine treats as a fatal endpoint failure — GetMixFormat then returns
+    // AUDCLNT_E_UNSUPPORTED_FORMAT and no capture pin is ever created. Accept any
+    // buffer large enough for the declared format; IsFormatSupported already parses
+    // plain WAVEFORMATEX proposals correctly and returns the real verdict.
+    if (PropertyRequest->Verb & KSPROPERTY_TYPE_SET)
+    {
+        if (PropertyRequest->ValueSize < sizeof(KSDATAFORMAT) + sizeof(WAVEFORMATEX))
+        {
+            // LAMPYRIS-DEBUG
+            DbgPrint("[LAMPYRIS] PDF1 SET: ValSize=%u too small for any format -> BUFFER_TOO_SMALL\n",
+                     PropertyRequest->ValueSize);
+            return STATUS_BUFFER_TOO_SMALL;
+        }
+
+        pKsFormat = (PKSDATAFORMAT)PropertyRequest->Value;
+        PWAVEFORMATEX pWfxProposed = (PWAVEFORMATEX)(pKsFormat + 1);
+
+        if (PropertyRequest->ValueSize < sizeof(KSDATAFORMAT) + sizeof(WAVEFORMATEX) + pWfxProposed->cbSize)
+        {
+            // LAMPYRIS-DEBUG
+            DbgPrint("[LAMPYRIS] PDF1 SET: ValSize=%u < declared size (cbSize=%u) -> BUFFER_TOO_SMALL\n",
+                     PropertyRequest->ValueSize, pWfxProposed->cbSize);
+            return STATUS_BUFFER_TOO_SMALL;
+        }
+
+        // LAMPYRIS-DEBUG
+        DbgPrint("[LAMPYRIS] PDF1 SET: ValSize=%u tag=0x%X ch=%u rate=%lu bits=%u cb=%u\n",
+                 PropertyRequest->ValueSize, pWfxProposed->wFormatTag, pWfxProposed->nChannels,
+                 pWfxProposed->nSamplesPerSec, pWfxProposed->wBitsPerSample, pWfxProposed->cbSize);
+
+        ntStatus = IsFormatSupported(kspPin->PinId,
+            IsSystemCapturePin(kspPin->PinId) || IsCellularBiDiCapturePin(kspPin->PinId) ||
+            IsLoopbackPin(kspPin->PinId),
+            pKsFormat);
+        if (!NT_SUCCESS(ntStatus))
+        {
+            return ntStatus;
+        }
+
+        //
+        // Make sure there are enough resources to handle a new pin creation with
+        // this format.
+        //
+        if (IsOffloadPin(kspPin->PinId))
+        {
+            ntStatus = ValidateStreamCreate(kspPin->PinId, FALSE);
+        }
+
+        return ntStatus;
+    }
+
+    // GET replies write a full WAVEFORMATEXTENSIBLE, so the buffer must fit one.
     if (PropertyRequest->ValueSize < cbMinSize)
     {
         return STATUS_BUFFER_TOO_SMALL;
     }
-
-#if 0
-    // Only SET is supported for this property
-    if ((PropertyRequest->Verb & KSPROPERTY_TYPE_SET) == 0)
-    {
-        return STATUS_INVALID_DEVICE_REQUEST;
-    }
-#endif
 
     if (PropertyRequest->Verb & KSPROPERTY_TYPE_GET)
     {
@@ -1775,27 +1824,7 @@ CMiniportWaveRT::PropertyHandlerProposedFormat
             ntStatus = STATUS_SUCCESS;
         }
     }
-    else if (PropertyRequest->Verb & KSPROPERTY_TYPE_SET)
-    {
-        pKsFormat = (PKSDATAFORMAT)PropertyRequest->Value;
-        ntStatus = IsFormatSupported(kspPin->PinId,
-            IsSystemCapturePin(kspPin->PinId) || IsCellularBiDiCapturePin(kspPin->PinId) ||
-            IsLoopbackPin(kspPin->PinId),
-            pKsFormat);
-        if (!NT_SUCCESS(ntStatus))
-        {
-            return ntStatus;
-        }
-
-        //
-        // Make sure there are enough resources to handle a new pin creation with
-        // this format.
-        //
-        if (IsOffloadPin(kspPin->PinId))
-        {
-            ntStatus = ValidateStreamCreate(kspPin->PinId, FALSE);
-        }
-    }
+    // (SET is fully handled above — LAMPYRIS FIX.)
 
     return ntStatus;
 } // PropertyHandlerProposedFormat
