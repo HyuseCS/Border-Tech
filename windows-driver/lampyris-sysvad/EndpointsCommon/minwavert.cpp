@@ -1687,6 +1687,32 @@ CMiniportWaveRT::PropertyHandlerProposedFormat
     // plain WAVEFORMATEX proposals correctly and returns the real verdict.
     if (PropertyRequest->Verb & KSPROPERTY_TYPE_SET)
     {
+        // LAMPYRIS FIX: the engine also proposes GUID-only formats — a bare 64-byte
+        // KSDATAFORMAT with no WAVEFORMATEX payload (e.g. the analog bridge format or
+        // wildcards). Answer those semantically instead of with a size error: match the
+        // GUID triple against our supported format, STATUS_NO_MATCH otherwise.
+        if (PropertyRequest->ValueSize >= sizeof(KSDATAFORMAT) &&
+            PropertyRequest->ValueSize < sizeof(KSDATAFORMAT) + sizeof(WAVEFORMATEX))
+        {
+            PKSDATAFORMAT pHdr = (PKSDATAFORMAT)PropertyRequest->Value;
+
+            // LAMPYRIS-DEBUG: identify the GUID-only proposal exactly.
+            DbgPrint("[LAMPYRIS] PDF1 SET GUID-only: Pin=%u ValSize=%u FmtSize=%lu Flags=0x%lx Major=0x%08X Sub=0x%08X Spec=0x%08X\n",
+                     kspPin->PinId, PropertyRequest->ValueSize, pHdr->FormatSize, pHdr->Flags,
+                     ((const ULONG*)&pHdr->MajorFormat)[0],
+                     ((const ULONG*)&pHdr->SubFormat)[0],
+                     ((const ULONG*)&pHdr->Specifier)[0]);
+
+            if (IsEqualGUIDAligned(pHdr->MajorFormat, KSDATAFORMAT_TYPE_AUDIO) &&
+                (IsEqualGUIDAligned(pHdr->SubFormat, KSDATAFORMAT_SUBTYPE_PCM) ||
+                 IsEqualGUIDAligned(pHdr->SubFormat, KSDATAFORMAT_SUBTYPE_WAVEFORMATEX)) &&
+                IsEqualGUIDAligned(pHdr->Specifier, KSDATAFORMAT_SPECIFIER_WAVEFORMATEX))
+            {
+                return STATUS_SUCCESS;   // our PCM/WAVEFORMATEX class — acceptable in principle
+            }
+            return STATUS_NO_MATCH;      // anything else (analog, wildcard, ...) — not our format
+        }
+
         if (PropertyRequest->ValueSize < sizeof(KSDATAFORMAT) + sizeof(WAVEFORMATEX))
         {
             // LAMPYRIS-DEBUG
@@ -1707,8 +1733,8 @@ CMiniportWaveRT::PropertyHandlerProposedFormat
         }
 
         // LAMPYRIS-DEBUG
-        DbgPrint("[LAMPYRIS] PDF1 SET: ValSize=%u tag=0x%X ch=%u rate=%lu bits=%u cb=%u\n",
-                 PropertyRequest->ValueSize, pWfxProposed->wFormatTag, pWfxProposed->nChannels,
+        DbgPrint("[LAMPYRIS] PDF1 SET: Pin=%u ValSize=%u tag=0x%X ch=%u rate=%lu bits=%u cb=%u\n",
+                 kspPin->PinId, PropertyRequest->ValueSize, pWfxProposed->wFormatTag, pWfxProposed->nChannels,
                  pWfxProposed->nSamplesPerSec, pWfxProposed->wBitsPerSample, pWfxProposed->cbSize);
 
         ntStatus = IsFormatSupported(kspPin->PinId,
