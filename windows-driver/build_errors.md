@@ -1,8 +1,6 @@
-D:\Border-Tech\windows-driver>cd D:\Border-Tech\windows-driver\lampyris-sysvad
-
 D:\Border-Tech\windows-driver\lampyris-sysvad>msbuild sysvad.sln /p:Configuration=Release /p:Platform=x64
 MSBuild version 17.14.40+3e7442088 for .NET Framework
-Build started 05/07/2026 11:38:11 am.
+Build started 05/07/2026 1:31:56 pm.
 
 Project "D:\Border-Tech\windows-driver\lampyris-sysvad\sysvad.sln" on node 1 (default targets).
 ValidateSolutionConfiguration:
@@ -23,9 +21,39 @@ InitializeBuildStatus:
   Creating "x64\Release\EndpointsCommon.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
   Touching "x64\Release\EndpointsCommon.tlog\unsuccessfulbuild".
 ClCompile:
-  All outputs are up-to-date.
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\CL.exe /c /Ix64\Rel
+  ease\ /I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\km\\" /I.. /I. /Zi /nologo /W4 /WX /diagnostics:
+  column /Ox /Os /Oy- /D POOL_ZERO_DOWN_LEVEL_SUPPORT /D _WIN64 /D _AMD64_ /D AMD64 /D _WIN32_WINNT=0x0A00 /D WINVER=0x
+  0A00 /D WINNT=1 /D NTDDI_VERSION=0xA00000C /D _USE_WAVERT_ /D SYSVAD_BTH_BYPASS /D SYSVAD_USB_SIDEBAND /D _NEW_DELETE
+  _OPERATORS_ /D KMDF_VERSION_MAJOR=1 /D KMDF_VERSION_MINOR=15 /GF /Gm- /Zp8 /GS /guard:cf /Gy /fp:precise /Zc:wchar_t-
+   /Zc:forScope /Zc:inline /GR- /std:c++17 /Fo"x64\Release\\" /Fd"x64\Release\EndpointsCommon.pdb" /external:W4 /Gz /wd
+  4595 /wd4603 /wd4627 /wd4986 /wd4987 /FI"C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\warning.h
+  " /FC /errorReport:queue /kernel -cbstring -d2epilogunwind  /d1nodatetime /d1import_no_registry /d2AllowCompatibleILV
+  ersions /d2Zi+ minwavert.cpp
+  minwavert.cpp
 Lib:
-  All outputs are up-to-date.
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\Lib.exe /OUT:"x64\R
+  elease\EndpointsCommon.lib" /NOLOGO /MACHINE:X64 x64\Release\a2dphpminwavert.obj
+  x64\Release\a2dphpspeakertopo.obj
+  x64\Release\a2dphptopo.obj
+  x64\Release\AudioModuleHelper.obj
+  x64\Release\bthhfpmictopo.obj
+  x64\Release\bthhfpminwavert.obj
+  x64\Release\bthhfpspeakertopo.obj
+  x64\Release\bthhfptopo.obj
+  x64\Release\micarraytopo.obj
+  x64\Release\MiniportAudioEngineNode.obj
+  x64\Release\MiniportStreamAudioEngineNode.obj
+  x64\Release\mintopo.obj
+  x64\Release\minwavert.obj
+  x64\Release\minwavertstream.obj
+  x64\Release\NewDelete.obj
+  x64\Release\speakerhptopo.obj
+  x64\Release\speakertopo.obj
+  x64\Release\usbhsminwavert.obj
+  x64\Release\usbhsmictopo.obj
+  x64\Release\usbhsspeakertopo.obj
+  x64\Release\usbhstopo.obj
   EndpointsCommon.vcxproj -> D:\Border-Tech\windows-driver\lampyris-sysvad\EndpointsCommon\x64\Release\EndpointsCommon.
   lib
 FinalizeBuildStatus:
@@ -49,19 +77,19 @@ StampInf:
   Copying "D:\Border-Tech\windows-driver\lampyris-sysvad\TabletAudioSample\ComponentizedApoSample.inx" to "x64\Release\
   ComponentizedApoSample.inf" for stamping
   Stamping x64\Release\ComponentizedApoSample.inf
-  Stamping [Version] section with DriverVer=07/05/2026,11.38.12.475
+  Stamping [Version] section with DriverVer=07/05/2026,13.31.57.283
   C:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x86\stampinf.exe -d "*" -a "amd64" -v "*" -k "1.15"  -x -f x6
   4\Release\ComponentizedAudioSample.inf
   Copying "D:\Border-Tech\windows-driver\lampyris-sysvad\TabletAudioSample\ComponentizedAudioSample.inx" to "x64\Releas
   e\ComponentizedAudioSample.inf" for stamping
   Stamping x64\Release\ComponentizedAudioSample.inf
-  Stamping [Version] section with DriverVer=07/05/2026,11.38.12.560
+  Stamping [Version] section with DriverVer=07/05/2026,13.31.57.358
   C:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x86\stampinf.exe -d "*" -a "amd64" -v "*" -k "1.15"  -x -f x6
   4\Release\ComponentizedAudioSampleExtension.inf
   Copying "D:\Border-Tech\windows-driver\lampyris-sysvad\TabletAudioSample\ComponentizedAudioSampleExtension.inx" to "x
   64\Release\ComponentizedAudioSampleExtension.inf" for stamping
   Stamping x64\Release\ComponentizedAudioSampleExtension.inf
-  Stamping [Version] section with DriverVer=07/05/2026,11.38.12.632
+  Stamping [Version] section with DriverVer=07/05/2026,13.31.57.425
 D:\Border-Tech\windows-driver\lampyris-sysvad\TabletAudioSample\ComponentizedAudioSample.inx(43-43): warning 2083: Sect
 ion [keyworddetectorcontosoadapter.copylist] not referenced or used. [D:\Border-Tech\windows-driver\lampyris-sysvad\Tab
 letAudioSample\TabletAudioSample.vcxproj]
@@ -70,7 +98,33 @@ ClCompile:
 ResourceCompile:
   All outputs are up-to-date.
 Link:
-  All outputs are up-to-date.
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\link.exe /ERRORREPO
+  RT:QUEUE /OUT:"x64\Release\lampyris-mic.sys" /VERSION:"10.0" /INCREMENTAL:NO /NOLOGO /WX /SECTION:"INIT,d" "C:\Progra
+  m Files (x86)\Windows Kits\10\lib\10.0.22621.0\km\x64\BufferOverflowFastFailK.lib" "C:\Program Files (x86)\Windows Ki
+  ts\10\lib\10.0.22621.0\km\x64\ntoskrnl.lib" "C:\Program Files (x86)\Windows Kits\10\lib\10.0.22621.0\km\x64\hal.lib"
+  "C:\Program Files (x86)\Windows Kits\10\lib\10.0.22621.0\km\x64\wmilib.lib" "C:\Program Files (x86)\Windows Kits\10\l
+  ib\wdf\kmdf\x64\1.15\WdfLdr.lib" "C:\Program Files (x86)\Windows Kits\10\lib\wdf\kmdf\x64\1.15\WdfDriverEntry.lib" "C
+  :\Program Files (x86)\Windows Kits\10\lib\10.0.22621.0\km\x64\\portcls.lib" "C:\Program Files (x86)\Windows Kits\10\l
+  ib\10.0.22621.0\km\x64\\stdunk.lib" "C:\Program Files (x86)\Windows Kits\10\lib\10.0.22621.0\km\x64\\libcntpr.lib" "C
+  :\Program Files (x86)\Windows Kits\10\lib\10.0.22621.0\km\x64\\wdmsec.lib" .\..\EndpointsCommon\x64\Release\\Endpoint
+  sCommon.lib /NODEFAULTLIB /MANIFEST:NO /DEBUG /PDB:"x64\Release\lampyris-mic.pdb" /SUBSYSTEM:NATIVE,"10.00" /Driver /
+  OPT:REF /OPT:ICF /ENTRY:"FxDriverEntry" /RELEASE /IMPLIB:"x64\Release\lampyris-mic.lib" /MERGE:"_TEXT=.text;_PAGE=PAG
+  E" /MACHINE:X64 /PROFILE /guard:cf /kernel /IGNORE:4198,4010,4037,4039,4065,4070,4078,4087,4089,4221,4108,4088,4218,4
+  218,4235 /osversion:10.0 /pdbcompress /debugtype:pdata x64\Release\TabletAudioSample.res
+  x64\Release\A2dpHpDevice.obj
+  x64\Release\adapter.obj
+  x64\Release\lampyris_core.obj
+  x64\Release\basetopo.obj
+  x64\Release\BthhfpDevice.obj
+  x64\Release\common.obj
+  x64\Release\hw.obj
+  x64\Release\kshelper.obj
+  x64\Release\savedata.obj
+  x64\Release\tonegenerator.obj
+  x64\Release\UsbHsDevice.obj
+  x64\Release\hdmitopo.obj
+  x64\Release\micintopo.obj
+  x64\Release\spdiftopo.obj
   TabletAudioSample.vcxproj -> D:\Border-Tech\windows-driver\lampyris-sysvad\TabletAudioSample\x64\Release\lampyris-mic
   .sys
 Project "D:\Border-Tech\windows-driver\lampyris-sysvad\TabletAudioSample\TabletAudioSample.vcxproj" (3) is building "D:
@@ -79,13 +133,20 @@ et(s)).
 TestSign:
   The driver will be test-signed. Driver signing options can be changed from the project properties.
   Sign Inputs: D:\Border-Tech\windows-driver\lampyris-sysvad\TabletAudioSample\x64\Release\lampyris-mic.sys
-  All outputs are up-to-date.
+  C:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x86\signtool.exe sign /ph /fd "sha256" /sha1 "DF5BB8BF921D9CF
+  CF15636514913EFF63FFC257D"
+  Done Adding Additional Store
+  Successfully signed: D:\Border-Tech\windows-driver\lampyris-sysvad\TabletAudioSample\x64\Release\lampyris-mic.sys
+
+  Certificate used for signing: issued to = WDKTestCert Hyuse,134254678173840160 and thumbprint = DF5BB8BF921D9CFCF1563
+  6514913EFF63FFC257D
+  Exported Certificate: x64\Release\lampyris-mic.cer
 Done Building Project "D:\Border-Tech\windows-driver\lampyris-sysvad\TabletAudioSample\TabletAudioSample.vcxproj" (Test
 Sign target(s)).
 
 ApiValidator:
   Validating 'Universal' driver using ApiValidator.exe
-  cmd.exe /D /C "C:\Users\Hyuse\AppData\Local\Temp\MSBuildTemp\tmpd6becda6d12648ba8122c0ddbbfbd46f.cmd"
+  cmd.exe /D /C "C:\Users\Hyuse\AppData\Local\Temp\MSBuildTemp\tmp72cc388a31664da891d95e0c250f0893.cmd"
   "C:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x64\ApiValidator.exe" -DriverPackagePath:x64\Release\lampyri
   s-mic.sys -SupportedApiXmlFiles:"C:\Program Files (x86)\Windows Kits\10\build\10.0.22621.0\universalDDIs\x64\Universa
   lDDIs.xml" -ModuleWhiteListXmlFiles:"C:\Program Files (x86)\Windows Kits\10\build\10.0.22621.0\universalDDIs\x64\Modu
@@ -361,4 +422,4 @@ ApoDll.h': No such file or directory [D:\Border-Tech\windows-driver\lampyris-sys
     1 Warning(s)
     14 Error(s)
 
-Time Elapsed 00:00:10.11
+Time Elapsed 00:00:10.24
