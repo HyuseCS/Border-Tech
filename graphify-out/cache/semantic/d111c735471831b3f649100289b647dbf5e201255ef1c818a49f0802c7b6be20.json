@@ -1,0 +1,1 @@
+{"nodes": [{"id": "endpointscommon_a2dphptopo_cpp_volumehandler", "label": "PropertyHandler_A2dpHpVolumeLevel_BasicSupport", "file_type": "code", "source_file": "windows-driver/lampyris-sysvad/EndpointsCommon/a2dphptopo.cpp", "source_location": "line 26", "source_url": null, "captured_at": null, "author": null, "contributor": null}], "edges": [], "hyperedges": []}
