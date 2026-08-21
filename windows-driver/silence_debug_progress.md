@@ -1,5 +1,27 @@
 # Lampyris Mic — Silence Debug Progress (handoff)
 
+> ## RESOLVED — 2026-08-21. Verified end to end on the Win10 22H2 VM.
+>
+> The mono pin fix was built, signed, installed and run. `NewStream ENTER Pin=1
+> Capture=1` → `EXIT status=0x0`, SetState transitions fired, and live audio was
+> audible with correct pitch.
+>
+> Two bugs, not one:
+>
+> 1. **Driver:** the MicIn capture pin advertised stereo only. Fixed — mono is
+>    element 0 of `micinwavtable.h`.
+> 2. **Client:** `pc-client/src/audio/windows.rs` packed each mono sample twice as
+>    a fake L/R pair (left over from the stereo pin). Against a mono pin the driver
+>    read each pair as two samples, so playback ran at half speed — audible as a
+>    voice one octave too deep. Fixed — one sample per frame, byte counts `*2`.
+>
+> Still open: the `External Microphone Headphone` (MicIn) endpoint still fails
+> `GetMixFormat` because its cached registry `DeviceFormat` is stale at 2ch from
+> the old build. Audio was confirmed through the temporary `MicArray1` diagnostic
+> endpoint instead. Clear the cache with a full uninstall-with-driver-deletion +
+> reinstall, or `reset_mic_endpoint.ps1`. Then remove `&MicArray1Miniports` from
+> `minipairs.h` and strip the `LAMPYRIS-DEBUG` prints.
+
 > ## ROOT CAUSE FOUND — 2026-08-21. Everything below this block is superseded.
 >
 > **The MicIn capture pin advertised stereo only. The Windows shared-mode capture

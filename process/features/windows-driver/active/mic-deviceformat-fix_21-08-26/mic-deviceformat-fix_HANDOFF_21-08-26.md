@@ -11,6 +11,20 @@ metadata:
 
 # Mic DeviceFormat Fix — Next-Session Handoff
 
+> ## SUPERSEDED — 2026-08-21. Do not follow this document.
+>
+> The `PKEY_AudioEngine_DeviceFormat` theory described below was **refuted**. The
+> INF `DeviceFormat` write was built, installed and tested with no effect, and the
+> cached value measured correct on a clean install while the open still failed.
+>
+> The real cause was the MicIn capture pin advertising **stereo only**, plus a
+> second bug in the client that duplicated each mono sample into a fake L/R pair.
+> Both are fixed and verified — audible audio with correct pitch on the VM,
+> 2026-08-21.
+>
+> Sections 2, 3, and 6 (the decision tree) are wrong. Section 4 (ruled out) is
+> still accurate. Current state: `windows-driver/silence_debug_progress.md`.
+
 **Read this file first. Do not re-read the 434-line plan unless this handoff sends you there.**
 
 ## 1. Situation
