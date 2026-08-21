@@ -178,22 +178,11 @@ HKR,,FriendlyName,,%SYSVAD.TopologyMicIn.szPname%
 ; The following lines opt-in to pull mode.
 HKR,EP\0,%PKEY_AudioEndpoint_Association%,,%KSNODETYPE_ANY%
 HKR,EP\0,%PKEY_AudioEndpoint_Supports_EventDriven_Mode%,0x00010001,0x1
-; Default endpoint format: serialized VT_BLOB PROPVARIANT containing a
-; WAVEFORMATEXTENSIBLE 1ch / 48000 Hz / 16-bit PCM mono — must match
-; MicInPinSupportedDeviceFormats[0] in micinwavtable.h.
-;
-; BOTH properties are written, with the SAME byte-identical blob:
-;   DeviceFormat is the value the audio engine actually reads on
-;     EVERY open (IAudioClient::GetMixFormat reads this cached registry value; it
-;     never queries the driver). If it is stale or absent, the engine aborts the
-;     capture open before NewStream is ever called and the mic is silent.
-;   OEMFormat only SEEDS DeviceFormat the first time an endpoint's
-;     property store is created. On a machine whose store already exists, adding
-;     OEMFormat alone changes nothing — that is exactly why this endpoint stayed
-;     stale after the OEMFormat fix landed, and why DeviceFormat is written directly.
-; Flag 0x00000001 = REG_BINARY, clobber: a reinstall always overwrites a stale value.
-HKR,EP\0,%PKEY_AudioEngine_OEMFormat%,0x00000001,41,00,00,00,28,00,00,00,FE,FF,01,00,80,BB,00,00,00,77,01,00,02,00,10,00,16,00,10,00,04,00,00,00,01,00,00,00,00,00,10,00,80,00,00,AA,00,38,9B,71
-HKR,EP\0,%PKEY_AudioEngine_DeviceFormat%,0x00000001,41,00,00,00,28,00,00,00,FE,FF,01,00,80,BB,00,00,00,77,01,00,02,00,10,00,16,00,10,00,04,00,00,00,01,00,00,00,00,00,10,00,80,00,00,AA,00,38,9B,71
+; NOTE: this endpoint deliberately writes NO PKEY_AudioEngine_DeviceFormat /
+; OEMFormat. Forcing a 16-bit PCM blob here made the shared-mode engine reject the
+; endpoint (GetMixFormat -> AUDCLNT_E_UNSUPPORTED_FORMAT) because a capture mix
+; format is 32-bit float, not PCM. Left alone, the engine derives the mix format
+; from the pin - which is what the working MicArray endpoint does.
 
 ;======================================================
 ; capture interfaces: mic array (internal: front)

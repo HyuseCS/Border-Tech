@@ -55,18 +55,6 @@ $FallbackGuids = @(
     '{b1dd805e-09b6-4673-8efd-2f072d9bf0cf}'
 )
 
-# Serialized VT_BLOB PROPVARIANT: WAVEFORMATEXTENSIBLE 1ch / 48000 Hz / 16-bit PCM mono.
-# NOTE (2026-08-21): the stale-DeviceFormat theory this script was written for was
-# REFUTED. Root cause was the MicIn pin advertising stereo only. Kept only to repair
-# an endpoint whose cached format predates the mono fix.
-# MUST stay byte-identical to the blob in
-# lampyris-sysvad\TabletAudioSample\ComponentizedAudioSample.inx.
-$StereoBlob = [byte[]](
-    0x41,0x00,0x00,0x00,0x28,0x00,0x00,0x00,0xFE,0xFF,0x01,0x00,0x80,0xBB,0x00,0x00,
-    0x00,0x77,0x01,0x00,0x02,0x00,0x10,0x00,0x16,0x00,0x10,0x00,0x04,0x00,0x00,0x00,
-    0x01,0x00,0x00,0x00,0x00,0x00,0x10,0x00,0x80,0x00,0x00,0xAA,0x00,0x38,0x9B,0x71
-)
-
 # ---------------------------------------------------------------------------
 # Elevation check (belt and braces alongside #Requires -RunAsAdministrator)
 # ---------------------------------------------------------------------------
@@ -243,15 +231,18 @@ foreach ($m in $matched) {
         continue
     }
 
-    # (c) Write both properties with the correct stereo blob. Idempotent.
-    Write-Host '  Writing corrected 1ch/48000/16-bit mono blob to DeviceFormat and OEMFormat...'
-    if (-not (Test-Path -LiteralPath $m.PropertiesPS)) {
-        New-Item -Path $m.PropertiesPS -Force | Out-Null
+    # (c) DELETE both properties. A hand-written DeviceFormat is what breaks this
+    # endpoint: a shared-mode capture mix format is 32-bit float, so forcing a
+    # 16-bit PCM blob makes GetMixFormat return AUDCLNT_E_UNSUPPORTED_FORMAT. With
+    # both values absent the engine derives the mix format from the pin, which is
+    # exactly what the working MicArray endpoint does.
+    Write-Host '  Deleting DeviceFormat and OEMFormat so the engine derives them from the pin...'
+    if (Test-Path -LiteralPath $m.PropertiesPS) {
+        Remove-ItemProperty -LiteralPath $m.PropertiesPS -Name $PkeyDeviceFormat -Force -ErrorAction SilentlyContinue
+        Remove-ItemProperty -LiteralPath $m.PropertiesPS -Name $PkeyOemFormat    -Force -ErrorAction SilentlyContinue
     }
-    New-ItemProperty -LiteralPath $m.PropertiesPS -Name $PkeyDeviceFormat -PropertyType Binary -Value $StereoBlob -Force | Out-Null
-    New-ItemProperty -LiteralPath $m.PropertiesPS -Name $PkeyOemFormat    -PropertyType Binary -Value $StereoBlob -Force | Out-Null
 
-    # (d) AFTER decode — expect channels=2, rate=48000, bits=16, mask=0x3 (STEREO).
+    # (d) AFTER decode — expect both properties to read <not set>.
     Write-Host ''
     Write-Host '  --- AFTER ---' -ForegroundColor Green
     Show-FormatBlob -Label 'DeviceFormat' -Value (Get-EndpointProperty -PropertiesPath $m.PropertiesPS -PropertyName $PkeyDeviceFormat)
