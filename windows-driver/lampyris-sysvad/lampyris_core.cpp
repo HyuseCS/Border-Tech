@@ -16,6 +16,12 @@ PDEVICE_OBJECT g_ControlDeviceObject = NULL;
 
 // Audio ring buffer configuration: 2 seconds of 48kHz mono 16-bit PCM (192,000 bytes)
 #define RING_BUFFER_SIZE (48000 * 2 * 2)
+
+// Latency cap: never hold more than 100 ms of queued audio (48kHz mono 16-bit).
+// The client pushes from the moment it connects, but nothing drains the ring
+// until an app opens the mic. Without this the ring fills to its full 2 s and
+// the reader stays that far behind for the rest of the session.
+#define MAX_QUEUED_BYTES (48000 * 2 / 10)
 UCHAR* g_AudioRingBuffer = NULL;
 ULONG g_RingBufferWriteOffset = 0;
 ULONG g_RingBufferReadOffset = 0;
@@ -48,6 +54,12 @@ NTSTATUS PushAudioData(PVOID Buffer, ULONG Length) {
         } else {
             g_RingBufferReadOffset = (g_RingBufferReadOffset + 1) % RING_BUFFER_SIZE;
         }
+    }
+    
+    if (g_RingBufferLength > MAX_QUEUED_BYTES) {
+        ULONG Drop = g_RingBufferLength - MAX_QUEUED_BYTES;
+        g_RingBufferReadOffset = (g_RingBufferReadOffset + Drop) % RING_BUFFER_SIZE;
+        g_RingBufferLength -= Drop;
     }
     
     KeReleaseInStackQueuedSpinLock(&LockHandle);
