@@ -565,7 +565,7 @@ FX_DISCOVER_EFFECTS_APO_CLSID  = "{889C03C8-ABAD-4004-BF0A-BC7BB825E166}"
 
 
 MEDIA_CATEGORIES = "MediaCategories"
-MicArray1CustomNameGUID = {6ae81ff4-203e-4fe1-88aa-f2d57775cd4a}
+MicArray1CustomNameGUID = {bb04bbc9-cfa0-4094-bb45-b0a84bf8b131}
 MicArray2CustomNameGUID = {3fe0e3e1-ad16-4772-8382-4129169018ce}
 MicArray3CustomNameGUID = {c04bdb7c-2138-48da-9dd4-2af9ff2e58c2}
 MicInCustomNameGUID = {d48deb08-fd1c-4d1e-b821-9064d49ae96e}
@@ -622,7 +622,7 @@ SYSVAD.TopologyUsbHsSpeaker.szPname="SYSVAD Topology USB Headset Speaker"
 SYSVAD.WaveUsbHsMic.szPname="SYSVAD Wave USB Headset Microphone"
 SYSVAD.TopologyUsbHsMic.szPname="SYSVAD Topology USB Headset Microphone"
 
-MicArray1CustomName= "Internal Microphone Array - Front"
+MicArray1CustomName= "Lampyris Virtual Microphone"
 MicArray2CustomName= "Internal Microphone Array - Rear"
 MicArray3CustomName= "Internal Microphone Array - Front/Rear"
 MicInCustomName= "Lampyris Virtual Microphone"

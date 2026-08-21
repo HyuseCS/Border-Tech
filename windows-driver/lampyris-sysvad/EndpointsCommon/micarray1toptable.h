@@ -16,9 +16,13 @@ Abstract:
 #define _SYSVAD_MICARRAY1TOPTABLE_H_
 
 //
-// {6ae81ff4-203e-4fe1-88aa-f2d57775cd4a}
+// {bb04bbc9-cfa0-4094-bb45-b0a84bf8b131}
+// Freshly minted 2026-08-21. This topology is what the Lampyris MicIn endpoint
+// now uses, so the pin's custom name must resolve to the Lampyris name, not the
+// inherited mic-array one. A new GUID also sidesteps any cached endpoint name
+// Windows kept against the old one.
 DEFINE_GUID(MICARRAY1_CUSTOM_NAME, 
-0x6ae81ff4, 0x203e, 0x4fe1, 0x88, 0xaa, 0xf2, 0xd5, 0x77, 0x75, 0xcd, 0x4a);
+0xbb04bbc9, 0xcfa0, 0x4094, 0xbb, 0x45, 0xb0, 0xa8, 0x4b, 0xf8, 0xb1, 0x31);
 
 //=============================================================================
 static
