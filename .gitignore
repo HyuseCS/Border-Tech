@@ -58,3 +58,4 @@ windows-driver/mic_endpoint_backup_*.reg
 build.log
 windows-driver/tools/*.exe
 windows-driver/tools/*.obj
+windows-driver/mic_endpoint_backup_*.reg
