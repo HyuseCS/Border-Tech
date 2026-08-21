@@ -18,7 +18,7 @@ Abstract:
 //
 // Mic in (external: headphone) range.
 //
-#define MICIN_DEVICE_MAX_CHANNELS           2       // Max Channels.
+#define MICIN_DEVICE_MAX_CHANNELS           1       // Max Channels.
 #define MICIN_MIN_BITS_PER_SAMPLE_PCM       16      // Min Bits Per Sample
 #define MICIN_MAX_BITS_PER_SAMPLE_PCM       16      // Max Bits Per Sample
 #define MICIN_MIN_SAMPLE_RATE               48000    // Min Sample Rate
@@ -66,31 +66,6 @@ KSDATAFORMAT_WAVEFORMATEXTENSIBLE MicInPinSupportedDeviceFormats[] =
             },
             16,
             KSAUDIO_SPEAKER_MONO,
-            STATICGUIDOF(KSDATAFORMAT_SUBTYPE_PCM)
-        }
-    },
-    { // 1 - 48 KHz 16-bit stereo.
-        {
-            sizeof(KSDATAFORMAT_WAVEFORMATEXTENSIBLE),
-            0,
-            0,
-            0,
-            STATICGUIDOF(KSDATAFORMAT_TYPE_AUDIO),
-            STATICGUIDOF(KSDATAFORMAT_SUBTYPE_PCM),
-            STATICGUIDOF(KSDATAFORMAT_SPECIFIER_WAVEFORMATEX)
-        },
-        {
-            {
-                WAVE_FORMAT_EXTENSIBLE,
-                2,
-                48000,
-                192000,
-                4,
-                16,
-                sizeof(WAVEFORMATEXTENSIBLE) - sizeof(WAVEFORMATEX)
-            },
-            16,
-            KSAUDIO_SPEAKER_STEREO,
             STATICGUIDOF(KSDATAFORMAT_SUBTYPE_PCM)
         }
     }
