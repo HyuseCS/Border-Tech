@@ -6,7 +6,7 @@
 > Capture=1` → `EXIT status=0x0`, SetState transitions fired, and live audio was
 > audible with correct pitch.
 >
-> Two bugs, not one:
+> Three bugs, not one:
 >
 > 1. **Driver:** the MicIn capture pin advertised stereo only. Fixed — mono is
 >    element 0 of `micinwavtable.h`.
@@ -14,6 +14,11 @@
 >    a fake L/R pair (left over from the stereo pin). Against a mono pin the driver
 >    read each pair as two samples, so playback ran at half speed — audible as a
 >    voice one octave too deep. Fixed — one sample per frame, byte counts `*2`.
+> 3. **Latency:** `PushAudioData` in `lampyris_core.cpp` never bounded the queue.
+>    The client pushes from the moment it connects but nothing drains the ring
+>    until an app opens the mic, so it filled to its full 2 s and the reader
+>    stayed that far behind all session — audible as hearing the mouse click that
+>    started the recording. Fixed — drop the oldest bytes past a 100 ms watermark.
 >
 > Still open: the `External Microphone Headphone` (MicIn) endpoint still fails
 > `GetMixFormat` because its cached registry `DeviceFormat` is stale at 2ch from
