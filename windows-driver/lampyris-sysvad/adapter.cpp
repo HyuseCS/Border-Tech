@@ -23,6 +23,7 @@ Abstract:
 #include <sysvad.h>
 #include <ContosoKeywordDetector.h>
 #include "IHVPrivatePropertySet.h"
+#include "lampyris_debug.h"
 
 #include "simple.h"
 #include "minipairs.h"
@@ -34,7 +35,6 @@ Abstract:
 #endif // SYSVAD_USB_SIDEBAND
 #ifdef SYSVAD_A2DP_SIDEBAND
 #include "a2dphpminipairs.h"
-#include "lampyris_debug.h"
 #endif // SYSVAD_A2DP_SIDEBAND
 
 extern "C" VOID LampyrisCleanup();

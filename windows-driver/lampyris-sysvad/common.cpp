@@ -20,6 +20,7 @@ Abstract:
 #include "savedata.h"
 #include "IHVPrivatePropertySet.h"
 #include "simple.h"
+#include "lampyris_debug.h"
 
 #ifdef SYSVAD_BTH_BYPASS
 #include <limits.h>
@@ -44,7 +45,6 @@ Abstract:
 #include <A2DPSidebandAudio.h>
 #include "A2dpHpMinipairs.h"
 #include "A2dpHpDevice.h"
-#include "lampyris_debug.h"
 #endif // SYSVAD_A2DP_SIDEBAND
 
 //-----------------------------------------------------------------------------
