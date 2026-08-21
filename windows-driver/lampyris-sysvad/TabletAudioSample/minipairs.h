@@ -555,12 +555,6 @@ static
 PENDPOINT_MINIPAIR  g_CaptureEndpoints[] = 
 {
     &MicInMiniports,
-    // Diagnostic control endpoint (2026-08-21). MicIn's capture pin negotiates
-    // format successfully (26/26 IsFormatSupported -> STATUS_SUCCESS) yet the audio
-    // engine never calls NewStream and GetMixFormat returns AUDCLNT_E_UNSUPPORTED_FORMAT.
-    // MicArray1 is a second capture endpoint from the same driver: if it opens and
-    // MicIn does not, the cause is MicIn-specific config. Remove once diagnosed.
-    &MicArray1Miniports,
 };
 
 #define g_cCaptureEndpoints (SIZEOF_ARRAY(g_CaptureEndpoints))
