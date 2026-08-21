@@ -58,12 +58,21 @@ cargo run --release
 
 ### 2. Android App (`android-client/`)
 1. Connect your device with USB Debugging enabled.
-2. Build and install the optimized release:
+2. Build the release-signed APK (recommended):
    ```bash
    cd android-client
-   ./gradlew installDebug # For testing
-   ./gradlew assembleRelease # For final Sonus-v1.0.apk
+   ./gradlew assembleRelease # Produces app/build/outputs/apk/release/Sonus-v1.1.0.apk
+   adb install -r app/build/outputs/apk/release/Sonus-v1.1.0.apk
    ```
+   Signing credentials are read from `android-client/keystore.properties` (git-ignored).
+   Without that file the release APK is built unsigned and cannot be installed.
+3. For local development only:
+   ```bash
+   ./gradlew installDebug # Debug-signed, debuggable build
+   ```
+   *Note: Debug and release builds use different signing certificates, so you cannot install
+   one over the other. Run `adb uninstall com.projectm.mic` first — this wipes app data,
+   including pairing state.*
 
 ---
 
