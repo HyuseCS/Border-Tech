@@ -28,8 +28,25 @@ where
         let mut header = [0u8; 7];
 
         loop {
-            // Scan for magic 'M'
-            self.stream.read_exact(&mut header[0..1]).await?;
+            // Scan for magic 'M'.
+            // 5s timeout: measured frame cadence is ~10ms (48kHz / 480-sample buffer), so this is
+            // ~500x the normal inter-frame gap. It is a UX threshold for "how long before a frozen
+            // VU meter reads as broken", deliberately loose enough to survive a GC pause, a USB
+            // re-enumeration, or a Wi-Fi roam.
+            match tokio::time::timeout(
+                std::time::Duration::from_secs(5),
+                self.stream.read_exact(&mut header[0..1]),
+            )
+            .await
+            {
+                Ok(res) => {
+                    res?;
+                }
+                Err(_) => {
+                    error!("Timeout waiting for frame header");
+                    return Err(anyhow::anyhow!("Timeout waiting for frame header"));
+                }
+            }
             if header[0] == b'M' {
                 // Check if next byte is 'C'
                 self.stream.read_exact(&mut header[1..2]).await?;
@@ -234,6 +251,26 @@ mod tests {
                 0x00, 0x00, 0x00, 0x00, // Silence inserted for missing Packet 2
                 0x05, 0x06, 0x07, 0x08 // Packet 3
             ]
+        );
+    }
+
+    #[tokio::test(start_paused = true)]
+    async fn test_header_read_timeout() {
+        // Stall longer than the 5s header timeout. `start_paused` auto-advances the virtual
+        // clock, so this costs no real wall-clock time.
+        let mock = Builder::new()
+            .wait(std::time::Duration::from_secs(10))
+            .build();
+        let mut handler = ProtocolHandler::new(mock);
+        let mut buf = [0u8; 10];
+
+        let result = handler.read_audio_packet(&mut buf).await;
+        assert!(result.is_err());
+        assert!(
+            result
+                .unwrap_err()
+                .to_string()
+                .contains("Timeout waiting for frame header")
         );
     }
 }
