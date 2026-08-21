@@ -1,1 +1,0 @@
-D:\Border-Tech\windows-driver\x64\Debug\lampyris-mic.sys
