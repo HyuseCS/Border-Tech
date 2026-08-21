@@ -8,7 +8,7 @@ $ErrorActionPreference = "Stop"
 $WdkBinRoot  = "C:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0"
 $Inf2Cat     = Join-Path $WdkBinRoot "x86\Inf2Cat.exe"
 $SignTool    = Join-Path $WdkBinRoot "x64\signtool.exe"
-$CertThumb   = "DF5BB8BF921D9CFCF15636514913EFF63FFC257D"
+$CertThumb   = "CDDFCA2E7FC4670B8E00D7AF54347FFD0E5F4C3F"
 $DriverDir   = Join-Path $PSScriptRoot "lampyris-sysvad\TabletAudioSample\x64\Release"
 
 # Staging directory: clean folder with only the files Inf2Cat needs
