@@ -581,7 +581,7 @@ MfgName      = "Project M"
 MsCopyRight  = "TODO-Set-Copyright"
 
 
-SYSVAD_SA.DeviceDesc="Lampyris Virtual Microphone"
+SYSVAD_SA.DeviceDesc="Lampyris Mic"
 SYSVAD_ComponentizedAudioSample.SvcDesc="Virtual Audio Device (WDM) - Tablet Sample Driver"
 SYSVAD_MIDI="Virtual Audio Device (WDM) - Midi Device"
 
@@ -598,8 +598,8 @@ SYSVAD.TopologyHdmi.szPname="SYSVAD Topology HDMI"
 SYSVAD.WaveSpdif.szPname="SYSVAD Wave SPDIF"
 SYSVAD.TopologySpdif.szPname="SYSVAD Topology SPDIF"
 
-SYSVAD.WaveMicIn.szPname="SYSVAD Wave Microphone Headphone"
-SYSVAD.TopologyMicIn.szPname="SYSVAD Topology Microphone Headphone"
+SYSVAD.WaveMicIn.szPname="Lampyris Wave Microphone"
+SYSVAD.TopologyMicIn.szPname="Lampyris Topology Microphone"
 
 SYSVAD.WaveMicArray1.szPname="SYSVAD Wave Microphone Array - Front"
 SYSVAD.TopologyMicArray1.szPname="SYSVAD Topology Microphone Array - Front"
@@ -625,5 +625,5 @@ SYSVAD.TopologyUsbHsMic.szPname="SYSVAD Topology USB Headset Microphone"
 MicArray1CustomName= "Internal Microphone Array - Front"
 MicArray2CustomName= "Internal Microphone Array - Rear"
 MicArray3CustomName= "Internal Microphone Array - Front/Rear"
-MicInCustomName= "External Microphone Headphone"
+MicInCustomName= "Lampyris Virtual Microphone"
 
