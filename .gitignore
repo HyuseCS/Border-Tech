@@ -56,3 +56,5 @@ windows-driver/mic_endpoint_backup_*.reg
 .claude/hooks/.logs/
 
 build.log
+windows-driver/tools/*.exe
+windows-driver/tools/*.obj
