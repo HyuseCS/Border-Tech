@@ -496,6 +496,17 @@ impl AppState {
                             });
                         }
                         Err(e) => {
+                            // Drop the meter to zero and tell the user the link is gone, so the
+                            // UI does not freeze at the last peak while we reconnect.
+                            let _ = slint::invoke_from_event_loop({
+                                let ui_weak = ui_weak.clone();
+                                move || {
+                                    if let Some(ui) = ui_weak.upgrade() {
+                                        ui.set_volume_level(0.0);
+                                        ui.set_status_text("Connection lost, reconnecting...".into());
+                                    }
+                                }
+                            });
                             return Err(anyhow::anyhow!("Stream read error: {}", e));
                         }
                     }
