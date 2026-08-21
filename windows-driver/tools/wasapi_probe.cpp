@@ -2,7 +2,7 @@
 // and try to open the Lampyris endpoint several ways, printing the exact HRESULT
 // at each step:
 //   - GetMixFormat + shared-mode Initialize on every endpoint (control vs Lampyris)
-//   - Lampyris: shared Initialize with an EXPLICIT 2ch/48k/16 format (GetMixFormat
+//   - Lampyris: shared Initialize with an EXPLICIT 1ch/48k/16 format (GetMixFormat
 //     may fail; don't depend on it)
 //   - Lampyris: shared + AUDCLNT_STREAMFLAGS_EVENTCALLBACK (how browsers open mics)
 //   - Lampyris: EXCLUSIVE-mode Initialize with the explicit format — this bypasses
@@ -18,6 +18,9 @@
 // Run DebugView (kernel capture) at the same time: watch for "NewStream ENTER"
 // during the exclusive attempt.
 
+// INITGUID must precede the includes: DEFINE_PROPERTYKEY only DECLARES a key
+// without it, so the PKEY_Lampyris_* dumps below fail to link.
+#define INITGUID
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <mmdeviceapi.h>
