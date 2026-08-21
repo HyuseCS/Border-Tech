@@ -27,15 +27,43 @@ Start here before loading deeper context files.
 
 ### Current State (2026-08-21, branch `feat/windows`)
 
-**Mid-debug on the Windows driver.** Cross-platform audio abstraction (Phase 3) is complete and was verified end to end on a Windows VM — TLS handshake, SRP auth, and PCM streaming into the kernel driver all work. The producer side (PC client → IOCTL → ring buffer) is healthy.
+**The Windows virtual microphone works end to end.** Verified on a Win10 22H2 VM
+on 2026-08-21: one capture endpoint named `Lampyris Virtual Microphone (Lampyris
+Mic)`, opens in shared / event-driven / exclusive mode, correct pitch, no
+perceptible delay, confirmed in Voice Recorder and in a live Discord call.
 
-The virtual mic silence bug is **root-caused (2026-08-21), fix implemented, NOT yet compiled or run**. The MicIn capture pin advertised **stereo only**; the Windows shared-mode capture pipe will not open a stereo-only capture endpoint. Proven by a control experiment on a fresh Win10 22H2 VM: adding `&MicArray1Miniports` (mono default) to `g_CaptureEndpoints` gave a second capture endpoint on the *same driver binary* that opened normally (`GetMixFormat -> S_OK`, `NewStream EXIT status=0x0`) while MicIn returned `AUDCLNT_E_UNSUPPORTED_FORMAT` with zero `NewStream` calls. Commit `634691d` removed every mono format from MicIn; the silence dates from there. Mono is independently required because `ReadAudioData` copies ring-buffer bytes into the DMA buffer with no channel conversion and the wire protocol is mono 48kHz s16le.
+Four separate bugs were fixed to get there, each hiding the next:
 
-Three earlier theories are **refuted — do not re-investigate**: the stale cached `PKEY_AudioEngine_DeviceFormat` (measured correct on a clean install while the open still failed), the INF `DeviceFormat` write (built, installed, tested — log identical, no effect), and the pin format table's *values* (driver, registry and control panel all agreed). The `Microsoft-Windows-Audio/Operational` log carries no diagnostic value. An earlier `0xC00000BB` failed-start was a **stale binary**, not a real bug.
+1. **Stereo-only capture pin** (`micinwavtable.h`) — the shared-mode capture pipe
+   will not open a stereo-only capture endpoint. Total silence, `NewStream` never
+   called. Introduced by `634691d`.
+2. **Fake stereo frames** (`pc-client/src/audio/windows.rs`) — the client wrote
+   each mono sample twice as an L/R pair. Against a mono pin the driver read each
+   pair as two samples, so playback ran at half speed: same words, one octave
+   down.
+3. **Unbounded ring buffer** (`lampyris_core.cpp`) — the client pushes from the
+   moment it connects but nothing drains until an app opens the mic, so the ring
+   filled to its full 2 s and the reader stayed that far behind. Fixed 1–2 s
+   delay, now capped at a 100 ms watermark.
+4. **MicIn's own descriptor set could not be opened by the audio engine**
+   (`minipairs.h`) — it now uses MicArray's topology descriptor, wave descriptor,
+   packet-size constraints and format/mode table, keeping only its own identity.
+   The pin itself was provably fine throughout: `IsFormatSupported(EXCLUSIVE,
+   1ch/48000/16)` returned `S_OK` the whole time.
 
-The fix touches `micinwavtable.h` (mono as element 0), `ComponentizedAudioSample.inx` (both format blobs), and `reset_mic_endpoint.ps1` (blob + endpoint matcher). `minipairs.h` still carries the MicArray1 diagnostic endpoint — **remove before release**.
+Every capture mode is pinned to 48 kHz mono, because the driver does no
+resampling and the wire protocol is fixed at mono 48 kHz s16le. MicArray's stock
+table mapped SPEECH to 16 kHz and COMMUNICATIONS to 24 kHz, which communications
+apps select by default.
 
-Live handoff notes, including the ruled-out list and the verification runbook, are in `windows-driver/silence_debug_progress.md`. Read it before touching the driver.
+The full ruled-out list, the two Windows facts that cost real time, and the
+verification runbook are in `windows-driver/silence_debug_progress.md`. Read it
+before touching the driver — several plausible-looking theories were already
+tested and killed.
+
+Build and install with `windows-driver/rebuild_install.ps1` (elevated): build →
+sign → purge every stale `oem*.inf` → install → reboot prompt. It judges the
+build by whether `lampyris-mic.sys` was produced.
 
 ### High-Risk Areas
 
@@ -43,7 +71,7 @@ All four of these are treated as hot spots. Change them deliberately.
 
 | Area | Where | Why it is risky |
 |---|---|---|
-| Windows kernel driver | `windows-driver/` | Kernel mode, SYSVAD-derived, test-signing required. Hard to test, easy to bugcheck. Stale-binary builds have already cost a debugging detour — always do a **clean full-solution rebuild**. Whenever a capture pin's advertised format list is narrowed, the endpoint's cached `PKEY_AudioEngine_DeviceFormat` registry value goes stale and must be explicitly reset (`reset_mic_endpoint.ps1`) or the endpoint silently stops opening — this trap cost a full debugging cycle. |
+| Windows kernel driver | `windows-driver/` | Kernel mode, SYSVAD-derived, test-signing required. Hard to test, easy to bugcheck. Always build the **whole solution** — `TabletAudioSample.vcxproj` links `EndpointsCommon.lib` as a raw input with no `<ProjectReference>`, so a single-project build silently relinks a stale library and discards your changes. Always purge every stale `ComponentizedAudioSample` package from the driver store before installing; five copies once accumulated and it was unclear which the device was bound to. `rebuild_install.ps1` does both correctly. |
 | Audio backends | `pc-client/src/audio/` | Two `cfg`-gated implementations behind one trait. A change on one platform silently skips compilation on the other. |
 | TLS + SRP auth path | `pc-client/src/app_state.rs`, `AudioCaptureService.kt` | Security-critical: custom cert verifier, rcgen self-signed certs, SRP/SPAKE2 pairing. Constant-time comparison matters here. |
 | Android capture loop | `android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt` | Foreground service + `AudioRecord` loop. Latency and dropout regressions show up here first. |
@@ -216,7 +244,8 @@ project-m/
     ioctl.h                     -- shared IOCTL contract with pc-client/src/audio/windows.rs
     lampyris-sysvad/            -- SYSVAD-derived audio miniport (APO, EndpointsCommon, Package, ...)
     *.ps1                       -- cert/signing helper scripts (manual, machine-specific)
-    silence_debug_progress.md   -- live handoff notes for the current bug
+    silence_debug_progress.md   -- post-mortem: the four bugs, ruled-out list, runbook
+    rebuild_install.ps1         -- build + sign + purge driver store + install (elevated)
   Justfile                      -- root build/test/lint/audit orchestration
   process/                      -- this harness: context, plans, features, protocols
   debug_logs/, graphify-out/    -- scratch output, not source
@@ -302,8 +331,8 @@ The shortest path to understanding each component.
 | `pc-client/src/audio/mod.rs` | the `AudioBackend` trait — the whole cross-platform seam, 16 lines |
 | `windows-driver/ioctl.h` | the IOCTL contract shared between the Rust sender and the C++ driver |
 | `windows-driver/driver.cpp` | IOCTL dispatch and the 2-second PCM ring buffer |
-| `windows-driver/silence_debug_progress.md` | live handoff notes for the silence bug: confirmed root cause and the verification runbook, incl. the ruled-out list |
-| `windows-driver/reset_mic_endpoint.ps1` | repair script — writes the missing `PKEY_AudioEngine_DeviceFormat` registry value onto the already-installed capture endpoint (fixes the currently-broken install; the INF fix only covers future clean installs) |
+| `windows-driver/silence_debug_progress.md` | post-mortem for the capture bugs: the four root causes, the ruled-out list, and the verification runbook |
+| `windows-driver/rebuild_install.ps1` | one elevated command for build -> sign -> purge driver store -> install -> reboot |
 | `android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt` | TLS server + `AudioRecord` capture loop |
 | `testing_instructions.md` | manual end-to-end verification steps |
 
@@ -311,7 +340,7 @@ Deeper routing: `process/context/tests/all-tests.md` (verification), `process/co
 
 ## Open Questions and Outstanding Work
 
-- **Windows virtual mic silence — root-caused 2026-08-21, fix implemented, NOT compiled or run.** The MicIn pin advertised stereo only; the shared-mode capture pipe will not open a stereo-only capture endpoint. Fix: mono 1ch/48000/16 as the default format in `micinwavtable.h`, matching blobs in the INF. Next step is the rebuild → sign → install → probe cycle on the Windows VM; acceptance is still audible meter-moving audio. Three prior theories (registry cache, INF DeviceFormat write, pin format values) are refuted — see `windows-driver/silence_debug_progress.md`.
+- **Windows virtual mic: working and verified (2026-08-21).** Four bugs fixed — stereo-only capture pin, client fake-stereo frames, unbounded ring buffer, and MicIn's unopenable descriptor set. Remaining cosmetic debt: MicIn borrows MicArray's topology, so it carries an inert keyword-detection pin it does not need, and `micintoptable.h` / `micinwavtable.h` are now unused. Neither affects behaviour.
 - **`TestApp.exe` is dead code.** It expects `IOCTL_LAMPYRIS_AUTHENTICATE` and `HKLM\SOFTWARE\Lampyris`; the current `ioctl.h` defines only `PUSH_AUDIO` and nothing writes that key.
 - **The four APO projects and `KeywordDetectorContosoAdapter` cannot build** — their headers (`DelayAPOInterface.h`, `SwapAPOInterface.h`, `KWSApoInterface.h`, `AecApoDll.h`, `KeywordDetectorOemAdapter.idl`) were never vendored. Build `TabletAudioSample.vcxproj` alone.
 - **`windows-driver/driver.cpp` + `lampyris-mic.vcxproj` are dead code.** They build a separate `\Device\LampyrisMic` (no "2") that nothing opens. The live IOCTL device is `\Device\LampyrisMic2`, served by `lampyris-sysvad/lampyris_core.cpp` and consumed in `minwavertstream.cpp` (~line 1541-1542). Do not debug `driver.cpp` for capture-path issues. Deleting this dead code is a candidate future cleanup task, not yet done.
