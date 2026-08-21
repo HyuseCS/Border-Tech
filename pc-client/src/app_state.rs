@@ -50,9 +50,17 @@ impl rustls::client::danger::ServerCertVerifier for TofuVerifier {
                 Ok(rustls::client::danger::ServerCertVerified::assertion())
             } else {
                 Err(rustls::Error::General(format!(
-                    "Certificate pinning failed! Expected {}, got {}",
+                    "The phone's identity certificate has changed, so the connection was refused.\n\
+                     Pinned:   {}\n\
+                     Received: {}\n\
+                     If you reinstalled or reset Sonus, or paired a different phone, this is \
+                     expected - re-pair to trust the new certificate. If none of those happened, \
+                     do not clear the pin: an unexplained change is exactly what pinning exists \
+                     to catch.\n\
+                     Pin file: {}",
                     pinned.trim(),
-                    hash_hex
+                    hash_hex,
+                    self.pin_path.display()
                 )))
             }
         } else {
@@ -335,26 +343,21 @@ impl AppState {
             }
         };
 
-        // Save TOFU pin if not already pinned
-        if let Some(end_entity) = tls_stream
+        // Capture the peer certificate fingerprint now, while the TLS stream is still
+        // concrete - it is boxed below. Deliberately NOT pinned here: pinning an
+        // unauthenticated peer would mean whatever answers on this address during a
+        // first pairing gets trusted permanently. The pin is written after SRP proves
+        // the peer knows the pairing PIN.
+        let peer_cert_sha256 = tls_stream
             .get_ref()
             .1
             .peer_certificates()
             .and_then(|certs| certs.first())
-        {
-            let mut hasher = Sha256::new();
-            hasher.update(end_entity.as_ref());
-            let hash = hasher.finalize();
-            let hash_hex = hex::encode(hash);
-
-            let mut path = dirs::config_dir().unwrap_or_else(|| std::env::current_dir().unwrap());
-            path.push("project-m");
-            let pin_path = path.join("pinned_cert.sha256");
-            if !pin_path.exists() {
-                info!("Pinning server certificate: {}", hash_hex);
-                let _ = std::fs::write(pin_path, hash_hex);
-            }
-        }
+            .map(|end_entity| {
+                let mut hasher = Sha256::new();
+                hasher.update(end_entity.as_ref());
+                hex::encode(hasher.finalize())
+            });
 
         let mut stream: Box<dyn AsyncStream> = Box::new(tls_stream);
 
@@ -441,6 +444,28 @@ impl AppState {
         }
 
         info!("SRP: Handshake successful!");
+
+        // SRP mutual authentication passed, so this certificate genuinely belongs to the
+        // paired phone. Persist the pin - unconditionally, so that re-pairing after a
+        // Sonus reinstall (which regenerates the certificate) updates it instead of
+        // leaving a stale value that fails every later connection.
+        if let Some(hash_hex) = peer_cert_sha256 {
+            let mut path = dirs::config_dir().unwrap_or_else(|| std::env::current_dir().unwrap());
+            path.push("project-m");
+            if let Err(e) = std::fs::create_dir_all(&path) {
+                error!("Could not create {}: {}", path.display(), e);
+            }
+            let pin_path = path.join("pinned_cert.sha256");
+            let changed = fs::read_to_string(&pin_path)
+                .map(|existing| existing.trim() != hash_hex)
+                .unwrap_or(true);
+            if changed {
+                info!("Pinning server certificate: {}", hash_hex);
+                if let Err(e) = std::fs::write(&pin_path, &hash_hex) {
+                    error!("Could not write {}: {}", pin_path.display(), e);
+                }
+            }
+        }
 
         info!("Connection established with {}", peer_addr);
 
