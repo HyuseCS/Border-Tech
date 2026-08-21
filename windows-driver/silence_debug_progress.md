@@ -39,45 +39,107 @@ So we are back to the ORIGINAL bug, now from a healthy-start baseline:
   DirectShow's legacy KsProxy handles WaveRT capture endpoints poorly. The real
   clients (browser, Voice Recorder, WASAPI) use a different path. Stop using
   ffmpeg as the probe.
+- **Event-driven (pull) mode mismatch.** Former leading suspect, now ruled out:
+  the endpoint opts into event-driven capture via
+  `PKEY_AudioEndpoint_Supports_EventDriven_Mode`, and the theory was that the
+  polled `ExSetTimer`/`GetPosition` drain broke the notification contract. It is not
+  the cause — the engine aborts at `GetMixFormat`/format-cache time, before any
+  `Initialize(EVENTCALLBACK)` path is reached. See "Confirmed root cause" below.
 
-## Leading suspect
+## Confirmed root cause
 
-**Event-driven (pull) mode mismatch.** The INF opts the MicIn endpoint into
-event-driven capture:
-`HKR,EP\0,%PKEY_AudioEndpoint_Supports_EventDriven_Mode%,...,0x1`.
-The audio engine's capture pump opens the WaveRT pin in event-driven mode, which
-requires the miniport stream to implement the notification contract
-(`AllocateBufferWithNotification` / notification event). The custom drain uses a
-polled `ExSetTimer`/`GetPosition` model instead — if the stream doesn't support
-notifications, `IAudioClient::Initialize(EVENTCALLBACK)` fails, possibly before
-`NewStream`. Unconfirmed — the probe below will confirm or refute it.
+**A stale cached `PKEY_AudioEngine_DeviceFormat` on the capture endpoint.**
 
-## NEXT ACTION — run the WASAPI probe (no driver rebuild)
+`IAudioClient::GetMixFormat` on a **capture** endpoint reads the cached registry value
+`PKEY_AudioEngine_DeviceFormat` (`{F19F064D-082C-4E27-BC73-6882A1BB8E4C},0`) under:
 
-Wrote `windows-driver/tools/wasapi_probe.cpp` — a user-space program that opens
-the Lampyris endpoint exactly like a browser/Voice Recorder and prints the exact
-`AUDCLNT_*` HRESULT at each step. It tries TWO ways: shared-mode WITHOUT the
-event flag, then WITH it (to isolate the event-driven theory).
-
-On the Windows PC, in an x64 Developer/WDK command prompt:
 ```
-cd windows-driver\tools
-cl /EHsc /W3 wasapi_probe.cpp ole32.lib
-wasapi_probe.exe
+HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture\{endpoint-GUID}\Properties
 ```
 
-Interpret the output:
-- **Attempt 1 (no event) SUCCEEDS, Attempt 2 (event) FAILS at `Initialize`**
-  → confirms the event-driven/notification mismatch. Fix = implement the WaveRT
-  notification contract, OR drop the event-driven opt-in from the INF
-  (`ComponentizedAudioSample.inx`, the `SYSVAD.I.TopologyMicIn.AddReg` /
-  `WaveMicIn` EP lines) so the engine uses the timer/polled model the driver
-  already has.
-- **`Initialize -> AUDCLNT_E_UNSUPPORTED_FORMAT`** → engine mix format vs pin
-  format mismatch (channel mask). Fixable in the format table.
-- **`AUDCLNT_E_ENDPOINT_CREATE_FAILED`** → PortCls can't build the capture pin
-  graph — WaveRT pin/DMA config.
-- **`>>> OPEN SUCCEEDED <<<`** → driver side is fine; pivot to client/permission.
+It **never queries the driver**. So the pin's format table can be perfect and the mic
+still won't open.
+
+How it got stale:
+
+- Commit `634691d` (21 Jun) collapsed the MicIn pin's wave-format table down to a single
+  stereo `2ch / 48000 Hz / 16-bit` format. The endpoint's `Properties` key kept the older
+  mono-era value.
+- Commit `a86f997` added `PKEY_AudioEngine_OEMFormat`
+  (`{E4870E26-3CC5-4CD2-BA46-CA0A9A70ED04},3`) to the INF with a byte-correct stereo blob.
+  That was correct but ineffective here: **OEMFormat only seeds DeviceFormat the first
+  time an endpoint's property store is created.** This endpoint's store already existed
+  (created 30 Jun per `EventViewerLogs.md`), so the seed never applied.
+- The INF never wrote `DeviceFormat` directly.
+
+Net effect: the engine believes the mix format is stale/unsupported, aborts the capture
+open **before** calling `NewStream`, and the meter never moves — exactly the observed
+symptom.
+
+**The fix (two halves, both required):**
+
+1. `ComponentizedAudioSample.inx` now writes `PKEY_AudioEngine_DeviceFormat` directly in
+   `[SYSVAD.I.TopologyMicIn.AddReg]`, with the same 48-byte stereo blob as OEMFormat and
+   clobber flag `0x00000001`. This fixes **future clean installs**.
+2. `windows-driver\reset_mic_endpoint.ps1` writes the same value into the live registry.
+   This fixes **the currently-broken install** — the INF alone cannot, because the
+   property store already exists.
+
+Design decision: **keep the stereo 2ch/48000/16 contract.** Do not revert to mono —
+`pc-client/src/audio/windows.rs` already upmixes mono to stereo, and the pin tables,
+jack descriptor, and INF blob are all internally consistent at stereo.
+
+## NEXT ACTION — verification procedure (steps a-d need NO driver rebuild)
+
+Ordering is deliberate. Steps (a)-(d) test the theory and the registry-level fix without
+rebuilding anything. Only after they pass does (e) rebuild the driver to make the fix
+durable for future installs. Do not reorder.
+
+**a. Run the reset script (elevated):** `.\reset_mic_endpoint.ps1`
+
+Capture the printed **BEFORE** decode — this is the experiment.
+
+- *Expected (confirms root cause):* `DeviceFormat: <not set>`, or it decodes to mono /
+  non-48000 Hz / non-16-bit — i.e. stale relative to the current stereo pin table.
+- *If BEFORE already shows `channels=2, rate=48000, bits=16, mask=0x3 (STEREO)`:* the root
+  cause is **refuted** on this machine. Stop. Do not run b-e. Re-open the investigation.
+
+**b. Re-run the probe:** `wasapi_probe.exe`
+
+It now prints the endpoint id plus raw + decoded `DeviceFormat` and `OEMFormat` for every
+capture endpoint, before it tries `GetMixFormat`.
+
+- *Expected:* `GetMixFormat -> S_OK` returning `2 ch, 48000 Hz, 16 bit`, and shared-mode
+  `Initialize` succeeding (`S_OK`) both with and without `EVENTCALLBACK`.
+- *If `GetMixFormat` still fails:* the write in (a) did not take effect — check for a
+  service-restart or permission problem and re-run (a) before continuing.
+
+**c. Watch DebugView during a real open** (browser "Listen to this device", or Voice
+Recorder).
+
+- *Expected:* `NewStream`, `AllocateAudioBuffer` and `SetState` LAMPYRIS-DEBUG lines appear
+  for the first time.
+- *If they still do not appear:* the engine is still aborting before the miniport — capture
+  the exact HRESULT chain from `wasapi_probe.exe` and treat it as a new investigation.
+
+**d. End-to-end audio test:** start `pc-client` + the Android app streaming, then test in a
+browser mic page or Voice Recorder.
+
+- *Expected:* audible playback, VU meter moves. **This is the acceptance bar.**
+- *If silent but (c) passed:* revisit the ring-buffer / `ReadAudioData` consumption path in
+  `minwavertstream.cpp` — a new, narrower bug, not this one.
+
+**e. Only after a-d all pass — make it durable for clean installs:**
+
+- Clean **whole-solution** rebuild:
+  `msbuild sysvad.sln /p:Configuration=Release /p:Platform=x64`
+  (never a single project — see the stale `EndpointsCommon.lib` trap below).
+- Re-sign: `sign_driver.ps1`.
+- Uninstall the Lampyris mic device **with** "Delete the driver software for this device".
+- Reinstall from the freshly built + signed `SignedPackage\ComponentizedAudioSample.inf`.
+- Repeat (b) and (d) on the CLEAN install with **no manual registry step** — that proves the
+  INF fix alone is now sufficient.
+
 
 ## Build/capture reminders (gotchas already hit)
 

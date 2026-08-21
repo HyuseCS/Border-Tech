@@ -29,9 +29,11 @@ Start here before loading deeper context files.
 
 **Mid-debug on the Windows driver.** Cross-platform audio abstraction (Phase 3) is complete and was verified end to end on a Windows VM — TLS handshake, SRP auth, and PCM streaming into the kernel driver all work. The producer side (PC client → IOCTL → ring buffer) is healthy.
 
-The open bug: **the virtual mic outputs silence.** The device starts cleanly (every start-path step returns `0x0`), and the audio engine accepts the `2ch/48000/16bit` format, but `NewStream` is never called — the engine aborts the open before it reaches the miniport, so a capture stream never opens. An earlier `0xC00000BB` (`STATUS_NOT_SUPPORTED`) failed-start was traced to a **stale binary** (a single-project build relinking a stale `EndpointsCommon.lib`), not a real bug — do not re-chase it.
+The virtual mic silence bug is **root-caused and fix-implemented, pending user verification** on the Windows VM. `IAudioClient::GetMixFormat` on a capture endpoint reads the cached registry value `PKEY_AudioEngine_DeviceFormat` (`{F19F064D-082C-4E27-BC73-6882A1BB8E4C},0`) under `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture\{GUID}\Properties` — it never queries the driver. Commit `634691d` removed every mono format from the MicIn pin (leaving only `2ch/48000/16bit`), but the endpoint's cached `DeviceFormat` was never cleared, so the engine resolved a format the pin no longer supported and aborted the open before `NewStream`. Commit `a86f997` had added `PKEY_AudioEngine_OEMFormat`, but that key only seeds `DeviceFormat` when an endpoint's property store is created for the very first time — this endpoint's store already existed, so it had no effect. An earlier `0xC00000BB` (`STATUS_NOT_SUPPORTED`) failed-start was traced to a **stale binary** (a single-project build relinking a stale `EndpointsCommon.lib`), not a real bug — do not re-chase it.
 
-Live handoff notes, including the ruled-out list, are in `windows-driver/silence_debug_progress.md`. Read it before touching the driver.
+The fix (INF write of `PKEY_AudioEngine_DeviceFormat` for future installs + `windows-driver/reset_mic_endpoint.ps1` to repair the currently-broken install) is implemented but **not yet verified** — proving it requires the user to run the runbook on the Windows VM (step (d), audible meter-moving audio, is the acceptance criterion).
+
+Live handoff notes, including the ruled-out list and the verification runbook, are in `windows-driver/silence_debug_progress.md`. Read it before touching the driver.
 
 ### High-Risk Areas
 
@@ -39,7 +41,7 @@ All four of these are treated as hot spots. Change them deliberately.
 
 | Area | Where | Why it is risky |
 |---|---|---|
-| Windows kernel driver | `windows-driver/` | Kernel mode, SYSVAD-derived, test-signing required. Hard to test, easy to bugcheck. Stale-binary builds have already cost a debugging detour — always do a **clean full-solution rebuild**. |
+| Windows kernel driver | `windows-driver/` | Kernel mode, SYSVAD-derived, test-signing required. Hard to test, easy to bugcheck. Stale-binary builds have already cost a debugging detour — always do a **clean full-solution rebuild**. Whenever a capture pin's advertised format list is narrowed, the endpoint's cached `PKEY_AudioEngine_DeviceFormat` registry value goes stale and must be explicitly reset (`reset_mic_endpoint.ps1`) or the endpoint silently stops opening — this trap cost a full debugging cycle. |
 | Audio backends | `pc-client/src/audio/` | Two `cfg`-gated implementations behind one trait. A change on one platform silently skips compilation on the other. |
 | TLS + SRP auth path | `pc-client/src/app_state.rs`, `AudioCaptureService.kt` | Security-critical: custom cert verifier, rcgen self-signed certs, SRP/SPAKE2 pairing. Constant-time comparison matters here. |
 | Android capture loop | `android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt` | Foreground service + `AudioRecord` loop. Latency and dropout regressions show up here first. |
@@ -298,7 +300,8 @@ The shortest path to understanding each component.
 | `pc-client/src/audio/mod.rs` | the `AudioBackend` trait — the whole cross-platform seam, 16 lines |
 | `windows-driver/ioctl.h` | the IOCTL contract shared between the Rust sender and the C++ driver |
 | `windows-driver/driver.cpp` | IOCTL dispatch and the 2-second PCM ring buffer |
-| `windows-driver/silence_debug_progress.md` | live handoff notes for the active bug, incl. the ruled-out list |
+| `windows-driver/silence_debug_progress.md` | live handoff notes for the silence bug: confirmed root cause and the verification runbook, incl. the ruled-out list |
+| `windows-driver/reset_mic_endpoint.ps1` | repair script — writes the missing `PKEY_AudioEngine_DeviceFormat` registry value onto the already-installed capture endpoint (fixes the currently-broken install; the INF fix only covers future clean installs) |
 | `android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt` | TLS server + `AudioRecord` capture loop |
 | `testing_instructions.md` | manual end-to-end verification steps |
 
@@ -306,8 +309,8 @@ Deeper routing: `process/context/tests/all-tests.md` (verification), `process/co
 
 ## Open Questions and Outstanding Work
 
-- **Windows virtual mic outputs silence (active blocker).** The device starts cleanly and the audio engine accepts `2ch/48000/16bit`, but `NewStream` is never called — the engine aborts the capture open before reaching the miniport. Root cause unknown. Evidence and the ruled-out list live in `windows-driver/silence_debug_progress.md`. Read that file before proposing a fix; several obvious theories are already disproven.
-- **Channel-count mismatch worth checking.** The wire format and the driver ring buffer are mono 48kHz s16le, but the Windows engine negotiates `2ch/48000/16bit`. Whether the miniport correctly advertises mono is an open question in the silence investigation.
+- **Windows virtual mic silence — root-caused, fix implemented, pending user verification.** `IAudioClient::GetMixFormat` on a capture endpoint reads the cached registry value `PKEY_AudioEngine_DeviceFormat` and never queries the driver; a stale cached value from before the pin's format list was narrowed caused the audio engine to abort the open before `NewStream`. The fix (INF write + `windows-driver/reset_mic_endpoint.ps1` repair script) is implemented but not yet verified — the user must run the verification runbook in `windows-driver/silence_debug_progress.md` on the Windows VM; step (d), audible meter-moving audio, is the acceptance criterion. Plan: `process/features/windows-driver/active/mic-deviceformat-fix_21-08-26/`.
+- **`windows-driver/driver.cpp` + `lampyris-mic.vcxproj` are dead code.** They build a separate `\Device\LampyrisMic` (no "2") that nothing opens. The live IOCTL device is `\Device\LampyrisMic2`, served by `lampyris-sysvad/lampyris_core.cpp` and consumed in `minwavertstream.cpp` (~line 1541-1542). Do not debug `driver.cpp` for capture-path issues. Deleting this dead code is a candidate future cleanup task, not yet done.
 - **No automated test coverage outside `protocol.rs`.** `app_state.rs` (TLS, custom cert verifier, SRP pairing) and both Kotlin files are entirely untested. See `process/context/tests/all-tests.md` for the full gap list.
 - **No CI.** Nothing runs on push; there is no `.github/workflows/`.
 - **`just bench-latency` has no benchmarks** to run, despite latency being a core product claim.

@@ -16,21 +16,68 @@
   The real clients (browser, Voice Recorder, WASAPI) use a different path. Stop
   using ffmpeg to test this.
 
-**Leading suspect:** event-driven (pull) mode mismatch. The INF opts MicIn into
-event-driven capture (`PKEY_AudioEndpoint_Supports_EventDriven_Mode = 1`), but
-the driver's drain uses a polled `ExSetTimer`/`GetPosition` model, not the WaveRT
-notification contract. If the engine's event-driven `Initialize` fails, no pin
-opens. The probe below confirms or refutes this.
+**Confirmed root cause: a stale cached `PKEY_AudioEngine_DeviceFormat`** on the
+capture endpoint. `GetMixFormat` on a capture endpoint reads that registry value
+(`{F19F064D-082C-4E27-BC73-6882A1BB8E4C},0` under
+`HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture\{guid}\Properties`)
+and never asks the driver. `PKEY_AudioEngine_OEMFormat` only seeds it when the
+property store is first created, so adding OEMFormat did not repair this
+already-existing endpoint. Full write-up: `silence_debug_progress.md`
+("Confirmed root cause"). The event-driven/pull-mode theory is now **ruled out**.
 
 ---
 
-## STEP 1 (do this first) — WASAPI probe, prints the exact HRESULT (NO rebuild)
+## STEP 0 (do this FIRST, before any capture attempt) — repair the endpoint
+
+`windows-driver\reset_mic_endpoint.ps1` writes the correct stereo
+`2ch / 48000 Hz / 16-bit` blob into the live endpoint's `DeviceFormat` and
+`OEMFormat`. Run it from an **elevated** PowerShell prompt:
+
+```
+cd windows-driver
+.\reset_mic_endpoint.ps1
+```
+
+What it does, in order: refuses to run unelevated -> matches the Lampyris capture
+endpoint by name (or one of two documented fallback GUIDs) and **refuses to touch
+anything if nothing matches** -> `reg export` backup of the endpoint's `Properties`
+key -> prints the **BEFORE** decode -> writes the corrected blob -> prints the
+**AFTER** decode -> restarts `AudioEndpointBuilder`/`Audiosrv` (this briefly cuts
+all audio on the machine; it warns first).
+
+**Record the BEFORE decode — it is the experiment.** Expect `DeviceFormat: <not set>`
+or a mono / non-48000 / non-16-bit decode. If BEFORE already reads
+`channels=2, rate=48000, bits=16, mask=0x3 (STEREO)`, the root cause is refuted on
+this machine — stop and re-open the investigation.
+
+`-Purge` (opt-in, never default) deletes the endpoint subtree instead, so Windows
+recreates it fresh from the INF seed after a Device Manager disable/enable. A `.reg`
+backup is still taken first; restore with `reg import <backup>.reg`.
+
+---
+
+## STEP 1 (after STEP 0) — WASAPI probe, prints the exact HRESULT (NO rebuild)
 
 `windows-driver/tools/wasapi_probe.cpp` opens the Lampyris endpoint exactly like
 a browser/Voice Recorder and prints the exact `AUDCLNT_*` HRESULT at each step.
-It tries TWO ways — shared-mode WITHOUT the event flag, then WITH it — to isolate
-the event-driven theory. It's a plain user-space program; the driver does not
-need rebuilding.
+It tries TWO ways — shared-mode WITHOUT the event flag, then WITH it. It's a plain
+user-space program; the driver does not need rebuilding.
+
+**The probe is now self-diagnosing.** For EVERY enumerated capture endpoint (not just
+Lampyris) it prints, before it ever calls `GetMixFormat`:
+
+- the endpoint id string,
+- the raw hex + decoded `PKEY_AudioEngine_DeviceFormat`, and
+- the raw hex + decoded `PKEY_AudioEngine_OEMFormat`
+
+decoded as `channels=`, `rate=`, `bits=`, `blockAlign=`, `avgBytesPerSec=`,
+`formatTag=`, `mask=`. A missing value prints `DeviceFormat: <not set>`. This means
+the probe output alone tells you whether the cached format is stale — no extra
+tooling, and healthy control endpoints appear side-by-side for comparison.
+
+Run STEP 0 (`reset_mic_endpoint.ps1`) before this. After the repair the Lampyris
+endpoint should read `channels=2, rate=48000, bits=16, mask=0x3 (STEREO)` and
+`GetMixFormat -> S_OK` with `2 ch, 48000 Hz, 16 bit`.
 
 In an **x64 Developer/WDK command prompt** (no admin needed):
 ```
