@@ -54,3 +54,5 @@ windows-driver/lampyris-sysvad/APO/**/*_p.c
 # which is regenerated on every clean install and is useless on another machine.
 windows-driver/mic_endpoint_backup_*.reg
 .claude/hooks/.logs/
+
+build.log
