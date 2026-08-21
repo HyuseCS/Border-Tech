@@ -2,6 +2,7 @@
 #include <ntstrsafe.h>
 #include <wdmsec.h>
 #include "..\ioctl.h"
+#include "lampyris_debug.h"
 
 #ifdef ExAllocatePool2
 #undef ExAllocatePool2
@@ -93,7 +94,7 @@ ULONG ReadAudioData(PVOID Buffer, ULONG Length) {
     
     static ULONG readCount = 0;
     if (readCount++ % 100 == 0) {
-        DbgPrint("[LAMPYRIS] ReadAudioData: Requested %d bytes. Read %d bytes. Available: %d\n", Length, BytesRead, Available);
+        LampyrisTrace("[LAMPYRIS] ReadAudioData: Requested %d bytes. Read %d bytes. Available: %d\n", Length, BytesRead, Available);
     }
     
     KeReleaseInStackQueuedSpinLock(&LockHandle);
@@ -110,7 +111,7 @@ NTSTATUS LampyrisCreateClose(PDEVICE_OBJECT DeviceObject, PIRP Irp) {
             USHORT nameLen = IrpSp->FileObject ? IrpSp->FileObject->FileName.Length : 0;
             PVOID related = IrpSp->FileObject ? IrpSp->FileObject->RelatedFileObject : NULL;
             NTSTATUS st = g_PcCreate(DeviceObject, Irp);
-            DbgPrint("[LAMPYRIS] MJ_CREATE %s nameLen=%u -> 0x%X\n",
+            LampyrisTrace("[LAMPYRIS] MJ_CREATE %s nameLen=%u -> 0x%X\n",
                      related ? "PIN" : "FILTER", nameLen, st);
             return st;
         }
@@ -163,7 +164,7 @@ NTSTATUS LampyrisDeviceControl(PDEVICE_OBJECT DeviceObject, PIRP Irp) {
             
             static ULONG pushCount = 0;
             if (pushCount++ % 100 == 0) {
-                DbgPrint("[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length %d. Ring buffer available: %d\n", Audio->Length, g_RingBufferLength);
+                LampyrisTrace("[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length %d. Ring buffer available: %d\n", Audio->Length, g_RingBufferLength);
             }
             break;
         }

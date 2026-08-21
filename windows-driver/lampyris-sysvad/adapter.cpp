@@ -34,6 +34,7 @@ Abstract:
 #endif // SYSVAD_USB_SIDEBAND
 #ifdef SYSVAD_A2DP_SIDEBAND
 #include "a2dphpminipairs.h"
+#include "lampyris_debug.h"
 #endif // SYSVAD_A2DP_SIDEBAND
 
 extern "C" VOID LampyrisCleanup();
@@ -1081,27 +1082,27 @@ Return Value:
     IF_FAILED_JUMP(ntStatus, Exit);
 
     ntStatus = pAdapterCommon->Init(DeviceObject);
-    DbgPrint("[LAMPYRIS] StartDevice: AdapterCommon->Init -> 0x%X\n", ntStatus); // LAMPYRIS-DEBUG
+    LampyrisTrace("[LAMPYRIS] StartDevice: AdapterCommon->Init -> 0x%X\n", ntStatus); // LAMPYRIS-DEBUG
     IF_FAILED_JUMP(ntStatus, Exit);
 
     //
     // register with PortCls for power-management services
     ntStatus = PcRegisterAdapterPowerManagement( PUNKNOWN(pAdapterCommon), DeviceObject);
-    DbgPrint("[LAMPYRIS] StartDevice: PcRegisterAdapterPowerManagement -> 0x%X\n", ntStatus); // LAMPYRIS-DEBUG
+    LampyrisTrace("[LAMPYRIS] StartDevice: PcRegisterAdapterPowerManagement -> 0x%X\n", ntStatus); // LAMPYRIS-DEBUG
     IF_FAILED_JUMP(ntStatus, Exit);
 
     //
     // Install wave+topology filters for render devices
     //
     ntStatus = InstallAllRenderFilters(DeviceObject, Irp, pAdapterCommon);
-    DbgPrint("[LAMPYRIS] StartDevice: InstallAllRenderFilters -> 0x%X\n", ntStatus); // LAMPYRIS-DEBUG
+    LampyrisTrace("[LAMPYRIS] StartDevice: InstallAllRenderFilters -> 0x%X\n", ntStatus); // LAMPYRIS-DEBUG
     IF_FAILED_JUMP(ntStatus, Exit);
 
     //
     // Install wave+topology filters for capture devices
     //
     ntStatus = InstallAllCaptureFilters(DeviceObject, Irp, pAdapterCommon);
-    DbgPrint("[LAMPYRIS] StartDevice: InstallAllCaptureFilters -> 0x%X\n", ntStatus); // LAMPYRIS-DEBUG
+    LampyrisTrace("[LAMPYRIS] StartDevice: InstallAllCaptureFilters -> 0x%X\n", ntStatus); // LAMPYRIS-DEBUG
     IF_FAILED_JUMP(ntStatus, Exit);
 
 #ifdef SYSVAD_BTH_BYPASS

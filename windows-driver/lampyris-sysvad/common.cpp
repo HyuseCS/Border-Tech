@@ -44,6 +44,7 @@ Abstract:
 #include <A2DPSidebandAudio.h>
 #include "A2dpHpMinipairs.h"
 #include "A2dpHpDevice.h"
+#include "lampyris_debug.h"
 #endif // SYSVAD_A2DP_SIDEBAND
 
 //-----------------------------------------------------------------------------
@@ -1795,7 +1796,7 @@ Return Value:
     adapterCommon = PADAPTERCOMMON(this);
 
     ntStatus = CreateAudioInterfaceWithProperties(Name, TemplateName, cPropertyCount, pProperties, &symbolicLink);
-    DbgPrint("[LAMPYRIS] InstallSubdevice %S: CreateAudioInterface -> 0x%X\n", Name, ntStatus); // LAMPYRIS-DEBUG
+    LampyrisTrace("[LAMPYRIS] InstallSubdevice %S: CreateAudioInterface -> 0x%X\n", Name, ntStatus); // LAMPYRIS-DEBUG
     if (NT_SUCCESS(ntStatus))
     {
         // Currently have no use for the symbolic link
@@ -1804,7 +1805,7 @@ Return Value:
         // Create the port driver object
         //
         ntStatus = PcNewPort(&port, PortClassId);
-        DbgPrint("[LAMPYRIS] InstallSubdevice %S: PcNewPort -> 0x%X\n", Name, ntStatus); // LAMPYRIS-DEBUG
+        LampyrisTrace("[LAMPYRIS] InstallSubdevice %S: PcNewPort -> 0x%X\n", Name, ntStatus); // LAMPYRIS-DEBUG
     }
 
     // Create the miniport object
@@ -1834,7 +1835,7 @@ Return Value:
                     MiniportClassId
                 );
         }
-        DbgPrint("[LAMPYRIS] InstallSubdevice %S: MiniportCreate -> 0x%X\n", Name, ntStatus); // LAMPYRIS-DEBUG
+        LampyrisTrace("[LAMPYRIS] InstallSubdevice %S: MiniportCreate -> 0x%X\n", Name, ntStatus); // LAMPYRIS-DEBUG
     }
 
     // Init the port driver and miniport in one go.
@@ -1857,7 +1858,7 @@ Return Value:
                 ResourceList 
             );
 #pragma warning (pop)
-        DbgPrint("[LAMPYRIS] InstallSubdevice %S: port->Init -> 0x%X\n", Name, ntStatus); // LAMPYRIS-DEBUG
+        LampyrisTrace("[LAMPYRIS] InstallSubdevice %S: port->Init -> 0x%X\n", Name, ntStatus); // LAMPYRIS-DEBUG
 
         if (NT_SUCCESS(ntStatus))
         {
@@ -1870,7 +1871,7 @@ Return Value:
                     Name,
                     port
                 );
-            DbgPrint("[LAMPYRIS] InstallSubdevice %S: PcRegisterSubdevice -> 0x%X\n", Name, ntStatus); // LAMPYRIS-DEBUG
+            LampyrisTrace("[LAMPYRIS] InstallSubdevice %S: PcRegisterSubdevice -> 0x%X\n", Name, ntStatus); // LAMPYRIS-DEBUG
         }
     }
 
@@ -2608,7 +2609,7 @@ CAdapterCommon::InstallEndpointFilters
             unknownWave,
             MiniportPair->PhysicalConnections,
             MiniportPair->PhysicalConnectionCount);
-        DbgPrint("[LAMPYRIS] InstallEndpointFilters: ConnectTopologies -> 0x%X\n", ntStatus); // LAMPYRIS-DEBUG
+        LampyrisTrace("[LAMPYRIS] InstallEndpointFilters: ConnectTopologies -> 0x%X\n", ntStatus); // LAMPYRIS-DEBUG
     }
 
     if (NT_SUCCESS(ntStatus))

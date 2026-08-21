@@ -6,6 +6,7 @@
 #include "minwavertstream.h"
 #include "UnittestData.h"
 #include "AudioModuleHelper.h"
+#include "lampyris_debug.h"
 #define MINWAVERTSTREAM_POOLTAG 'SRWM'
 
 #pragma warning (disable : 4127)
@@ -837,7 +838,7 @@ _Out_   MEMORY_CACHING_TYPE    *CacheType_
     m_ulDmaBufferSize = RequestedSize_;
     m_ulNotificationsPerBuffer = 0;
 
-    DbgPrint("[LAMPYRIS] AllocBuffer: size=%u rate=%lu\n", m_ulDmaBufferSize, m_ulDmaMovementRate); // LAMPYRIS-DEBUG
+    LampyrisTrace("[LAMPYRIS] AllocBuffer: size=%u rate=%lu\n", m_ulDmaBufferSize, m_ulDmaMovementRate); // LAMPYRIS-DEBUG
 
     *AudioBufferMdl_ = pBufferMdl;
     *ActualSize_ = RequestedSize_;
@@ -887,7 +888,7 @@ NTSTATUS CMiniportWaveRTStream::GetPosition
 
     static ULONG getPosCount = 0;
     if (getPosCount++ % 100 == 0) {
-        DbgPrint("[LAMPYRIS] GetPosition: PlayOffset %llu, WriteOffset %llu (State: %d)\n", m_ullPlayPosition, m_ullWritePosition, m_KsState);
+        LampyrisTrace("[LAMPYRIS] GetPosition: PlayOffset %llu, WriteOffset %llu (State: %d)\n", m_ullPlayPosition, m_ullWritePosition, m_KsState);
     }
 
     KeReleaseSpinLock(&m_PositionSpinLock, oldIrql);
@@ -1168,7 +1169,7 @@ NTSTATUS CMiniportWaveRTStream::SetState
     PADAPTERCOMMON  pAdapterComm    = m_pMiniport->GetAdapterCommObj();
     KIRQL oldIrql;
 
-    DbgPrint("[LAMPYRIS] SetState: Pin=%u %d -> %d (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)\n", m_ulPin, m_KsState, State_); // LAMPYRIS-DEBUG
+    LampyrisTrace("[LAMPYRIS] SetState: Pin=%u %d -> %d (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)\n", m_ulPin, m_KsState, State_); // LAMPYRIS-DEBUG
 
     // Spew an event for a pin state change request from portcls
     //Event type: eMINIPORT_PIN_STATE
@@ -1444,7 +1445,7 @@ VOID CMiniportWaveRTStream::UpdatePosition
 
     static ULONG updPosCount = 0;
     if (updPosCount++ % 100 == 0) {
-        DbgPrint("[LAMPYRIS] UpdatePosition: TimeElapsedInMS %lu, ByteDisplacement %lu, Rate %lu\n", TimeElapsedInMS, ByteDisplacement, m_ulDmaMovementRate);
+        LampyrisTrace("[LAMPYRIS] UpdatePosition: TimeElapsedInMS %lu, ByteDisplacement %lu, Rate %lu\n", TimeElapsedInMS, ByteDisplacement, m_ulDmaMovementRate);
     }
 
     if (m_bCapture)
@@ -1794,7 +1795,7 @@ TimerNotifyRT
         
         static ULONG notifyCount = 0;
         if (notifyCount++ % 100 == 0) {
-            DbgPrint("[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.\n");
+            LampyrisTrace("[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.\n");
         }
     }
 

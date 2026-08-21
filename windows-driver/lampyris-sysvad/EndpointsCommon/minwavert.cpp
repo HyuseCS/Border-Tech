@@ -24,6 +24,7 @@ Abstract:
 #include "minwavertstream.h"
 #include "IHVPrivatePropertySet.h"
 #include "AudioModuleHelper.h"
+#include "lampyris_debug.h"
 
 
 #define EFFECTS_LIST_COUNT 2
@@ -296,14 +297,14 @@ Arguments:
     // range for each supported channel count.
     if (((PKSDATARANGE_AUDIO)MyDataRange)->MaximumChannels != ((PKSDATARANGE_AUDIO)ClientDataRange)->MaximumChannels)
     {
-        DbgPrint("[LAMPYRIS] DRI: Pin=%u MyCh=%u ClientCh=%u -> NO_MATCH\n",
+        LampyrisTrace("[LAMPYRIS] DRI: Pin=%u MyCh=%u ClientCh=%u -> NO_MATCH\n",
                  PinId,
                  ((PKSDATARANGE_AUDIO)MyDataRange)->MaximumChannels,
                  ((PKSDATARANGE_AUDIO)ClientDataRange)->MaximumChannels); // LAMPYRIS-DEBUG
         return STATUS_NO_MATCH;
     }
 
-    DbgPrint("[LAMPYRIS] DRI: Pin=%u MyCh=%u ClientCh=%u -> PASS\n",
+    LampyrisTrace("[LAMPYRIS] DRI: Pin=%u MyCh=%u ClientCh=%u -> PASS\n",
              PinId,
              ((PKSDATARANGE_AUDIO)MyDataRange)->MaximumChannels,
              ((PKSDATARANGE_AUDIO)ClientDataRange)->MaximumChannels); // LAMPYRIS-DEBUG
@@ -680,7 +681,7 @@ Return Value:
 
     DPF_ENTER(("[CMiniportWaveRT::NewStream]"));
 
-    DbgPrint("[LAMPYRIS] NewStream ENTER: Pin=%u Capture=%u\n", Pin, Capture); // LAMPYRIS-DEBUG
+    LampyrisTrace("[LAMPYRIS] NewStream ENTER: Pin=%u Capture=%u\n", Pin, Capture); // LAMPYRIS-DEBUG
 
     NTSTATUS                    ntStatus = STATUS_SUCCESS;
     PCMiniportWaveRTStream      stream = NULL;
@@ -758,7 +759,7 @@ Return Value:
         stream->Release();
     }
 
-    DbgPrint("[LAMPYRIS] NewStream EXIT: Pin=%u status=0x%X\n", Pin, ntStatus); // LAMPYRIS-DEBUG
+    LampyrisTrace("[LAMPYRIS] NewStream EXIT: Pin=%u status=0x%X\n", Pin, ntStatus); // LAMPYRIS-DEBUG
 
     return ntStatus;
 } // NewStream
@@ -1531,7 +1532,7 @@ CMiniportWaveRT::IsFormatSupported
 
     {
         PWAVEFORMATEX pReqWf = reinterpret_cast<PWAVEFORMATEX>(_pDataFormat + 1);
-        DbgPrint("[LAMPYRIS] IsFormatSupported: Pin=%u req %uch/%luHz/%ubit/blk%u -> 0x%X\n",
+        LampyrisTrace("[LAMPYRIS] IsFormatSupported: Pin=%u req %uch/%luHz/%ubit/blk%u -> 0x%X\n",
                  _ulPin, pReqWf->nChannels, pReqWf->nSamplesPerSec,
                  pReqWf->wBitsPerSample, pReqWf->nBlockAlign, ntStatus); // LAMPYRIS-DEBUG
     }
@@ -1697,7 +1698,7 @@ CMiniportWaveRT::PropertyHandlerProposedFormat
             PKSDATAFORMAT pHdr = (PKSDATAFORMAT)PropertyRequest->Value;
 
             // LAMPYRIS-DEBUG: identify the GUID-only proposal exactly.
-            DbgPrint("[LAMPYRIS] PDF1 SET GUID-only: Pin=%u ValSize=%u FmtSize=%lu Flags=0x%lx Major=0x%08X Sub=0x%08X Spec=0x%08X\n",
+            LampyrisTrace("[LAMPYRIS] PDF1 SET GUID-only: Pin=%u ValSize=%u FmtSize=%lu Flags=0x%lx Major=0x%08X Sub=0x%08X Spec=0x%08X\n",
                      kspPin->PinId, PropertyRequest->ValueSize, pHdr->FormatSize, pHdr->Flags,
                      ((const ULONG*)&pHdr->MajorFormat)[0],
                      ((const ULONG*)&pHdr->SubFormat)[0],
@@ -1716,7 +1717,7 @@ CMiniportWaveRT::PropertyHandlerProposedFormat
         if (PropertyRequest->ValueSize < sizeof(KSDATAFORMAT) + sizeof(WAVEFORMATEX))
         {
             // LAMPYRIS-DEBUG
-            DbgPrint("[LAMPYRIS] PDF1 SET: ValSize=%u too small for any format -> BUFFER_TOO_SMALL\n",
+            LampyrisTrace("[LAMPYRIS] PDF1 SET: ValSize=%u too small for any format -> BUFFER_TOO_SMALL\n",
                      PropertyRequest->ValueSize);
             return STATUS_BUFFER_TOO_SMALL;
         }
@@ -1727,13 +1728,13 @@ CMiniportWaveRT::PropertyHandlerProposedFormat
         if (PropertyRequest->ValueSize < sizeof(KSDATAFORMAT) + sizeof(WAVEFORMATEX) + pWfxProposed->cbSize)
         {
             // LAMPYRIS-DEBUG
-            DbgPrint("[LAMPYRIS] PDF1 SET: ValSize=%u < declared size (cbSize=%u) -> BUFFER_TOO_SMALL\n",
+            LampyrisTrace("[LAMPYRIS] PDF1 SET: ValSize=%u < declared size (cbSize=%u) -> BUFFER_TOO_SMALL\n",
                      PropertyRequest->ValueSize, pWfxProposed->cbSize);
             return STATUS_BUFFER_TOO_SMALL;
         }
 
         // LAMPYRIS-DEBUG
-        DbgPrint("[LAMPYRIS] PDF1 SET: Pin=%u ValSize=%u tag=0x%X ch=%u rate=%lu bits=%u cb=%u\n",
+        LampyrisTrace("[LAMPYRIS] PDF1 SET: Pin=%u ValSize=%u tag=0x%X ch=%u rate=%lu bits=%u cb=%u\n",
                  kspPin->PinId, PropertyRequest->ValueSize, pWfxProposed->wFormatTag, pWfxProposed->nChannels,
                  pWfxProposed->nSamplesPerSec, pWfxProposed->wBitsPerSample, pWfxProposed->cbSize);
 
@@ -2210,7 +2211,7 @@ CMiniportWaveRT::PropertyHandlerProposedFormat2
     }
 
     // LAMPYRIS-DEBUG
-    DbgPrint("[LAMPYRIS] PDF2 ENTER: Pin=%u Verb=0x%X InstSize=%u ValSize=%u\n",
+    LampyrisTrace("[LAMPYRIS] PDF2 ENTER: Pin=%u Verb=0x%X InstSize=%u ValSize=%u\n",
              kspPin->PinId, PropertyRequest->Verb, PropertyRequest->InstanceSize, PropertyRequest->ValueSize);
 
     //
@@ -2222,7 +2223,7 @@ CMiniportWaveRT::PropertyHandlerProposedFormat2
 
     if (modeInfo == NULL)
     {
-        DbgPrint("[LAMPYRIS] PDF2 EXIT: Pin=%u no modes -> NOT_SUPPORTED\n", kspPin->PinId); // LAMPYRIS-DEBUG
+        LampyrisTrace("[LAMPYRIS] PDF2 EXIT: Pin=%u no modes -> NOT_SUPPORTED\n", kspPin->PinId); // LAMPYRIS-DEBUG
         return STATUS_NOT_SUPPORTED;
     }
 
@@ -2261,7 +2262,7 @@ CMiniportWaveRT::PropertyHandlerProposedFormat2
     ntStatus = GetAttributesFromAttributeList(pKsItemsHeader, cbItemsList, &signalProcessingMode);
     if (!NT_SUCCESS(ntStatus))
     {
-        DbgPrint("[LAMPYRIS] PDF2 EXIT: GetAttributesFromAttributeList -> 0x%X\n", ntStatus); // LAMPYRIS-DEBUG
+        LampyrisTrace("[LAMPYRIS] PDF2 EXIT: GetAttributesFromAttributeList -> 0x%X\n", ntStatus); // LAMPYRIS-DEBUG
         return ntStatus;
     }
 
@@ -2284,7 +2285,7 @@ CMiniportWaveRT::PropertyHandlerProposedFormat2
     {
         // LAMPYRIS-DEBUG: mode GUID Data1 identifies which mode the engine asked for
         // (DEFAULT=0xC18E2F7E, RAW=0x9E90EA20, SPEECH=0xFC1CFC9B, COMMUNICATIONS=0x98951333, FFS=0x1064E603)
-        DbgPrint("[LAMPYRIS] PDF2 EXIT: mode=0x%08X found=%d -> NOT_SUPPORTED\n",
+        LampyrisTrace("[LAMPYRIS] PDF2 EXIT: mode=0x%08X found=%d -> NOT_SUPPORTED\n",
                  ((const ULONG*)&signalProcessingMode)[0], bFound); // LAMPYRIS-DEBUG
         return STATUS_NOT_SUPPORTED;
     }
@@ -2343,7 +2344,7 @@ CMiniportWaveRT::PropertyHandlerProposedFormat2
     PropertyRequest->ValueSize = cbMinSize;
 
     // LAMPYRIS-DEBUG
-    DbgPrint("[LAMPYRIS] PDF2 EXIT: mode=0x%08X -> 0x0 (returned default fmt)\n",
+    LampyrisTrace("[LAMPYRIS] PDF2 EXIT: mode=0x%08X -> 0x0 (returned default fmt)\n",
              ((const ULONG*)&signalProcessingMode)[0]);
 
     return STATUS_SUCCESS;
@@ -3368,7 +3369,7 @@ Return Value:
     }
 
     // LAMPYRIS-DEBUG: log every wave-filter property verdict (property-set GUID Data1 + id + verb).
-    DbgPrint("[LAMPYRIS] WaveFilterProp: set=0x%08X id=%u verb=0x%X -> 0x%X\n",
+    LampyrisTrace("[LAMPYRIS] WaveFilterProp: set=0x%08X id=%u verb=0x%X -> 0x%X\n",
              ((const ULONG*)PropertyRequest->PropertyItem->Set)[0],
              PropertyRequest->PropertyItem->Id,
              PropertyRequest->Verb,
