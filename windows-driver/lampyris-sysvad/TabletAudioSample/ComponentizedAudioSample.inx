@@ -65,6 +65,12 @@ HKR,Drivers\wave\wdmaud.drv,Description,,%SYSVAD_SA.DeviceDesc%
 HKR,Drivers\midi\wdmaud.drv,Description,,%SYSVAD_MIDI%
 HKR,Drivers\mixer\wdmaud.drv,Description,,%SYSVAD_SA.DeviceDesc%
 
+; The pin's custom name MUST go in the GLOBAL MediaCategories key. Windows resolves
+; KSPROPERTY_PIN_NAME against HKLM\SYSTEM\CurrentControlSet\Control\MediaCategories;
+; the stock SYSVAD HKR form below writes to the device's software key instead, which
+; nothing reads - verified 2026-08-21, the key was absent and the endpoint fell back
+; to the node-type default name ("Microphone Array").
+HKLM,"SYSTEM\CurrentControlSet\Control\MediaCategories\%MicArray1CustomNameGUID%",Name,,%MicArray1CustomName%
 HKR,%MEDIA_CATEGORIES%\%MicArray1CustomNameGUID%,Name,,%MicArray1CustomName%
 HKR,%MEDIA_CATEGORIES%\%MicArray2CustomNameGUID%,Name,,%MicArray2CustomName%
 HKR,%MEDIA_CATEGORIES%\%MicArray3CustomNameGUID%,Name,,%MicArray3CustomName%
