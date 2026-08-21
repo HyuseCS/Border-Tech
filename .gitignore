@@ -30,3 +30,8 @@ local.properties
 *.class
 captures/
 .vibecode-backup*/
+
+# Signing secrets (never commit)
+*.jks
+*.keystore
+keystore.properties
