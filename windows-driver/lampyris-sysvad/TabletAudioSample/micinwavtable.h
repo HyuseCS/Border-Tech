@@ -33,7 +33,43 @@ Abstract:
 static 
 KSDATAFORMAT_WAVEFORMATEXTENSIBLE MicInPinSupportedDeviceFormats[] =
 {
-    { // 0
+    { // 0 - DEFAULT. 48 KHz 16-bit mono.
+      // Mono is mandatory here, for two independent reasons:
+      //   1. The shared-mode capture pipe refuses to open a stereo-only capture
+      //      endpoint. Verified 2026-08-21: with this list stereo-only, the pin
+      //      answered all 26 IsFormatSupported queries with STATUS_SUCCESS yet the
+      //      engine returned AUDCLNT_E_UNSUPPORTED_FORMAT and never called NewStream.
+      //      MicArray1 (mono default) on the same driver binary opened normally.
+      //   2. ReadAudioData copies ring-buffer bytes straight into the DMA buffer with
+      //      no channel conversion, and the wire protocol is mono 48kHz s16le. A stereo
+      //      pin reinterprets those mono samples as L/R pairs.
+      // Must stay byte-compatible with PKEY_AudioEngine_DeviceFormat in
+      // ComponentizedAudioSample.inx.
+        {
+            sizeof(KSDATAFORMAT_WAVEFORMATEXTENSIBLE),
+            0,
+            0,
+            0,
+            STATICGUIDOF(KSDATAFORMAT_TYPE_AUDIO),
+            STATICGUIDOF(KSDATAFORMAT_SUBTYPE_PCM),
+            STATICGUIDOF(KSDATAFORMAT_SPECIFIER_WAVEFORMATEX)
+        },
+        {
+            {
+                WAVE_FORMAT_EXTENSIBLE,
+                1,
+                48000,
+                96000,
+                2,
+                16,
+                sizeof(WAVEFORMATEXTENSIBLE) - sizeof(WAVEFORMATEX)
+            },
+            16,
+            KSAUDIO_SPEAKER_MONO,
+            STATICGUIDOF(KSDATAFORMAT_SUBTYPE_PCM)
+        }
+    },
+    { // 1 - 48 KHz 16-bit stereo.
         {
             sizeof(KSDATAFORMAT_WAVEFORMATEXTENSIBLE),
             0,
