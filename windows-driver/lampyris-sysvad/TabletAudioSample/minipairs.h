@@ -348,6 +348,30 @@ PHYSICALCONNECTIONTABLE MicInTopologyPhysicalConnections[] =
     }
 };
 
+// Every capture mode defaults to 48kHz mono. MicArray's own table sends SPEECH to
+// 16kHz and COMMUNICATIONS to 24kHz; the driver copies ring-buffer bytes into the DMA
+// buffer with no resampling and the wire protocol is fixed at mono 48kHz s16le, so any
+// other rate plays back at the wrong pitch. Communications apps pick that mode by
+// default, so this is not a corner case.
+static
+MODE_AND_DEFAULT_FORMAT MicInPinModes48k[] =
+{
+    { STATIC_AUDIO_SIGNALPROCESSINGMODE_RAW,            &MicArrayPinSupportedDeviceFormats[0].DataFormat },
+    { STATIC_AUDIO_SIGNALPROCESSINGMODE_DEFAULT,        &MicArrayPinSupportedDeviceFormats[0].DataFormat },
+    { STATIC_AUDIO_SIGNALPROCESSINGMODE_SPEECH,         &MicArrayPinSupportedDeviceFormats[0].DataFormat },
+    { STATIC_AUDIO_SIGNALPROCESSINGMODE_COMMUNICATIONS, &MicArrayPinSupportedDeviceFormats[0].DataFormat }
+};
+
+// Same pin layout as MicArray (bridge / capture / keyword) and the same full format
+// list - only the per-mode defaults change.
+static
+PIN_DEVICE_FORMATS_AND_MODES MicInPinDeviceFormatsAndModes48k[] =
+{
+    { BridgePin,         NULL,                             0,                                                NULL,              0 },
+    { SystemCapturePin,  MicArrayPinSupportedDeviceFormats, SIZEOF_ARRAY(MicArrayPinSupportedDeviceFormats), MicInPinModes48k,  SIZEOF_ARRAY(MicInPinModes48k) },
+    { KeywordCapturePin, KeywordPinSupportedDeviceFormats,  SIZEOF_ARRAY(KeywordPinSupportedDeviceFormats),  KeywordPinSupportedDeviceModes, SIZEOF_ARRAY(KeywordPinSupportedDeviceModes) }
+};
+
 static
 ENDPOINT_MINIPAIR MicInMiniports =
 {
@@ -372,8 +396,8 @@ ENDPOINT_MINIPAIR MicInMiniports =
     ARRAYSIZE(SysvadWaveFilterInterfacePropertiesCapture),  // Interface properties
     SysvadWaveFilterInterfacePropertiesCapture,
     MICARRAY_DEVICE_MAX_CHANNELS,
-    MicArrayPinDeviceFormatsAndModes,
-    SIZEOF_ARRAY(MicArrayPinDeviceFormatsAndModes),
+    MicInPinDeviceFormatsAndModes48k,
+    SIZEOF_ARRAY(MicInPinDeviceFormatsAndModes48k),
     MicInTopologyPhysicalConnections,
     SIZEOF_ARRAY(MicInTopologyPhysicalConnections),
     ENDPOINT_SOUNDDETECTOR_SUPPORTED,
