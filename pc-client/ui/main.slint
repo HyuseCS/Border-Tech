@@ -89,12 +89,14 @@ component StatusCard inherits Rectangle {
         padding: 16px;
         spacing: 12px;
         
-        Text {
+        TextInput {
             text: text;
+            read-only: true;
             color: is_connected ? #00FFCC : #FF3366;
             font-size: 14px;
             font-weight: 900;
             horizontal-alignment: center;
+            wrap: word-wrap;
         }
         
         VolumeMeter {

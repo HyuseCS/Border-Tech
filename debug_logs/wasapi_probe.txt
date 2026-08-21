@@ -1,0 +1,36 @@
+Z:\windows-driver\tools>wasapi_probe.exe
+Active capture endpoints: 2
+
+[0] Microphone (High Definition Audio Device)
+  Activate(IAudioClient)             -> 0x00000000  S_OK
+  GetMixFormat                       -> 0x00000000  S_OK
+      fmt: 2 ch, 44100 Hz, 32 bit, tag 0xFFFE
+  Initialize(SHARED, mix fmt)        -> 0x00000000  S_OK
+      (open OK ΓÇö endpoint healthy)
+
+[1] External Microphone Headphone (Lampyris Virtual Microphone)
+  Activate(IAudioClient)             -> 0x00000000  S_OK
+  GetMixFormat                       -> 0x88890008  AUDCLNT_E_UNSUPPORTED_FORMAT
+
+=== Lampyris deep probe (explicit 2ch/48000/16 WAVEFORMATEXTENSIBLE) ===
+
+  Activate(IAudioClient)             -> 0x00000000  S_OK
+  IsFormatSupported(SHARED, dev fmt) -> 0x88890008  AUDCLNT_E_UNSUPPORTED_FORMAT
+  IsFormatSupported(EXCL, dev fmt)   -> 0x00000000  S_OK
+
+-- Attempt: SHARED, explicit dev fmt, no event --
+  Activate(IAudioClient)             -> 0x00000000  S_OK
+  Initialize                         -> 0x88890008  AUDCLNT_E_UNSUPPORTED_FORMAT
+
+-- Attempt: SHARED + EVENTCALLBACK, explicit dev fmt --
+  Activate(IAudioClient)             -> 0x00000000  S_OK
+  Initialize(EVENTCALLBACK)          -> 0x88890008  AUDCLNT_E_UNSUPPORTED_FORMAT
+
+-- Attempt: EXCLUSIVE, explicit dev fmt (bypasses engine pipe; watch for NewStream) --
+  Activate(IAudioClient)             -> 0x00000000  S_OK
+  Initialize(EXCLUSIVE)              -> 0x88890008  AUDCLNT_E_UNSUPPORTED_FORMAT
+
+Done. Interpretation:
+  control mic also fails            -> VM audio engine broken, not our driver
+  EXCLUSIVE succeeds, SHARED fails  -> driver fine; shared-mode engine pipe is the bug
+  EXCLUSIVE fails too               -> the HRESULT + DebugView (NewStream?) name the KS-level reason

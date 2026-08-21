@@ -1,0 +1,712 @@
+00000893	81.76294708	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 9600. Ring buffer available: 9600	
+00000901	85.16518402	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 9600. Ring buffer available: 192000	
+00000910	88.60366058	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 9600. Ring buffer available: 192000	
+00000921	92.04585266	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 9600. Ring buffer available: 192000	
+00000931	95.60263062	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 9600. Ring buffer available: 192000	
+00000934	96.65671539	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=36 -> 0x0	
+00000935	96.65673065	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=36 -> 0x0	
+00000936	96.65715790	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00000937	96.65718079	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00000938	96.65744781	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00000939	96.65745544	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000940	96.66738129	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00000941	96.66738892	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00000942	96.66778564	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=20 -> 0x0	
+00000943	96.66778564	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=20 -> 0x0	
+00000944	96.66802216	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00000945	96.66802216	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000953	99.00316620	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 9600. Ring buffer available: 192000	
+00000956	99.28613281	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00000957	99.28614044	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00000958	99.28614044	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000959	99.28619385	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x54 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00000960	99.28619385	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000961	99.28623962	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000962	99.28623962	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000963	99.28623962	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000964	99.28624725	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000965	99.28624725	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000966	99.28624725	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
+00000967	99.28625488	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000968	99.28629303	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=48000 bits=16 cb=22	
+00000969	99.28630066	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/48000Hz/16bit/blk2 -> 0x0	
+00000970	99.28630066	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000971	99.28688812	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00000972	99.28689575	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000973	99.28750610	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00000974	99.28750610	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000975	99.28892517	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00000976	99.28893280	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000977	99.29022217	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000978	99.29022217	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000979	99.29022980	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000980	99.29022980	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000981	99.29022980	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000982	99.29022980	System	[LAMPYRIS] PDF2 EXIT: mode=0xC18E2F7E -> 0x0 (returned default fmt)	
+00000983	99.29022980	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000984	99.29264069	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000985	99.29264832	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000986	99.29264832	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000987	99.29265594	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000988	99.29265594	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000989	99.29265594	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
+00000990	99.29265594	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000991	99.29403687	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=36 -> 0x0	
+00000992	99.29447937	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=36 -> 0x0	
+00000993	99.29478455	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00000994	99.29479218	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00000995	99.29504395	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=48000 bits=16 cb=22	
+00000996	99.29505157	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/48000Hz/16bit/blk2 -> 0x0	
+00000997	99.29505157	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000998	99.29515076	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00000999	99.29519653	System	[LAMPYRIS] NewStream ENTER: Pin=1 Capture=1	
+00001000	99.29519653	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/48000Hz/16bit/blk2 -> 0x0	
+00001001	99.29523468	System	[LAMPYRIS] NewStream EXIT: Pin=1 status=0x0	
+00001002	99.29523468	System	[LAMPYRIS] MJ_CREATE PIN nameLen=302 -> 0x0	
+00001003	99.29534912	System	[LAMPYRIS] SetState: Pin=1 0 -> 1 (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)	
+00001004	99.29535675	System	[LAMPYRIS] SetState: Pin=1 1 -> 2 (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)	
+00001005	99.29618835	System	[LAMPYRIS] SetState: Pin=1 2 -> 3 (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)	
+00001006	99.30758667	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001007	99.30759430	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00001008	99.30760193	System	[LAMPYRIS] ReadAudioData: Requested 1056 bytes. Read 1056 bytes. Available: 192000	
+00001010	100.16690826	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 864 bytes. Available: 192000	
+00001011	100.30747223	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001012	100.30747223	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00001015	101.03719330	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 864 bytes. Available: 189024	
+00001016	101.30806732	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001017	101.30806732	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001021	101.88635254	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 190176	
+00001022	102.30718994	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001023	102.30719757	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00001024	102.74702454	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 190176	
+00001026	102.88336945	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 9600. Ring buffer available: 192000	
+00001029	103.30671692	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001030	103.30672455	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00001031	103.58689880	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 864 bytes. Available: 192000	
+00001033	104.30713654	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001034	104.30714417	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001035	104.48643494	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 190176	
+00001038	105.30671692	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001039	105.30671692	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001040	105.36627197	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 188160	
+00001044	106.25691223	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 190080	
+00001045	106.30622864	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001046	106.30622864	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001047	106.48644257	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 9600. Ring buffer available: 192000	
+00001049	107.12715912	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 190080	
+00001052	107.30668640	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001053	107.30668640	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00001054	108.00769043	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 192000	
+00001056	108.30630493	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001057	108.30630493	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00001060	108.87753296	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 189120	
+00001061	109.30721283	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001062	109.30721283	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00001064	109.72752380	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 188064	
+00001065	109.96201324	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 9600. Ring buffer available: 192000	
+00001071	110.30626678	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001072	110.30628204	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001073	110.56715393	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 190080	
+00001075	111.30663300	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001076	111.30663300	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001079	111.44623566	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 190080	
+00001080	112.30715942	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001081	112.30717468	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001082	112.31735992	System	[LAMPYRIS] ReadAudioData: Requested 96 bytes. Read 96 bytes. Available: 190080	
+00001086	113.18701172	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 190080	
+00001087	113.28546906	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 9600. Ring buffer available: 192000	
+00001088	113.30744171	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001089	113.30745697	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00001091	114.05758667	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 189120	
+00001094	114.30722809	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001095	114.30722809	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001096	114.88690948	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 190176	
+00001098	115.30719757	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001099	115.30719757	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00001102	115.73722839	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 189120	
+00001103	116.30715179	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001104	116.30715942	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001108	116.60758972	System	[LAMPYRIS] ReadAudioData: Requested 1056 bytes. Read 1056 bytes. Available: 188160	
+00001109	116.84410858	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 9600. Ring buffer available: 192000	
+00001110	117.30672455	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001111	117.30673981	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001112	117.43681335	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 864 bytes. Available: 189120	
+00001116	118.29682159	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 864 bytes. Available: 189024	
+00001117	118.30751038	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001118	118.30751038	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00001122	119.13743591	System	[LAMPYRIS] ReadAudioData: Requested 96 bytes. Read 96 bytes. Available: 190080	
+00001123	119.30743408	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001124	119.30743408	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001126	120.03745270	System	[LAMPYRIS] ReadAudioData: Requested 96 bytes. Read 96 bytes. Available: 188160	
+00001127	120.24317169	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 9600. Ring buffer available: 192000	
+00001128	120.30619049	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001129	120.30619812	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00001135	120.89759827	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 864 bytes. Available: 190944	
+00001136	121.30670166	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001137	121.30670166	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00001141	121.76755524	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 192000	
+00001142	122.30636597	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001143	122.30636597	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001145	122.63642883	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 864 bytes. Available: 191040	
+00001146	123.30715179	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001147	123.30715942	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001148	123.48699951	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 192000	
+00001154	123.60550690	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 9600. Ring buffer available: 192000	
+00001155	124.30635834	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001156	124.30635834	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001157	124.36733246	System	[LAMPYRIS] ReadAudioData: Requested 1056 bytes. Read 1056 bytes. Available: 192000	
+00001161	125.20696259	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 186240	
+00001162	125.30686951	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001163	125.30686951	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001167	126.09688568	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 864 bytes. Available: 189024	
+00001168	126.30626678	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001169	126.30626678	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001171	126.95690155	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 864 bytes. Available: 191040	
+00001174	127.30722809	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001175	127.30722809	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00001176	127.48546600	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 9600. Ring buffer available: 192000	
+00001177	127.81735992	System	[LAMPYRIS] ReadAudioData: Requested 96 bytes. Read 96 bytes. Available: 190080	
+00001181	128.30754089	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001182	128.30754089	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00001183	128.68742371	System	[LAMPYRIS] ReadAudioData: Requested 1056 bytes. Read 1056 bytes. Available: 188160	
+00001185	129.30628967	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001186	129.30628967	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001187	129.54646301	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 864 bytes. Available: 192000	
+00001188	130.30664062	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001189	130.30664062	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00001190	130.40658569	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 188160	
+00001196	130.97134399	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 9600. Ring buffer available: 192000	
+00001197	131.03163147	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00001198	131.03163147	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00001199	131.03215027	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00001200	131.29760742	System	[LAMPYRIS] ReadAudioData: Requested 96 bytes. Read 96 bytes. Available: 186240	
+00001201	131.30703735	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001202	131.30703735	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00001206	132.16700745	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 864 bytes. Available: 190080	
+00001207	132.30621338	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001208	132.30621338	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00001209	132.48136902	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=20 -> 0x0	
+00001210	132.48138428	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=20 -> 0x0	
+00001211	132.48167419	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001212	132.48167419	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001213	132.48173523	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001214	132.48173523	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001215	132.48178101	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001216	132.48178101	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001217	132.48371887	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001218	132.48371887	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001219	132.48394775	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=44100 bits=32 cb=22	
+00001220	132.48394775	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/44100Hz/32bit/blk4 -> 0xC0000272	
+00001221	132.48394775	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000272	
+00001222	132.48394775	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=44100 bits=24 cb=22	
+00001223	132.48394775	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/44100Hz/24bit/blk3 -> 0xC0000272	
+00001224	132.48396301	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000272	
+00001225	132.48396301	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=44100 bits=16 cb=22	
+00001226	132.48396301	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/44100Hz/16bit/blk2 -> 0xC0000272	
+00001227	132.48396301	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000272	
+00001228	132.48397827	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=48000 bits=32 cb=22	
+00001229	132.48397827	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/48000Hz/32bit/blk4 -> 0xC0000272	
+00001230	132.48397827	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000272	
+00001231	132.48397827	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=48000 bits=24 cb=22	
+00001232	132.48397827	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/48000Hz/24bit/blk3 -> 0xC0000272	
+00001233	132.48397827	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000272	
+00001234	132.48399353	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=48000 bits=16 cb=22	
+00001235	132.48399353	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/48000Hz/16bit/blk2 -> 0x0	
+00001236	132.48399353	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001237	132.48399353	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=16000 bits=32 cb=22	
+00001238	132.48399353	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/16000Hz/32bit/blk4 -> 0xC0000272	
+00001239	132.48399353	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000272	
+00001240	132.48400879	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=16000 bits=24 cb=22	
+00001241	132.48400879	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/16000Hz/24bit/blk3 -> 0xC0000272	
+00001242	132.48400879	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000272	
+00001243	132.48400879	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=16000 bits=16 cb=22	
+00001244	132.48400879	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/16000Hz/16bit/blk2 -> 0xC0000272	
+00001245	132.48400879	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000272	
+00001246	132.48402405	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=8000 bits=32 cb=22	
+00001247	132.48402405	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/8000Hz/32bit/blk4 -> 0xC0000272	
+00001248	132.48402405	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000272	
+00001249	132.48402405	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=8000 bits=24 cb=22	
+00001250	132.48403931	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/8000Hz/24bit/blk3 -> 0xC0000272	
+00001251	132.48403931	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000272	
+00001252	132.48403931	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=8000 bits=16 cb=22	
+00001253	132.48403931	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/8000Hz/16bit/blk2 -> 0xC0000272	
+00001254	132.48403931	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000272	
+00001255	132.48403931	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=2 rate=44100 bits=32 cb=22	
+00001256	132.48403931	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/44100Hz/32bit/blk8 -> 0xC0000272	
+00001257	132.48403931	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000272	
+00001258	132.48403931	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=2 rate=44100 bits=24 cb=22	
+00001259	132.48403931	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/44100Hz/24bit/blk6 -> 0xC0000272	
+00001260	132.48403931	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000272	
+00001261	132.48405457	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=2 rate=44100 bits=16 cb=22	
+00001262	132.48405457	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/44100Hz/16bit/blk4 -> 0xC0000272	
+00001263	132.48405457	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000272	
+00001264	132.48405457	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=32 cb=22	
+00001265	132.48405457	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/32bit/blk8 -> 0xC0000272	
+00001266	132.48405457	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000272	
+00001267	132.48405457	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=24 cb=22	
+00001268	132.48405457	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/24bit/blk6 -> 0xC0000272	
+00001269	132.48405457	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0xC0000272	
+00001270	132.48406982	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00001271	132.48406982	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00001272	132.48406982	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001274	132.98677063	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 864 bytes. Available: 188064	
+00001280	133.30683899	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001281	133.30683899	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001282	133.84761047	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 189984	
+00001284	134.30700684	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001285	134.30700684	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001288	134.60404968	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 9600. Ring buffer available: 192000	
+00001289	134.69731140	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 189120	
+00001290	134.86070251	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00001291	134.86071777	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00001292	134.86071777	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001293	134.86080933	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x54 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001294	134.86080933	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001295	134.86085510	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00001296	134.86085510	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00001297	134.86087036	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00001298	134.86087036	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00001299	134.86087036	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00001300	134.86087036	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
+00001301	134.86087036	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00001302	134.86091614	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=48000 bits=16 cb=22	
+00001303	134.86093140	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/48000Hz/16bit/blk2 -> 0x0	
+00001304	134.86093140	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001305	134.86151123	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001306	134.86151123	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001307	134.86210632	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001308	134.86210632	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001309	135.30755615	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001310	135.30755615	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00001311	135.37353516	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00001312	135.37353516	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00001313	135.37353516	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001314	135.37359619	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x54 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001315	135.37359619	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001316	135.37362671	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00001317	135.37362671	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00001318	135.37362671	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00001319	135.37364197	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00001320	135.37364197	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00001321	135.37364197	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
+00001322	135.37364197	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00001323	135.37367249	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=48000 bits=16 cb=22	
+00001324	135.37367249	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/48000Hz/16bit/blk2 -> 0x0	
+00001325	135.37367249	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001326	135.37420654	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001327	135.37420654	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001328	135.37477112	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001329	135.37477112	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001331	135.61723328	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 187200	
+00001334	136.30757141	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001335	136.30757141	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001336	136.38969421	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00001337	136.38969421	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00001338	136.38969421	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001339	136.38973999	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x54 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001340	136.38975525	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001341	136.38981628	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00001342	136.38981628	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00001343	136.38981628	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00001344	136.38981628	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00001345	136.38981628	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00001346	136.38983154	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
+00001347	136.38983154	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00001348	136.38986206	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=48000 bits=16 cb=22	
+00001349	136.38986206	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/48000Hz/16bit/blk2 -> 0x0	
+00001350	136.38986206	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001351	136.39039612	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001352	136.39039612	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001353	136.39097595	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001354	136.39097595	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001355	136.47743225	System	[LAMPYRIS] ReadAudioData: Requested 96 bytes. Read 96 bytes. Available: 190080	
+00001356	136.60368347	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=36 -> 0x0	
+00001357	136.60369873	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=36 -> 0x0	
+00001358	136.60408020	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=36 -> 0x0	
+00001362	137.30712891	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001363	137.30712891	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001364	137.31698608	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 189120	
+00001365	137.51454163	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00001366	137.51455688	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00001367	137.51484680	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001368	137.51484680	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001369	137.51490784	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001370	137.51490784	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001371	137.51493835	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001372	137.51493835	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001373	137.51504517	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001374	137.51504517	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001375	137.51527405	System	[LAMPYRIS] DRI: Pin=1 MyCh=1 ClientCh=1 -> PASS	
+00001379	138.19688416	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 191040	
+00001380	138.24464417	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 9600. Ring buffer available: 192000	
+00001381	138.30619812	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001382	138.30619812	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00001383	139.01695251	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 191040	
+00001385	139.30650330	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001386	139.30650330	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00001389	139.86668396	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 188160	
+00001390	140.14198303	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00001391	140.14198303	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00001392	140.14199829	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00001393	140.14199829	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00001394	140.14199829	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00001395	140.14199829	System	[LAMPYRIS] PDF2 EXIT: mode=0xC18E2F7E -> 0x0 (returned default fmt)	
+00001396	140.14199829	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00001397	140.14334106	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00001398	140.14334106	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00001399	140.14334106	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00001400	140.14334106	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00001401	140.14334106	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00001402	140.14334106	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
+00001403	140.14334106	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00001404	140.30747986	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001405	140.30747986	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001407	140.70732117	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 189984	
+00001408	141.30709839	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001409	141.30709839	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001415	141.40028381	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00001416	141.40028381	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00001417	141.40028381	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001418	141.40032959	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x54 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001419	141.40032959	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001420	141.40039062	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00001421	141.40039062	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00001422	141.40039062	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00001423	141.40039062	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00001424	141.40039062	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00001425	141.40039062	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
+00001426	141.40039062	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00001427	141.40043640	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=48000 bits=16 cb=22	
+00001428	141.40043640	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/48000Hz/16bit/blk2 -> 0x0	
+00001429	141.40043640	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001430	141.40097046	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001431	141.40097046	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001432	141.40156555	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001433	141.40158081	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001434	141.57740784	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 191040	
+00001435	141.68157959	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 9600. Ring buffer available: 192000	
+00001436	141.90658569	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00001437	141.90658569	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00001438	141.90658569	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001439	141.90663147	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x54 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001440	141.90664673	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001441	141.90667725	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00001442	141.90667725	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00001443	141.90669250	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00001444	141.90669250	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00001445	141.90669250	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00001446	141.90669250	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
+00001447	141.90669250	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00001448	141.90672302	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=48000 bits=16 cb=22	
+00001449	141.90672302	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/48000Hz/16bit/blk2 -> 0x0	
+00001450	141.90672302	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001451	141.90725708	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001452	141.90725708	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001453	141.90792847	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001454	141.90792847	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001455	142.30628967	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001456	142.30628967	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00001458	142.41638184	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 189120	
+00001461	142.92037964	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00001462	142.92039490	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00001463	142.92039490	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001464	142.92044067	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x54 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001465	142.92044067	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001466	142.92050171	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00001467	142.92050171	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00001468	142.92050171	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00001469	142.92050171	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00001470	142.92051697	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00001471	142.92051697	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
+00001472	142.92051697	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00001473	142.92053223	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=48000 bits=16 cb=22	
+00001474	142.92053223	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/48000Hz/16bit/blk2 -> 0x0	
+00001475	142.92053223	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001476	142.92111206	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001477	142.92111206	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001478	142.92167664	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001479	142.92167664	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001480	143.27670288	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 864 bytes. Available: 190944	
+00001481	143.30749512	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001482	143.30749512	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001486	144.13713074	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 189120	
+00001487	144.30712891	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001488	144.30712891	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00001489	144.95722961	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 188160	
+00001491	145.24510193	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 9600. Ring buffer available: 192000	
+00001492	145.30711365	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001493	145.30711365	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00001496	145.82711792	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 190080	
+00001497	146.30746460	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001498	146.30746460	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001500	146.69776917	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 189216	
+00001503	147.30740356	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001504	147.30740356	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00001505	147.56678772	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 190176	
+00001507	147.92485046	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00001508	147.92485046	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00001509	147.92485046	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001510	147.92491150	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x54 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001511	147.92491150	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001512	147.92495728	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00001513	147.92495728	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00001514	147.92497253	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00001515	147.92497253	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00001516	147.92497253	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00001517	147.92497253	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
+00001518	147.92497253	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00001519	147.92500305	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=48000 bits=16 cb=22	
+00001520	147.92500305	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/48000Hz/16bit/blk2 -> 0x0	
+00001521	147.92500305	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001522	147.92562866	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001523	147.92562866	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001524	147.92625427	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001525	147.92625427	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001528	148.30697632	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001529	148.30697632	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001530	148.41738892	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 864 bytes. Available: 191040	
+00001531	149.00294495	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 9600. Ring buffer available: 192000	
+00001533	149.27650452	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 192000	
+00001534	149.30645752	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001535	149.30645752	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001538	150.10681152	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 188160	
+00001539	150.30673218	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001540	150.30673218	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001544	150.98721313	System	[LAMPYRIS] ReadAudioData: Requested 1056 bytes. Read 1056 bytes. Available: 192000	
+00001545	151.12348938	System	[LAMPYRIS] SetState: Pin=1 3 -> 2 (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)	
+00001546	151.12385559	System	[LAMPYRIS] SetState: Pin=1 2 -> 1 (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)	
+00001547	151.12385559	System	[LAMPYRIS] SetState: Pin=1 1 -> 0 (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)	
+00001551	152.52684021	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 9600. Ring buffer available: 192000	
+00001556	154.42434692	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=36 -> 0x0	
+00001557	154.42436218	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=36 -> 0x0	
+00001558	154.42469788	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00001559	154.42469788	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00001560	154.42494202	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001561	154.42494202	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001562	154.43374634	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00001563	154.43376160	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00001564	154.43406677	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=20 -> 0x0	
+00001565	154.43408203	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=20 -> 0x0	
+00001566	154.43426514	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001567	154.43428040	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001571	156.24627686	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 9600. Ring buffer available: 192000	
+00001577	156.45083618	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00001578	156.45083618	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00001579	156.45083618	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001580	156.45088196	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x54 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001581	156.45088196	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001582	156.45091248	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00001583	156.45091248	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00001584	156.45092773	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00001585	156.45092773	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00001586	156.45092773	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00001587	156.45092773	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
+00001588	156.45092773	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00001589	156.45095825	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=48000 bits=16 cb=22	
+00001590	156.45095825	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/48000Hz/16bit/blk2 -> 0x0	
+00001591	156.45095825	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001592	156.45153809	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001593	156.45153809	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001594	156.45211792	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001595	156.45211792	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001596	156.45423889	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00001597	156.45423889	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00001598	156.45423889	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00001599	156.45423889	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00001600	156.45423889	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00001601	156.45423889	System	[LAMPYRIS] PDF2 EXIT: mode=0xC18E2F7E -> 0x0 (returned default fmt)	
+00001602	156.45423889	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00001603	156.45597839	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00001604	156.45597839	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00001605	156.45599365	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00001606	156.45599365	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00001607	156.45599365	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00001608	156.45599365	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
+00001609	156.45599365	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00001610	156.45710754	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=36 -> 0x0	
+00001611	156.45710754	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=36 -> 0x0	
+00001612	156.45742798	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00001613	156.45742798	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00001614	156.45767212	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=48000 bits=16 cb=22	
+00001615	156.45767212	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/48000Hz/16bit/blk2 -> 0x0	
+00001616	156.45767212	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001617	156.45776367	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00001618	156.45782471	System	[LAMPYRIS] NewStream ENTER: Pin=1 Capture=1	
+00001619	156.45782471	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/48000Hz/16bit/blk2 -> 0x0	
+00001620	156.45785522	System	[LAMPYRIS] NewStream EXIT: Pin=1 status=0x0	
+00001621	156.45785522	System	[LAMPYRIS] MJ_CREATE PIN nameLen=302 -> 0x0	
+00001622	156.45797729	System	[LAMPYRIS] SetState: Pin=1 0 -> 1 (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)	
+00001623	156.45797729	System	[LAMPYRIS] SetState: Pin=1 1 -> 2 (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)	
+00001624	156.45869446	System	[LAMPYRIS] SetState: Pin=1 2 -> 3 (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)	
+00001625	156.63874817	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00001626	156.64941406	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001627	156.90669250	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=36 -> 0x0	
+00001628	156.90670776	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=36 -> 0x0	
+00001629	156.90711975	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=36 -> 0x0	
+00001630	157.19883728	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 191040	
+00001632	157.63893127	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001633	157.64927673	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001636	158.06880188	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 188256	
+00001637	158.63882446	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00001638	158.64912415	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001642	158.76947021	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00001643	158.76947021	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00001644	158.76948547	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00001645	158.76948547	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00001646	158.76948547	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00001647	158.76948547	System	[LAMPYRIS] PDF2 EXIT: mode=0xC18E2F7E -> 0x0 (returned default fmt)	
+00001648	158.76948547	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00001649	158.77059937	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00001650	158.77059937	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00001651	158.77059937	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001652	158.77066040	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x54 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001653	158.77066040	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001654	158.77070618	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00001655	158.77070618	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00001656	158.77070618	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00001657	158.77070618	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00001658	158.77070618	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00001659	158.77070618	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
+00001660	158.77070618	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00001661	158.77073669	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=48000 bits=16 cb=22	
+00001662	158.77073669	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/48000Hz/16bit/blk2 -> 0x0	
+00001663	158.77073669	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001664	158.77130127	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001665	158.77130127	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001666	158.77191162	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001667	158.77191162	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001668	158.77380371	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00001669	158.77381897	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00001670	158.77381897	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00001671	158.77381897	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00001672	158.77381897	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00001673	158.77381897	System	[LAMPYRIS] PDF2 EXIT: mode=0xC18E2F7E -> 0x0 (returned default fmt)	
+00001674	158.77383423	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00001675	158.88009644	System	[LAMPYRIS] SetState: Pin=1 3 -> 2 (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)	
+00001676	158.88084412	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00001677	158.88084412	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00001678	158.88084412	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00001679	158.88085938	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00001680	158.88085938	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00001681	158.88085938	System	[LAMPYRIS] PDF2 EXIT: mode=0xC18E2F7E -> 0x0 (returned default fmt)	
+00001682	158.88085938	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00001683	158.88209534	System	[LAMPYRIS] SetState: Pin=1 2 -> 3 (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)	
+00001684	158.91035461	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00001685	158.91035461	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00001686	158.91035461	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001687	158.91041565	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x54 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001688	158.91041565	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001689	158.91044617	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00001690	158.91044617	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00001691	158.91046143	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00001692	158.91046143	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00001693	158.91046143	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00001694	158.91046143	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
+00001695	158.91046143	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00001696	158.91049194	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=48000 bits=16 cb=22	
+00001697	158.91050720	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/48000Hz/16bit/blk2 -> 0x0	
+00001698	158.91050720	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001699	158.91102600	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001700	158.91102600	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001701	158.91156006	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001702	158.91156006	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001703	158.93235779	System	[LAMPYRIS] ReadAudioData: Requested 96 bytes. Read 96 bytes. Available: 187296	
+00001704	159.24169922	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=36 -> 0x0	
+00001705	159.24171448	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=36 -> 0x0	
+00001706	159.24208069	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=36 -> 0x0	
+00001707	159.63116455	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00001708	159.64445496	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 9600. Ring buffer available: 192000	
+00001709	159.65158081	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001711	159.78083801	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 864 bytes. Available: 190944	
+00001712	159.93753052	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00001713	159.93753052	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00001714	159.93753052	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00001715	159.93753052	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00001716	159.93753052	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00001717	159.93753052	System	[LAMPYRIS] PDF2 EXIT: mode=0xC18E2F7E -> 0x0 (returned default fmt)	
+00001718	159.93753052	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00001719	159.96748352	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00001720	159.96748352	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00001721	159.96749878	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001722	159.96754456	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x54 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001723	159.96754456	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001724	159.96757507	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00001725	159.96757507	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00001726	159.96757507	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00001727	159.96757507	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00001728	159.96759033	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00001729	159.96759033	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
+00001730	159.96759033	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00001731	159.96762085	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=48000 bits=16 cb=22	
+00001732	159.96762085	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/48000Hz/16bit/blk2 -> 0x0	
+00001733	159.96762085	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001734	159.96817017	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001735	159.96817017	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001736	159.96871948	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001737	159.96878052	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001743	160.52070618	System	[LAMPYRIS] SetState: Pin=1 3 -> 2 (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)	
+00001745	162.69075012	System	[LAMPYRIS] SetState: Pin=1 2 -> 3 (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)	
+00001746	162.69477844	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00001747	162.69477844	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00001748	162.69479370	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00001749	162.69479370	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00001750	162.69479370	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00001751	162.69479370	System	[LAMPYRIS] PDF2 EXIT: mode=0xC18E2F7E -> 0x0 (returned default fmt)	
+00001752	162.69479370	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00001758	162.79083252	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00001759	162.79083252	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 864 bytes. Available: 188064	
+00001760	162.82171631	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001761	162.92965698	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00001762	162.92967224	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00001763	162.92967224	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001764	162.92973328	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x54 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001765	162.92973328	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001766	162.92976379	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00001767	162.92976379	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00001768	162.92976379	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00001769	162.92976379	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00001770	162.92977905	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00001771	162.92977905	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
+00001772	162.92977905	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00001773	162.92982483	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=48000 bits=16 cb=22	
+00001774	162.92982483	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/48000Hz/16bit/blk2 -> 0x0	
+00001775	162.92982483	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001776	162.93037415	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001777	162.93037415	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001778	162.93099976	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001779	162.93101501	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001780	163.40522766	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 9600. Ring buffer available: 192000	
+00001781	163.66204834	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 190944	
+00001783	163.79142761	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001784	163.82131958	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001785	164.51119995	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 864 bytes. Available: 189984	
+00001791	164.79109192	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001792	164.82170105	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001793	165.38075256	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 864 bytes. Available: 191040	
+00001795	165.79228210	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00001796	165.82070923	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00001799	166.25160217	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 190080	
+00001800	166.79067993	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00001801	166.80197144	System	[LAMPYRIS] SetState: Pin=1 3 -> 2 (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)	
+00001802	166.84121704	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 9600. Ring buffer available: 192000	
+00001815	170.44564819	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 9600. Ring buffer available: 192000	
+00001827	173.96153259	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 9600. Ring buffer available: 192000	
+00001875	192.94197083	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=2 rate=48000 bits=16 cb=22	
+00001876	192.94197083	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 2ch/48000Hz/16bit/blk4 -> 0x0	
+00001877	192.94197083	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001878	192.94204712	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x54 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001879	192.94204712	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001880	192.94210815	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00001881	192.94210815	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00001882	192.94212341	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00001883	192.94212341	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00001884	192.94212341	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00001885	192.94212341	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
+00001886	192.94212341	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00001887	192.94215393	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=48000 bits=16 cb=22	
+00001888	192.94215393	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/48000Hz/16bit/blk2 -> 0x0	
+00001889	192.94215393	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001890	192.94293213	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001891	192.94293213	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00001892	192.94357300	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00001893	192.94357300	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	

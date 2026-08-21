@@ -1,0 +1,546 @@
+00000001	0.00000000	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 0 bytes. Available: 0	
+00000003	0.34969339	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000004	0.34969619	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00000006	0.89064300	System	[LAMPYRIS] ReadAudioData: Requested 1056 bytes. Read 0 bytes. Available: 0	
+00000009	1.35061467	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000010	1.35061741	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000011	1.71000278	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000016	2.35010886	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000017	2.35011673	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000018	2.55957866	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 0 bytes. Available: 0	
+00000022	3.35002828	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000023	3.35003567	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000024	3.41047835	System	[LAMPYRIS] ReadAudioData: Requested 1056 bytes. Read 0 bytes. Available: 0	
+00000028	4.27006578	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 0 bytes. Available: 0	
+00000029	4.34981203	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000030	4.34981489	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00000032	5.15054083	System	[LAMPYRIS] ReadAudioData: Requested 1056 bytes. Read 0 bytes. Available: 0	
+00000033	5.35027456	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000034	5.35027838	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000040	6.01068020	System	[LAMPYRIS] ReadAudioData: Requested 1056 bytes. Read 0 bytes. Available: 0	
+00000041	6.34979916	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000042	6.34980249	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000044	6.88091183	System	[LAMPYRIS] ReadAudioData: Requested 96 bytes. Read 0 bytes. Available: 0	
+00000047	7.34986973	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000048	7.34987354	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000049	7.71986818	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000051	8.35061646	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000052	8.35062122	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000055	8.57959557	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 0 bytes. Available: 0	
+00000056	9.34970284	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000057	9.34970665	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00000058	9.45074368	System	[LAMPYRIS] ReadAudioData: Requested 1056 bytes. Read 0 bytes. Available: 0	
+00000062	10.34085178	System	[LAMPYRIS] ReadAudioData: Requested 96 bytes. Read 0 bytes. Available: 0	
+00000063	10.34996605	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000064	10.34996796	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00000068	11.18066788	System	[LAMPYRIS] ReadAudioData: Requested 96 bytes. Read 0 bytes. Available: 0	
+00000069	11.35009480	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000070	11.35010147	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000072	12.05025291	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000075	12.34963799	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000076	12.34963989	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000077	12.90089893	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 0 bytes. Available: 0	
+00000079	13.35077667	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000080	13.35077953	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000083	13.73982906	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000084	14.34950066	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000085	14.34950447	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000086	14.59986877	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000090	15.35015965	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000091	15.35016346	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000092	15.45018673	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 0 bytes. Available: 0	
+00000094	16.30089378	System	[LAMPYRIS] ReadAudioData: Requested 96 bytes. Read 0 bytes. Available: 0	
+00000095	16.34961510	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000096	16.34961700	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000099	17.15966034	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000100	17.35093307	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000101	17.35093498	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000105	18.01957703	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 0 bytes. Available: 0	
+00000106	18.35063171	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000107	18.35063553	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000109	18.89012909	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000110	19.35051537	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000111	19.35051918	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000117	19.77041245	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000118	20.35004997	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000119	20.35005379	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000121	20.63086510	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000124	21.35064316	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000125	21.35064697	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000126	21.49041557	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000130	22.34954643	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000131	22.34954834	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00000132	22.34955025	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 0 bytes. Available: 0	
+00000134	23.25044250	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000135	23.35039902	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000136	23.35040855	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000142	24.08979225	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000143	24.34959793	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000144	24.34960175	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00000148	24.94049835	System	[LAMPYRIS] ReadAudioData: Requested 96 bytes. Read 0 bytes. Available: 0	
+00000149	25.34967804	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000150	25.34968185	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00000152	25.78962326	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 0 bytes. Available: 0	
+00000158	26.35004425	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000159	26.35004997	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000160	26.64052391	System	[LAMPYRIS] ReadAudioData: Requested 96 bytes. Read 0 bytes. Available: 0	
+00000162	27.35058975	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000163	27.35059166	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000164	27.50058937	System	[LAMPYRIS] ReadAudioData: Requested 96 bytes. Read 0 bytes. Available: 0	
+00000167	28.34958076	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000168	28.34958458	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000169	28.40043259	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000173	29.25995255	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000174	29.35084534	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000175	29.35084724	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000177	30.11004066	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000180	30.34994316	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000181	30.34994507	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000182	30.98002815	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000184	31.35061836	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000185	31.35062027	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000188	31.85004425	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000189	32.35071945	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000190	32.35072327	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000192	32.72999191	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000195	33.18145370	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000196	33.18145752	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000197	33.18145752	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000198	33.18146133	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000199	33.18146515	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000200	33.18146515	System	[LAMPYRIS] PDF2 EXIT: mode=0xC18E2F7E -> 0x0 (returned default fmt)	
+00000201	33.18146515	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000202	33.19128418	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=48000 bits=16 cb=22	
+00000203	33.19128799	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/48000Hz/16bit/blk2 -> 0x0	
+00000204	33.19128799	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000205	33.19243240	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000206	33.19243622	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000207	33.19244003	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000208	33.19244003	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000209	33.19244385	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000210	33.19244385	System	[LAMPYRIS] PDF2 EXIT: mode=0xC18E2F7E -> 0x0 (returned default fmt)	
+00000211	33.19244385	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000212	33.19692612	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000213	33.19692612	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000214	33.19692993	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000215	33.19692993	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000216	33.19693375	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000217	33.19693756	System	[LAMPYRIS] PDF2 EXIT: mode=0xC18E2F7E -> 0x0 (returned default fmt)	
+00000218	33.19693756	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000219	33.20395660	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000220	33.20395660	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000221	33.20396042	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000222	33.20396423	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000223	33.20396805	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000224	33.20396805	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
+00000225	33.20396805	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000226	33.20429611	System	[LAMPYRIS] SetState: Pin=1 3 -> 2 (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)	
+00000227	33.20463562	System	[LAMPYRIS] SetState: Pin=1 2 -> 1 (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)	
+00000228	33.20464325	System	[LAMPYRIS] SetState: Pin=1 1 -> 0 (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)	
+00000229	33.20683670	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00000230	33.20722580	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00000231	33.20764542	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=20 -> 0x0	
+00000232	33.20765305	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=20 -> 0x0	
+00000233	33.20796585	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=48000 bits=16 cb=22	
+00000234	33.20796967	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/48000Hz/16bit/blk2 -> 0x0	
+00000235	33.20797348	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000236	33.20808411	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=20 -> 0x0	
+00000237	33.20812607	System	[LAMPYRIS] NewStream ENTER: Pin=1 Capture=1	
+00000238	33.20812988	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/48000Hz/16bit/blk2 -> 0x0	
+00000239	33.20816422	System	[LAMPYRIS] NewStream EXIT: Pin=1 status=0x0	
+00000240	33.20816803	System	[LAMPYRIS] MJ_CREATE PIN nameLen=302 -> 0x0	
+00000241	33.20960236	System	[LAMPYRIS] AllocBuffer: size=12288 rate=96000	
+00000242	33.20962906	System	[LAMPYRIS] SetState: Pin=1 0 -> 1 (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)	
+00000243	33.20963669	System	[LAMPYRIS] SetState: Pin=1 1 -> 2 (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)	
+00000244	33.21042633	System	[LAMPYRIS] SetState: Pin=1 2 -> 3 (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)	
+00000245	33.21044922	System	[LAMPYRIS] GetPosition: PlayOffset 0, WriteOffset 0 (State: 3)	
+00000246	33.21163940	System	[LAMPYRIS] SetState: Pin=1 3 -> 2 (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)	
+00000247	33.21207809	System	[LAMPYRIS] SetState: Pin=1 2 -> 1 (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)	
+00000248	33.21208191	System	[LAMPYRIS] SetState: Pin=1 1 -> 0 (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)	
+00000249	33.23001099	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000250	33.23001099	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000251	33.23001862	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000252	33.23001862	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000253	33.23002243	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000254	33.23002625	System	[LAMPYRIS] PDF2 EXIT: mode=0xC18E2F7E -> 0x0 (returned default fmt)	
+00000255	33.23002625	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000256	33.23154831	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000257	33.23155212	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000258	33.23155975	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000259	33.23155975	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000260	33.23156357	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000261	33.23156738	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
+00000262	33.23156738	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000263	33.23231506	System	[LAMPYRIS] PDF1 SET: Pin=1 ValSize=104 tag=0xFFFE ch=1 rate=48000 bits=16 cb=22	
+00000264	33.23231888	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/48000Hz/16bit/blk2 -> 0x0	
+00000265	33.23231888	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000266	33.23243332	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=20 -> 0x0	
+00000267	33.23246765	System	[LAMPYRIS] NewStream ENTER: Pin=1 Capture=1	
+00000268	33.23247147	System	[LAMPYRIS] IsFormatSupported: Pin=1 req 1ch/48000Hz/16bit/blk2 -> 0x0	
+00000269	33.23250580	System	[LAMPYRIS] NewStream EXIT: Pin=1 status=0x0	
+00000270	33.23250961	System	[LAMPYRIS] MJ_CREATE PIN nameLen=302 -> 0x0	
+00000271	33.23268127	System	[LAMPYRIS] SetState: Pin=1 0 -> 1 (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)	
+00000272	33.23268890	System	[LAMPYRIS] SetState: Pin=1 1 -> 2 (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)	
+00000273	33.23344803	System	[LAMPYRIS] SetState: Pin=1 2 -> 3 (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)	
+00000274	33.35454559	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000275	33.38396454	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000276	33.59422302	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000278	34.35446167	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000279	34.38378906	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000282	34.43367767	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 0 bytes. Available: 0	
+00000283	35.26411438	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000284	35.35409164	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000285	35.38473511	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000289	36.11462784	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000290	36.35408783	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00000291	36.38366318	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000293	36.96464157	System	[LAMPYRIS] ReadAudioData: Requested 1056 bytes. Read 0 bytes. Available: 0	
+00000296	37.35414505	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000297	37.38414764	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000298	37.85410309	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000302	38.35452652	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000303	38.38380814	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000304	38.71466064	System	[LAMPYRIS] ReadAudioData: Requested 96 bytes. Read 0 bytes. Available: 0	
+00000306	39.35394669	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000307	39.38361740	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000308	39.56486511	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000311	40.35389328	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000312	40.38348389	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000313	40.39394379	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000315	41.27489090	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 0 bytes. Available: 0	
+00000316	41.35401154	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000317	41.38460159	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000323	42.13440323	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000324	42.35491180	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000325	42.38465118	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000329	42.97411346	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000330	43.35386658	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000331	43.38369370	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000333	43.84374619	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000339	44.35379410	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000340	44.38368607	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000341	44.73395538	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 0 bytes. Available: 0	
+00000345	45.35371017	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000346	45.38365936	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000347	45.59408951	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000351	46.35445786	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000352	46.38411331	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000353	46.46481323	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000355	47.31381226	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 0 bytes. Available: 0	
+00000356	47.35467911	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000357	47.38447189	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000358	48.17474747	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 0 bytes. Available: 0	
+00000359	48.35359192	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00000360	48.38428497	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000361	49.01462173	System	[LAMPYRIS] ReadAudioData: Requested 96 bytes. Read 0 bytes. Available: 0	
+00000362	49.35440445	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000363	49.38354874	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000369	49.89366150	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 0 bytes. Available: 0	
+00000370	50.35445404	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000371	50.38417053	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000373	50.77473831	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 0 bytes. Available: 0	
+00000374	51.35431671	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000375	51.38403702	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000376	51.63427353	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000377	52.35487366	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000378	52.38405991	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000379	52.50413132	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000380	53.35350418	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00000381	53.36375427	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000382	53.38452530	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000388	54.22352600	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 0 bytes. Available: 0	
+00000389	54.35452271	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000390	54.38460922	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000394	55.07491302	System	[LAMPYRIS] ReadAudioData: Requested 96 bytes. Read 0 bytes. Available: 0	
+00000395	55.35490036	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000396	55.38438416	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000398	55.93423462	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000404	56.35391998	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000405	56.38425446	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000406	56.78350067	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 0 bytes. Available: 0	
+00000408	57.35407257	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000409	57.38464737	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000412	57.65406036	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000413	58.35440063	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000414	58.38421631	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000415	58.50478745	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000419	59.35436630	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000420	59.38378143	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000421	59.39461136	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000425	60.25363159	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000426	60.35383606	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000427	60.38478088	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000428	61.11360168	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 0 bytes. Available: 0	
+00000430	61.35467529	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000431	61.38420486	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000432	61.97455215	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000433	62.35373306	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00000434	62.38468933	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000435	62.86446762	System	[LAMPYRIS] ReadAudioData: Requested 1056 bytes. Read 0 bytes. Available: 0	
+00000441	63.35396957	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000442	63.38478851	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000443	63.73467636	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000447	64.35365295	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00000448	64.38374329	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000449	64.60419464	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 0 bytes. Available: 0	
+00000453	65.35485077	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000454	65.38418579	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000455	65.48352051	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 0 bytes. Available: 0	
+00000457	66.35396576	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000458	66.35397339	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000459	66.38478088	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000462	67.20433044	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000463	67.35489655	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000464	67.38434601	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000468	68.06368256	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 0 bytes. Available: 0	
+00000469	68.35358429	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00000470	68.38443756	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000472	68.92375183	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000476	69.35442352	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000477	69.38381195	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000480	69.79383850	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000481	70.35469818	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000482	70.38412476	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000484	70.65480804	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 0 bytes. Available: 0	
+00000485	71.35369873	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000486	71.38471985	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000490	71.53388214	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000493	72.35399628	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000494	72.38345337	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000495	72.40399933	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000499	73.27389526	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000500	73.35359192	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000501	73.38440704	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000505	74.11374664	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 0 bytes. Available: 0	
+00000506	74.35376740	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000507	74.38350677	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000508	74.98394012	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000512	75.35464478	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000513	75.38359070	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000514	75.83438110	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000516	76.35482788	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000519	76.38465118	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000520	76.70449829	System	[LAMPYRIS] ReadAudioData: Requested 1056 bytes. Read 0 bytes. Available: 0	
+00000521	77.35373688	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000523	77.38357544	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000524	77.56404877	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000530	78.35409546	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000531	78.38477325	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000532	78.43420410	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000534	79.29481506	System	[LAMPYRIS] ReadAudioData: Requested 96 bytes. Read 0 bytes. Available: 0	
+00000535	79.35385895	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000538	79.38460541	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000539	80.13481903	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 0 bytes. Available: 0	
+00000540	80.35478973	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000541	80.38418579	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000545	80.97345734	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000546	81.35421753	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000547	81.38354492	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000549	81.83468628	System	[LAMPYRIS] ReadAudioData: Requested 96 bytes. Read 0 bytes. Available: 0	
+00000552	82.35391998	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000553	82.38386536	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000554	82.68399048	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000556	83.35484314	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000557	83.38419342	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000560	83.54426575	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000561	84.35345459	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00000562	84.38415527	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000563	84.41406250	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000567	85.27413940	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000568	85.35491943	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000569	85.38436127	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000573	86.12438202	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 0 bytes. Available: 0	
+00000574	86.35430908	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00000575	86.38368988	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000576	86.52852631	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 4800. Ring buffer available: 4800	
+00000577	86.97434998	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 3936	
+00000581	87.35485840	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000582	87.38388824	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000583	87.83378601	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 2976	
+00000585	88.35415649	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000588	88.38445282	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000589	88.74421692	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 1056	
+00000590	89.35490417	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000592	89.38368988	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000595	89.54358673	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 864 bytes. Available: 2880	
+00000596	89.93097687	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 4800. Ring buffer available: 4800	
+00000597	90.35445404	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000598	90.38381958	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000599	90.41453552	System	[LAMPYRIS] ReadAudioData: Requested 96 bytes. Read 96 bytes. Available: 4896	
+00000603	91.29373169	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 3936	
+00000604	91.35458374	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000605	91.38438416	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000609	92.11348724	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 5856	
+00000610	92.35449219	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000611	92.38349915	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000615	92.95452881	System	[LAMPYRIS] ReadAudioData: Requested 96 bytes. Read 96 bytes. Available: 3936	
+00000616	93.35394287	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000617	93.38391876	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000618	93.44525909	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 4800. Ring buffer available: 4896	
+00000619	93.87464905	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 3936	
+00000623	94.08737946	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000624	94.08737946	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000625	94.08738708	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000626	94.08738708	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000627	94.08739471	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000628	94.08739471	System	[LAMPYRIS] PDF2 EXIT: mode=0xC18E2F7E -> 0x0 (returned default fmt)	
+00000629	94.08739471	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000630	94.35380554	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000631	94.38394165	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000632	94.74409485	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 2976	
+00000636	95.34903717	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000637	95.34904480	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000638	95.34905243	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000639	95.34905243	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000640	95.34905243	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000641	95.34905243	System	[LAMPYRIS] PDF2 EXIT: mode=0xC18E2F7E -> 0x0 (returned default fmt)	
+00000642	95.34905243	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000643	95.35393524	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000644	95.38375854	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000645	95.60486603	System	[LAMPYRIS] ReadAudioData: Requested 1056 bytes. Read 1056 bytes. Available: 4896	
+00000647	96.35458374	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000650	96.38468170	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000651	96.47440338	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 3936	
+00000652	96.88578033	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 4800. Ring buffer available: 4896	
+00000653	97.29397583	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 5856	
+00000654	97.35368347	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00000655	97.38417816	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000659	98.15420532	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 5856	
+00000660	98.35488129	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000661	98.38392639	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000665	98.96373749	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 864 bytes. Available: 1920	
+00000666	99.35398102	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00000667	99.38481903	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000671	99.81468201	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 3936	
+00000672	100.35406494	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000673	100.38452148	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000674	100.52925873	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 4800. Ring buffer available: 4800	
+00000675	100.67424011	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 2016	
+00000679	101.35445404	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000680	101.38417053	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000681	101.56432343	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 2976	
+00000685	102.35389709	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 9, ByteDisplacement 864, Rate 96000	
+00000686	102.38420105	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000687	102.44468689	System	[LAMPYRIS] ReadAudioData: Requested 1056 bytes. Read 1056 bytes. Available: 4896	
+00000691	103.31429291	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 6720	
+00000692	103.35485077	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000693	103.38394928	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000695	104.16944122	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 4800. Ring buffer available: 5664	
+00000696	104.18412018	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 4800	
+00000699	104.35475159	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000700	104.38465881	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000701	105.01357269	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 864 bytes. Available: 4704	
+00000705	105.35357666	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000706	105.35763550	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00000707	105.35763550	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00000708	105.35818481	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00000709	105.38388824	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000710	105.83486938	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 6720	
+00000711	106.20330811	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=20 -> 0x0	
+00000712	106.20332336	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=20 -> 0x0	
+00000713	106.20363617	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00000714	106.20363617	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000715	106.20368195	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00000716	106.20368195	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000717	106.20382690	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00000718	106.20382690	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000719	106.20420837	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00000720	106.20420837	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000722	106.35350037	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000723	106.38468170	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000726	106.68446350	System	[LAMPYRIS] ReadAudioData: Requested 1056 bytes. Read 1056 bytes. Available: 5760	
+00000727	107.35489655	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000728	107.38365173	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000729	107.54364014	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 864 bytes. Available: 1824	
+00000733	107.72612000	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 4800. Ring buffer available: 5664	
+00000734	108.35484314	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000735	108.35952759	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000736	108.35952759	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000737	108.35952759	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000738	108.35952759	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000739	108.35960388	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000740	108.35960388	System	[LAMPYRIS] PDF2 EXIT: mode=0xC18E2F7E -> 0x0 (returned default fmt)	
+00000741	108.35960388	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000742	108.36113739	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000743	108.36115265	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000744	108.36115265	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000745	108.36115265	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000746	108.36116791	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000747	108.36116791	System	[LAMPYRIS] PDF2 EXIT: mode=0x9E90EA20 -> 0x0 (returned default fmt)	
+00000748	108.36116791	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000749	108.38452148	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000750	108.40485382	System	[LAMPYRIS] ReadAudioData: Requested 1056 bytes. Read 1056 bytes. Available: 1920	
+00000752	109.28471375	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 3744	
+00000753	109.35469818	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000759	109.38475800	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000760	110.12346649	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 864 bytes. Available: 1824	
+00000761	110.35469818	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000762	110.38385010	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000766	110.96430206	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 3840	
+00000767	111.20511627	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 4800. Ring buffer available: 5760	
+00000768	111.35482788	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000769	111.38426971	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000771	111.79473877	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 6720	
+00000774	112.35439301	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000775	112.38366699	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000776	112.62438202	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 3840	
+00000778	113.35453796	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000779	113.38440704	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000782	113.49366760	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 2880	
+00000783	114.32443237	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 2016	
+00000784	114.35476685	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000785	114.38451385	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000789	114.84416962	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 4800. Ring buffer available: 5856	
+00000790	115.05197144	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00000791	115.05197906	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00000792	115.05233765	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=20 -> 0x0	
+00000793	115.05235291	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=20 -> 0x0	
+00000794	115.05260468	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00000795	115.05260468	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000796	115.06189728	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=36 -> 0xC0000034	
+00000797	115.06192780	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=36 -> 0xC0000034	
+00000798	115.13409424	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 6816	
+00000799	115.35472870	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000800	115.38398743	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000802	115.97380829	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 864 bytes. Available: 5760	
+00000805	116.35429382	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000806	116.38459015	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000807	116.65711212	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x200 InstSize=8 ValSize=4	
+00000808	116.65711212	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x200 -> 0x0	
+00000809	116.65711212	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=0	
+00000810	116.65711212	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x80000005	
+00000811	116.65712738	System	[LAMPYRIS] PDF2 ENTER: Pin=1 Verb=0x1 InstSize=56 ValSize=152	
+00000812	116.65712738	System	[LAMPYRIS] PDF2 EXIT: mode=0xC18E2F7E -> 0x0 (returned default fmt)	
+00000813	116.65712738	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=15 verb=0x1 -> 0x0	
+00000814	116.84362030	System	[LAMPYRIS] ReadAudioData: Requested 864 bytes. Read 864 bytes. Available: 2880	
+00000815	117.07453156	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00000816	117.07454681	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00000817	117.07489014	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=28 -> 0x0	
+00000819	117.35431671	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000820	117.38365173	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000823	117.69465637	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 6816	
+00000824	117.85642242	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=20 -> 0x0	
+00000825	117.85643768	System	[LAMPYRIS] MJ_CREATE FILTER nameLen=20 -> 0x0	
+00000826	117.85674286	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00000827	117.85675812	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000828	117.85680389	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00000829	117.85680389	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000830	117.85684204	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00000831	117.85684204	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000832	117.85695648	System	[LAMPYRIS] PDF1 SET GUID-only: Pin=1 ValSize=64 FmtSize=64 Flags=0x0 Major=0x73647561 Sub=0x00000001 Spec=0x05589F81	
+00000833	117.85695648	System	[LAMPYRIS] WaveFilterProp: set=0x8C134960 id=14 verb=0x2 -> 0x0	
+00000834	118.32720947	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 4800. Ring buffer available: 5856	
+00000835	118.35390472	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000836	118.38419342	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000838	118.57369232	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 5856	
+00000841	119.35348511	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 10, ByteDisplacement 960, Rate 96000	
+00000842	119.38428497	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000843	119.42391968	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 2016	
+00000847	120.27376556	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 6816	
+00000848	120.35484314	System	[LAMPYRIS] UpdatePosition: TimeElapsedInMS 11, ByteDisplacement 1056, Rate 96000	
+00000849	120.38415527	System	[LAMPYRIS] TimerNotifyRT: Buffer completed. Signaling event.	
+00000851	121.11379242	System	[LAMPYRIS] ReadAudioData: Requested 960 bytes. Read 960 bytes. Available: 2976	
+00000854	121.28471375	System	[LAMPYRIS] SetState: Pin=1 3 -> 2 (0=STOP 1=ACQUIRE 2=PAUSE 3=RUN)	
+00000855	121.56590271	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 4800. Ring buffer available: 9600	
+00000868	125.18476868	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 4800. Ring buffer available: 9600	
+00000878	128.82409668	System	[LAMPYRIS] IOCTL_LAMPYRIS_PUSH_AUDIO: Length 4800. Ring buffer available: 9600	

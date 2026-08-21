@@ -1,12 +1,12 @@
+mod app_state;
 mod audio;
 mod protocol;
-mod app_state;
 
-use clap::Parser;
-use tracing::{info, Level};
 use crate::app_state::AppState;
+use clap::Parser;
 use slint::ComponentHandle;
 use std::sync::Arc;
+use tracing::{Level, info};
 
 slint::include_modules!();
 
@@ -50,14 +50,13 @@ async fn main() -> anyhow::Result<()> {
         .with_ansi(false)
         .finish();
 
-    tracing::subscriber::set_global_default(subscriber)
-        .expect("setting default subscriber failed");
+    tracing::subscriber::set_global_default(subscriber).expect("setting default subscriber failed");
 
     info!("Starting Lampyris Client");
 
     let ui = MainWindow::new()?;
     let ui_weak = ui.as_weak();
-    
+
     // Set local IP and port in the UI
     let local_ip = get_local_ip().unwrap_or_else(|| "127.0.0.1 (Offline)".to_string());
     ui.set_local_ip(local_ip.into());
@@ -85,7 +84,7 @@ async fn main() -> anyhow::Result<()> {
     // Handle Graceful Shutdown
     let app_state_shutdown = app_state.clone();
     tokio::spawn(async move {
-        if let Ok(_) = tokio::signal::ctrl_c().await {
+        if tokio::signal::ctrl_c().await.is_ok() {
             info!("Received Ctrl+C, shutting down...");
             app_state_shutdown.disconnect();
             let _ = slint::invoke_from_event_loop(|| {
@@ -95,7 +94,7 @@ async fn main() -> anyhow::Result<()> {
     });
 
     ui.run()?;
-    
+
     // Final cleanup after UI exits
     app_state.disconnect();
     info!("Lampyris Client exited");

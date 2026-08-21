@@ -8,9 +8,15 @@
 .idea/shelf/
 out/
 
+.vs/
+.gemini/
+
 # Rust (pc-client)
 pc-client/target/
-v1.1.0/
+pc-client/lampyris-linux-x86_64-v1.1.0.tar.gz
+pc-client/lampyris-v1.1.0-linux-x86_64
+pc-client/lampyris.desktop
+pc-client/install.sh
 **/*.rs.bk
 
 # Android & Gradle (android-client)
@@ -23,3 +29,33 @@ local.properties
 *.dex
 *.class
 captures/
+.vibecode-backup*/
+
+# Signing secrets (never commit)
+*.jks
+*.keystore
+keystore.properties
+
+# Windows driver generated output (MSBuild + MIDL).
+# These were tracked until 2026-08-21, so every compile — even a failed one —
+# left ~130 files dirty and buried real changes in git status.
+# Includes x64/SignedPackage/: it is produced by sign_driver.ps1 and is
+# test-signed with a per-machine certificate, so a committed copy is useless
+# to anyone else and goes stale silently. A stale copy there cost a full
+# debugging cycle. Always rebuild and re-sign instead of trusting a checked-in
+# package.
+windows-driver/**/x64/
+windows-driver/lampyris-sysvad/APO/**/*_h.h
+windows-driver/lampyris-sysvad/APO/**/*_i.c
+windows-driver/lampyris-sysvad/APO/**/*_p.c
+
+# Machine-specific driver debug artifacts
+# reset_mic_endpoint.ps1 writes a registry backup keyed to the endpoint GUID,
+# which is regenerated on every clean install and is useless on another machine.
+windows-driver/mic_endpoint_backup_*.reg
+.claude/hooks/.logs/
+
+build.log
+windows-driver/tools/*.exe
+windows-driver/tools/*.obj
+windows-driver/mic_endpoint_backup_*.reg
