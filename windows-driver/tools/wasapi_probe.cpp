@@ -91,6 +91,66 @@ static WAVEFORMATEXTENSIBLE MakeDeviceFormat()
     return wfx;
 }
 
+// --- Cached audio-engine format properties on the endpoint property store. ---
+// IAudioClient::GetMixFormat on a CAPTURE endpoint reads PKEY_AudioEngine_DeviceFormat
+// out of the registry; it never asks the driver. A stale/absent value there makes the
+// engine abort the open before the miniport's NewStream is called (= silent mic).
+// PKEY_AudioEngine_OEMFormat only SEEDS DeviceFormat when the property store is first
+// created, so it cannot repair an already-existing endpoint. Print both, decoded.
+//
+// These two keys are not declared by mmdeviceapi.h / functiondiscoverykeys_devpkey.h in
+// every SDK, so declare them locally under distinct names (no clash if the SDK has them).
+DEFINE_PROPERTYKEY(PKEY_Lampyris_AudioEngine_DeviceFormat,
+    0xF19F064D, 0x082C, 0x4E27, 0xBC, 0x73, 0x68, 0x82, 0xA1, 0xBB, 0x8E, 0x4C, 0);
+DEFINE_PROPERTYKEY(PKEY_Lampyris_AudioEngine_OEMFormat,
+    0xE4870E26, 0x3CC5, 0x4CD2, 0xBA, 0x46, 0xCA, 0x0A, 0x9A, 0x70, 0xED, 0x04, 3);
+
+static void PrintEngineFormatProperty(IPropertyStore* pProps, REFPROPERTYKEY key, const char* label)
+{
+    PROPVARIANT v; PropVariantInit(&v);
+    HRESULT hrp = pProps->GetValue(key, &v);
+    if (FAILED(hrp) || v.vt == VT_EMPTY) {
+        printf("      %s: <not set>\n", label);
+        PropVariantClear(&v);
+        return;
+    }
+
+    const BYTE* blob = nullptr;
+    ULONG cb = 0;
+    if (v.vt == VT_BLOB) { blob = v.blob.pBlobData; cb = v.blob.cbSize; }
+    else {
+        printf("      %s: <unexpected PROPVARIANT vt=%u>\n", label, (unsigned)v.vt);
+        PropVariantClear(&v);
+        return;
+    }
+
+    printf("      %s raw (%lu bytes):", label, (unsigned long)cb);
+    for (ULONG i = 0; i < cb; ++i) printf(" %02X", blob[i]);
+    printf("\n");
+
+    if (cb < sizeof(WAVEFORMATEX)) {
+        printf("      %s: <too short to decode as WAVEFORMATEX>\n", label);
+        PropVariantClear(&v);
+        return;
+    }
+
+    const WAVEFORMATEX* wfx = reinterpret_cast<const WAVEFORMATEX*>(blob);
+    printf("      %s: channels=%u, rate=%lu, bits=%u, blockAlign=%u, avgBytesPerSec=%lu, formatTag=0x%04X",
+           label, wfx->nChannels, (unsigned long)wfx->nSamplesPerSec, wfx->wBitsPerSample,
+           wfx->nBlockAlign, (unsigned long)wfx->nAvgBytesPerSec, wfx->wFormatTag);
+    if (wfx->wFormatTag == WAVE_FORMAT_EXTENSIBLE && cb >= sizeof(WAVEFORMATEXTENSIBLE)) {
+        const WAVEFORMATEXTENSIBLE* wfex = reinterpret_cast<const WAVEFORMATEXTENSIBLE*>(blob);
+        printf(", mask=0x%lX (%s), validBits=%u",
+               (unsigned long)wfex->dwChannelMask,
+               wfex->dwChannelMask == KSAUDIO_SPEAKER_STEREO ? "STEREO" :
+               wfex->dwChannelMask == KSAUDIO_SPEAKER_MONO   ? "MONO"   : "other",
+               wfex->Samples.wValidBitsPerSample);
+    }
+    printf("\n");
+
+    PropVariantClear(&v);
+}
+
 static void PrintFormat(const WAVEFORMATEX* f)
 {
     if (!f) return;
@@ -129,9 +189,24 @@ int wmain()
             if (SUCCEEDED(pProps->GetValue(PKEY_Device_FriendlyName, &v)) && v.vt == VT_LPWSTR)
                 wcsncpy_s(name, v.pwszVal, _TRUNCATE);
             PropVariantClear(&v);
+
+            wprintf(L"[%u] %s\n", i, name);
+
+            LPWSTR pwszId = nullptr;
+            if (SUCCEEDED(pDev->GetId(&pwszId)) && pwszId) {
+                wprintf(L"      id: %s\n", pwszId);
+                CoTaskMemFree(pwszId);
+            }
+
+            // Read the cached engine formats from the SAME still-open property store,
+            // BEFORE pProps->Release() below (and long before GetMixFormat).
+            PrintEngineFormatProperty(pProps, PKEY_Lampyris_AudioEngine_DeviceFormat, "DeviceFormat");
+            PrintEngineFormatProperty(pProps, PKEY_Lampyris_AudioEngine_OEMFormat,    "OEMFormat");
+
             pProps->Release();
+        } else {
+            wprintf(L"[%u] %s  (property store unavailable)\n", i, name);
         }
-        wprintf(L"[%u] %s\n", i, name);
 
         IAudioClient* pClient = nullptr;
         STEP("Activate(IAudioClient)", pDev->Activate(__uuidof(IAudioClient), CLSCTX_ALL, nullptr, (void**)&pClient));
