@@ -79,14 +79,14 @@ static WAVEFORMATEXTENSIBLE MakeDeviceFormat()
 {
     WAVEFORMATEXTENSIBLE wfx = {};
     wfx.Format.wFormatTag = WAVE_FORMAT_EXTENSIBLE;
-    wfx.Format.nChannels = 2;
+    wfx.Format.nChannels = 1;
     wfx.Format.nSamplesPerSec = 48000;
-    wfx.Format.nAvgBytesPerSec = 192000;
-    wfx.Format.nBlockAlign = 4;
+    wfx.Format.nAvgBytesPerSec = 96000;
+    wfx.Format.nBlockAlign = 2;
     wfx.Format.wBitsPerSample = 16;
     wfx.Format.cbSize = sizeof(WAVEFORMATEXTENSIBLE) - sizeof(WAVEFORMATEX);
     wfx.Samples.wValidBitsPerSample = 16;
-    wfx.dwChannelMask = KSAUDIO_SPEAKER_STEREO;
+    wfx.dwChannelMask = KSAUDIO_SPEAKER_MONO;
     wfx.SubFormat = KSDATAFORMAT_SUBTYPE_PCM;
     return wfx;
 }
@@ -208,6 +208,7 @@ int wmain()
             wprintf(L"[%u] %s  (property store unavailable)\n", i, name);
         }
 
+        bool openOk = false;
         IAudioClient* pClient = nullptr;
         STEP("Activate(IAudioClient)", pDev->Activate(__uuidof(IAudioClient), CLSCTX_ALL, nullptr, (void**)&pClient));
         if (SUCCEEDED(hr)) {
@@ -216,14 +217,20 @@ int wmain()
             PrintFormat(pMix);
             if (pMix) {
                 STEP("Initialize(SHARED, mix fmt)", pClient->Initialize(AUDCLNT_SHAREMODE_SHARED, 0, 2000000, 0, pMix, nullptr));
-                if (SUCCEEDED(hr)) printf("      (open OK — endpoint healthy)\n");
+                if (SUCCEEDED(hr)) { openOk = true; printf("      (open OK — endpoint healthy)\n"); }
                 CoTaskMemFree(pMix);
             }
             pClient->Release();
         }
         printf("\n");
 
-        if (!pLampyris && wcsstr(name, L"Lampyris")) { pLampyris = pDev; pLampyris->AddRef(); }
+        // Prefer a Lampyris endpoint that FAILED to open - that is the one worth
+        // deep-probing. Picking the first match blindly aimed the whole pass 2 at the
+        // healthy endpoint and made its results meaningless.
+        if (wcsstr(name, L"Lampyris") && (!pLampyris || !openOk)) {
+            if (pLampyris) pLampyris->Release();
+            pLampyris = pDev; pLampyris->AddRef();
+        }
         pDev->Release();
     }
 
@@ -232,7 +239,7 @@ int wmain()
     // ---- Pass 2: Lampyris deep probe with an EXPLICIT format (never depend on GetMixFormat).
     WAVEFORMATEXTENSIBLE wfx = MakeDeviceFormat();
     WAVEFORMATEX* pFmt = &wfx.Format;
-    printf("=== Lampyris deep probe (explicit 2ch/48000/16 WAVEFORMATEXTENSIBLE) ===\n\n");
+    printf("=== Lampyris deep probe (explicit 1ch/48000/16 WAVEFORMATEXTENSIBLE) ===\n\n");
 
     // 2a. IsFormatSupported, shared + exclusive.
     {
