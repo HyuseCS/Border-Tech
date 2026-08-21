@@ -41,7 +41,11 @@ $ErrorActionPreference = 'Stop'
 $CaptureRoot      = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture'
 $CaptureRootReg   = 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture'
 
-$PkeyFriendlyName = '{a45c254e-df1c-4efd-8020-67d146a850e0},2'
+$PkeyFriendlyName = '{a45c254e-df1c-4efd-8020-67d146a850e0},2'   # PKEY_Device_DeviceDesc
+# PKEY_DeviceInterface_FriendlyName. The Lampyris endpoint's DeviceDesc is the generic
+# 'External Microphone Headphone'; the 'Lampyris Virtual Microphone' string lives here.
+# Matching on DeviceDesc alone finds nothing on a clean install.
+$PkeyIfaceName    = '{b3f8fa53-0004-438e-9003-51a46e139bfc},6'
 $PkeyDeviceFormat = '{F19F064D-082C-4E27-BC73-6882A1BB8E4C},0'
 $PkeyOemFormat    = '{E4870E26-3CC5-4CD2-BA46-CA0A9A70ED04},3'
 
@@ -51,12 +55,15 @@ $FallbackGuids = @(
     '{b1dd805e-09b6-4673-8efd-2f072d9bf0cf}'
 )
 
-# Serialized VT_BLOB PROPVARIANT: WAVEFORMATEXTENSIBLE 2ch / 48000 Hz / 16-bit PCM stereo.
+# Serialized VT_BLOB PROPVARIANT: WAVEFORMATEXTENSIBLE 1ch / 48000 Hz / 16-bit PCM mono.
+# NOTE (2026-08-21): the stale-DeviceFormat theory this script was written for was
+# REFUTED. Root cause was the MicIn pin advertising stereo only. Kept only to repair
+# an endpoint whose cached format predates the mono fix.
 # MUST stay byte-identical to the blob in
 # lampyris-sysvad\TabletAudioSample\ComponentizedAudioSample.inx.
 $StereoBlob = [byte[]](
-    0x41,0x00,0x00,0x00,0x28,0x00,0x00,0x00,0xFE,0xFF,0x02,0x00,0x80,0xBB,0x00,0x00,
-    0x00,0xEE,0x02,0x00,0x04,0x00,0x10,0x00,0x16,0x00,0x10,0x00,0x03,0x00,0x00,0x00,
+    0x41,0x00,0x00,0x00,0x28,0x00,0x00,0x00,0xFE,0xFF,0x01,0x00,0x80,0xBB,0x00,0x00,
+    0x00,0x77,0x01,0x00,0x02,0x00,0x10,0x00,0x16,0x00,0x10,0x00,0x04,0x00,0x00,0x00,
     0x01,0x00,0x00,0x00,0x00,0x00,0x10,0x00,0x80,0x00,0x00,0xAA,0x00,0x38,0x9B,0x71
 )
 
@@ -156,11 +163,14 @@ foreach ($key in (Get-ChildItem -LiteralPath $CaptureRoot -ErrorAction SilentlyC
     $guid      = $key.PSChildName
     $propsPath = Join-Path $key.PSPath 'Properties'
     $name      = Get-EndpointProperty -PropertiesPath $propsPath -PropertyName $PkeyFriendlyName
+    $iface     = Get-EndpointProperty -PropertiesPath $propsPath -PropertyName $PkeyIfaceName
 
     $isMatch = $false
     $reason  = ''
     if ($name -and ([string]$name) -like '*Lampyris*') {
         $isMatch = $true; $reason = "friendly name '$name'"
+    } elseif ($iface -and ([string]$iface) -like '*Lampyris*') {
+        $isMatch = $true; $reason = "interface name '$iface'"
     } elseif ($FallbackGuids -contains $guid.ToLowerInvariant()) {
         $isMatch = $true; $reason = 'documented fallback GUID'
     }
@@ -168,7 +178,7 @@ foreach ($key in (Get-ChildItem -LiteralPath $CaptureRoot -ErrorAction SilentlyC
     if ($isMatch) {
         $matched += [pscustomobject]@{
             Guid          = $guid
-            Name          = if ($name) { [string]$name } else { '(no friendly name)' }
+            Name          = if ($name -and $iface) { "$name ($iface)" } elseif ($name) { [string]$name } elseif ($iface) { [string]$iface } else { '(no friendly name)' }
             Reason        = $reason
             PropertiesPS  = $propsPath
             PropertiesReg = "$CaptureRootReg\$guid\Properties"
@@ -234,7 +244,7 @@ foreach ($m in $matched) {
     }
 
     # (c) Write both properties with the correct stereo blob. Idempotent.
-    Write-Host '  Writing corrected 2ch/48000/16-bit stereo blob to DeviceFormat and OEMFormat...'
+    Write-Host '  Writing corrected 1ch/48000/16-bit mono blob to DeviceFormat and OEMFormat...'
     if (-not (Test-Path -LiteralPath $m.PropertiesPS)) {
         New-Item -Path $m.PropertiesPS -Force | Out-Null
     }
@@ -273,5 +283,5 @@ if ($audiosrv.Status -ne 'Running') {
 Write-Host ("Audiosrv status: {0}" -f $audiosrv.Status)
 Write-Host ''
 Write-Host 'Done. Next: run windows-driver\tools\wasapi_probe.exe and check that' -ForegroundColor Green
-Write-Host 'GetMixFormat returns S_OK with 2 ch, 48000 Hz, 16 bit for the Lampyris endpoint.' -ForegroundColor Green
+Write-Host 'GetMixFormat returns S_OK with 1 ch, 48000 Hz, 16 bit for the Lampyris endpoint.' -ForegroundColor Green
 exit 0
