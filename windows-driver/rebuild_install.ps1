@@ -31,6 +31,7 @@
 #>
 param(
     [switch]$SkipBuild,
+    [switch]$Fast,
     [switch]$NoReboot
 )
 
@@ -67,26 +68,27 @@ if (-not $SkipBuild) {
     }
     Note "msbuild: $msbuildPath"
 
-    $before = if (Test-Path $SysPath) { (Get-Item $SysPath).LastWriteTimeUtc } else { [datetime]::MinValue }
+    # Delete the artifact first. MSBuild's up-to-date check is not trustworthy here:
+    # the source tree lives on a share whose clock differs from the VM's, and it has
+    # already skipped a rebuild after real source edits, silently installing a stale
+    # binary. If lampyris-mic.sys is absent afterwards, the build genuinely failed.
+    if (Test-Path $SysPath) { Remove-Item $SysPath -Force }
+
+    $targets = if ($Fast) { '/t:Build' } else { '/t:Rebuild' }
+    Note "targets: $targets  (pass -Fast for an incremental build)"
 
     $log = Join-Path $env:TEMP 'lampyris-build.log'
-    & $msbuildPath $Solution /p:Configuration=Release /p:Platform=x64 /v:n `
+    & $msbuildPath $Solution $targets /p:Configuration=Release /p:Platform=x64 /v:n `
         | Tee-Object -FilePath $log | Out-Null
 
-    # Judge by artifact, not exit code - see .NOTES above.
     if (-not (Test-Path $SysPath)) {
-        Write-Host "  lampyris-mic.sys was not produced. Real errors:" -ForegroundColor Red
+        Write-Host '  lampyris-mic.sys was not produced. Errors naming our own files:' -ForegroundColor Red
         Select-String -Path $log -Pattern 'error' |
             Where-Object { $_.Line -match 'TabletAudioSample|EndpointsCommon|minipairs|micinwavtable|micarray|lampyris' } |
             ForEach-Object { Write-Host "    $($_.Line.Trim())" -ForegroundColor Red }
         throw "Driver build failed. Full log: $log"
     }
-    $after = (Get-Item $SysPath).LastWriteTimeUtc
-    if ($after -le $before) {
-        Note 'lampyris-mic.sys unchanged - nothing to rebuild (this is fine if you changed nothing).'
-    }
-    Ok "lampyris-mic.sys built $((Get-Item $SysPath).LastWriteTime)"
-    Note 'The 14 APO/KeywordDetector errors are expected and were ignored.'
+    Ok "lampyris-mic.sys rebuilt $((Get-Item $SysPath).LastWriteTime)"
 
     # -----------------------------------------------------------------------
     # 2. Sign
