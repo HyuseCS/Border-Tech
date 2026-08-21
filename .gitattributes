@@ -1,0 +1,2 @@
+# gradlew is a POSIX shell script and must keep LF endings for the Linux/macOS build.
+android-client/gradlew text eol=lf
