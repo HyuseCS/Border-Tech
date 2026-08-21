@@ -5,7 +5,7 @@ Requires=pipewire.service
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/lampyris
+ExecStart=%h/.local/bin/lampyris
 Restart=always
 RestartSec=5
 # Allow real-time scheduling
