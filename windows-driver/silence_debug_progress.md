@@ -1,5 +1,59 @@
 # Lampyris Mic — Silence Debug Progress (handoff)
 
+> ## ROOT CAUSE FOUND — 2026-08-21. Everything below this block is superseded.
+>
+> **The MicIn capture pin advertised stereo only. The Windows shared-mode capture
+> pipe will not open a stereo-only capture endpoint.**
+>
+> Proven by a control experiment on a fresh Win10 22H2 VM: `&MicArray1Miniports`
+> was temporarily added to `g_CaptureEndpoints`. On the *same driver binary*:
+>
+> | Endpoint | Formats | Result |
+> |---|---|---|
+> | MicIn | stereo only (2ch/48000/16) | `GetMixFormat -> AUDCLNT_E_UNSUPPORTED_FORMAT`, **zero `NewStream`** |
+> | MicArray1 | mono default (1ch/48000/16) | `GetMixFormat -> S_OK`, `NewStream EXIT status=0x0`, SetState STOP→ACQUIRE→PAUSE |
+>
+> Commit `634691d` removed every mono format from MicIn. The silence dates from there.
+>
+> Mono is also required for a second, independent reason: `ReadAudioData` copies
+> ring-buffer bytes straight into the DMA buffer with **no channel conversion**, and
+> the wire protocol is mono 48kHz s16le. A stereo pin reads mono samples as L/R pairs.
+>
+> ### Refuted — do NOT re-investigate
+>
+> * **Stale cached `PKEY_AudioEngine_DeviceFormat`.** Measured on a clean install: the
+>   cached value already read 2ch/48000/16, correctly serialized, and `GetMixFormat`
+>   still failed. The byte-header anomaly was a red herring — the healthy control mic
+>   has the same shape.
+> * **The INF `PKEY_AudioEngine_DeviceFormat` write.** Built, signed, installed, tested.
+>   The log was byte-for-byte the same shape: 26 `IsFormatSupported` calls, all
+>   `STATUS_SUCCESS`, zero `NewStream`. No effect.
+> * **The pin format table's *values*.** Driver, registry and control panel all agreed
+>   on 2ch/48000/16. The problem was the *absence of a mono entry*, not a wrong value.
+> * **`Microsoft-Windows-Audio/Operational`.** Event ID 65 only. No diagnostic value.
+>
+> ### Fix implemented 2026-08-21 — NOT YET COMPILED OR RUN
+>
+> * `micinwavtable.h` — mono 1ch/48000/16 inserted as element **0** (the default);
+>   stereo kept as element 1.
+> * `ComponentizedAudioSample.inx` — both `DeviceFormat` and `OEMFormat` blobs → mono.
+> * `reset_mic_endpoint.ps1` — blob updated to match; endpoint matcher fixed to read
+>   `PKEY_DeviceInterface_FriendlyName`, since `DeviceDesc` is the generic
+>   "External Microphone Headphone" and never contains "Lampyris".
+> * `minipairs.h` — `&MicArray1Miniports` left in as a positive control.
+>   **Remove before release.**
+>
+> ### Other traps found
+>
+> * Update the driver on **Lampyris Virtual Microphone** under *Sound, video and game
+>   controllers*. The "External Microphone Headphone (Lampyris Virtual Microphone)"
+>   entry under *Audio inputs and outputs* is the endpoint — no INF matches it.
+> * `TestApp.exe` is dead code. It expects `IOCTL_LAMPYRIS_AUTHENTICATE` and
+>   `HKLM\SOFTWARE\Lampyris`; neither exists any more.
+> * The four APO projects and `KeywordDetectorContosoAdapter` cannot build — their
+>   headers were never vendored. Build `TabletAudioSample.vcxproj` alone.
+
+
 **Next session starting fresh?** Read
 `process/features/windows-driver/active/mic-deviceformat-fix_21-08-26/mic-deviceformat-fix_HANDOFF_21-08-26.md`
 first, then follow `windows-driver/WINDOWS_VM_GUIDE.md` for VM steps.
