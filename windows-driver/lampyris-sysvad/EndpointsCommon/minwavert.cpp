@@ -1676,18 +1676,93 @@ CMiniportWaveRT::PropertyHandlerProposedFormat
         PropertyRequest->ValueSize = cbMinSize;
         return STATUS_BUFFER_OVERFLOW;
     }
+
+    // LAMPYRIS FIX: the audio engine canonicalizes simple formats (<= 2ch, <= 16-bit PCM)
+    // to a plain KSDATAFORMAT + WAVEFORMATEX (82 bytes) when proposing via
+    // KSPROPERTY_PIN_PROPOSEDATAFORMAT (SET). Stock sysvad rejected anything smaller
+    // than KSDATAFORMAT_WAVEFORMATEXTENSIBLE (104 bytes) with STATUS_BUFFER_TOO_SMALL,
+    // which the engine treats as a fatal endpoint failure — GetMixFormat then returns
+    // AUDCLNT_E_UNSUPPORTED_FORMAT and no capture pin is ever created. Accept any
+    // buffer large enough for the declared format; IsFormatSupported already parses
+    // plain WAVEFORMATEX proposals correctly and returns the real verdict.
+    if (PropertyRequest->Verb & KSPROPERTY_TYPE_SET)
+    {
+        // LAMPYRIS FIX: the engine also proposes GUID-only formats — a bare 64-byte
+        // KSDATAFORMAT with no WAVEFORMATEX payload (e.g. the analog bridge format or
+        // wildcards). Answer those semantically instead of with a size error: match the
+        // GUID triple against our supported format, STATUS_NO_MATCH otherwise.
+        if (PropertyRequest->ValueSize >= sizeof(KSDATAFORMAT) &&
+            PropertyRequest->ValueSize < sizeof(KSDATAFORMAT) + sizeof(WAVEFORMATEX))
+        {
+            PKSDATAFORMAT pHdr = (PKSDATAFORMAT)PropertyRequest->Value;
+
+            // LAMPYRIS-DEBUG: identify the GUID-only proposal exactly.
+            DbgPrint("[LAMPYRIS] PDF1 SET GUID-only: Pin=%u ValSize=%u FmtSize=%lu Flags=0x%lx Major=0x%08X Sub=0x%08X Spec=0x%08X\n",
+                     kspPin->PinId, PropertyRequest->ValueSize, pHdr->FormatSize, pHdr->Flags,
+                     ((const ULONG*)&pHdr->MajorFormat)[0],
+                     ((const ULONG*)&pHdr->SubFormat)[0],
+                     ((const ULONG*)&pHdr->Specifier)[0]);
+
+            if (IsEqualGUIDAligned(pHdr->MajorFormat, KSDATAFORMAT_TYPE_AUDIO) &&
+                (IsEqualGUIDAligned(pHdr->SubFormat, KSDATAFORMAT_SUBTYPE_PCM) ||
+                 IsEqualGUIDAligned(pHdr->SubFormat, KSDATAFORMAT_SUBTYPE_WAVEFORMATEX)) &&
+                IsEqualGUIDAligned(pHdr->Specifier, KSDATAFORMAT_SPECIFIER_WAVEFORMATEX))
+            {
+                return STATUS_SUCCESS;   // our PCM/WAVEFORMATEX class — acceptable in principle
+            }
+            return STATUS_NO_MATCH;      // anything else (analog, wildcard, ...) — not our format
+        }
+
+        if (PropertyRequest->ValueSize < sizeof(KSDATAFORMAT) + sizeof(WAVEFORMATEX))
+        {
+            // LAMPYRIS-DEBUG
+            DbgPrint("[LAMPYRIS] PDF1 SET: ValSize=%u too small for any format -> BUFFER_TOO_SMALL\n",
+                     PropertyRequest->ValueSize);
+            return STATUS_BUFFER_TOO_SMALL;
+        }
+
+        pKsFormat = (PKSDATAFORMAT)PropertyRequest->Value;
+        PWAVEFORMATEX pWfxProposed = (PWAVEFORMATEX)(pKsFormat + 1);
+
+        if (PropertyRequest->ValueSize < sizeof(KSDATAFORMAT) + sizeof(WAVEFORMATEX) + pWfxProposed->cbSize)
+        {
+            // LAMPYRIS-DEBUG
+            DbgPrint("[LAMPYRIS] PDF1 SET: ValSize=%u < declared size (cbSize=%u) -> BUFFER_TOO_SMALL\n",
+                     PropertyRequest->ValueSize, pWfxProposed->cbSize);
+            return STATUS_BUFFER_TOO_SMALL;
+        }
+
+        // LAMPYRIS-DEBUG
+        DbgPrint("[LAMPYRIS] PDF1 SET: Pin=%u ValSize=%u tag=0x%X ch=%u rate=%lu bits=%u cb=%u\n",
+                 kspPin->PinId, PropertyRequest->ValueSize, pWfxProposed->wFormatTag, pWfxProposed->nChannels,
+                 pWfxProposed->nSamplesPerSec, pWfxProposed->wBitsPerSample, pWfxProposed->cbSize);
+
+        ntStatus = IsFormatSupported(kspPin->PinId,
+            IsSystemCapturePin(kspPin->PinId) || IsCellularBiDiCapturePin(kspPin->PinId) ||
+            IsLoopbackPin(kspPin->PinId),
+            pKsFormat);
+        if (!NT_SUCCESS(ntStatus))
+        {
+            return ntStatus;
+        }
+
+        //
+        // Make sure there are enough resources to handle a new pin creation with
+        // this format.
+        //
+        if (IsOffloadPin(kspPin->PinId))
+        {
+            ntStatus = ValidateStreamCreate(kspPin->PinId, FALSE);
+        }
+
+        return ntStatus;
+    }
+
+    // GET replies write a full WAVEFORMATEXTENSIBLE, so the buffer must fit one.
     if (PropertyRequest->ValueSize < cbMinSize)
     {
         return STATUS_BUFFER_TOO_SMALL;
     }
-
-#if 0
-    // Only SET is supported for this property
-    if ((PropertyRequest->Verb & KSPROPERTY_TYPE_SET) == 0)
-    {
-        return STATUS_INVALID_DEVICE_REQUEST;
-    }
-#endif
 
     if (PropertyRequest->Verb & KSPROPERTY_TYPE_GET)
     {
@@ -1775,27 +1850,7 @@ CMiniportWaveRT::PropertyHandlerProposedFormat
             ntStatus = STATUS_SUCCESS;
         }
     }
-    else if (PropertyRequest->Verb & KSPROPERTY_TYPE_SET)
-    {
-        pKsFormat = (PKSDATAFORMAT)PropertyRequest->Value;
-        ntStatus = IsFormatSupported(kspPin->PinId,
-            IsSystemCapturePin(kspPin->PinId) || IsCellularBiDiCapturePin(kspPin->PinId) ||
-            IsLoopbackPin(kspPin->PinId),
-            pKsFormat);
-        if (!NT_SUCCESS(ntStatus))
-        {
-            return ntStatus;
-        }
-
-        //
-        // Make sure there are enough resources to handle a new pin creation with
-        // this format.
-        //
-        if (IsOffloadPin(kspPin->PinId))
-        {
-            ntStatus = ValidateStreamCreate(kspPin->PinId, FALSE);
-        }
-    }
+    // (SET is fully handled above — LAMPYRIS FIX.)
 
     return ntStatus;
 } // PropertyHandlerProposedFormat
@@ -2154,6 +2209,10 @@ CMiniportWaveRT::PropertyHandlerProposedFormat2
         return STATUS_INVALID_PARAMETER;
     }
 
+    // LAMPYRIS-DEBUG
+    DbgPrint("[LAMPYRIS] PDF2 ENTER: Pin=%u Verb=0x%X InstSize=%u ValSize=%u\n",
+             kspPin->PinId, PropertyRequest->Verb, PropertyRequest->InstanceSize, PropertyRequest->ValueSize);
+
     //
     // This property is supported only on some streaming pins.
     //
@@ -2163,6 +2222,7 @@ CMiniportWaveRT::PropertyHandlerProposedFormat2
 
     if (modeInfo == NULL)
     {
+        DbgPrint("[LAMPYRIS] PDF2 EXIT: Pin=%u no modes -> NOT_SUPPORTED\n", kspPin->PinId); // LAMPYRIS-DEBUG
         return STATUS_NOT_SUPPORTED;
     }
 
@@ -2201,6 +2261,7 @@ CMiniportWaveRT::PropertyHandlerProposedFormat2
     ntStatus = GetAttributesFromAttributeList(pKsItemsHeader, cbItemsList, &signalProcessingMode);
     if (!NT_SUCCESS(ntStatus))
     {
+        DbgPrint("[LAMPYRIS] PDF2 EXIT: GetAttributesFromAttributeList -> 0x%X\n", ntStatus); // LAMPYRIS-DEBUG
         return ntStatus;
     }
 
@@ -2221,6 +2282,10 @@ CMiniportWaveRT::PropertyHandlerProposedFormat2
     // proprosed format for this specific mode.
     if (!bFound || modeInfo->DefaultFormat == NULL)
     {
+        // LAMPYRIS-DEBUG: mode GUID Data1 identifies which mode the engine asked for
+        // (DEFAULT=0xC18E2F7E, RAW=0x9E90EA20, SPEECH=0xFC1CFC9B, COMMUNICATIONS=0x98951333, FFS=0x1064E603)
+        DbgPrint("[LAMPYRIS] PDF2 EXIT: mode=0x%08X found=%d -> NOT_SUPPORTED\n",
+                 ((const ULONG*)&signalProcessingMode)[0], bFound); // LAMPYRIS-DEBUG
         return STATUS_NOT_SUPPORTED;
     }
 
@@ -2274,8 +2339,12 @@ CMiniportWaveRT::PropertyHandlerProposedFormat2
     ASSERT(cbItemsList > 0);
     ((KSDATAFORMAT*)PropertyRequest->Value)->Flags = KSDATAFORMAT_ATTRIBUTES;
     RtlCopyMemory(pKsItemsHeaderOut, pKsItemsHeader, cbItemsList);
-    
+
     PropertyRequest->ValueSize = cbMinSize;
+
+    // LAMPYRIS-DEBUG
+    DbgPrint("[LAMPYRIS] PDF2 EXIT: mode=0x%08X -> 0x0 (returned default fmt)\n",
+             ((const ULONG*)&signalProcessingMode)[0]);
 
     return STATUS_SUCCESS;
 } // PropertyHandlerProposedFormat
@@ -3297,6 +3366,13 @@ Return Value:
                 
         }
     }
+
+    // LAMPYRIS-DEBUG: log every wave-filter property verdict (property-set GUID Data1 + id + verb).
+    DbgPrint("[LAMPYRIS] WaveFilterProp: set=0x%08X id=%u verb=0x%X -> 0x%X\n",
+             ((const ULONG*)PropertyRequest->PropertyItem->Set)[0],
+             PropertyRequest->PropertyItem->Id,
+             PropertyRequest->Verb,
+             ntStatus);
 
     pWaveHelper->Release();
 

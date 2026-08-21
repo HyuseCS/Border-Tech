@@ -1,882 +1,1117 @@
 {
-  "/home/hyuse/Desktop/project-m/pc-client/build.rs": {
-    "mtime": 1781272454.0405502,
-    "hash": "31a64cc4ec13bf83058013197ec51230"
-  },
-  "/home/hyuse/Desktop/project-m/pc-client/test_pw.rs": {
-    "mtime": 1781272454.0415502,
-    "hash": "c4d7d51f603dc7a49945b4c7be689441"
-  },
-  "/home/hyuse/Desktop/project-m/pc-client/src/app_state.rs": {
-    "mtime": 1781272977.7786205,
-    "hash": "082783c8a1b6831cf7220c2036db01d6"
-  },
-  "/home/hyuse/Desktop/project-m/pc-client/src/bin.rs": {
-    "mtime": 1781272454.0415502,
-    "hash": "cbb1877046670a67c2bacbe3e900ea24"
-  },
-  "/home/hyuse/Desktop/project-m/pc-client/src/bin_srp.rs": {
-    "mtime": 1781272454.0415502,
-    "hash": "93999e82d314320cef30bc743d82e311"
-  },
-  "/home/hyuse/Desktop/project-m/pc-client/src/main.rs": {
-    "mtime": 1781272977.7836206,
-    "hash": "eafc3714846623d781f5c4a5d1d45b91"
-  },
-  "/home/hyuse/Desktop/project-m/pc-client/src/protocol.rs": {
-    "mtime": 1781272977.7856207,
-    "hash": "43e70368b5eddbc4410ec45c4c234d64"
-  },
-  "/home/hyuse/Desktop/project-m/pc-client/src/srp_test.rs": {
-    "mtime": 1781272454.0415502,
-    "hash": "54e878f5bfd933c528c907b609b0080f"
-  },
-  "/home/hyuse/Desktop/project-m/pc-client/src/audio/linux.rs": {
-    "mtime": 1781272977.7816205,
-    "hash": "3ec44b64a67b9c9c8446c8f48d858770"
-  },
-  "/home/hyuse/Desktop/project-m/pc-client/src/audio/mod.rs": {
-    "mtime": 1781272454.0415502,
-    "hash": "df53b0fe12e6ad0fd1df5eea067014e0"
-  },
-  "/home/hyuse/Desktop/project-m/pc-client/src/audio/windows.rs": {
-    "mtime": 1781960214.8519044,
-    "hash": "c80abdd7c5d575e9957fd4ea54727a01"
-  },
-  "/home/hyuse/Desktop/project-m/android-client/build.gradle.kts": {
-    "mtime": 1781272454.03955,
-    "hash": "9a098ab31960e77e877469dc753daa02"
-  },
-  "/home/hyuse/Desktop/project-m/android-client/gradlew": {
-    "mtime": 1781272454.03955,
-    "hash": "66475fbab3d842ebef119def02dca5fd"
-  },
-  "/home/hyuse/Desktop/project-m/android-client/settings.gradle.kts": {
-    "mtime": 1781272454.03955,
-    "hash": "72245ba44c9e6b488acd2986e6a9c378"
-  },
-  "/home/hyuse/Desktop/project-m/android-client/app/build.gradle.kts": {
-    "mtime": 1781272454.03655,
-    "hash": "6e34585808362e9be1c92a0b5f629995"
-  },
-  "/home/hyuse/Desktop/project-m/android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt": {
-    "mtime": 1781272454.03955,
-    "hash": "1ff6b0afa357bf5a39bfd6cf1a5a4d05"
-  },
-  "/home/hyuse/Desktop/project-m/android-client/app/src/main/java/com/projectm/mic/MainActivity.kt": {
-    "mtime": 1781272454.03955,
-    "hash": "33f9a0181b9ef86bed5f485005399324"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/TestApp.cpp": {
-    "mtime": 1781090550.8365948,
-    "hash": "16381ac595356e5f435b761942a0ec22"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/driver.cpp": {
-    "mtime": 1781536486.3125875,
-    "hash": "d43ee838e605340fae705392a7f0811e"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/ioctl.h": {
-    "mtime": 1781536029.6326363,
-    "hash": "4dd25ba3b0a7a13fcbce518fc526b233"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/export_cert.ps1": {
-    "mtime": 1781960214.8519044,
-    "hash": "cccb54173fa592e098badf228e714358"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/find_cert.ps1": {
-    "mtime": 1781960214.8519044,
-    "hash": "cbbd2f387bd941a62a1c49cb5b2ba5a4"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/sign_driver.ps1": {
-    "mtime": 1781960214.8626144,
-    "hash": "a751427864dba79d682b0ceb080e4025"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/A2dpHpDevice.cpp": {
-    "mtime": 1781054992.7079425,
-    "hash": "cb63d4e78cc57c0d0ca7aab06deb5adf"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/A2dpHpDevice.h": {
-    "mtime": 1781054992.7080743,
-    "hash": "52bc3b175778032e6b401a4e4300f1e1"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/basetopo.cpp": {
-    "mtime": 1781054992.7103348,
-    "hash": "c23d50403a9168c0586015897f4633e8"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/basetopo.h": {
-    "mtime": 1781054992.7103708,
-    "hash": "e19125e8dbbeabed98893c19bddafd3c"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/BthhfpDevice.cpp": {
-    "mtime": 1781054992.7104287,
-    "hash": "d394895d1f04ef26539a3f9d0bc1c801"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/BthhfpDevice.h": {
-    "mtime": 1781054992.7105248,
-    "hash": "b83a933a991cb0d7ab85af13dacd1de9"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/common.cpp": {
-    "mtime": 1781054992.710601,
-    "hash": "8dcfa9b4b91a2fb1be63294110d2fa02"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/common.h": {
-    "mtime": 1781054992.7107162,
-    "hash": "4f9338aa3229a63634ad8568fedee9d0"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/ContosoKeywordDetector.h": {
-    "mtime": 1781054992.7107565,
-    "hash": "d0c5011d68908093576f72ddc692978b"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/hw.cpp": {
-    "mtime": 1781054992.7142785,
-    "hash": "5247447e76488b48390299e0cf7ba29a"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/hw.h": {
-    "mtime": 1781054992.714313,
-    "hash": "b8aa980ea482c30be1c0927798c14677"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/ihvprivatepropertyset.h": {
-    "mtime": 1781054992.7143352,
-    "hash": "a58343e17e889a0a374f7fab96581101"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/kshelper.cpp": {
-    "mtime": 1781054992.714681,
-    "hash": "15b861feb00101cd221360f163d43ab4"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/kshelper.h": {
-    "mtime": 1781054992.7147508,
-    "hash": "35dab701230660a78559da5e6d19bb78"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/savedata.cpp": {
-    "mtime": 1781054992.714977,
-    "hash": "6ec1f34c0bdce50d3136b1a87b79467a"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/savedata.h": {
-    "mtime": 1781054992.7150474,
-    "hash": "2d2553611d258f6137b9805948c451d6"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/SysVadShared.h": {
-    "mtime": 1781054992.7152739,
-    "hash": "5cd9792b124e8f8b036ff1f5e8f13b47"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/ToneGenerator.cpp": {
-    "mtime": 1781054992.7166195,
-    "hash": "30daeabc276c0aa382fa9e37c47d413d"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/ToneGenerator.h": {
-    "mtime": 1781054992.716653,
-    "hash": "f443b31c2414b8c4771bf7d644041c26"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/UnittestData.h": {
-    "mtime": 1781054992.7166753,
-    "hash": "bae5fd40d21c41fc1fb37d8e0771ed5c"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/UsbHsDevice.cpp": {
-    "mtime": 1781054992.7167387,
-    "hash": "e4051f883162d6ac7bef9edad6225c5a"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/UsbHsDevice.h": {
-    "mtime": 1781054992.7168496,
-    "hash": "b1fcb9677a251d4230af6628783c3d34"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/adapter.cpp": {
-    "mtime": 1781090550.8375947,
-    "hash": "70e1b8a61d7c02e1f56661b0ab597381"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/lookaside_polyfill.h": {
-    "mtime": 1781090550.8375947,
-    "hash": "6520b1c3fcf98c33c74c428484a7f1c8"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/sysvad.h": {
-    "mtime": 1781090550.8375947,
-    "hash": "9df7d4e2c007814cf9529cdab4e4e372"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/lampyris_core.cpp": {
-    "mtime": 1781960214.8626144,
-    "hash": "141ca3787b59a098425eb71ebc4567fa"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/AecApo/AecApo.h": {
-    "mtime": 1781054992.7082777,
-    "hash": "3c8f4e433dfd9b91d3fc8d6eb5fb257a"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/AecApo/AecApoDll.cpp": {
-    "mtime": 1781054992.708412,
-    "hash": "f0afd0cdb5232f0d36264af2b19113f0"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/AecApo/AecApoMfx.cpp": {
-    "mtime": 1781054992.7085323,
-    "hash": "d43efcc4eea8cd20de6e99a833a46503"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/AecApo/Resource.h": {
-    "mtime": 1781054992.7085867,
-    "hash": "1f6d0cafcc9e9619dcc44d19dde4bd2a"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/AecApo/AecApoDll_h.h": {
-    "mtime": 1781272454.04255,
-    "hash": "196d20f5a364ff5e2f00247bf6ae0867"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/AecApo/AecApoDll_i.c": {
-    "mtime": 1781272454.04255,
-    "hash": "7d2a56475df0471e8442f2c87ae46abb"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/DelayAPO/Delay.cpp": {
-    "mtime": 1781054992.708628,
-    "hash": "a9c70618943f93e3d9ce6bace46821e0"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/DelayAPO/DelayAPO.h": {
-    "mtime": 1781054992.7086823,
-    "hash": "e40799ab0a460609e020e20fd97f4200"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/DelayAPO/DelayAPODll.cpp": {
-    "mtime": 1781054992.7087996,
-    "hash": "752bf91022cf2dbc5f61f85b9a11a768"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/DelayAPO/DelayAPOMFX.cpp": {
-    "mtime": 1781054992.7089612,
-    "hash": "97003fed116c180cb7d34fdb2c96b03c"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/DelayAPO/DelayAPOSFX.cpp": {
-    "mtime": 1781054992.7090616,
-    "hash": "696849f12cb5a6d4667e9c25fa479a07"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/DelayAPO/Resource.h": {
-    "mtime": 1781054992.7091255,
-    "hash": "537152321776af22a9d6fed23f89e8d9"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/DelayAPO/DelayAPODll_h.h": {
-    "mtime": 1781272454.04255,
-    "hash": "36c49e197faa71048d78b709775dcf7a"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/DelayAPO/DelayAPODll_i.c": {
-    "mtime": 1781272454.04255,
-    "hash": "7ffab32477dc7eced8a24ef160e2753b"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/DelayAPO/DelayAPOInterface_h.h": {
-    "mtime": 1781272454.04255,
-    "hash": "9a2601bbdadefcb086166b0ee6900613"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/DelayAPO/DelayAPOInterface_i.c": {
-    "mtime": 1781272454.04255,
-    "hash": "9c338d994dc256a8d1ba45425e73c423"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/DelayAPO/DelayAPOInterface_p.c": {
-    "mtime": 1781272454.04255,
-    "hash": "71d95e8f15a46707aa1c40d787c02e8c"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/DelayAPO/dlldata.c": {
-    "mtime": 1781272454.04255,
-    "hash": "447d7668ffe313250953c1888d4d4af4"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/Inc/CommonMacros.h": {
-    "mtime": 1781054992.70918,
-    "hash": "0b375d4c5bb9d9d623edf28eaafae289"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/Inc/CustomPropKeys.h": {
-    "mtime": 1781054992.7092469,
-    "hash": "bdeebb159505a5d564435441f8588ec4"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/Inc/tlist.h": {
-    "mtime": 1781054992.7092948,
-    "hash": "f9543bf687d4b7edcb03dd0fc9421179"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/KWSApo/KWSApo.cpp": {
-    "mtime": 1781054992.7093384,
-    "hash": "3037f3b16e36f5af513194e27d3b6155"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/KWSApo/KWSApo.h": {
-    "mtime": 1781054992.7093902,
-    "hash": "90c0778f70c99211d35ad61985d6b912"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/KWSApo/KWSApoDll.cpp": {
-    "mtime": 1781054992.709516,
-    "hash": "32b0b7b719868403befeb4f0a6f64cfe"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/KWSApo/KWSApoEfx.cpp": {
-    "mtime": 1781054992.7096665,
-    "hash": "d47505a574280731c36a2d968a4bb2f8"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/KWSApo/Resource.h": {
-    "mtime": 1781054992.7097468,
-    "hash": "bb2522ed8830d047cbc404dca3f7c278"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/KWSApo/KWSApoDll_h.h": {
-    "mtime": 1781272454.0435503,
-    "hash": "1c0d0a8e77329376c8eae2c6bd764fd5"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/KWSApo/KWSApoDll_i.c": {
-    "mtime": 1781272454.0435503,
-    "hash": "1f3c053bec35e04ee029a34c7b4026ff"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/KWSApo/KWSApoInterface_h.h": {
-    "mtime": 1781272454.0435503,
-    "hash": "050d737483e1594583a6fd11785c7c01"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/KWSApo/KWSApoInterface_i.c": {
-    "mtime": 1781272454.0435503,
-    "hash": "c1e489c61c5ee390fd11e57dd7c66503"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/KWSApo/KWSApoInterface_p.c": {
-    "mtime": 1781272454.0435503,
-    "hash": "dc5d68f28cf0ad97848be08cbc2af1cc"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/KWSApo/dlldata.c": {
-    "mtime": 1781272454.0435503,
-    "hash": "a3ade1ada25e033bf93abf5b55cc3a6f"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/SwapAPO/Resource.h": {
-    "mtime": 1781054992.7097797,
-    "hash": "eb017ce75f2d5022a331f9ac349a2f3f"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/SwapAPO/SwapAPO.h": {
-    "mtime": 1781054992.7098367,
-    "hash": "46c5a568c4696144559bf74a83c36d0f"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/SwapAPO/SwapAPODll.cpp": {
-    "mtime": 1781054992.709944,
-    "hash": "7441d8685cfc7f48fcab54db5e8a4ebf"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/SwapAPO/swap.cpp": {
-    "mtime": 1781054992.7100947,
-    "hash": "6735c2f044e272507babfcecd9c8aa3a"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/SwapAPO/swapapomfx.cpp": {
-    "mtime": 1781054992.7101867,
-    "hash": "8f6eeeebd44d057f1ae1d47093cd5ddb"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/SwapAPO/swapaposfx.cpp": {
-    "mtime": 1781054992.7102616,
-    "hash": "2fbfecf7969d888e7b5a5645659ae08c"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/SwapAPO/SwapAPODll_h.h": {
-    "mtime": 1781272454.0435503,
-    "hash": "3ee9ffb6f709b05b8dc6ea886ba0edfc"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/SwapAPO/SwapAPODll_i.c": {
-    "mtime": 1781272454.0435503,
-    "hash": "d74f4977feaef8a766778ea49f8bf4fc"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/SwapAPO/SwapAPOInterface_h.h": {
-    "mtime": 1781272454.0435503,
-    "hash": "eca21fd0ff23f0a96a91416df63dba4b"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/SwapAPO/SwapAPOInterface_i.c": {
-    "mtime": 1781272454.0435503,
-    "hash": "8f103735e60d5d6887ee14772536d4f4"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/SwapAPO/SwapAPOInterface_p.c": {
-    "mtime": 1781272454.0435503,
-    "hash": "c81373930cf214538c85c999f2f16ed3"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/SwapAPO/dlldata.c": {
-    "mtime": 1781272454.0435503,
-    "hash": "75ebb61d18fced1cef4b0f156b678f3b"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/A2dpHpDeviceFormats.h": {
-    "mtime": 1781054992.7108092,
-    "hash": "07c3decbe57914be5ad553acf0cb6e00"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/AudioModule0.h": {
-    "mtime": 1781054992.7109187,
-    "hash": "7defab16a72ba4b8af4119c7aedb8e62"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/AudioModule1.h": {
-    "mtime": 1781054992.7109792,
-    "hash": "91526e1a620140605f7d2c04997a0433"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/AudioModule2.h": {
-    "mtime": 1781054992.7110376,
-    "hash": "96a3008ec1b76ae6509f6b409fac5c6a"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/AudioModuleHelper.cpp": {
-    "mtime": 1781054992.7110994,
-    "hash": "a5235a51706d742b0031c141af984cc6"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/AudioModuleHelper.h": {
-    "mtime": 1781054992.7111313,
-    "hash": "4e249c11cad09736683ddc42f9bbf4bc"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/MiniportAudioEngineNode.cpp": {
-    "mtime": 1781054992.7112603,
-    "hash": "402c5968cba467e11656bf0ccedbf0bc"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/MiniportStreamAudioEngineNode.cpp": {
-    "mtime": 1781054992.711335,
-    "hash": "61a95663b607a92d01fbcd56e23da59c"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/NewDelete.cpp": {
-    "mtime": 1781054992.7113712,
-    "hash": "aed047146499060d43960cb3d04f2ad4"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/NewDelete.h": {
-    "mtime": 1781054992.7113917,
-    "hash": "80ba26353dbe856710e4305c21050a76"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/UsbHsDeviceFormats.h": {
-    "mtime": 1781054992.71144,
-    "hash": "c0966f2031cfd68e979a7944f12eda61"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/a2dphpminipairs.h": {
-    "mtime": 1781054992.711499,
-    "hash": "b508c430af0c9c86cbaf9a54077e54fc"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/a2dphpminwavert.cpp": {
-    "mtime": 1781054992.7115562,
-    "hash": "68aa7486c219419c54e23ddf9eb4028a"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/a2dphpspeakertopo.cpp": {
-    "mtime": 1781054992.7115836,
-    "hash": "5836f4060652adf4b26912ee0a1269e0"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/a2dphpspeakertopo.h": {
-    "mtime": 1781054992.7116005,
-    "hash": "3bd6146a7c2b6aeb1b1dd15035f6c097"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/a2dphpspeakertoptable.h": {
-    "mtime": 1781054992.7116523,
-    "hash": "0cfea72a113be3a8dbcd437971ab74ef"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/a2dphpspeakerwavtable.h": {
-    "mtime": 1781054992.7117124,
-    "hash": "6b42c47cb6257a5c20730b4908260b04"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/a2dphptopo.cpp": {
-    "mtime": 1781054992.7117946,
-    "hash": "94d9d7ce46525d603875af638b99f5c6"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/a2dphptopo.h": {
-    "mtime": 1781054992.71183,
-    "hash": "460be077068bc8642c58f4eca328f82f"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfpmictopo.cpp": {
-    "mtime": 1781054992.7118907,
-    "hash": "87189fbc66b7d4c08e065355a90696ef"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfpmictopo.h": {
-    "mtime": 1781054992.7119205,
-    "hash": "685c3367c83f34272153f272c930c08d"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfpmictoptable.h": {
-    "mtime": 1781054992.7119782,
-    "hash": "9cead5b5712b7bfcb2f81066752d287a"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfpmicwavtable.h": {
-    "mtime": 1781054992.7120485,
-    "hash": "9760be8b18ba1d857c682c5cddeff772"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfpmicwbwavtable.h": {
-    "mtime": 1781054992.7121189,
-    "hash": "f666f22e507c92eebaa298dd8a581859"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfpminipairs.h": {
-    "mtime": 1781054992.7121868,
-    "hash": "8b4c167bfca0a9072f673fc5f43a4f7e"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfpminwavert.cpp": {
-    "mtime": 1781054992.7122445,
-    "hash": "3dbe6d66712d58c6ca52164b948c8ebd"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfpspeakertopo.cpp": {
-    "mtime": 1781054992.7123024,
-    "hash": "8bf21da69b2ef18e18c5156fb568b58b"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfpspeakertopo.h": {
-    "mtime": 1781054992.7123299,
-    "hash": "5ac9769bfce8a6ff53b0da0c3e701ee7"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfpspeakertoptable.h": {
-    "mtime": 1781054992.712379,
-    "hash": "09dfe6ef33a44d2e56fbe3d04fa55c12"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfpspeakerwavtable.h": {
-    "mtime": 1781054992.7124364,
-    "hash": "413f94bf1c7c9a87be30272aaa25b9dc"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfpspeakerwbwavtable.h": {
-    "mtime": 1781054992.7124956,
-    "hash": "b909d59d1e4595a2fc1507096e9322e4"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfptopo.cpp": {
-    "mtime": 1781054992.7125542,
-    "hash": "d7e34f11a11f119b935cb063053b71d8"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfptopo.h": {
-    "mtime": 1781054992.7125854,
-    "hash": "b0f15cd09dd59fcf57257cc002b60fff"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/micarray1toptable.h": {
-    "mtime": 1781054992.7126338,
-    "hash": "f806764ad7cd6564767ea4b179787611"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/micarraytopo.cpp": {
-    "mtime": 1781054992.7126935,
-    "hash": "8c72d757caac798149d403f58882ed62"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/micarraytopo.h": {
-    "mtime": 1781054992.7127292,
-    "hash": "142a0c347b8754ca20d14dc3f08ffe76"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/micarraywavtable.h": {
-    "mtime": 1781054992.7127783,
-    "hash": "610dc9ee3de6d62fcbc63ad4b14e6c67"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/mintopo.cpp": {
-    "mtime": 1781054992.71285,
-    "hash": "a27955848a3e823391c30b7a895bb4ac"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/mintopo.h": {
-    "mtime": 1781054992.712921,
-    "hash": "8757e2fb93449488cd1e455fbec6b0ca"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/minwavert.cpp": {
-    "mtime": 1781054992.7129874,
-    "hash": "4659655afca5428a2c505c3cd70f1791"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/minwavert.h": {
-    "mtime": 1781054992.7130916,
-    "hash": "16274faf580dfa64429325f92fc8626e"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/minwavertstream.cpp": {
-    "mtime": 1781055132.6231358,
-    "hash": "0e45be6aa84cb184f79eb6800e799a81"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/minwavertstream.h": {
-    "mtime": 1781054992.7132466,
-    "hash": "41eac97e6f5b0410f737d96b342917b0"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/simple.h": {
-    "mtime": 1781054992.7132819,
-    "hash": "8eff705b3638761c8af8a84cd8b53c6d"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/speakerhptopo.cpp": {
-    "mtime": 1781054992.71334,
-    "hash": "3a41d66b5f46cfaa2edf2a20b78c1ba7"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/speakerhptopo.h": {
-    "mtime": 1781054992.7133718,
-    "hash": "241e9347e053caf52164c130de8d6592"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/speakerhptoptable.h": {
-    "mtime": 1781054992.7134194,
-    "hash": "17d9d30c827c4b6ff1f708cc7e5105ef"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/speakerhpwavtable.h": {
-    "mtime": 1781054992.7134783,
-    "hash": "696c458dbf5088c82c8f25d81b881b48"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/speakertopo.cpp": {
-    "mtime": 1781054992.713513,
-    "hash": "746df04bd1fa2cc90c65254d10da8389"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/speakertopo.h": {
-    "mtime": 1781054992.7135303,
-    "hash": "e926d6e28fedb87ce92c77aaf420e3e5"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/speakertoptable.h": {
-    "mtime": 1781054992.7135777,
-    "hash": "36f45623e6aec49b45c270bbeda1a0c0"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/speakerwavtable.h": {
-    "mtime": 1781054992.7136388,
-    "hash": "74adc35a7d14587d6957f609bcead5c7"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/usbhsmictopo.cpp": {
-    "mtime": 1781054992.7137077,
-    "hash": "b15ab6e81c2eb6c4ce00c2ed33b102a0"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/usbhsmictopo.h": {
-    "mtime": 1781054992.7137387,
-    "hash": "0cab47510a2ddf9d70a2a25641a17cfe"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/usbhsmictoptable.h": {
-    "mtime": 1781054992.7137911,
-    "hash": "aca6e09c4217f4b6f5946c865f6c75eb"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/usbhsmicwavtable.h": {
-    "mtime": 1781054992.7138517,
-    "hash": "3509f2709feac61c89f4be3b04794aef"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/usbhsminipairs.h": {
-    "mtime": 1781054992.7139115,
-    "hash": "593f0159dcd29ded0cfc0ef2ad1576f9"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/usbhsminwavert.cpp": {
-    "mtime": 1781054992.7139711,
-    "hash": "9a46ccd380a6d8032d0cf28b84c77649"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/usbhsspeakertopo.cpp": {
-    "mtime": 1781054992.7139995,
-    "hash": "a9ab244537564a31ca2c1e78ea74dfe7"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/usbhsspeakertopo.h": {
-    "mtime": 1781054992.7140172,
-    "hash": "cfad321f1b001eb8c5850935cb184390"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/usbhsspeakertoptable.h": {
-    "mtime": 1781054992.7140658,
-    "hash": "f4654945eea0e958fe5c192c02d17773"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/usbhsspeakerwavtable.h": {
-    "mtime": 1781054992.7141278,
-    "hash": "eccbd674443494e9fc7395065225146a"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/usbhstopo.cpp": {
-    "mtime": 1781054992.7141929,
-    "hash": "5b578cb4b7438f0d671dcdf9277f02be"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/usbhstopo.h": {
-    "mtime": 1781054992.7142246,
-    "hash": "ed8dbcb03593bad31ba028e8a00ab03e"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/KeywordDetectorAdapter/KeywordDetectorContosoAdapter.cpp": {
-    "mtime": 1781054992.7143736,
-    "hash": "76ded4eb8e187ed00706f3b46b2bf7ca"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/KeywordDetectorAdapter/dllmain.cpp": {
-    "mtime": 1781054992.7145739,
-    "hash": "2ecdf034193a380fd886bcd4d2f8c0b3"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/KeywordDetectorAdapter/stdafx.cpp": {
-    "mtime": 1781054992.7145905,
-    "hash": "32be64a2361ea2d348e217da9d423282"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/KeywordDetectorAdapter/stdafx.h": {
-    "mtime": 1781054992.7146075,
-    "hash": "30e8d622707136d58ea4e93b1d3de520"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/KeywordDetectorAdapter/targetver.h": {
-    "mtime": 1781054992.7146246,
-    "hash": "05f2aff48de1b7f920e0fa15051a207f"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/TabletAudioSample/hdmitopo.cpp": {
-    "mtime": 1781054992.7157245,
-    "hash": "12f67e21e0f5491bb578a8e682e59937"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/TabletAudioSample/hdmitopo.h": {
-    "mtime": 1781054992.7157555,
-    "hash": "153c06109379157d0164aabddbdfb983"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/TabletAudioSample/hdmitoptable.h": {
-    "mtime": 1781054992.7158034,
-    "hash": "d11daf7a4104a6b02c2e00d17b86a0d1"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/TabletAudioSample/hdmiwavtable.h": {
-    "mtime": 1781054992.715872,
-    "hash": "3420e0819c28284c57d9ecd7054c2931"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/TabletAudioSample/micarray2toptable.h": {
-    "mtime": 1781054992.7159388,
-    "hash": "9bc8e3d31f2349206cb074f06c8c6fae"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/TabletAudioSample/micarray2wavtable.h": {
-    "mtime": 1781054992.7159963,
-    "hash": "7bf28855e0a4dcc033ee195a3b7adf9a"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/TabletAudioSample/micarray3toptable.h": {
-    "mtime": 1781054992.716062,
-    "hash": "5fc500a1cd03cee989308ea4529b5d0e"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/TabletAudioSample/micarray3wavtable.h": {
-    "mtime": 1781054992.7161248,
-    "hash": "a171e672faed780064c2b6af05d33e9f"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/TabletAudioSample/micintopo.cpp": {
-    "mtime": 1781054992.716185,
-    "hash": "d9fcb2824119ac0d8dca27b83252a2c3"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/TabletAudioSample/micintopo.h": {
-    "mtime": 1781054992.716214,
-    "hash": "1eaaaada0f286697b7156f6fd0a47281"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/TabletAudioSample/micintoptable.h": {
-    "mtime": 1781054992.7162626,
-    "hash": "e6ee4e9bfd0d0b610545275dfa0850d1"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/TabletAudioSample/micinwavtable.h": {
-    "mtime": 1781054992.7163265,
-    "hash": "35219ebdf3c2aed60758c7fafac2c873"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/TabletAudioSample/spdiftopo.cpp": {
-    "mtime": 1781054992.7164228,
-    "hash": "789b57082baad34a5de8cf8a6acd6a12"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/TabletAudioSample/spdiftopo.h": {
-    "mtime": 1781054992.7164402,
-    "hash": "0e9203b7a4d5bbb6fc4922286c67aadf"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/TabletAudioSample/spdiftoptable.h": {
-    "mtime": 1781054992.7164888,
-    "hash": "65e683fae94f3a53358066a27c0d2602"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/TabletAudioSample/spdifwavtable.h": {
-    "mtime": 1781054992.7165482,
-    "hash": "7eafa21d7c941c7155a70ecb548829cd"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/TabletAudioSample/minipairs.h": {
-    "mtime": 1781090550.8365948,
-    "hash": "0c48de16f5cce56efa704c15fb3efcaf"
-  },
-  "/home/hyuse/Desktop/project-m/milestone_1_report.md": {
-    "mtime": 1781007944.575737,
-    "hash": "40604aa9a84842e32061336b28d18baf"
-  },
-  "/home/hyuse/Desktop/project-m/testing_instructions.md": {
-    "mtime": 1781527711.689852,
-    "hash": "94f7068c9a3e0c954c1ddaf14eb794ec"
-  },
-  "/home/hyuse/Desktop/project-m/DESIGN.md": {
-    "mtime": 1781272454.03555,
-    "hash": "9acb89458a69800806dd0f24428e2fcf"
-  },
-  "/home/hyuse/Desktop/project-m/GEMINI.md": {
-    "mtime": 1781534020.402688,
-    "hash": "59bede0f9a2f52d179aff821b9f7304c"
-  },
-  "/home/hyuse/Desktop/project-m/PRODUCT.md": {
-    "mtime": 1781272454.03655,
-    "hash": "96419ca25e818c0d928e5b4f29f97def"
-  },
-  "/home/hyuse/Desktop/project-m/README.md": {
-    "mtime": 1781272454.03655,
-    "hash": "3c26c90ca80e3b141886e02ac547317d"
-  },
-  "/home/hyuse/Desktop/project-m/execution_roadmap.md": {
-    "mtime": 1781272454.03955,
-    "hash": "a1fcaef95b42a5453afaf33268a2e490"
-  },
-  "/home/hyuse/Desktop/project-m/goal.md": {
-    "mtime": 1781272454.03955,
-    "hash": "0f98cf142fbf2ee02e8cfe4398aeb1fa"
-  },
-  "/home/hyuse/Desktop/project-m/phase_3_report.md": {
-    "mtime": 1781272454.0415502,
-    "hash": "f8a769f6846dd0e3ae1f81e5be4ba7df"
-  },
-  "/home/hyuse/Desktop/project-m/project_plan.md": {
-    "mtime": 1781535165.2287908,
-    "hash": "c09fe9a297b7638b1b4089dab9254f9d"
-  },
-  "/home/hyuse/Desktop/project-m/windows_driver_debugging_session.md": {
-    "mtime": 1781272454.0465503,
-    "hash": "ed3d59d490e7045bf82cc7a990254efc"
-  },
-  "/home/hyuse/Desktop/project-m/windows_ioctl_resolution.md": {
-    "mtime": 1781272454.0465503,
-    "hash": "25bb0ec58766958e2685037cd120ed06"
-  },
-  "/home/hyuse/Desktop/project-m/windows_auth_access_denied.md": {
-    "mtime": 1781273887.5128336,
-    "hash": "e515688bb2bb2093370b33b0a4c11d83"
-  },
-  "/home/hyuse/Desktop/project-m/commit_message.md": {
-    "mtime": 1781960214.8519044,
-    "hash": "bf191d3e0461c48765e6ceacea6e4ec7"
-  },
-  "/home/hyuse/Desktop/project-m/dev_results.md": {
-    "mtime": 1781960214.8519044,
-    "hash": "a388e99fd9d95d95681baaca3e99817d"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-mic/x64/Debug/lampyris-mic.vcxproj.FileListAbsolute.txt": {
-    "mtime": 1781007944.6417372,
-    "hash": "d41d8cd98f00b204e9800998ecf8427e"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/x64/Debug/lampyris-mic.vcxproj.FileListAbsolute.txt": {
-    "mtime": 1781272454.04555,
-    "hash": "6c7736710bc856b82763a59230bb15f7"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/README.md": {
-    "mtime": 1781272454.0445502,
-    "hash": "df6276f0dfc5fb934f7cfac8ed6829bd"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/AecApo/x64/Debug/AecAPO.vcxproj.FileListAbsolute.txt": {
-    "mtime": 1781170170.0251417,
-    "hash": "d41d8cd98f00b204e9800998ecf8427e"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/AecApo/x64/Release/AecAPO.vcxproj.FileListAbsolute.txt": {
-    "mtime": 1781170170.0254817,
-    "hash": "d41d8cd98f00b204e9800998ecf8427e"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/DelayAPO/x64/Debug/DelayAPO.vcxproj.FileListAbsolute.txt": {
-    "mtime": 1781170170.0268707,
-    "hash": "d41d8cd98f00b204e9800998ecf8427e"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/DelayAPO/x64/Release/DelayAPO.vcxproj.FileListAbsolute.txt": {
-    "mtime": 1781170170.027089,
-    "hash": "d41d8cd98f00b204e9800998ecf8427e"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/KWSApo/x64/Debug/KwsAPO.vcxproj.FileListAbsolute.txt": {
-    "mtime": 1781170170.0284104,
-    "hash": "d41d8cd98f00b204e9800998ecf8427e"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/KWSApo/x64/Release/KwsAPO.vcxproj.FileListAbsolute.txt": {
-    "mtime": 1781170170.0290031,
-    "hash": "d41d8cd98f00b204e9800998ecf8427e"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/SwapAPO/x64/Debug/SwapAPO.vcxproj.FileListAbsolute.txt": {
-    "mtime": 1781170170.0301669,
-    "hash": "d41d8cd98f00b204e9800998ecf8427e"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/SwapAPO/x64/Release/SwapAPO.vcxproj.FileListAbsolute.txt": {
-    "mtime": 1781170170.03035,
-    "hash": "d41d8cd98f00b204e9800998ecf8427e"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/x64/Debug/EndpointsCommon.vcxproj.FileListAbsolute.txt": {
-    "mtime": 1781272454.0445502,
-    "hash": "9023e81963bde0f2e004d134af773ca9"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/EndpointsCommon/x64/Release/EndpointsCommon.vcxproj.FileListAbsolute.txt": {
-    "mtime": 1781272454.0445502,
-    "hash": "eb9f3760a88a2fa244032b4e80a882aa"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/KeywordDetectorAdapter/x64/Debug/KeywordDetectorContosoAdapter.vcxproj.FileListAbsolute.txt": {
-    "mtime": 1781170170.047628,
-    "hash": "d41d8cd98f00b204e9800998ecf8427e"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/KeywordDetectorAdapter/x64/Release/KeywordDetectorContosoAdapter.vcxproj.FileListAbsolute.txt": {
-    "mtime": 1781170170.0477204,
-    "hash": "d41d8cd98f00b204e9800998ecf8427e"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/Package/x64/Debug/package.VcxProj.FileListAbsolute.txt": {
-    "mtime": 1781170170.0480144,
-    "hash": "d41d8cd98f00b204e9800998ecf8427e"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/Package/x64/Release/package.VcxProj.FileListAbsolute.txt": {
-    "mtime": 1781170170.0480442,
-    "hash": "d41d8cd98f00b204e9800998ecf8427e"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/TabletAudioSample/x64/Debug/TabletAudioSample.vcxproj.FileListAbsolute.txt": {
-    "mtime": 1781272454.04555,
-    "hash": "4fe511e80c75a4eeaec1bddbbb570dd8"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/TabletAudioSample/x64/Release/TabletAudioSample.vcxproj.FileListAbsolute.txt": {
-    "mtime": 1781272454.04555,
-    "hash": "92c9e0a32a544cbb7c1c15a90fd5c9b3"
-  },
-  "/home/hyuse/Desktop/project-m/pc-client/ui/Lampyris.svg": {
-    "mtime": 1781272454.0415502,
-    "hash": "f7abbe6ba3182c52955eb1b99d5f45a0"
-  },
-  "/home/hyuse/Desktop/project-m/Logos/Lampyris.svg": {
-    "mtime": 1781272454.03655,
-    "hash": "f7abbe6ba3182c52955eb1b99d5f45a0"
-  },
-  "/home/hyuse/Desktop/project-m/Logos/Sonus.svg": {
-    "mtime": 1781272454.03655,
-    "hash": "757bb53667e24ea153789530b61c4ef1"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/AecApo/AecApo.png": {
-    "mtime": 1781054992.7083101,
-    "hash": "f62883c7f7a46d216c8ebd1c55aacbef"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/DelayAPO/delayapo.png": {
-    "mtime": 1781054992.7091491,
-    "hash": "5e7d957834e7ed37715771fb0bd1e486"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/KWSApo/KWSApo.png": {
-    "mtime": 1781054992.7094178,
-    "hash": "e93b2d58937dc363ff86e68fe3217200"
-  },
-  "/home/hyuse/Desktop/project-m/windows-driver/lampyris-sysvad/APO/SwapAPO/swapapo.png": {
-    "mtime": 1781054992.710122,
-    "hash": "5d28c787d03cce531d59e63270552ddf"
+  "/home/hyuse/Desktop/Border-Tech/android-client/app/build.gradle.kts": {
+    "mtime": 1782823477.3566923,
+    "ast_hash": "6e34585808362e9be1c92a0b5f629995",
+    "semantic_hash": "6e34585808362e9be1c92a0b5f629995"
+  },
+  "/home/hyuse/Desktop/Border-Tech/android-client/app/src/main/java/com/projectm/mic/AudioCaptureService.kt": {
+    "mtime": 1782823477.3676932,
+    "ast_hash": "1ff6b0afa357bf5a39bfd6cf1a5a4d05",
+    "semantic_hash": "1ff6b0afa357bf5a39bfd6cf1a5a4d05"
+  },
+  "/home/hyuse/Desktop/Border-Tech/android-client/app/src/main/java/com/projectm/mic/MainActivity.kt": {
+    "mtime": 1782823477.3676932,
+    "ast_hash": "33f9a0181b9ef86bed5f485005399324",
+    "semantic_hash": "33f9a0181b9ef86bed5f485005399324"
+  },
+  "/home/hyuse/Desktop/Border-Tech/android-client/build.gradle.kts": {
+    "mtime": 1782823477.3676932,
+    "ast_hash": "9a098ab31960e77e877469dc753daa02",
+    "semantic_hash": "9a098ab31960e77e877469dc753daa02"
+  },
+  "/home/hyuse/Desktop/Border-Tech/android-client/gradlew": {
+    "mtime": 1782823477.3676932,
+    "ast_hash": "66475fbab3d842ebef119def02dca5fd",
+    "semantic_hash": "66475fbab3d842ebef119def02dca5fd"
+  },
+  "/home/hyuse/Desktop/Border-Tech/android-client/settings.gradle.kts": {
+    "mtime": 1782823477.3676932,
+    "ast_hash": "72245ba44c9e6b488acd2986e6a9c378",
+    "semantic_hash": "72245ba44c9e6b488acd2986e6a9c378"
+  },
+  "/home/hyuse/Desktop/Border-Tech/pc-client/build.rs": {
+    "mtime": 1782823477.381694,
+    "ast_hash": "31a64cc4ec13bf83058013197ec51230",
+    "semantic_hash": "31a64cc4ec13bf83058013197ec51230"
+  },
+  "/home/hyuse/Desktop/Border-Tech/pc-client/src/app_state.rs": {
+    "mtime": 1782823477.381694,
+    "ast_hash": "082783c8a1b6831cf7220c2036db01d6",
+    "semantic_hash": "082783c8a1b6831cf7220c2036db01d6"
+  },
+  "/home/hyuse/Desktop/Border-Tech/pc-client/src/audio/linux.rs": {
+    "mtime": 1782823477.381694,
+    "ast_hash": "3ec44b64a67b9c9c8446c8f48d858770",
+    "semantic_hash": "3ec44b64a67b9c9c8446c8f48d858770"
+  },
+  "/home/hyuse/Desktop/Border-Tech/pc-client/src/audio/mod.rs": {
+    "mtime": 1782823477.3828917,
+    "ast_hash": "df53b0fe12e6ad0fd1df5eea067014e0",
+    "semantic_hash": "df53b0fe12e6ad0fd1df5eea067014e0"
+  },
+  "/home/hyuse/Desktop/Border-Tech/pc-client/src/audio/windows.rs": {
+    "mtime": 1782823477.3828917,
+    "ast_hash": "c53114cb1d78566f695d482c9eb1f633",
+    "semantic_hash": "c53114cb1d78566f695d482c9eb1f633"
+  },
+  "/home/hyuse/Desktop/Border-Tech/pc-client/src/bin.rs": {
+    "mtime": 1782823477.3828917,
+    "ast_hash": "cbb1877046670a67c2bacbe3e900ea24",
+    "semantic_hash": "cbb1877046670a67c2bacbe3e900ea24"
+  },
+  "/home/hyuse/Desktop/Border-Tech/pc-client/src/bin_srp.rs": {
+    "mtime": 1782823477.3828917,
+    "ast_hash": "93999e82d314320cef30bc743d82e311",
+    "semantic_hash": "93999e82d314320cef30bc743d82e311"
+  },
+  "/home/hyuse/Desktop/Border-Tech/pc-client/src/main.rs": {
+    "mtime": 1782823477.3828917,
+    "ast_hash": "eafc3714846623d781f5c4a5d1d45b91",
+    "semantic_hash": "eafc3714846623d781f5c4a5d1d45b91"
+  },
+  "/home/hyuse/Desktop/Border-Tech/pc-client/src/protocol.rs": {
+    "mtime": 1782823477.3828917,
+    "ast_hash": "43e70368b5eddbc4410ec45c4c234d64",
+    "semantic_hash": "43e70368b5eddbc4410ec45c4c234d64"
+  },
+  "/home/hyuse/Desktop/Border-Tech/pc-client/src/srp_test.rs": {
+    "mtime": 1782823477.3828917,
+    "ast_hash": "54e878f5bfd933c528c907b609b0080f",
+    "semantic_hash": "54e878f5bfd933c528c907b609b0080f"
+  },
+  "/home/hyuse/Desktop/Border-Tech/pc-client/test_pw.rs": {
+    "mtime": 1782823477.3828917,
+    "ast_hash": "c4d7d51f603dc7a49945b4c7be689441",
+    "semantic_hash": "c4d7d51f603dc7a49945b4c7be689441"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/TestApp.cpp": {
+    "mtime": 1782824055.506577,
+    "ast_hash": "e27cc76dc07aae2c5c43c5e5c69ec812",
+    "semantic_hash": "e27cc76dc07aae2c5c43c5e5c69ec812"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/driver.cpp": {
+    "mtime": 1782823477.6217105,
+    "ast_hash": "d43ee838e605340fae705392a7f0811e",
+    "semantic_hash": "d43ee838e605340fae705392a7f0811e"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/export_cert.ps1": {
+    "mtime": 1782823477.6227107,
+    "ast_hash": "cccb54173fa592e098badf228e714358",
+    "semantic_hash": "cccb54173fa592e098badf228e714358"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/find_cert.ps1": {
+    "mtime": 1782823477.6227107,
+    "ast_hash": "cbbd2f387bd941a62a1c49cb5b2ba5a4",
+    "semantic_hash": "cbbd2f387bd941a62a1c49cb5b2ba5a4"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/ioctl.h": {
+    "mtime": 1782824055.506577,
+    "ast_hash": "d7a77a9082b1f4b6e7e7126c5eab687c",
+    "semantic_hash": "d7a77a9082b1f4b6e7e7126c5eab687c"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-mic.sln": {
+    "mtime": 1782823477.6227107,
+    "ast_hash": "4cfa9d92673789ac8e6a18ae7f087b78",
+    "semantic_hash": "4cfa9d92673789ac8e6a18ae7f087b78"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/A2dpHpDevice.cpp": {
+    "mtime": 1782823477.6247108,
+    "ast_hash": "cb63d4e78cc57c0d0ca7aab06deb5adf",
+    "semantic_hash": "cb63d4e78cc57c0d0ca7aab06deb5adf"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/A2dpHpDevice.h": {
+    "mtime": 1782823477.6247108,
+    "ast_hash": "52bc3b175778032e6b401a4e4300f1e1",
+    "semantic_hash": "52bc3b175778032e6b401a4e4300f1e1"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/AecApo/AecApo.h": {
+    "mtime": 1782823477.6253695,
+    "ast_hash": "3c8f4e433dfd9b91d3fc8d6eb5fb257a",
+    "semantic_hash": "3c8f4e433dfd9b91d3fc8d6eb5fb257a"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/AecApo/AecApoDll.cpp": {
+    "mtime": 1782823477.6253695,
+    "ast_hash": "f0afd0cdb5232f0d36264af2b19113f0",
+    "semantic_hash": "f0afd0cdb5232f0d36264af2b19113f0"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/AecApo/AecApoDll_h.h": {
+    "mtime": 1782823477.6253695,
+    "ast_hash": "196d20f5a364ff5e2f00247bf6ae0867",
+    "semantic_hash": "196d20f5a364ff5e2f00247bf6ae0867"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/AecApo/AecApoDll_i.c": {
+    "mtime": 1782823477.6253695,
+    "ast_hash": "7d2a56475df0471e8442f2c87ae46abb",
+    "semantic_hash": "7d2a56475df0471e8442f2c87ae46abb"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/AecApo/AecApoMfx.cpp": {
+    "mtime": 1782823477.6253695,
+    "ast_hash": "d43efcc4eea8cd20de6e99a833a46503",
+    "semantic_hash": "d43efcc4eea8cd20de6e99a833a46503"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/AecApo/Resource.h": {
+    "mtime": 1782823477.625711,
+    "ast_hash": "1f6d0cafcc9e9619dcc44d19dde4bd2a",
+    "semantic_hash": "1f6d0cafcc9e9619dcc44d19dde4bd2a"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/DelayAPO/Delay.cpp": {
+    "mtime": 1782823477.626711,
+    "ast_hash": "a9c70618943f93e3d9ce6bace46821e0",
+    "semantic_hash": "a9c70618943f93e3d9ce6bace46821e0"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/DelayAPO/DelayAPO.h": {
+    "mtime": 1782823477.627817,
+    "ast_hash": "e40799ab0a460609e020e20fd97f4200",
+    "semantic_hash": "e40799ab0a460609e020e20fd97f4200"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/DelayAPO/DelayAPODll.cpp": {
+    "mtime": 1782823477.627817,
+    "ast_hash": "752bf91022cf2dbc5f61f85b9a11a768",
+    "semantic_hash": "752bf91022cf2dbc5f61f85b9a11a768"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/DelayAPO/DelayAPODll_h.h": {
+    "mtime": 1782823477.627817,
+    "ast_hash": "36c49e197faa71048d78b709775dcf7a",
+    "semantic_hash": "36c49e197faa71048d78b709775dcf7a"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/DelayAPO/DelayAPODll_i.c": {
+    "mtime": 1782823477.627817,
+    "ast_hash": "7ffab32477dc7eced8a24ef160e2753b",
+    "semantic_hash": "7ffab32477dc7eced8a24ef160e2753b"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/DelayAPO/DelayAPOInterface_h.h": {
+    "mtime": 1782823477.627817,
+    "ast_hash": "9a2601bbdadefcb086166b0ee6900613",
+    "semantic_hash": "9a2601bbdadefcb086166b0ee6900613"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/DelayAPO/DelayAPOInterface_i.c": {
+    "mtime": 1782823477.627817,
+    "ast_hash": "9c338d994dc256a8d1ba45425e73c423",
+    "semantic_hash": "9c338d994dc256a8d1ba45425e73c423"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/DelayAPO/DelayAPOInterface_p.c": {
+    "mtime": 1782823477.627817,
+    "ast_hash": "71d95e8f15a46707aa1c40d787c02e8c",
+    "semantic_hash": "71d95e8f15a46707aa1c40d787c02e8c"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/DelayAPO/DelayAPOMFX.cpp": {
+    "mtime": 1782823477.627817,
+    "ast_hash": "97003fed116c180cb7d34fdb2c96b03c",
+    "semantic_hash": "97003fed116c180cb7d34fdb2c96b03c"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/DelayAPO/DelayAPOSFX.cpp": {
+    "mtime": 1782823477.627817,
+    "ast_hash": "696849f12cb5a6d4667e9c25fa479a07",
+    "semantic_hash": "696849f12cb5a6d4667e9c25fa479a07"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/DelayAPO/Resource.h": {
+    "mtime": 1782823477.627817,
+    "ast_hash": "537152321776af22a9d6fed23f89e8d9",
+    "semantic_hash": "537152321776af22a9d6fed23f89e8d9"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/DelayAPO/dlldata.c": {
+    "mtime": 1782823477.6287112,
+    "ast_hash": "447d7668ffe313250953c1888d4d4af4",
+    "semantic_hash": "447d7668ffe313250953c1888d4d4af4"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/Inc/CommonMacros.h": {
+    "mtime": 1782823477.6297112,
+    "ast_hash": "0b375d4c5bb9d9d623edf28eaafae289",
+    "semantic_hash": "0b375d4c5bb9d9d623edf28eaafae289"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/Inc/CustomPropKeys.h": {
+    "mtime": 1782823477.6308627,
+    "ast_hash": "bdeebb159505a5d564435441f8588ec4",
+    "semantic_hash": "bdeebb159505a5d564435441f8588ec4"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/Inc/tlist.h": {
+    "mtime": 1782823477.6308627,
+    "ast_hash": "f9543bf687d4b7edcb03dd0fc9421179",
+    "semantic_hash": "f9543bf687d4b7edcb03dd0fc9421179"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/KWSApo/KWSApo.cpp": {
+    "mtime": 1782823477.6308627,
+    "ast_hash": "3037f3b16e36f5af513194e27d3b6155",
+    "semantic_hash": "3037f3b16e36f5af513194e27d3b6155"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/KWSApo/KWSApo.h": {
+    "mtime": 1782823477.6310372,
+    "ast_hash": "90c0778f70c99211d35ad61985d6b912",
+    "semantic_hash": "90c0778f70c99211d35ad61985d6b912"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/KWSApo/KWSApoDll.cpp": {
+    "mtime": 1782823477.6310372,
+    "ast_hash": "32b0b7b719868403befeb4f0a6f64cfe",
+    "semantic_hash": "32b0b7b719868403befeb4f0a6f64cfe"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/KWSApo/KWSApoDll_h.h": {
+    "mtime": 1782823477.6310372,
+    "ast_hash": "1c0d0a8e77329376c8eae2c6bd764fd5",
+    "semantic_hash": "1c0d0a8e77329376c8eae2c6bd764fd5"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/KWSApo/KWSApoDll_i.c": {
+    "mtime": 1782823477.6310372,
+    "ast_hash": "1f3c053bec35e04ee029a34c7b4026ff",
+    "semantic_hash": "1f3c053bec35e04ee029a34c7b4026ff"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/KWSApo/KWSApoEfx.cpp": {
+    "mtime": 1782823477.6310372,
+    "ast_hash": "d47505a574280731c36a2d968a4bb2f8",
+    "semantic_hash": "d47505a574280731c36a2d968a4bb2f8"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/KWSApo/KWSApoInterface_h.h": {
+    "mtime": 1782823477.6310372,
+    "ast_hash": "050d737483e1594583a6fd11785c7c01",
+    "semantic_hash": "050d737483e1594583a6fd11785c7c01"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/KWSApo/KWSApoInterface_i.c": {
+    "mtime": 1782823477.6310372,
+    "ast_hash": "c1e489c61c5ee390fd11e57dd7c66503",
+    "semantic_hash": "c1e489c61c5ee390fd11e57dd7c66503"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/KWSApo/KWSApoInterface_p.c": {
+    "mtime": 1782823477.6310372,
+    "ast_hash": "dc5d68f28cf0ad97848be08cbc2af1cc",
+    "semantic_hash": "dc5d68f28cf0ad97848be08cbc2af1cc"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/KWSApo/Resource.h": {
+    "mtime": 1782823477.6310372,
+    "ast_hash": "bb2522ed8830d047cbc404dca3f7c278",
+    "semantic_hash": "bb2522ed8830d047cbc404dca3f7c278"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/KWSApo/dlldata.c": {
+    "mtime": 1782823477.6310372,
+    "ast_hash": "a3ade1ada25e033bf93abf5b55cc3a6f",
+    "semantic_hash": "a3ade1ada25e033bf93abf5b55cc3a6f"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/SwapAPO/Resource.h": {
+    "mtime": 1782823477.6327114,
+    "ast_hash": "eb017ce75f2d5022a331f9ac349a2f3f",
+    "semantic_hash": "eb017ce75f2d5022a331f9ac349a2f3f"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/SwapAPO/SwapAPO.h": {
+    "mtime": 1782823477.6334999,
+    "ast_hash": "46c5a568c4696144559bf74a83c36d0f",
+    "semantic_hash": "46c5a568c4696144559bf74a83c36d0f"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/SwapAPO/SwapAPODll.cpp": {
+    "mtime": 1782823477.6334999,
+    "ast_hash": "7441d8685cfc7f48fcab54db5e8a4ebf",
+    "semantic_hash": "7441d8685cfc7f48fcab54db5e8a4ebf"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/SwapAPO/SwapAPODll_h.h": {
+    "mtime": 1782823477.6337116,
+    "ast_hash": "3ee9ffb6f709b05b8dc6ea886ba0edfc",
+    "semantic_hash": "3ee9ffb6f709b05b8dc6ea886ba0edfc"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/SwapAPO/SwapAPODll_i.c": {
+    "mtime": 1782823477.6337116,
+    "ast_hash": "d74f4977feaef8a766778ea49f8bf4fc",
+    "semantic_hash": "d74f4977feaef8a766778ea49f8bf4fc"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/SwapAPO/SwapAPOInterface_h.h": {
+    "mtime": 1782823477.6337116,
+    "ast_hash": "eca21fd0ff23f0a96a91416df63dba4b",
+    "semantic_hash": "eca21fd0ff23f0a96a91416df63dba4b"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/SwapAPO/SwapAPOInterface_i.c": {
+    "mtime": 1782823477.6337116,
+    "ast_hash": "8f103735e60d5d6887ee14772536d4f4",
+    "semantic_hash": "8f103735e60d5d6887ee14772536d4f4"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/SwapAPO/SwapAPOInterface_p.c": {
+    "mtime": 1782823477.6337116,
+    "ast_hash": "c81373930cf214538c85c999f2f16ed3",
+    "semantic_hash": "c81373930cf214538c85c999f2f16ed3"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/SwapAPO/dlldata.c": {
+    "mtime": 1782823477.6347115,
+    "ast_hash": "75ebb61d18fced1cef4b0f156b678f3b",
+    "semantic_hash": "75ebb61d18fced1cef4b0f156b678f3b"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/SwapAPO/swap.cpp": {
+    "mtime": 1782823477.6347115,
+    "ast_hash": "6735c2f044e272507babfcecd9c8aa3a",
+    "semantic_hash": "6735c2f044e272507babfcecd9c8aa3a"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/SwapAPO/swapapomfx.cpp": {
+    "mtime": 1782823477.6347115,
+    "ast_hash": "8f6eeeebd44d057f1ae1d47093cd5ddb",
+    "semantic_hash": "8f6eeeebd44d057f1ae1d47093cd5ddb"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/SwapAPO/swapaposfx.cpp": {
+    "mtime": 1782823477.6347115,
+    "ast_hash": "2fbfecf7969d888e7b5a5645659ae08c",
+    "semantic_hash": "2fbfecf7969d888e7b5a5645659ae08c"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/BthhfpDevice.cpp": {
+    "mtime": 1782823477.6367116,
+    "ast_hash": "d394895d1f04ef26539a3f9d0bc1c801",
+    "semantic_hash": "d394895d1f04ef26539a3f9d0bc1c801"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/BthhfpDevice.h": {
+    "mtime": 1782823477.6367116,
+    "ast_hash": "b83a933a991cb0d7ab85af13dacd1de9",
+    "semantic_hash": "b83a933a991cb0d7ab85af13dacd1de9"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/ContosoKeywordDetector.h": {
+    "mtime": 1782823477.6367116,
+    "ast_hash": "d0c5011d68908093576f72ddc692978b",
+    "semantic_hash": "d0c5011d68908093576f72ddc692978b"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/A2dpHpDeviceFormats.h": {
+    "mtime": 1782823477.6367116,
+    "ast_hash": "07c3decbe57914be5ad553acf0cb6e00",
+    "semantic_hash": "07c3decbe57914be5ad553acf0cb6e00"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/AudioModule0.h": {
+    "mtime": 1782823477.6374204,
+    "ast_hash": "7defab16a72ba4b8af4119c7aedb8e62",
+    "semantic_hash": "7defab16a72ba4b8af4119c7aedb8e62"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/AudioModule1.h": {
+    "mtime": 1782823477.6374204,
+    "ast_hash": "91526e1a620140605f7d2c04997a0433",
+    "semantic_hash": "91526e1a620140605f7d2c04997a0433"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/AudioModule2.h": {
+    "mtime": 1782823477.6374204,
+    "ast_hash": "96a3008ec1b76ae6509f6b409fac5c6a",
+    "semantic_hash": "96a3008ec1b76ae6509f6b409fac5c6a"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/AudioModuleHelper.cpp": {
+    "mtime": 1782823477.6374204,
+    "ast_hash": "a5235a51706d742b0031c141af984cc6",
+    "semantic_hash": "a5235a51706d742b0031c141af984cc6"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/AudioModuleHelper.h": {
+    "mtime": 1782823477.6374204,
+    "ast_hash": "4e249c11cad09736683ddc42f9bbf4bc",
+    "semantic_hash": "4e249c11cad09736683ddc42f9bbf4bc"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/MiniportAudioEngineNode.cpp": {
+    "mtime": 1782823477.6377118,
+    "ast_hash": "402c5968cba467e11656bf0ccedbf0bc",
+    "semantic_hash": "402c5968cba467e11656bf0ccedbf0bc"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/MiniportStreamAudioEngineNode.cpp": {
+    "mtime": 1782823477.6377118,
+    "ast_hash": "61a95663b607a92d01fbcd56e23da59c",
+    "semantic_hash": "61a95663b607a92d01fbcd56e23da59c"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/NewDelete.cpp": {
+    "mtime": 1782823477.6377118,
+    "ast_hash": "aed047146499060d43960cb3d04f2ad4",
+    "semantic_hash": "aed047146499060d43960cb3d04f2ad4"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/NewDelete.h": {
+    "mtime": 1782823477.6377118,
+    "ast_hash": "80ba26353dbe856710e4305c21050a76",
+    "semantic_hash": "80ba26353dbe856710e4305c21050a76"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/UsbHsDeviceFormats.h": {
+    "mtime": 1782823477.6377118,
+    "ast_hash": "c0966f2031cfd68e979a7944f12eda61",
+    "semantic_hash": "c0966f2031cfd68e979a7944f12eda61"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/a2dphpminipairs.h": {
+    "mtime": 1782823477.6377118,
+    "ast_hash": "b508c430af0c9c86cbaf9a54077e54fc",
+    "semantic_hash": "b508c430af0c9c86cbaf9a54077e54fc"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/a2dphpminwavert.cpp": {
+    "mtime": 1782823477.6377118,
+    "ast_hash": "68aa7486c219419c54e23ddf9eb4028a",
+    "semantic_hash": "68aa7486c219419c54e23ddf9eb4028a"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/a2dphpspeakertopo.cpp": {
+    "mtime": 1782823477.6387117,
+    "ast_hash": "5836f4060652adf4b26912ee0a1269e0",
+    "semantic_hash": "5836f4060652adf4b26912ee0a1269e0"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/a2dphpspeakertopo.h": {
+    "mtime": 1782823477.6387117,
+    "ast_hash": "3bd6146a7c2b6aeb1b1dd15035f6c097",
+    "semantic_hash": "3bd6146a7c2b6aeb1b1dd15035f6c097"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/a2dphpspeakertoptable.h": {
+    "mtime": 1782823477.6387117,
+    "ast_hash": "0cfea72a113be3a8dbcd437971ab74ef",
+    "semantic_hash": "0cfea72a113be3a8dbcd437971ab74ef"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/a2dphpspeakerwavtable.h": {
+    "mtime": 1782823477.6397119,
+    "ast_hash": "6b42c47cb6257a5c20730b4908260b04",
+    "semantic_hash": "6b42c47cb6257a5c20730b4908260b04"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/a2dphptopo.cpp": {
+    "mtime": 1782823477.6397119,
+    "ast_hash": "94d9d7ce46525d603875af638b99f5c6",
+    "semantic_hash": "94d9d7ce46525d603875af638b99f5c6"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/a2dphptopo.h": {
+    "mtime": 1782823477.6397119,
+    "ast_hash": "460be077068bc8642c58f4eca328f82f",
+    "semantic_hash": "460be077068bc8642c58f4eca328f82f"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfpmictopo.cpp": {
+    "mtime": 1782823477.6397119,
+    "ast_hash": "87189fbc66b7d4c08e065355a90696ef",
+    "semantic_hash": "87189fbc66b7d4c08e065355a90696ef"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfpmictopo.h": {
+    "mtime": 1782823477.640712,
+    "ast_hash": "685c3367c83f34272153f272c930c08d",
+    "semantic_hash": "685c3367c83f34272153f272c930c08d"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfpmictoptable.h": {
+    "mtime": 1782823477.640712,
+    "ast_hash": "9cead5b5712b7bfcb2f81066752d287a",
+    "semantic_hash": "9cead5b5712b7bfcb2f81066752d287a"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfpmicwavtable.h": {
+    "mtime": 1782823477.640712,
+    "ast_hash": "9760be8b18ba1d857c682c5cddeff772",
+    "semantic_hash": "9760be8b18ba1d857c682c5cddeff772"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfpmicwbwavtable.h": {
+    "mtime": 1782823477.640712,
+    "ast_hash": "f666f22e507c92eebaa298dd8a581859",
+    "semantic_hash": "f666f22e507c92eebaa298dd8a581859"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfpminipairs.h": {
+    "mtime": 1782823477.640712,
+    "ast_hash": "8b4c167bfca0a9072f673fc5f43a4f7e",
+    "semantic_hash": "8b4c167bfca0a9072f673fc5f43a4f7e"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfpminwavert.cpp": {
+    "mtime": 1782823477.640712,
+    "ast_hash": "3dbe6d66712d58c6ca52164b948c8ebd",
+    "semantic_hash": "3dbe6d66712d58c6ca52164b948c8ebd"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfpspeakertopo.cpp": {
+    "mtime": 1782823477.640712,
+    "ast_hash": "8bf21da69b2ef18e18c5156fb568b58b",
+    "semantic_hash": "8bf21da69b2ef18e18c5156fb568b58b"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfpspeakertopo.h": {
+    "mtime": 1782823477.640712,
+    "ast_hash": "5ac9769bfce8a6ff53b0da0c3e701ee7",
+    "semantic_hash": "5ac9769bfce8a6ff53b0da0c3e701ee7"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfpspeakertoptable.h": {
+    "mtime": 1782823477.640712,
+    "ast_hash": "09dfe6ef33a44d2e56fbe3d04fa55c12",
+    "semantic_hash": "09dfe6ef33a44d2e56fbe3d04fa55c12"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfpspeakerwavtable.h": {
+    "mtime": 1782823477.640712,
+    "ast_hash": "413f94bf1c7c9a87be30272aaa25b9dc",
+    "semantic_hash": "413f94bf1c7c9a87be30272aaa25b9dc"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfpspeakerwbwavtable.h": {
+    "mtime": 1782823477.640712,
+    "ast_hash": "b909d59d1e4595a2fc1507096e9322e4",
+    "semantic_hash": "b909d59d1e4595a2fc1507096e9322e4"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfptopo.cpp": {
+    "mtime": 1782823477.640712,
+    "ast_hash": "d7e34f11a11f119b935cb063053b71d8",
+    "semantic_hash": "d7e34f11a11f119b935cb063053b71d8"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/bthhfptopo.h": {
+    "mtime": 1782823477.641712,
+    "ast_hash": "b0f15cd09dd59fcf57257cc002b60fff",
+    "semantic_hash": "b0f15cd09dd59fcf57257cc002b60fff"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/micarray1toptable.h": {
+    "mtime": 1782823477.641712,
+    "ast_hash": "f806764ad7cd6564767ea4b179787611",
+    "semantic_hash": "f806764ad7cd6564767ea4b179787611"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/micarraytopo.cpp": {
+    "mtime": 1782823477.641712,
+    "ast_hash": "8c72d757caac798149d403f58882ed62",
+    "semantic_hash": "8c72d757caac798149d403f58882ed62"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/micarraytopo.h": {
+    "mtime": 1782823477.641712,
+    "ast_hash": "142a0c347b8754ca20d14dc3f08ffe76",
+    "semantic_hash": "142a0c347b8754ca20d14dc3f08ffe76"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/micarraywavtable.h": {
+    "mtime": 1782823477.642712,
+    "ast_hash": "610dc9ee3de6d62fcbc63ad4b14e6c67",
+    "semantic_hash": "610dc9ee3de6d62fcbc63ad4b14e6c67"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/mintopo.cpp": {
+    "mtime": 1782823477.642712,
+    "ast_hash": "a27955848a3e823391c30b7a895bb4ac",
+    "semantic_hash": "a27955848a3e823391c30b7a895bb4ac"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/mintopo.h": {
+    "mtime": 1782823477.642712,
+    "ast_hash": "8757e2fb93449488cd1e455fbec6b0ca",
+    "semantic_hash": "8757e2fb93449488cd1e455fbec6b0ca"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/minwavert.cpp": {
+    "mtime": 1782825412.2092412,
+    "ast_hash": "af6fa70bc8f91019be31262269cd5c7a",
+    "semantic_hash": "af6fa70bc8f91019be31262269cd5c7a"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/minwavert.h": {
+    "mtime": 1782823477.643712,
+    "ast_hash": "16274faf580dfa64429325f92fc8626e",
+    "semantic_hash": "16274faf580dfa64429325f92fc8626e"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/minwavertstream.cpp": {
+    "mtime": 1782825424.2058258,
+    "ast_hash": "ffe44879944aa2b5725d4ee8e33d3366",
+    "semantic_hash": "ffe44879944aa2b5725d4ee8e33d3366"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/minwavertstream.h": {
+    "mtime": 1782823477.643712,
+    "ast_hash": "41eac97e6f5b0410f737d96b342917b0",
+    "semantic_hash": "41eac97e6f5b0410f737d96b342917b0"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/simple.h": {
+    "mtime": 1782823477.643712,
+    "ast_hash": "8eff705b3638761c8af8a84cd8b53c6d",
+    "semantic_hash": "8eff705b3638761c8af8a84cd8b53c6d"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/speakerhptopo.cpp": {
+    "mtime": 1782823477.643712,
+    "ast_hash": "3a41d66b5f46cfaa2edf2a20b78c1ba7",
+    "semantic_hash": "3a41d66b5f46cfaa2edf2a20b78c1ba7"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/speakerhptopo.h": {
+    "mtime": 1782823477.643712,
+    "ast_hash": "241e9347e053caf52164c130de8d6592",
+    "semantic_hash": "241e9347e053caf52164c130de8d6592"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/speakerhptoptable.h": {
+    "mtime": 1782823477.643712,
+    "ast_hash": "17d9d30c827c4b6ff1f708cc7e5105ef",
+    "semantic_hash": "17d9d30c827c4b6ff1f708cc7e5105ef"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/speakerhpwavtable.h": {
+    "mtime": 1782823477.643712,
+    "ast_hash": "696c458dbf5088c82c8f25d81b881b48",
+    "semantic_hash": "696c458dbf5088c82c8f25d81b881b48"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/speakertopo.cpp": {
+    "mtime": 1782823477.6447122,
+    "ast_hash": "746df04bd1fa2cc90c65254d10da8389",
+    "semantic_hash": "746df04bd1fa2cc90c65254d10da8389"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/speakertopo.h": {
+    "mtime": 1782823477.6457124,
+    "ast_hash": "e926d6e28fedb87ce92c77aaf420e3e5",
+    "semantic_hash": "e926d6e28fedb87ce92c77aaf420e3e5"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/speakertoptable.h": {
+    "mtime": 1782823477.6457124,
+    "ast_hash": "36f45623e6aec49b45c270bbeda1a0c0",
+    "semantic_hash": "36f45623e6aec49b45c270bbeda1a0c0"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/speakerwavtable.h": {
+    "mtime": 1782823477.6457124,
+    "ast_hash": "74adc35a7d14587d6957f609bcead5c7",
+    "semantic_hash": "74adc35a7d14587d6957f609bcead5c7"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/usbhsmictopo.cpp": {
+    "mtime": 1782823477.6457124,
+    "ast_hash": "b15ab6e81c2eb6c4ce00c2ed33b102a0",
+    "semantic_hash": "b15ab6e81c2eb6c4ce00c2ed33b102a0"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/usbhsmictopo.h": {
+    "mtime": 1782823477.6457124,
+    "ast_hash": "0cab47510a2ddf9d70a2a25641a17cfe",
+    "semantic_hash": "0cab47510a2ddf9d70a2a25641a17cfe"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/usbhsmictoptable.h": {
+    "mtime": 1782823477.6457124,
+    "ast_hash": "aca6e09c4217f4b6f5946c865f6c75eb",
+    "semantic_hash": "aca6e09c4217f4b6f5946c865f6c75eb"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/usbhsmicwavtable.h": {
+    "mtime": 1782823477.6457124,
+    "ast_hash": "3509f2709feac61c89f4be3b04794aef",
+    "semantic_hash": "3509f2709feac61c89f4be3b04794aef"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/usbhsminipairs.h": {
+    "mtime": 1782823477.6457124,
+    "ast_hash": "593f0159dcd29ded0cfc0ef2ad1576f9",
+    "semantic_hash": "593f0159dcd29ded0cfc0ef2ad1576f9"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/usbhsminwavert.cpp": {
+    "mtime": 1782823477.6467123,
+    "ast_hash": "9a46ccd380a6d8032d0cf28b84c77649",
+    "semantic_hash": "9a46ccd380a6d8032d0cf28b84c77649"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/usbhsspeakertopo.cpp": {
+    "mtime": 1782823477.6477125,
+    "ast_hash": "a9ab244537564a31ca2c1e78ea74dfe7",
+    "semantic_hash": "a9ab244537564a31ca2c1e78ea74dfe7"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/usbhsspeakertopo.h": {
+    "mtime": 1782823477.6477125,
+    "ast_hash": "cfad321f1b001eb8c5850935cb184390",
+    "semantic_hash": "cfad321f1b001eb8c5850935cb184390"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/usbhsspeakertoptable.h": {
+    "mtime": 1782823477.6477125,
+    "ast_hash": "f4654945eea0e958fe5c192c02d17773",
+    "semantic_hash": "f4654945eea0e958fe5c192c02d17773"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/usbhsspeakerwavtable.h": {
+    "mtime": 1782823477.6487124,
+    "ast_hash": "eccbd674443494e9fc7395065225146a",
+    "semantic_hash": "eccbd674443494e9fc7395065225146a"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/usbhstopo.cpp": {
+    "mtime": 1782823477.6497126,
+    "ast_hash": "5b578cb4b7438f0d671dcdf9277f02be",
+    "semantic_hash": "5b578cb4b7438f0d671dcdf9277f02be"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/usbhstopo.h": {
+    "mtime": 1782823477.6497126,
+    "ast_hash": "ed8dbcb03593bad31ba028e8a00ab03e",
+    "semantic_hash": "ed8dbcb03593bad31ba028e8a00ab03e"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/KeywordDetectorAdapter/KeywordDetectorContosoAdapter.cpp": {
+    "mtime": 1782823477.684715,
+    "ast_hash": "76ded4eb8e187ed00706f3b46b2bf7ca",
+    "semantic_hash": "76ded4eb8e187ed00706f3b46b2bf7ca"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/KeywordDetectorAdapter/dllmain.cpp": {
+    "mtime": 1782823477.685543,
+    "ast_hash": "2ecdf034193a380fd886bcd4d2f8c0b3",
+    "semantic_hash": "2ecdf034193a380fd886bcd4d2f8c0b3"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/KeywordDetectorAdapter/stdafx.cpp": {
+    "mtime": 1782823477.685543,
+    "ast_hash": "32be64a2361ea2d348e217da9d423282",
+    "semantic_hash": "32be64a2361ea2d348e217da9d423282"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/KeywordDetectorAdapter/stdafx.h": {
+    "mtime": 1782823477.685543,
+    "ast_hash": "30e8d622707136d58ea4e93b1d3de520",
+    "semantic_hash": "30e8d622707136d58ea4e93b1d3de520"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/KeywordDetectorAdapter/targetver.h": {
+    "mtime": 1782823477.685543,
+    "ast_hash": "05f2aff48de1b7f920e0fa15051a207f",
+    "semantic_hash": "05f2aff48de1b7f920e0fa15051a207f"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/SysVadShared.h": {
+    "mtime": 1782823477.6873655,
+    "ast_hash": "5cd9792b124e8f8b036ff1f5e8f13b47",
+    "semantic_hash": "5cd9792b124e8f8b036ff1f5e8f13b47"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/TabletAudioSample/hdmitopo.cpp": {
+    "mtime": 1782823477.6877527,
+    "ast_hash": "12f67e21e0f5491bb578a8e682e59937",
+    "semantic_hash": "12f67e21e0f5491bb578a8e682e59937"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/TabletAudioSample/hdmitopo.h": {
+    "mtime": 1782823477.6877527,
+    "ast_hash": "153c06109379157d0164aabddbdfb983",
+    "semantic_hash": "153c06109379157d0164aabddbdfb983"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/TabletAudioSample/hdmitoptable.h": {
+    "mtime": 1782823477.6877527,
+    "ast_hash": "d11daf7a4104a6b02c2e00d17b86a0d1",
+    "semantic_hash": "d11daf7a4104a6b02c2e00d17b86a0d1"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/TabletAudioSample/hdmiwavtable.h": {
+    "mtime": 1782823477.6877527,
+    "ast_hash": "3420e0819c28284c57d9ecd7054c2931",
+    "semantic_hash": "3420e0819c28284c57d9ecd7054c2931"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/TabletAudioSample/micarray2toptable.h": {
+    "mtime": 1782823477.6877527,
+    "ast_hash": "9bc8e3d31f2349206cb074f06c8c6fae",
+    "semantic_hash": "9bc8e3d31f2349206cb074f06c8c6fae"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/TabletAudioSample/micarray2wavtable.h": {
+    "mtime": 1782823477.6877527,
+    "ast_hash": "7bf28855e0a4dcc033ee195a3b7adf9a",
+    "semantic_hash": "7bf28855e0a4dcc033ee195a3b7adf9a"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/TabletAudioSample/micarray3toptable.h": {
+    "mtime": 1782823477.6877527,
+    "ast_hash": "5fc500a1cd03cee989308ea4529b5d0e",
+    "semantic_hash": "5fc500a1cd03cee989308ea4529b5d0e"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/TabletAudioSample/micarray3wavtable.h": {
+    "mtime": 1782823477.6877527,
+    "ast_hash": "a171e672faed780064c2b6af05d33e9f",
+    "semantic_hash": "a171e672faed780064c2b6af05d33e9f"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/TabletAudioSample/micintopo.cpp": {
+    "mtime": 1782823477.6877527,
+    "ast_hash": "d9fcb2824119ac0d8dca27b83252a2c3",
+    "semantic_hash": "d9fcb2824119ac0d8dca27b83252a2c3"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/TabletAudioSample/micintopo.h": {
+    "mtime": 1782823477.6877527,
+    "ast_hash": "1eaaaada0f286697b7156f6fd0a47281",
+    "semantic_hash": "1eaaaada0f286697b7156f6fd0a47281"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/TabletAudioSample/micintoptable.h": {
+    "mtime": 1782823477.6877527,
+    "ast_hash": "089b7ec1832a099c3124c87556c029be",
+    "semantic_hash": "089b7ec1832a099c3124c87556c029be"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/TabletAudioSample/micinwavtable.h": {
+    "mtime": 1782824055.5265777,
+    "ast_hash": "0332a30f5c1798e7223bd3c0ea86a3a4",
+    "semantic_hash": "0332a30f5c1798e7223bd3c0ea86a3a4"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/TabletAudioSample/minipairs.h": {
+    "mtime": 1782823477.6887152,
+    "ast_hash": "0c48de16f5cce56efa704c15fb3efcaf",
+    "semantic_hash": "0c48de16f5cce56efa704c15fb3efcaf"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/TabletAudioSample/spdiftopo.cpp": {
+    "mtime": 1782823477.6887152,
+    "ast_hash": "789b57082baad34a5de8cf8a6acd6a12",
+    "semantic_hash": "789b57082baad34a5de8cf8a6acd6a12"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/TabletAudioSample/spdiftopo.h": {
+    "mtime": 1782823477.6887152,
+    "ast_hash": "0e9203b7a4d5bbb6fc4922286c67aadf",
+    "semantic_hash": "0e9203b7a4d5bbb6fc4922286c67aadf"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/TabletAudioSample/spdiftoptable.h": {
+    "mtime": 1782823477.6887152,
+    "ast_hash": "65e683fae94f3a53358066a27c0d2602",
+    "semantic_hash": "65e683fae94f3a53358066a27c0d2602"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/TabletAudioSample/spdifwavtable.h": {
+    "mtime": 1782823477.6887152,
+    "ast_hash": "7eafa21d7c941c7155a70ecb548829cd",
+    "semantic_hash": "7eafa21d7c941c7155a70ecb548829cd"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/ToneGenerator.cpp": {
+    "mtime": 1782823477.729718,
+    "ast_hash": "30daeabc276c0aa382fa9e37c47d413d",
+    "semantic_hash": "30daeabc276c0aa382fa9e37c47d413d"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/ToneGenerator.h": {
+    "mtime": 1782823477.729718,
+    "ast_hash": "f443b31c2414b8c4771bf7d644041c26",
+    "semantic_hash": "f443b31c2414b8c4771bf7d644041c26"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/UnittestData.h": {
+    "mtime": 1782823477.729718,
+    "ast_hash": "bae5fd40d21c41fc1fb37d8e0771ed5c",
+    "semantic_hash": "bae5fd40d21c41fc1fb37d8e0771ed5c"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/UsbHsDevice.cpp": {
+    "mtime": 1782823477.729718,
+    "ast_hash": "e4051f883162d6ac7bef9edad6225c5a",
+    "semantic_hash": "e4051f883162d6ac7bef9edad6225c5a"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/UsbHsDevice.h": {
+    "mtime": 1782823477.729718,
+    "ast_hash": "b1fcb9677a251d4230af6628783c3d34",
+    "semantic_hash": "b1fcb9677a251d4230af6628783c3d34"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/adapter.cpp": {
+    "mtime": 1782917563.0675144,
+    "ast_hash": "af5bfbd52e73a598f05b6f066679b4bb",
+    "semantic_hash": "af5bfbd52e73a598f05b6f066679b4bb"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/basetopo.cpp": {
+    "mtime": 1782823477.729718,
+    "ast_hash": "c23d50403a9168c0586015897f4633e8",
+    "semantic_hash": "c23d50403a9168c0586015897f4633e8"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/basetopo.h": {
+    "mtime": 1782823477.729718,
+    "ast_hash": "e19125e8dbbeabed98893c19bddafd3c",
+    "semantic_hash": "e19125e8dbbeabed98893c19bddafd3c"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/common.cpp": {
+    "mtime": 1782917546.0552905,
+    "ast_hash": "0401c4d14cdf1400325f013a2b10db8e",
+    "semantic_hash": "0401c4d14cdf1400325f013a2b10db8e"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/common.h": {
+    "mtime": 1782823477.7307181,
+    "ast_hash": "4f9338aa3229a63634ad8568fedee9d0",
+    "semantic_hash": "4f9338aa3229a63634ad8568fedee9d0"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/hw.cpp": {
+    "mtime": 1782823477.7307181,
+    "ast_hash": "9bf405aaa45849e7e044533dc218b7c4",
+    "semantic_hash": "9bf405aaa45849e7e044533dc218b7c4"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/hw.h": {
+    "mtime": 1782823477.7307181,
+    "ast_hash": "b8aa980ea482c30be1c0927798c14677",
+    "semantic_hash": "b8aa980ea482c30be1c0927798c14677"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/ihvprivatepropertyset.h": {
+    "mtime": 1782823477.7307181,
+    "ast_hash": "a58343e17e889a0a374f7fab96581101",
+    "semantic_hash": "a58343e17e889a0a374f7fab96581101"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/kshelper.cpp": {
+    "mtime": 1782823477.7307181,
+    "ast_hash": "15b861feb00101cd221360f163d43ab4",
+    "semantic_hash": "15b861feb00101cd221360f163d43ab4"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/kshelper.h": {
+    "mtime": 1782823477.7307181,
+    "ast_hash": "35dab701230660a78559da5e6d19bb78",
+    "semantic_hash": "35dab701230660a78559da5e6d19bb78"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/lampyris_core.cpp": {
+    "mtime": 1782823477.7307181,
+    "ast_hash": "0f860e1b616096fb124933d79276800f",
+    "semantic_hash": "0f860e1b616096fb124933d79276800f"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/lookaside_polyfill.h": {
+    "mtime": 1782823477.7307181,
+    "ast_hash": "6520b1c3fcf98c33c74c428484a7f1c8",
+    "semantic_hash": "6520b1c3fcf98c33c74c428484a7f1c8"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/savedata.cpp": {
+    "mtime": 1782823477.7307181,
+    "ast_hash": "6ec1f34c0bdce50d3136b1a87b79467a",
+    "semantic_hash": "6ec1f34c0bdce50d3136b1a87b79467a"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/savedata.h": {
+    "mtime": 1782823477.7307181,
+    "ast_hash": "2d2553611d258f6137b9805948c451d6",
+    "semantic_hash": "2d2553611d258f6137b9805948c451d6"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/sysvad.h": {
+    "mtime": 1782823477.7307181,
+    "ast_hash": "9df7d4e2c007814cf9529cdab4e4e372",
+    "semantic_hash": "9df7d4e2c007814cf9529cdab4e4e372"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/sysvad.sln": {
+    "mtime": 1782823477.7307181,
+    "ast_hash": "0367080e1cf683e42c8583457b328511",
+    "semantic_hash": "0367080e1cf683e42c8583457b328511"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/sign_driver.ps1": {
+    "mtime": 1782823477.7307181,
+    "ast_hash": "a751427864dba79d682b0ceb080e4025",
+    "semantic_hash": "a751427864dba79d682b0ceb080e4025"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/tools/wasapi_probe.cpp": {
+    "mtime": 1782920568.7412882,
+    "ast_hash": "c55ad587b025ab4a87427edc1e6fc210",
+    "semantic_hash": "c55ad587b025ab4a87427edc1e6fc210"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/trust_certs.ps1": {
+    "mtime": 1782919973.3887718,
+    "ast_hash": "537cd4d7b0a54758c9166b94138227f9",
+    "semantic_hash": "537cd4d7b0a54758c9166b94138227f9"
+  },
+  "/home/hyuse/Desktop/Border-Tech/DESIGN.md": {
+    "mtime": 1782823477.3556924,
+    "ast_hash": "9acb89458a69800806dd0f24428e2fcf",
+    "semantic_hash": "9acb89458a69800806dd0f24428e2fcf"
+  },
+  "/home/hyuse/Desktop/Border-Tech/DebugInstructions.md": {
+    "mtime": 1782823477.3566923,
+    "ast_hash": "c4dbe8f582444e09ebc50090167b1712",
+    "semantic_hash": "c4dbe8f582444e09ebc50090167b1712"
+  },
+  "/home/hyuse/Desktop/Border-Tech/GEMINI.md": {
+    "mtime": 1782823477.3566923,
+    "ast_hash": "59bede0f9a2f52d179aff821b9f7304c",
+    "semantic_hash": "59bede0f9a2f52d179aff821b9f7304c"
+  },
+  "/home/hyuse/Desktop/Border-Tech/PRODUCT.md": {
+    "mtime": 1782823477.3566923,
+    "ast_hash": "96419ca25e818c0d928e5b4f29f97def",
+    "semantic_hash": "96419ca25e818c0d928e5b4f29f97def"
+  },
+  "/home/hyuse/Desktop/Border-Tech/README.md": {
+    "mtime": 1782823477.3566923,
+    "ast_hash": "3c26c90ca80e3b141886e02ac547317d",
+    "semantic_hash": "3c26c90ca80e3b141886e02ac547317d"
+  },
+  "/home/hyuse/Desktop/Border-Tech/commit_message.md": {
+    "mtime": 1782824055.506577,
+    "ast_hash": "fae9cc370ffb01af795b85d349a4e0b8",
+    "semantic_hash": "fae9cc370ffb01af795b85d349a4e0b8"
+  },
+  "/home/hyuse/Desktop/Border-Tech/debug_logs/EventViewerLogs.md": {
+    "mtime": 1782914890.556338,
+    "ast_hash": "7c35ef2113a2ee3ce979837b0c0ec60a",
+    "semantic_hash": "7c35ef2113a2ee3ce979837b0c0ec60a"
+  },
+  "/home/hyuse/Desktop/Border-Tech/dev_results.md": {
+    "mtime": 1782823477.3676932,
+    "ast_hash": "5cd97a5c8ec14e67926559b38266c20c",
+    "semantic_hash": "5cd97a5c8ec14e67926559b38266c20c"
+  },
+  "/home/hyuse/Desktop/Border-Tech/diagnosis.md": {
+    "mtime": 1782823477.3676932,
+    "ast_hash": "330fafa45e1526041a2b96f07dd36e2e",
+    "semantic_hash": "330fafa45e1526041a2b96f07dd36e2e"
+  },
+  "/home/hyuse/Desktop/Border-Tech/goal.md": {
+    "mtime": 1782823477.3676932,
+    "ast_hash": "0f98cf142fbf2ee02e8cfe4398aeb1fa",
+    "semantic_hash": "0f98cf142fbf2ee02e8cfe4398aeb1fa"
+  },
+  "/home/hyuse/Desktop/Border-Tech/testing_instructions.md": {
+    "mtime": 1782823477.3828917,
+    "ast_hash": "94f7068c9a3e0c954c1ddaf14eb794ec",
+    "semantic_hash": "94f7068c9a3e0c954c1ddaf14eb794ec"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/build_errors.md": {
+    "mtime": 1782828897.8262384,
+    "ast_hash": "388fe8fbb1f58262f04e7b1c34c96b82",
+    "semantic_hash": "388fe8fbb1f58262f04e7b1c34c96b82"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/debug_capture_instructions.md": {
+    "mtime": 1782920738.916005,
+    "ast_hash": "472a795f56d1114c63af7236d8bba311",
+    "semantic_hash": "472a795f56d1114c63af7236d8bba311"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-mic/x64/Debug/lampyris-mic.vcxproj.FileListAbsolute.txt": {
+    "mtime": 1782823477.6242645,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/AecApo/x64/Debug/AecAPO.vcxproj.FileListAbsolute.txt": {
+    "mtime": 1782823477.6261961,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/AecApo/x64/Release/AecAPO.vcxproj.FileListAbsolute.txt": {
+    "mtime": 1782823477.626617,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/DelayAPO/x64/Debug/DelayAPO.vcxproj.FileListAbsolute.txt": {
+    "mtime": 1782823477.6292036,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/DelayAPO/x64/Release/DelayAPO.vcxproj.FileListAbsolute.txt": {
+    "mtime": 1782823477.629513,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/KWSApo/x64/Debug/KwsAPO.vcxproj.FileListAbsolute.txt": {
+    "mtime": 1782823477.6321938,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/KWSApo/x64/Release/KwsAPO.vcxproj.FileListAbsolute.txt": {
+    "mtime": 1782823477.6325204,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/SwapAPO/x64/Debug/SwapAPO.vcxproj.FileListAbsolute.txt": {
+    "mtime": 1782823477.635734,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/SwapAPO/x64/Release/SwapAPO.vcxproj.FileListAbsolute.txt": {
+    "mtime": 1782823477.636198,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/x64/Debug/EndpointsCommon.vcxproj.FileListAbsolute.txt": {
+    "mtime": 1782823477.6627135,
+    "ast_hash": "9023e81963bde0f2e004d134af773ca9",
+    "semantic_hash": "9023e81963bde0f2e004d134af773ca9"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/EndpointsCommon/x64/Release/EndpointsCommon.vcxproj.FileListAbsolute.txt": {
+    "mtime": 1782823477.6797435,
+    "ast_hash": "eb9f3760a88a2fa244032b4e80a882aa",
+    "semantic_hash": "eb9f3760a88a2fa244032b4e80a882aa"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/KeywordDetectorAdapter/x64/Debug/KeywordDetectorContosoAdapter.vcxproj.FileListAbsolute.txt": {
+    "mtime": 1782823477.6861196,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/KeywordDetectorAdapter/x64/Release/KeywordDetectorContosoAdapter.vcxproj.FileListAbsolute.txt": {
+    "mtime": 1782823477.686288,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/Package/x64/Debug/package.VcxProj.FileListAbsolute.txt": {
+    "mtime": 1782823477.6871936,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/Package/x64/Release/package.VcxProj.FileListAbsolute.txt": {
+    "mtime": 1782823477.6872547,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/README.md": {
+    "mtime": 1782823477.6873655,
+    "ast_hash": "df6276f0dfc5fb934f7cfac8ed6829bd",
+    "semantic_hash": "df6276f0dfc5fb934f7cfac8ed6829bd"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/TabletAudioSample/x64/Debug/TabletAudioSample.vcxproj.FileListAbsolute.txt": {
+    "mtime": 1782823477.6927154,
+    "ast_hash": "4fe511e80c75a4eeaec1bddbbb570dd8",
+    "semantic_hash": "4fe511e80c75a4eeaec1bddbbb570dd8"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/TabletAudioSample/x64/Release/TabletAudioSample.vcxproj.FileListAbsolute.txt": {
+    "mtime": 1782823477.7107701,
+    "ast_hash": "92c9e0a32a544cbb7c1c15a90fd5c9b3",
+    "semantic_hash": "92c9e0a32a544cbb7c1c15a90fd5c9b3"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/silence_debug_progress.md": {
+    "mtime": 1782920654.7736778,
+    "ast_hash": "08a1c826e02efd79deb10eb11e21ea5b",
+    "semantic_hash": "08a1c826e02efd79deb10eb11e21ea5b"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/x64/Debug/lampyris-mic.vcxproj.FileListAbsolute.txt": {
+    "mtime": 1782823477.7327182,
+    "ast_hash": "6c7736710bc856b82763a59230bb15f7",
+    "semantic_hash": "6c7736710bc856b82763a59230bb15f7"
+  },
+  "/home/hyuse/Desktop/Border-Tech/Logos/Lampyris.svg": {
+    "mtime": 1782823477.3566923,
+    "ast_hash": "f7abbe6ba3182c52955eb1b99d5f45a0",
+    "semantic_hash": "f7abbe6ba3182c52955eb1b99d5f45a0"
+  },
+  "/home/hyuse/Desktop/Border-Tech/Logos/Sonus.svg": {
+    "mtime": 1782823477.3566923,
+    "ast_hash": "757bb53667e24ea153789530b61c4ef1",
+    "semantic_hash": "757bb53667e24ea153789530b61c4ef1"
+  },
+  "/home/hyuse/Desktop/Border-Tech/pc-client/ui/Lampyris.svg": {
+    "mtime": 1782823477.3828917,
+    "ast_hash": "f7abbe6ba3182c52955eb1b99d5f45a0",
+    "semantic_hash": "f7abbe6ba3182c52955eb1b99d5f45a0"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/AecApo/AecApo.png": {
+    "mtime": 1782823477.6253695,
+    "ast_hash": "f62883c7f7a46d216c8ebd1c55aacbef",
+    "semantic_hash": "f62883c7f7a46d216c8ebd1c55aacbef"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/DelayAPO/delayapo.png": {
+    "mtime": 1782823477.627817,
+    "ast_hash": "5e7d957834e7ed37715771fb0bd1e486",
+    "semantic_hash": "5e7d957834e7ed37715771fb0bd1e486"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/KWSApo/KWSApo.png": {
+    "mtime": 1782823477.6310372,
+    "ast_hash": "e93b2d58937dc363ff86e68fe3217200",
+    "semantic_hash": "e93b2d58937dc363ff86e68fe3217200"
+  },
+  "/home/hyuse/Desktop/Border-Tech/windows-driver/lampyris-sysvad/APO/SwapAPO/swapapo.png": {
+    "mtime": 1782823477.6347115,
+    "ast_hash": "5d28c787d03cce531d59e63270552ddf",
+    "semantic_hash": "5d28c787d03cce531d59e63270552ddf"
   }
 }

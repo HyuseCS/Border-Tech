@@ -3,7 +3,7 @@ Signature   = "$Windows NT$"
 Class       = MEDIA
 Provider    = %ProviderName%
 ClassGUID   = {4d36e96c-e325-11ce-bfc1-08002be10318}
-DriverVer = 07/01/2026,23.12.26.17
+DriverVer = 07/05/2026,13.46.46.691
 CatalogFile = sysvad.cat
 PnpLockDown = 1
 
@@ -178,6 +178,11 @@ HKR,,FriendlyName,,%SYSVAD.TopologyMicIn.szPname%
 ; The following lines opt-in to pull mode.
 HKR,EP\0,%PKEY_AudioEndpoint_Association%,,%KSNODETYPE_ANY%
 HKR,EP\0,%PKEY_AudioEndpoint_Supports_EventDriven_Mode%,0x00010001,0x1
+; Default endpoint format (PKEY_AudioEngine_OEMFormat): serialized VT_BLOB PROPVARIANT
+; containing WAVEFORMATEXTENSIBLE 2ch / 48000 Hz / 16-bit PCM stereo — must match
+; MicInPinSupportedDeviceFormats[0] in micinwavtable.h. Without it the engine has no
+; shared-mode device format (GetMixFormat -> AUDCLNT_E_UNSUPPORTED_FORMAT, mic never opens).
+HKR,EP\0,%PKEY_AudioEngine_OEMFormat%,0x00000001,41,00,00,00,28,00,00,00,FE,FF,02,00,80,BB,00,00,00,EE,02,00,04,00,10,00,16,00,10,00,03,00,00,00,01,00,00,00,00,00,10,00,80,00,00,AA,00,38,9B,71
 
 ;======================================================
 ; capture interfaces: mic array (internal: front)
@@ -543,6 +548,7 @@ KSNODETYPE_ANY   = "{00000000-0000-0000-0000-000000000000}"
 
 PKEY_AudioEndpoint_Association               = "{1DA5D803-D492-4EDD-8C23-E0C0FFEE7F0E},2"
 PKEY_AudioEndpoint_Supports_EventDriven_Mode = "{1DA5D803-D492-4EDD-8C23-E0C0FFEE7F0E},7"
+PKEY_AudioEngine_OEMFormat                   = "{E4870E26-3CC5-4CD2-BA46-CA0A9A70ED04},3"
 ;PKEY_AudioEndpoint_Default_VolumeInDb        = "{1DA5D803-D492-4EDD-8C23-E0C0FFEE7F0E},9"
 
 PKEY_FX_Association         = "{D04E05A6-594B-4FB6-A80D-01AF5EED7D1D},0"

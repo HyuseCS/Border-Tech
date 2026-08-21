@@ -1,19 +1,30 @@
-// wasapi_probe.cpp — find the Lampyris capture endpoint and try to open it the
-// same way a browser / Voice Recorder does, printing the exact HRESULT at each
-// step. This tells us WHY IAudioClient::Initialize aborts before the driver's
-// NewStream is ever called.
+// wasapi_probe.cpp — probe ALL active capture endpoints (control group + Lampyris)
+// and try to open the Lampyris endpoint several ways, printing the exact HRESULT
+// at each step:
+//   - GetMixFormat + shared-mode Initialize on every endpoint (control vs Lampyris)
+//   - Lampyris: shared Initialize with an EXPLICIT 2ch/48k/16 format (GetMixFormat
+//     may fail; don't depend on it)
+//   - Lampyris: shared + AUDCLNT_STREAMFLAGS_EVENTCALLBACK (how browsers open mics)
+//   - Lampyris: EXCLUSIVE-mode Initialize with the explicit format — this bypasses
+//     the audio engine's shared pipe / format cache and opens the KS pin directly.
+//     If this succeeds, the driver's NewStream fires and the driver side is proven
+//     good; the bug is then purely in the shared-mode engine path.
 //
-// Build (in an x64 Developer/WDK command prompt):
-//     cl /EHsc /W3 wasapi_probe.cpp ole32.lib
+// Build (any VS x64 command prompt):
+//     cl /EHsc /W3 /MT wasapi_probe.cpp ole32.lib
 // Run:
 //     wasapi_probe.exe
 //
-// No admin needed. Make sure Windows mic privacy is on (it is).
+// Run DebugView (kernel capture) at the same time: watch for "NewStream ENTER"
+// during the exclusive attempt.
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <mmdeviceapi.h>
 #include <audioclient.h>
+#include <mmreg.h>
+#include <ks.h>
+#include <ksmedia.h>
 #include <functiondiscoverykeys_devpkey.h>
 #include <stdio.h>
 #include <string.h>
@@ -22,6 +33,10 @@ static const char* HrName(HRESULT hr)
 {
     switch ((unsigned)hr) {
     case 0x00000000: return "S_OK";
+    case 0x00000001: return "S_FALSE (close match returned)";
+    case 0x80004003: return "E_POINTER";
+    case 0x80070005: return "E_ACCESSDENIED";
+    case 0x80070490: return "E_NOTFOUND";
     case 0x88890001: return "AUDCLNT_E_NOT_INITIALIZED";
     case 0x88890002: return "AUDCLNT_E_ALREADY_INITIALIZED";
     case 0x88890003: return "AUDCLNT_E_WRONG_ENDPOINT_TYPE";
@@ -56,8 +71,32 @@ static const char* HrName(HRESULT hr)
 
 #define STEP(label, call) do { \
     hr = (call); \
-    printf("  %-28s -> 0x%08X  %s\n", label, (unsigned)hr, HrName(hr)); \
+    printf("  %-34s -> 0x%08X  %s\n", label, (unsigned)hr, HrName(hr)); \
 } while (0)
+
+// The exact device format the driver advertises (micinwavtable.h entry 0).
+static WAVEFORMATEXTENSIBLE MakeDeviceFormat()
+{
+    WAVEFORMATEXTENSIBLE wfx = {};
+    wfx.Format.wFormatTag = WAVE_FORMAT_EXTENSIBLE;
+    wfx.Format.nChannels = 2;
+    wfx.Format.nSamplesPerSec = 48000;
+    wfx.Format.nAvgBytesPerSec = 192000;
+    wfx.Format.nBlockAlign = 4;
+    wfx.Format.wBitsPerSample = 16;
+    wfx.Format.cbSize = sizeof(WAVEFORMATEXTENSIBLE) - sizeof(WAVEFORMATEX);
+    wfx.Samples.wValidBitsPerSample = 16;
+    wfx.dwChannelMask = KSAUDIO_SPEAKER_STEREO;
+    wfx.SubFormat = KSDATAFORMAT_SUBTYPE_PCM;
+    return wfx;
+}
+
+static void PrintFormat(const WAVEFORMATEX* f)
+{
+    if (!f) return;
+    printf("      fmt: %u ch, %lu Hz, %u bit, tag 0x%04X\n",
+           f->nChannels, f->nSamplesPerSec, f->wBitsPerSample, f->wFormatTag);
+}
 
 int wmain()
 {
@@ -74,12 +113,15 @@ int wmain()
     if (FAILED(hr)) { printf("EnumAudioEndpoints 0x%08X\n", (unsigned)hr); return 1; }
 
     UINT count = 0; pColl->GetCount(&count);
-    printf("Active capture endpoints: %u\n", count);
+    printf("Active capture endpoints: %u\n\n", count);
 
     IMMDevice* pLampyris = nullptr;
+
+    // ---- Pass 1: control sweep — GetMixFormat + plain shared Initialize on EVERY endpoint.
     for (UINT i = 0; i < count; ++i) {
         IMMDevice* pDev = nullptr;
         if (FAILED(pColl->Item(i, &pDev))) continue;
+
         IPropertyStore* pProps = nullptr;
         wchar_t name[256] = L"(unknown)";
         if (SUCCEEDED(pDev->OpenPropertyStore(STGM_READ, &pProps))) {
@@ -89,67 +131,111 @@ int wmain()
             PropVariantClear(&v);
             pProps->Release();
         }
-        wprintf(L"  [%u] %s\n", i, name);
-        if (!pLampyris && wcsstr(name, L"Lampyris")) {
-            pLampyris = pDev; pLampyris->AddRef();
+        wprintf(L"[%u] %s\n", i, name);
+
+        IAudioClient* pClient = nullptr;
+        STEP("Activate(IAudioClient)", pDev->Activate(__uuidof(IAudioClient), CLSCTX_ALL, nullptr, (void**)&pClient));
+        if (SUCCEEDED(hr)) {
+            WAVEFORMATEX* pMix = nullptr;
+            STEP("GetMixFormat", pClient->GetMixFormat(&pMix));
+            PrintFormat(pMix);
+            if (pMix) {
+                STEP("Initialize(SHARED, mix fmt)", pClient->Initialize(AUDCLNT_SHAREMODE_SHARED, 0, 2000000, 0, pMix, nullptr));
+                if (SUCCEEDED(hr)) printf("      (open OK — endpoint healthy)\n");
+                CoTaskMemFree(pMix);
+            }
+            pClient->Release();
         }
+        printf("\n");
+
+        if (!pLampyris && wcsstr(name, L"Lampyris")) { pLampyris = pDev; pLampyris->AddRef(); }
         pDev->Release();
     }
 
-    if (!pLampyris) { printf("\nNo capture endpoint with 'Lampyris' in the name.\n"); return 2; }
-    printf("\nOpening the Lampyris endpoint:\n");
+    if (!pLampyris) { printf("No capture endpoint with 'Lampyris' in the name.\n"); return 2; }
 
-    IAudioClient* pClient = nullptr;
-    STEP("Activate(IAudioClient)", pLampyris->Activate(__uuidof(IAudioClient), CLSCTX_ALL, nullptr, (void**)&pClient));
-    if (FAILED(hr)) return 3;
+    // ---- Pass 2: Lampyris deep probe with an EXPLICIT format (never depend on GetMixFormat).
+    WAVEFORMATEXTENSIBLE wfx = MakeDeviceFormat();
+    WAVEFORMATEX* pFmt = &wfx.Format;
+    printf("=== Lampyris deep probe (explicit 2ch/48000/16 WAVEFORMATEXTENSIBLE) ===\n\n");
 
-    WAVEFORMATEX* pMix = nullptr;
-    STEP("GetMixFormat", pClient->GetMixFormat(&pMix));
-    if (pMix)
-        printf("      mix: %u ch, %lu Hz, %u bit, tag %u\n",
-               pMix->nChannels, pMix->nSamplesPerSec, pMix->wBitsPerSample, pMix->wFormatTag);
-
-    if (pMix) {
-        WAVEFORMATEX* pClosest = nullptr;
-        STEP("IsFormatSupported(SHARED)", pClient->IsFormatSupported(AUDCLNT_SHAREMODE_SHARED, pMix, &pClosest));
-        if (pClosest) CoTaskMemFree(pClosest);
-    }
-
-    // Attempt 1: plain shared-mode, timer-driven (no event) — the simplest open.
-    printf("\n-- Attempt 1: shared, NO event flag --\n");
-    STEP("Initialize", pClient->Initialize(AUDCLNT_SHAREMODE_SHARED, 0, 2000000 /*200ms*/, 0, pMix, nullptr));
-    if (SUCCEEDED(hr)) {
-        UINT32 frames = 0; STEP("GetBufferSize", pClient->GetBufferSize(&frames));
-        printf("      buffer frames: %u\n", frames);
-        IAudioCaptureClient* pCap = nullptr;
-        STEP("GetService(CaptureClient)", pClient->GetService(__uuidof(IAudioCaptureClient), (void**)&pCap));
-        STEP("Start", pClient->Start());
-        printf("      >>> OPEN SUCCEEDED. Capture stream is live. <<<\n");
-        if (pCap) pCap->Release();
-        pClient->Stop();
-        if (pMix) CoTaskMemFree(pMix);
-        return 0;
-    }
-
-    // Attempt 1 failed. Re-activate a fresh client and try event-driven mode,
-    // which is what the audio engine's capture pump uses (INF opts into it).
-    printf("\n-- Attempt 2: shared, WITH event callback flag --\n");
-    pClient->Release(); pClient = nullptr;
-    STEP("Activate(IAudioClient)#2", pLampyris->Activate(__uuidof(IAudioClient), CLSCTX_ALL, nullptr, (void**)&pClient));
-    if (SUCCEEDED(hr)) {
-        HANDLE hEv = CreateEventW(nullptr, FALSE, FALSE, nullptr);
-        STEP("Initialize(EVENTCALLBACK)", pClient->Initialize(AUDCLNT_SHAREMODE_SHARED,
-                 AUDCLNT_STREAMFLAGS_EVENTCALLBACK, 2000000, 0, pMix, nullptr));
+    // 2a. IsFormatSupported, shared + exclusive.
+    {
+        IAudioClient* pClient = nullptr;
+        STEP("Activate(IAudioClient)", pLampyris->Activate(__uuidof(IAudioClient), CLSCTX_ALL, nullptr, (void**)&pClient));
         if (SUCCEEDED(hr)) {
-            STEP("SetEventHandle", pClient->SetEventHandle(hEv));
-            STEP("Start", pClient->Start());
-            printf("      >>> EVENT-DRIVEN OPEN SUCCEEDED. <<<\n");
-            pClient->Stop();
+            WAVEFORMATEX* pClosest = nullptr;
+            STEP("IsFormatSupported(SHARED, dev fmt)", pClient->IsFormatSupported(AUDCLNT_SHAREMODE_SHARED, pFmt, &pClosest));
+            if (pClosest) { PrintFormat(pClosest); CoTaskMemFree(pClosest); }
+            STEP("IsFormatSupported(EXCL, dev fmt)", pClient->IsFormatSupported(AUDCLNT_SHAREMODE_EXCLUSIVE, pFmt, nullptr));
+            pClient->Release();
         }
-        if (hEv) CloseHandle(hEv);
+        printf("\n");
     }
 
-    printf("\nBoth attempts failed above -> the HRESULT names the reason.\n");
-    if (pMix) CoTaskMemFree(pMix);
-    return 4;
+    // 2b. Shared mode with the explicit format.
+    {
+        IAudioClient* pClient = nullptr;
+        printf("-- Attempt: SHARED, explicit dev fmt, no event --\n");
+        STEP("Activate(IAudioClient)", pLampyris->Activate(__uuidof(IAudioClient), CLSCTX_ALL, nullptr, (void**)&pClient));
+        if (SUCCEEDED(hr)) {
+            STEP("Initialize", pClient->Initialize(AUDCLNT_SHAREMODE_SHARED, 0, 2000000, 0, pFmt, nullptr));
+            if (SUCCEEDED(hr)) {
+                STEP("Start", pClient->Start());
+                printf("      >>> SHARED OPEN SUCCEEDED <<<\n");
+                pClient->Stop();
+            }
+            pClient->Release();
+        }
+        printf("\n");
+    }
+
+    // 2c. Shared + event callback (the browser path).
+    {
+        IAudioClient* pClient = nullptr;
+        printf("-- Attempt: SHARED + EVENTCALLBACK, explicit dev fmt --\n");
+        STEP("Activate(IAudioClient)", pLampyris->Activate(__uuidof(IAudioClient), CLSCTX_ALL, nullptr, (void**)&pClient));
+        if (SUCCEEDED(hr)) {
+            HANDLE hEv = CreateEventW(nullptr, FALSE, FALSE, nullptr);
+            STEP("Initialize(EVENTCALLBACK)", pClient->Initialize(AUDCLNT_SHAREMODE_SHARED,
+                     AUDCLNT_STREAMFLAGS_EVENTCALLBACK, 2000000, 0, pFmt, nullptr));
+            if (SUCCEEDED(hr)) {
+                STEP("SetEventHandle", pClient->SetEventHandle(hEv));
+                STEP("Start", pClient->Start());
+                printf("      >>> EVENT-DRIVEN OPEN SUCCEEDED <<<\n");
+                pClient->Stop();
+            }
+            if (hEv) CloseHandle(hEv);
+            pClient->Release();
+        }
+        printf("\n");
+    }
+
+    // 2d. EXCLUSIVE mode — bypasses the shared engine pipe / format cache entirely and
+    //     opens the KS pin directly. Watch DebugView for "NewStream ENTER" here.
+    {
+        IAudioClient* pClient = nullptr;
+        printf("-- Attempt: EXCLUSIVE, explicit dev fmt (bypasses engine pipe; watch for NewStream) --\n");
+        STEP("Activate(IAudioClient)", pLampyris->Activate(__uuidof(IAudioClient), CLSCTX_ALL, nullptr, (void**)&pClient));
+        if (SUCCEEDED(hr)) {
+            STEP("Initialize(EXCLUSIVE)", pClient->Initialize(AUDCLNT_SHAREMODE_EXCLUSIVE, 0, 1000000, 0, pFmt, nullptr));
+            if (SUCCEEDED(hr)) {
+                UINT32 frames = 0; STEP("GetBufferSize", pClient->GetBufferSize(&frames));
+                printf("      buffer frames: %u\n", frames);
+                IAudioCaptureClient* pCap = nullptr;
+                STEP("GetService(CaptureClient)", pClient->GetService(__uuidof(IAudioCaptureClient), (void**)&pCap));
+                STEP("Start", pClient->Start());
+                printf("      >>> EXCLUSIVE OPEN SUCCEEDED — driver-side pin creation WORKS <<<\n");
+                if (pCap) pCap->Release();
+                pClient->Stop();
+            }
+            pClient->Release();
+        }
+    }
+
+    printf("\nDone. Interpretation:\n"
+           "  control mic also fails            -> VM audio engine broken, not our driver\n"
+           "  EXCLUSIVE succeeds, SHARED fails  -> driver fine; shared-mode engine pipe is the bug\n"
+           "  EXCLUSIVE fails too               -> the HRESULT + DebugView (NewStream?) name the KS-level reason\n");
+    return 0;
 }

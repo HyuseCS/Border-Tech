@@ -91,7 +91,17 @@ ULONG ReadAudioData(PVOID Buffer, ULONG Length) {
 NTSTATUS LampyrisCreateClose(PDEVICE_OBJECT DeviceObject, PIRP Irp) {
     if (DeviceObject != g_ControlDeviceObject) {
         PIO_STACK_LOCATION IrpSp = IoGetCurrentIrpStackLocation(Irp);
-        if (IrpSp->MajorFunction == IRP_MJ_CREATE && g_PcCreate) return g_PcCreate(DeviceObject, Irp);
+        if (IrpSp->MajorFunction == IRP_MJ_CREATE && g_PcCreate) {
+            // LAMPYRIS-DEBUG: filter opens have an empty name / no related file object;
+            // PIN creates are relative opens (Related != NULL) with the KSPIN_CONNECT
+            // blob in the name. Capture identity before forwarding (IRP is gone after).
+            USHORT nameLen = IrpSp->FileObject ? IrpSp->FileObject->FileName.Length : 0;
+            PVOID related = IrpSp->FileObject ? IrpSp->FileObject->RelatedFileObject : NULL;
+            NTSTATUS st = g_PcCreate(DeviceObject, Irp);
+            DbgPrint("[LAMPYRIS] MJ_CREATE %s nameLen=%u -> 0x%X\n",
+                     related ? "PIN" : "FILTER", nameLen, st);
+            return st;
+        }
         if (IrpSp->MajorFunction == IRP_MJ_CLOSE && g_PcClose) return g_PcClose(DeviceObject, Irp);
         Irp->IoStatus.Status = STATUS_SUCCESS;
         Irp->IoStatus.Information = 0;
