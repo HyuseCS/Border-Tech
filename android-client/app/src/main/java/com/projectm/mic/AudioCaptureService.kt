@@ -3,6 +3,7 @@ package com.projectm.mic
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
@@ -18,6 +19,8 @@ import androidx.core.app.NotificationCompat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import org.bouncycastle.asn1.x500.X500Name
 import org.bouncycastle.cert.jcajce.JcaX509CertificateConverter
@@ -30,6 +33,7 @@ import java.net.ServerSocket
 import java.net.Socket
 import java.security.*
 import java.security.cert.X509Certificate
+import java.util.concurrent.atomic.AtomicReference
 import java.util.Date
 import javax.net.ssl.KeyManagerFactory
 import javax.net.ssl.SSLContext
@@ -50,6 +54,12 @@ class AudioCaptureService : Service() {
         private const val TAG = "AudioCaptureService"
         const val NOTIFICATION_ID = 1001
         const val CHANNEL_ID = "audio_capture_channel"
+        const val ACTION_STOP = "com.projectm.mic.ACTION_STOP"
+        private const val HANDSHAKE_TIMEOUT_MS = 10_000
+        private const val WATCHDOG_TIMEOUT_MS = 5_000L
+        private const val WATCHDOG_POLL_MS = 1_000L
+        private const val ACCEPT_RETRY_DELAY_MS = 200L
+        private const val MAX_ACCEPT_FAILURES = 5
         
         var state = mutableStateOf(ConnectionState.DISCONNECTED)
         var errorMessage = mutableStateOf("")
@@ -91,7 +101,12 @@ class AudioCaptureService : Service() {
     private val serviceScope = CoroutineScope(Dispatchers.Main + Job())
     private var captureJob: Job? = null
     private var serverSocket: ServerSocket? = null
-    private var audioRecord: AudioRecord? = null
+    private val audioRecord = AtomicReference<AudioRecord?>(null)
+    @Volatile private var lastSuccessfulWriteMs: Long = System.currentTimeMillis()
+    // Written on the client thread (handleClient catch), read on Main (accept-loop notification
+    // update), so @Volatile is required. Lets the accept loop tell "listening for a first
+    // connection" apart from "the link just dropped" without holding `state` at a misleading ERROR.
+    @Volatile private var lastClientFailed: Boolean = false
 
     override fun onCreate() {
         super.onCreate()
@@ -105,6 +120,15 @@ class AudioCaptureService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        // Must be the FIRST statement: the rest of this function unconditionally re-notifies,
+        // sets CONNECTING and relaunches the server loop, which would restart the very
+        // connection this intent was sent to stop.
+        if (intent?.action == ACTION_STOP) {
+            Log.d(TAG, "onStartCommand: ACTION_STOP received")
+            stopService(this)
+            return START_NOT_STICKY
+        }
+
         val port = intent?.getIntExtra("EXTRA_PORT", 47999) ?: 47999
         val isUsb = intent?.getBooleanExtra("EXTRA_IS_USB", true) ?: true
 
@@ -136,9 +160,18 @@ class AudioCaptureService : Service() {
     }
 
     private fun createNotification(text: String): Notification {
+        // Tapping the notification body stops the connection. FLAG_IMMUTABLE is required at targetSdk 34.
+        val stopIntent = Intent(this, AudioCaptureService::class.java).setAction(ACTION_STOP)
+        val stopPendingIntent = PendingIntent.getService(
+            this,
+            0,
+            stopIntent,
+            PendingIntent.FLAG_IMMUTABLE
+        )
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("Sonus Audio Server")
-            .setContentText(text)
+            .setContentText("$text \u2022 Tap to stop")
+            .setContentIntent(stopPendingIntent)
             .setSmallIcon(R.drawable.ic_launcher_mic)
             .setOngoing(true)
             .setPriority(NotificationCompat.PRIORITY_LOW)
@@ -181,11 +214,15 @@ class AudioCaptureService : Service() {
             }
 
             Log.d(TAG, "Server socket ready, entering accept loop")
+            var consecutiveAcceptFailures = 0
             while (isServiceRunning.value) {
                 serviceScope.launch(Dispatchers.Main) {
                     state.value = ConnectionState.CONNECTING
                     val modeText = if (isUsb) "USB" else "Wi-Fi"
-                    updateNotification("Waiting for $modeText connection on port $port")
+                    updateNotification(
+                        if (lastClientFailed) "Connection lost - waiting for $modeText reconnect on port $port"
+                        else "Waiting for $modeText connection on port $port"
+                    )
                 }
 
                 val clientSocket = try {
@@ -193,8 +230,21 @@ class AudioCaptureService : Service() {
                 } catch (e: Exception) {
                     Log.e(TAG, "Accept error: ${e.message}")
                     null
-                } ?: break
-                
+                }
+
+                if (clientSocket == null) {
+                    // One bad peer must not kill the server. Retry, but bail out after a bounded
+                    // run of consecutive failures so a permanently dead socket cannot hot-spin.
+                    consecutiveAcceptFailures++
+                    if (consecutiveAcceptFailures >= MAX_ACCEPT_FAILURES) {
+                        Log.e(TAG, "Giving up after $consecutiveAcceptFailures consecutive accept failures")
+                        break
+                    }
+                    Thread.sleep(ACCEPT_RETRY_DELAY_MS)
+                    continue
+                }
+                consecutiveAcceptFailures = 0
+
                 handleClient(clientSocket)
             }
 
@@ -211,7 +261,14 @@ class AudioCaptureService : Service() {
     }
 
     private fun handleClient(socket: Socket) {
+        var watchdogJob: Job? = null
         try {
+            // Guards every blocking read of the pre-streaming phase: the TLS handshake below and
+            // all SRP reads. soTimeout is a persistent socket property, so setting it once here is
+            // enough; a SocketTimeoutException propagates to the general catch and the finally block
+            // closes the socket, exactly like any other handshake failure.
+            socket.soTimeout = HANDSHAKE_TIMEOUT_MS
+
             if (System.currentTimeMillis() < lockoutUntil) {
                 Log.w(TAG, "Connection rejected: Active lockout")
                 socket.close()
@@ -326,7 +383,12 @@ class AudioCaptureService : Service() {
             outputStream.write(m2Pad)
             outputStream.flush()
             
+            // Streaming only writes, and soTimeout affects reads only, so a lingering handshake
+            // timeout would be inert here. Cleared anyway as defensive hygiene.
+            socket.soTimeout = 0
+
             val peerAddr = socket.inetAddress.hostAddress
+            lastClientFailed = false
             serviceScope.launch(Dispatchers.Main) {
                 state.value = ConnectionState.CONNECTED
                 updateNotification("Streaming audio to $peerAddr")
@@ -348,7 +410,7 @@ class AudioCaptureService : Service() {
                 audioFormat,
                 bufferSize
             )
-            audioRecord = recorder
+            audioRecord.set(recorder)
 
             if (recorder.state != AudioRecord.STATE_INITIALIZED) {
                 throw IllegalStateException("Failed to initialize AudioRecord")
@@ -357,13 +419,43 @@ class AudioCaptureService : Service() {
             recorder.startRecording()
             Log.d(TAG, "AudioRecord started, streaming...")
             
+            // Two independent thresholds, deliberately different:
+            //  - 50ms (in the loop below): codec-quality heuristic. Three consecutive slow writes
+            //    degrade the stream to 24kHz to shed bandwidth. NOT a liveness signal.
+            //  - 5s (WATCHDOG_TIMEOUT_MS): liveness signal. Ordinary Wi-Fi jitter is already absorbed
+            //    by the 24kHz degradation valve, so a 5s gap with no completed write means the socket
+            //    is dead, not merely congested. 5s leaves headroom against scheduling jitter while
+            //    still recovering promptly.
+            // Reset before launching: this field is service-level and shared across sequential client
+            // connections, so a stale timestamp from a previous connection would force-close this
+            // brand-new socket before it ever writes its first frame.
+            lastSuccessfulWriteMs = System.currentTimeMillis()
+            // Closing the socket from ANOTHER thread is the only thing that unblocks a thread parked
+            // inside a blocked write(); captureJob.cancel() only trips cooperative coroutine
+            // cancellation and would not reach this loop at all.
+            watchdogJob = serviceScope.launch(Dispatchers.IO) {
+                while (isActive) {
+                    delay(WATCHDOG_POLL_MS)
+                    if (System.currentTimeMillis() - lastSuccessfulWriteMs > WATCHDOG_TIMEOUT_MS) {
+                        Log.w(TAG, "Watchdog: no successful write for ${WATCHDOG_TIMEOUT_MS}ms, closing socket")
+                        try { socket.close() } catch (e: Exception) {}
+                        break
+                    }
+                }
+            }
+
             val buffer = ByteArray(480)
             var seqNum: Short = 0
             var writeStallsCount = 0
             var writeOkCount = 0
             var isDegraded = false
 
-            // Streaming loop for this client
+            // Streaming loop for this client.
+            // NOTE: this loop deliberately uses the LOCAL `recorder` reference, not audioRecord.get().
+            // When another thread tears down via audioRecord.getAndSet(null)?.let { stop(); release() },
+            // the next recorder.read() on the released instance throws IllegalStateException, which the
+            // catch below turns into a clean, immediate loop exit. Routing through audioRecord.get()
+            // would yield null and silently skip reads (a spin) instead of failing fast. Do not "fix" this.
             while (isServiceRunning.value && socket.isConnected && !socket.isClosed) {
                 val bytesRead = recorder.read(buffer, 0, buffer.size)
                 if (bytesRead > 0) {
@@ -385,6 +477,7 @@ class AudioCaptureService : Service() {
                         Log.e(TAG, "Socket write error", e)
                         break
                     }
+                    lastSuccessfulWriteMs = System.currentTimeMillis()
                     val duration = System.currentTimeMillis() - startTime
                     
                     seqNum = (seqNum + 1).toShort()
@@ -416,15 +509,25 @@ class AudioCaptureService : Service() {
 
         } catch (e: Exception) {
             Log.e(TAG, "Handle client error", e)
+            lastClientFailed = true
+            // Queued on Main before the finally block's own Main-queued update, so the guard
+            // there (state != ERROR) sees this value and does not overwrite it with CONNECTING.
+            serviceScope.launch(Dispatchers.Main) {
+                state.value = ConnectionState.ERROR
+                errorMessage.value = e.localizedMessage ?: e.javaClass.simpleName
+            }
         } finally {
             Log.d(TAG, "Cleaning up client connection")
+            // Sibling of captureJob, not a child: captureJob.cancel() does not reach it.
+            watchdogJob?.cancel()
             try { socket.close() } catch (e: Exception) {}
-            try { audioRecord?.stop() } catch (e: Exception) {}
-            try { audioRecord?.release() } catch (e: Exception) {}
-            audioRecord = null
+            audioRecord.getAndSet(null)?.let {
+                try { it.stop() } catch (e: Exception) {}
+                try { it.release() } catch (e: Exception) {}
+            }
             
             serviceScope.launch(Dispatchers.Main) {
-                if (isServiceRunning.value) {
+                if (isServiceRunning.value && state.value != ConnectionState.ERROR) {
                     state.value = ConnectionState.CONNECTING
                 }
             }
@@ -517,13 +620,14 @@ class AudioCaptureService : Service() {
 
     private fun cleanup() {
         Log.d(TAG, "Service cleanup")
-        try {
-            audioRecord?.stop()
-        } catch (_: Exception) {}
-        try {
-            audioRecord?.release()
-        } catch (_: Exception) {}
-        audioRecord = null
+        audioRecord.getAndSet(null)?.let {
+            try {
+                it.stop()
+            } catch (_: Exception) {}
+            try {
+                it.release()
+            } catch (_: Exception) {}
+        }
 
         try {
             serverSocket?.close()
