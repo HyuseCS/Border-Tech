@@ -1,5 +1,9 @@
 # Lampyris Mic — Silence Debug Progress (handoff)
 
+**Next session starting fresh?** Read
+`process/features/windows-driver/active/mic-deviceformat-fix_21-08-26/mic-deviceformat-fix_HANDOFF_21-08-26.md`
+first, then follow `windows-driver/WINDOWS_VM_GUIDE.md` for VM steps.
+
 **Symptom:** virtual mic outputs silence — green meter never moves, browsers
 throw `NotReadableError`, Voice Recorder sees "no microphone". Producer
 (PC client → IOCTL → ring buffer) works fine.

@@ -292,17 +292,29 @@ otherwise a syntax/diff review), and the user completes the runbook above afterw
 
 ## Resume and Execution Handoff
 
+**Read `mic-deviceformat-fix_HANDOFF_21-08-26.md` first — it is the self-contained
+next-session entrypoint and supersedes the summary below for routing purposes.**
+
 1. **Selected plan file path**: `process/features/windows-driver/active/mic-deviceformat-fix_21-08-26/mic-deviceformat-fix_PLAN_21-08-26.md`
-2. **Last completed phase or step**: PLAN — this file just written; SPEC and INNOVATE deliberately
-   skipped (see Phase Skip Record above).
-3. **Validate-contract status**: pending — VALIDATE has not yet run.
-4. **Supporting context files loaded**: `process/context/all-context.md`,
+2. **Phases completed this session**: RESEARCH (5 parallel agents), PLAN, VALIDATE
+   (`Gate: CONDITIONAL`, 1 plan-fix cycle applied — see `## Validate Contract` →
+   `Proposed Plan Updates` P1-P5), EXECUTE, EVL (independent `vc-tester` confirmation run,
+   6/6 runnable gates green), UPDATE PROCESS. SPEC and INNOVATE deliberately skipped — see
+   Phase Skip Record above.
+3. **Current state**: code-complete, **UNVERIFIED**. Blocked entirely on the user-executed
+   Verification Procedure runbook (steps a-e) on the Windows VM. AC5-e2e (audible,
+   meter-moving audio) is the acceptance bar and has not run yet.
+4. **Archival status**: this plan stays in `active/`. Do **not** archive until runbook step
+   (d) — audible audio — passes. See `mic-deviceformat-fix_REPORT_21-08-26.md` closeout:
+   classification is "Keep in active/testing".
+5. **Supporting context files loaded**: `process/context/all-context.md`,
    `process/context/planning/all-planning.md`, `process/context/tests/all-tests.md`,
-   `process/features/windows-driver/_GUIDE.md`, `windows-driver/silence_debug_progress.md`.
-5. **Next step for a fresh agent picking up mid-execution**: run VALIDATE against this plan
-   (`ENTER VALIDATE MODE`), then EXECUTE the Implementation Checklist in order (items 1-4 are all
-   agent-executable code/doc changes; item 5, the verification runbook, is entirely user-executed
-   on the Windows VM and is out of agent scope — see Known Gap).
+   `process/features/windows-driver/_GUIDE.md`, `windows-driver/silence_debug_progress.md`,
+   `windows-driver/WINDOWS_VM_GUIDE.md`.
+6. **Next step for a fresh agent**: read `mic-deviceformat-fix_HANDOFF_21-08-26.md`, get the
+   BEFORE line from `reset_mic_endpoint.ps1` from the user, and route per that handoff's
+   decision tree (section 6). Do not re-run RESEARCH unless the decision tree's refutation
+   branch fires.
 
 
 Next step: say **ENTER VALIDATE MODE** to validate this plan, then **ENTER EXECUTE MODE** to implement.
