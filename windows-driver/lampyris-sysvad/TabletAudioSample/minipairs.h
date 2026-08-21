@@ -351,29 +351,32 @@ PHYSICALCONNECTIONTABLE MicInTopologyPhysicalConnections[] =
 static
 ENDPOINT_MINIPAIR MicInMiniports =
 {
+    // MicIn keeps its own identity (eMicInDevice, the TopologyMicIn / WaveMicIn INF
+    // names, its friendly name) but borrows the MicArray descriptors wholesale.
+    // Reason: with its own topology/wave descriptors and a single-entry 48kHz format
+    // list, this endpoint never opened - GetMixFormat returned
+    // AUDCLNT_E_UNSUPPORTED_FORMAT while MicArray1, same binary, opened fine. The pin
+    // itself was proven good throughout (IsFormatSupported(EXCLUSIVE, 1ch/48000/16)
+    // returns S_OK), so the fault is in how the endpoint is described to the audio
+    // engine. This adopts the description that demonstrably works.
     eMicInDevice,
-    L"TopologyMicIn",                       // make sure this or the template name matches with KSNAME_TopologyMicIn in the inf's [Strings] section 
+    L"TopologyMicIn",                       // matches KSNAME_TopologyMicIn in the inf's [Strings] section
     NULL,                                   // optional template name
-    CreateMiniportTopologySYSVAD,
-    &MicInTopoMiniportFilterDescriptor,
+    CreateMicArrayMiniportTopology,
+    &MicArray1TopoMiniportFilterDescriptor,
     0, NULL,                                // Interface properties
-    L"WaveMicIn",                           // make sure this or the template name matches with KSNAME_WaveMicIn in the inf's [Strings] section
+    L"WaveMicIn",                           // matches KSNAME_WaveMicIn in the inf's [Strings] section
     NULL,                                   // optional template name
     CreateMiniportWaveRTSYSVAD,
-    &MicInWaveMiniportFilterDescriptor,
-    // Pull mode is opted into for this endpoint in the INF
-    // (PKEY_AudioEndpoint_Supports_EventDriven_Mode), and the engine needs the
-    // WaveRT packet-size constraints to build a capture pipe. Leaving these 0/NULL
-    // is what kept MicIn unopenable while MicArray1, which declares them, opened
-    // fine on the same binary.
+    &MicArrayWaveMiniportFilterDescriptor,
     ARRAYSIZE(SysvadWaveFilterInterfacePropertiesCapture),  // Interface properties
     SysvadWaveFilterInterfacePropertiesCapture,
-    MICIN_DEVICE_MAX_CHANNELS,
-    MicInPinDeviceFormatsAndModes,
-    SIZEOF_ARRAY(MicInPinDeviceFormatsAndModes),
+    MICARRAY_DEVICE_MAX_CHANNELS,
+    MicArrayPinDeviceFormatsAndModes,
+    SIZEOF_ARRAY(MicArrayPinDeviceFormatsAndModes),
     MicInTopologyPhysicalConnections,
     SIZEOF_ARRAY(MicInTopologyPhysicalConnections),
-    ENDPOINT_NO_FLAGS,
+    ENDPOINT_SOUNDDETECTOR_SUPPORTED,
     NULL, 0, NULL,                          // audio module settings.
 };
 
