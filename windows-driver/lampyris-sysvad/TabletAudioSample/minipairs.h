@@ -361,7 +361,13 @@ ENDPOINT_MINIPAIR MicInMiniports =
     NULL,                                   // optional template name
     CreateMiniportWaveRTSYSVAD,
     &MicInWaveMiniportFilterDescriptor,
-    0, NULL,                                // Interface properties
+    // Pull mode is opted into for this endpoint in the INF
+    // (PKEY_AudioEndpoint_Supports_EventDriven_Mode), and the engine needs the
+    // WaveRT packet-size constraints to build a capture pipe. Leaving these 0/NULL
+    // is what kept MicIn unopenable while MicArray1, which declares them, opened
+    // fine on the same binary.
+    ARRAYSIZE(SysvadWaveFilterInterfacePropertiesCapture),  // Interface properties
+    SysvadWaveFilterInterfacePropertiesCapture,
     MICIN_DEVICE_MAX_CHANNELS,
     MicInPinDeviceFormatsAndModes,
     SIZEOF_ARRAY(MicInPinDeviceFormatsAndModes),
